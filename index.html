@@ -314,13 +314,16 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .gate-form.success~.gate-success-icon{display:block}
 
 /* ═══ LOGO WALL ═══ */
-.logo-wall{padding:48px 0;background:#fff;border-bottom:1px solid var(--border);overflow:hidden}
-.logo-wall-label{text-align:center;font-family:var(--font-h);font-size:13px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:28px}
-.logo-scroll{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);margin-bottom:12px}
-.logo-track{display:flex;gap:0;animation:logoScroll 35s linear infinite;width:max-content}
+.logo-wall{padding:56px 0 48px;background:#fff;border-bottom:1px solid var(--border);overflow:hidden}
+.logo-wall-label{text-align:center;font-family:var(--font-h);font-size:14px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:2px;margin-bottom:36px}
+.logo-scroll{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);margin-bottom:16px}
+.logo-track{display:flex;gap:0;animation:logoScroll 40s linear infinite;width:max-content}
 .logo-scroll[style*="reverse"] .logo-track{animation-direction:reverse}
-.logo-item{flex-shrink:0;padding:12px 32px;font-family:var(--font-h);font-size:14px;font-weight:600;color:#bbb;white-space:nowrap;transition:color .3s}
-.logo-item:hover{color:#222}
+.logo-item{flex-shrink:0;padding:8px 36px;display:flex;align-items:center;justify-content:center;height:48px}
+.logo-item img{height:28px;width:auto;max-width:120px;object-fit:contain;filter:grayscale(100%) opacity(.45);transition:filter .3s,transform .3s}
+.logo-item img:hover{filter:grayscale(0%) opacity(1);transform:scale(1.08)}
+.logo-item--text{font-family:var(--font-h);font-size:15px;font-weight:700;color:#c5c5c5;white-space:nowrap;transition:color .3s}
+.logo-item--text:hover{color:#222}
 @keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ═══ METHODOLOGY ═══ */
@@ -444,61 +447,61 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     <div class="logo-scroll">
       <div class="logo-track">
         <!-- Row 1: Client logos -->
-        <span class="logo-item">Amazon</span>
-        <span class="logo-item">EA</span>
-        <span class="logo-item">Rovio</span>
-        <span class="logo-item">TapNation</span>
-        <span class="logo-item">Shahid</span>
-        <span class="logo-item">HBO Max</span>
-        <span class="logo-item">Nike</span>
-        <span class="logo-item">Gram Games</span>
-        <span class="logo-item">Domino's</span>
-        <span class="logo-item">Superplay</span>
-        <span class="logo-item">Rollic</span>
-        <span class="logo-item">Hepsiburada</span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/amazon.com" alt="Amazon" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/ea.com" alt="EA" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/rovio.com" alt="Rovio" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/tapnation.io" alt="TapNation" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/shahid.mbc.net" alt="Shahid" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/hbomax.com" alt="HBO Max" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/nike.com" alt="Nike" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/gramgames.com" alt="Gram Games" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/dominos.com" alt="Domino's" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/superplaygames.com" alt="Superplay" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/rollicgames.com" alt="Rollic" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/hepsiburada.com" alt="Hepsiburada" loading="lazy"></span>
         <!-- Duplicate for seamless scroll -->
-        <span class="logo-item">Amazon</span>
-        <span class="logo-item">EA</span>
-        <span class="logo-item">Rovio</span>
-        <span class="logo-item">TapNation</span>
-        <span class="logo-item">Shahid</span>
-        <span class="logo-item">HBO Max</span>
-        <span class="logo-item">Nike</span>
-        <span class="logo-item">Gram Games</span>
-        <span class="logo-item">Domino's</span>
-        <span class="logo-item">Superplay</span>
-        <span class="logo-item">Rollic</span>
-        <span class="logo-item">Hepsiburada</span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/amazon.com" alt="Amazon" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/ea.com" alt="EA" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/rovio.com" alt="Rovio" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/tapnation.io" alt="TapNation" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/shahid.mbc.net" alt="Shahid" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/hbomax.com" alt="HBO Max" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/nike.com" alt="Nike" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/gramgames.com" alt="Gram Games" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/dominos.com" alt="Domino's" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/superplaygames.com" alt="Superplay" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/rollicgames.com" alt="Rollic" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/hepsiburada.com" alt="Hepsiburada" loading="lazy"></span>
       </div>
     </div>
     <div class="logo-scroll" style="--scroll-dir:reverse">
       <div class="logo-track">
         <!-- Row 2: OEM + DSP partners -->
-        <span class="logo-item">Samsung</span>
-        <span class="logo-item">OPPO</span>
-        <span class="logo-item">Nokia</span>
-        <span class="logo-item">T-Mobile</span>
-        <span class="logo-item">Verizon</span>
-        <span class="logo-item">AT&amp;T</span>
-        <span class="logo-item">InMobi</span>
-        <span class="logo-item">Unity</span>
-        <span class="logo-item">AppLovin</span>
-        <span class="logo-item">Taboola</span>
-        <span class="logo-item">Smaato</span>
-        <span class="logo-item">Beymen</span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/samsung.com" alt="Samsung" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/oppo.com" alt="OPPO" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/nokia.com" alt="Nokia" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/t-mobile.com" alt="T-Mobile" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/verizon.com" alt="Verizon" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/att.com" alt="AT&amp;T" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/inmobi.com" alt="InMobi" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/unity.com" alt="Unity" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/applovin.com" alt="AppLovin" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/taboola.com" alt="Taboola" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/smaato.com" alt="Smaato" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/beymen.com" alt="Beymen" loading="lazy"></span>
         <!-- Duplicate -->
-        <span class="logo-item">Samsung</span>
-        <span class="logo-item">OPPO</span>
-        <span class="logo-item">Nokia</span>
-        <span class="logo-item">T-Mobile</span>
-        <span class="logo-item">Verizon</span>
-        <span class="logo-item">AT&amp;T</span>
-        <span class="logo-item">InMobi</span>
-        <span class="logo-item">Unity</span>
-        <span class="logo-item">AppLovin</span>
-        <span class="logo-item">Taboola</span>
-        <span class="logo-item">Smaato</span>
-        <span class="logo-item">Beymen</span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/samsung.com" alt="Samsung" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/oppo.com" alt="OPPO" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/nokia.com" alt="Nokia" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/t-mobile.com" alt="T-Mobile" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/verizon.com" alt="Verizon" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/att.com" alt="AT&amp;T" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/inmobi.com" alt="InMobi" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/unity.com" alt="Unity" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/applovin.com" alt="AppLovin" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/taboola.com" alt="Taboola" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/smaato.com" alt="Smaato" loading="lazy"></span>
+        <span class="logo-item"><img src="https://logo.clearbit.com/beymen.com" alt="Beymen" loading="lazy"></span>
       </div>
     </div>
   </div>
@@ -1525,6 +1528,15 @@ document.addEventListener('DOMContentLoaded',()=>{
   initGate();
   initAllCharts();
   initParallax();
+  /* Logo fallback: if Clearbit can't load, show alt text */
+  document.querySelectorAll('.logo-item img').forEach(img=>{
+    img.onerror=function(){
+      const span=document.createElement('span');
+      span.className='logo-item--text';
+      span.textContent=this.alt;
+      this.parentNode.replaceChild(span,this);
+    };
+  });
 });
 })();
 </script>
