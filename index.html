@@ -69,19 +69,17 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 @media(max-width:1100px){.side-nav{display:none}}
 
 /* ═══ HERO ═══ */
-.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;background:#F5F7F9;padding:64px 40px;max-width:var(--max-w);margin:0 auto}
-@media(min-width:769px){.hero{padding:64px 40px}}
-.hero-text{max-width:540px}
-.hero-img{display:flex;align-items:center;justify-content:center}
-.hero-img img{width:100%;max-width:480px;border-radius:16px}
-@media(max-width:768px){.hero{grid-template-columns:1fr;padding:48px 24px;text-align:center}.hero-text{max-width:100%}.hero-img{order:-1}}
-.hero-wrap{background:#F5F7F9}
-.hero-badge{display:inline-block;background:rgba(38,190,129,.08);color:var(--green);font-size:11px;font-weight:700;font-family:var(--font-h);padding:7px 20px;border-radius:100px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:32px;border:1px solid rgba(38,190,129,.15)}
-.hero h1{font-family:var(--font-h);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;color:#222;line-height:1.08;margin-bottom:20px;letter-spacing:-.02em}
+.hero-wrap{background:#F5F7F9;position:relative;overflow:hidden}
+.hero-wrap::before{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(38,190,129,.07) 0%,transparent 70%);pointer-events:none}
+.hero-wrap::after{content:'';position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(175,156,255,.05) 0%,transparent 70%);pointer-events:none}
+.hero{max-width:var(--max-w);margin:0 auto;padding:80px 40px 72px;text-align:center;position:relative;z-index:1}
+.hero-badge{display:inline-block;background:rgba(38,190,129,.08);color:var(--green);font-size:11px;font-weight:700;font-family:var(--font-h);padding:7px 20px;border-radius:100px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:28px;border:1px solid rgba(38,190,129,.15)}
+.hero h1{font-family:var(--font-h);font-size:clamp(2.4rem,5.5vw,4rem);font-weight:700;color:#222;line-height:1.08;margin-bottom:20px;letter-spacing:-.03em}
 .hero h1 em{font-style:normal;color:var(--green)}
-.hero-sub{font-size:clamp(.92rem,1.5vw,1.05rem);color:#666;max-width:540px;margin:0 0 28px;line-height:1.7}
-.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
-@media(max-width:768px){.hero-cta{justify-content:center}.hero-sub{margin:0 auto 28px}}
+.hero-sub{font-size:clamp(.92rem,1.5vw,1.05rem);color:#666;max-width:560px;margin:0 auto 32px;line-height:1.7}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.hero-img{display:none}
+@media(max-width:768px){.hero{padding:56px 24px 48px}}
 .btn-primary{background:var(--green);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.88rem;padding:14px 32px;border-radius:29px;border:none;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
 .btn-primary:hover{background:var(--green-h);transform:translateY(-2px);box-shadow:0 16px 40px rgba(38,190,129,.2)}
 .btn-outline{background:transparent;color:var(--green);font-family:var(--font-h);font-weight:600;font-size:.88rem;padding:14px 32px;border-radius:29px;border:2px solid var(--green);cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
@@ -413,7 +411,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 <!-- ══════════════ HERO ══════════════ -->
 <div class="hero-wrap">
 <section class="hero" id="hero">
-  <div class="hero-text rv">
+  <div class="rv">
     <span class="hero-badge">AppSamurai Industry Report 2026</span>
     <h1>The 2026<br><em>Growth Playbook</em></h1>
     <p class="hero-sub">The definitive playbook for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads — built for growth teams who need to scale smarter in 2026.</p>
@@ -421,9 +419,6 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <button class="btn-primary" onclick="document.getElementById('toc').scrollIntoView({behavior:'smooth'})">Explore the Playbook <span>&darr;</span></button>
       <button class="btn-outline" onclick="document.getElementById('emailGate').scrollIntoView({behavior:'smooth'})">Download PDF</button>
     </div>
-  </div>
-  <div class="hero-img">
-    <img src="assets/cover.png" alt="2026 Growth Playbook" style="border-radius:16px">
   </div>
 </section>
 </div>
