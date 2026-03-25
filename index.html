@@ -1464,36 +1464,45 @@ function initGatedCharts(){
   if(cT&&!cT._done){cT._done=1;new Chart(cT,{type:'doughnut',data:{labels:['OEM Discovery','Programmatic','Organic Uplift'],datasets:[{data:[45,35,20],backgroundColor:[PUR,GRN,'rgba(255,255,255,.08)'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:true,cutout:'55%',plugins:{tooltip:tooltipOpts,legend:{position:'bottom',labels:{color:'rgba(255,255,255,.45)',padding:12,usePointStyle:true,pointStyle:'circle',font:{size:10}}},datalabels:{display:true,color:'#fff',font:{weight:'bold',size:12},formatter:v=>v+'%'}}}})}
 }
 
-/* Retention chart — replace canvas to avoid Chart.js resize bug */
+/* Retention chart — update data in place */
 let retInst=null;let currentRetTab='d7';
 const retData={d7:{'Mid-core':42,Hybridcasual:44,Hypercasual:40,Casual:35},d30:{'Mid-core':38,Hybridcasual:41,Hypercasual:36,Casual:33},d1:{'Mid-core':39,Hybridcasual:40,Hypercasual:38,Casual:32},d365:{'Mid-core':41,Hybridcasual:40,Hypercasual:39,Casual:30}};
 const retC={'Mid-core':RED,Hybridcasual:PUR,Hypercasual:BLU,Casual:GRN};
-function replaceCanvas(id,h){
-  const old=document.getElementById(id);if(!old)return null;
-  const p=old.parentNode;const c=document.createElement('canvas');
-  c.id=id;c.style.width='100%';c.style.height=(h||260)+'px';
-  p.replaceChild(c,old);return c;
+function retDatasets(tab){
+  const d=retData[tab];const labels=['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8'];
+  return Object.entries(d).map(([n,b])=>({label:n,data:labels.map((_,i)=>+(b-i*(Math.random()*1.2)).toFixed(1)),borderColor:retC[n],backgroundColor:'transparent',borderWidth:2,pointRadius:2,pointHoverRadius:5,tension:.3,borderDash:n==='Casual'?[5,3]:[]}));
 }
 function renderRetention(tab){
   currentRetTab=tab;
-  if(retInst){retInst.destroy();retInst=null}
-  const c=replaceCanvas('chartRetention',260);if(!c)return;
-  const d=retData[tab];
-  const labels=['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8'];
-  const ds=Object.entries(d).map(([n,b])=>({label:n,data:labels.map((_,i)=>+(b-i*(Math.random()*1.2)).toFixed(1)),borderColor:retC[n],backgroundColor:'transparent',borderWidth:2,pointRadius:2,pointHoverRadius:5,tension:.3,borderDash:n==='Casual'?[5,3]:[]}));
-  retInst=new Chart(c,{type:'line',data:{labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'right',labels:{usePointStyle:true,pointStyle:'line',padding:10,font:{size:10},color:'#666'}},datalabels:{display:false}},scales:{y:{min:20,max:50,ticks:{callback:v=>v+'%',font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}},x:{grid:{display:false},ticks:{font:{size:10},color:'#666'}}}}});
+  const c=$('#chartRetention');if(!c)return;
+  if(retInst){
+    retInst.data.datasets=retDatasets(tab);
+    retInst.update('active');
+    return;
+  }
+  retInst=new Chart(c,{type:'line',data:{labels:['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8'],datasets:retDatasets(tab)},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'right',labels:{usePointStyle:true,pointStyle:'line',padding:10,font:{size:10},color:'#666'}},datalabels:{display:false}},scales:{y:{min:20,max:50,ticks:{callback:v=>v+'%',font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}},x:{grid:{display:false},ticks:{font:{size:10},color:'#666'}}}}});
 }
 $('#retTabs')?.addEventListener('click',e=>{if(e.target.classList.contains('tab-btn')){$$('#retTabs .tab-btn').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');renderRetention(e.target.dataset.t)}});
 
-/* Trends chart — replace canvas to avoid Chart.js resize bug */
+/* Trends chart — update data in place */
 let trendInst=null;let currentTrendTab='revenue';
 const trendData={revenue:{'2024':[30,28,12,8],'2025':[30,28,14,7]},downloads:{'2024':[15,18,8,10],'2025':[14,16,9,8]},sessions:{'2024':[100,150,100,80],'2025':[100,140,90,70]}};
+function trendDatasets(tab){
+  const d=trendData[tab];
+  return [{label:'Casual',data:[d['2024'][0],d['2025'][0]],backgroundColor:GRN,borderRadius:2},{label:'Mid-core',data:[d['2024'][1],d['2025'][1]],backgroundColor:DRK,borderRadius:2},{label:'Hybridcasual',data:[d['2024'][2],d['2025'][2]],backgroundColor:PUR,borderRadius:2},{label:'Hypercasual',data:[d['2024'][3],d['2025'][3]],backgroundColor:GRY,borderRadius:2}];
+}
+function trendFormatter(tab){return v=>(tab==='revenue'?'$':'')+v+(tab==='revenue'?'B':tab==='sessions'?'B':'')}
 function renderTrends(tab){
   currentTrendTab=tab;
-  if(trendInst){trendInst.destroy();trendInst=null}
-  const c=replaceCanvas('chartTrends',280);if(!c)return;
-  const d=trendData[tab];
-  trendInst=new Chart(c,{type:'bar',data:{labels:['2024','2025'],datasets:[{label:'Casual',data:[d['2024'][0],d['2025'][0]],backgroundColor:GRN,borderRadius:2},{label:'Mid-core',data:[d['2024'][1],d['2025'][1]],backgroundColor:DRK,borderRadius:2},{label:'Hybridcasual',data:[d['2024'][2],d['2025'][2]],backgroundColor:PUR,borderRadius:2},{label:'Hypercasual',data:[d['2024'][3],d['2025'][3]],backgroundColor:GRY,borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'top',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10},color:'#666'}},datalabels:{display:true,anchor:'end',align:'end',font:{size:9,weight:'bold'},color:'#666',formatter:v=>(tab==='revenue'?'$':'')+v+(tab==='revenue'?'B':tab==='sessions'?'B':'')}},scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11},color:'#666'}},y:{stacked:true,ticks:{callback:v=>(tab==='revenue'?'$':'')+v+'B',font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}}}}});
+  const c=$('#chartTrends');if(!c)return;
+  if(trendInst){
+    trendInst.data.datasets=trendDatasets(tab);
+    trendInst.options.plugins.datalabels.formatter=trendFormatter(tab);
+    trendInst.options.scales.y.ticks.callback=trendFormatter(tab);
+    trendInst.update('active');
+    return;
+  }
+  trendInst=new Chart(c,{type:'bar',data:{labels:['2024','2025'],datasets:trendDatasets(tab)},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'top',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10},color:'#666'}},datalabels:{display:true,anchor:'end',align:'end',font:{size:9,weight:'bold'},color:'#666',formatter:trendFormatter(tab)}},scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11},color:'#666'}},y:{stacked:true,ticks:{callback:trendFormatter(tab),font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}}}}});
 }
 $('#trendTabs')?.addEventListener('click',e=>{if(e.target.classList.contains('tab-btn')){$$('#trendTabs .tab-btn').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');renderTrends(e.target.dataset.t)}});
 
