@@ -370,6 +370,8 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   .info-card{padding:20px}
   .bento{padding:40px 0}
   .toc{padding:40px 0}
+  [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 1fr;gap:32px"]{grid-template-columns:1fr!important}
 }
 @media(max-width:480px){
   .footer-grid{grid-template-columns:1fr!important}
@@ -854,18 +856,16 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 
 <!-- 2.2 Finding the "Aha! Moment" -->
 <section class="sec sec-l">
-  <div class="wrap"><div class="story rv">
-    <div class="story-text rv-l">
-      <span class="tag" style="color:var(--ch2);border-color:var(--ch2)">Section 2.2</span>
-      <h3>Finding the "Aha! Moment" Across Genres</h3>
-      <p>The "Aha! Moment" is the specific point where a user recognizes the core value of an app. In a rewarded ecosystem, the structure is mapped directly to these milestones to ensure users don't just install, but "hook" into the experience.</p>
+  <div class="wrap rv">
+    <span class="tag" style="color:var(--ch2);border-color:var(--ch2)">Section 2.2</span>
+    <h3 style="font-family:var(--font-h);font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:700;margin-bottom:8px;color:var(--text)">Finding the "Aha! Moment" Across Genres</h3>
+    <p style="font-size:.9rem;color:var(--text-muted);line-height:1.75;margin-bottom:24px;max-width:720px">The "Aha! Moment" is the specific point where a user recognizes the core value of an app. In a rewarded ecosystem, the structure is mapped directly to these milestones to ensure users don't just install, but "hook" into the experience.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div class="info-card" style="margin:0;border-left:3px solid var(--ch2);flex-direction:column"><div class="ic-icon" style="background:var(--purple-l)"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><h4>Hypercasual Games</h4><p>Playtime uses event-based campaigns to reward users for every level completed. By continuously rewarding the user for their gameplay, the model drives extended session times and higher ARPU.</p></div></div>
+      <div class="info-card" style="margin:0;border-left:3px solid var(--ch2);flex-direction:column"><div class="ic-icon" style="background:var(--purple-l)"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><div><h4>Casual &amp; Puzzle Games</h4><p>For titles like "merge" or "mystery" games, the focus is on repeated gaming sessions and user attachment. Playtime provides a visually appealing way to drive users to continue playing and become more hooked on the core gameplay loop.</p></div></div>
+      <div class="info-card" style="margin:0;border-left:3px solid var(--ch2);flex-direction:column"><div class="ic-icon" style="background:var(--purple-l)"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div><div><h4>Mid-Core &amp; High-Friction Apps</h4><p>For apps with mixed monetization strategies or complex onboarding (like FinTech or E-commerce), Playtime provides an entertaining rewards experience. This high-retention approach has a promising impact on revenue and LTV.</p></div></div>
     </div>
-    <div class="rv-r" style="display:flex;flex-direction:column;gap:10px">
-      <div class="info-card" style="margin:0;border-left:3px solid var(--ch2)"><div class="ic-icon" style="background:var(--purple-l)"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><h4>Hypercasual Games</h4><p>Playtime uses event-based campaigns to reward users for every level completed. By continuously rewarding the user for their gameplay, the model drives extended session times and higher ARPU.</p></div></div>
-      <div class="info-card" style="margin:0;border-left:3px solid var(--ch2)"><div class="ic-icon" style="background:var(--purple-l)"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><div><h4>Casual &amp; Puzzle Games</h4><p>For titles like "merge" or "mystery" games, the focus is on repeated gaming sessions and user attachment. Playtime provides a visually appealing way to drive users to continue playing and become more hooked on the core gameplay loop.</p></div></div>
-      <div class="info-card" style="margin:0;border-left:3px solid var(--ch2)"><div class="ic-icon" style="background:var(--purple-l)"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div><div><h4>Mid-Core &amp; High-Friction Apps</h4><p>For apps with mixed monetization strategies or complex onboarding (like FinTech or E-commerce), Playtime provides an entertaining rewards experience. This high-retention approach has a promising impact on revenue and LTV, giving studios the flexibility to increase both their bids and budget.</p></div></div>
-    </div>
-  </div></div>
+  </div>
 </section>
 
 <!-- Genre + Retention Charts -->
@@ -1468,15 +1468,20 @@ function initGatedCharts(){
 let retInst=null;let currentRetTab='d7';
 const retData={d7:{'Mid-core':42,Hybridcasual:44,Hypercasual:40,Casual:35},d30:{'Mid-core':38,Hybridcasual:41,Hypercasual:36,Casual:33},d1:{'Mid-core':39,Hybridcasual:40,Hypercasual:38,Casual:32},d365:{'Mid-core':41,Hybridcasual:40,Hypercasual:39,Casual:30}};
 const retC={'Mid-core':RED,Hybridcasual:PUR,Hypercasual:BLU,Casual:GRN};
+function replaceCanvas(id,h){
+  const old=document.getElementById(id);if(!old)return null;
+  const p=old.parentNode;const c=document.createElement('canvas');
+  c.id=id;c.style.width='100%';c.style.height=(h||260)+'px';
+  p.replaceChild(c,old);return c;
+}
 function renderRetention(tab){
   currentRetTab=tab;
   if(retInst){retInst.destroy();retInst=null}
-  const c=$('#chartRetention');if(!c)return;
+  const c=replaceCanvas('chartRetention',260);if(!c)return;
   const d=retData[tab];
   const labels=['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8'];
   const ds=Object.entries(d).map(([n,b])=>({label:n,data:labels.map((_,i)=>+(b-i*(Math.random()*1.2)).toFixed(1)),borderColor:retC[n],backgroundColor:'transparent',borderWidth:2,pointRadius:2,pointHoverRadius:5,tension:.3,borderDash:n==='Casual'?[5,3]:[]}));
   retInst=new Chart(c,{type:'line',data:{labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'right',labels:{usePointStyle:true,pointStyle:'line',padding:10,font:{size:10},color:'#666'}},datalabels:{display:false}},scales:{y:{min:20,max:50,ticks:{callback:v=>v+'%',font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}},x:{grid:{display:false},ticks:{font:{size:10},color:'#666'}}}}});
-  requestAnimationFrame(()=>{if(retInst)retInst.resize()});
 }
 $('#retTabs')?.addEventListener('click',e=>{if(e.target.classList.contains('tab-btn')){$$('#retTabs .tab-btn').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');renderRetention(e.target.dataset.t)}});
 
@@ -1486,7 +1491,7 @@ const trendData={revenue:{'2024':[30,28,12,8],'2025':[30,28,14,7]},downloads:{'2
 function renderTrends(tab){
   currentTrendTab=tab;
   if(trendInst){trendInst.destroy();trendInst=null}
-  const c=$('#chartTrends');if(!c)return;
+  const c=replaceCanvas('chartTrends',280);if(!c)return;
   const d=trendData[tab];
   trendInst=new Chart(c,{type:'bar',data:{labels:['2024','2025'],datasets:[{label:'Casual',data:[d['2024'][0],d['2025'][0]],backgroundColor:GRN,borderRadius:2},{label:'Mid-core',data:[d['2024'][1],d['2025'][1]],backgroundColor:DRK,borderRadius:2},{label:'Hybridcasual',data:[d['2024'][2],d['2025'][2]],backgroundColor:PUR,borderRadius:2},{label:'Hypercasual',data:[d['2024'][3],d['2025'][3]],backgroundColor:GRY,borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'top',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10},color:'#666'}},datalabels:{display:true,anchor:'end',align:'end',font:{size:9,weight:'bold'},color:'#666',formatter:v=>(tab==='revenue'?'$':'')+v+(tab==='revenue'?'B':tab==='sessions'?'B':'')}},scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11},color:'#666'}},y:{stacked:true,ticks:{callback:v=>(tab==='revenue'?'$':'')+v+'B',font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}}}}});
 }
