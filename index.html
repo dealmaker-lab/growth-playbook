@@ -363,6 +363,8 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   .testimonial-grid{grid-template-columns:1fr}
   .success-strip{gap:16px}
   .success-item strong{font-size:1.1rem}
+  .success-grid{grid-template-columns:repeat(3,1fr)!important}
+  [style*="grid-template-columns:repeat(5"]{grid-template-columns:repeat(3,1fr)!important}
   .about-stats{flex-direction:column;gap:16px}
   .logo-item{padding:10px 20px;font-size:12px}
   .gate{padding:28px 0!important}
@@ -380,6 +382,10 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   .footer-grid{grid-template-columns:1fr!important}
   .success-strip{gap:12px}
   .success-item{min-width:calc(50% - 12px)}
+  .success-grid{grid-template-columns:repeat(2,1fr)!important}
+  [style*="grid-template-columns:repeat(5"]{grid-template-columns:repeat(2,1fr)!important}
+  [style*="grid-template-columns:1fr 1fr;gap:16px"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 1fr 1fr;gap:14px"]{grid-template-columns:1fr!important}
   .stat-callout{padding:20px;gap:16px}
   .stat-callout .big-num{font-size:2rem!important;min-width:auto}
   .data-table{display:block;overflow-x:auto}
@@ -920,18 +926,16 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 
 <!-- 2.4 AppsPrize -->
 <section class="sec sec-w">
-  <div class="wrap"><div class="story reverse rv">
-    <div class="story-text rv-r">
-      <span class="tag" style="color:var(--ch2);border-color:var(--ch2)">Section 2.4</span>
-      <h3>Publisher Monetization: The AppsPrize Ecosystem</h3>
-      <p>For publishers, maximizing yield in 2026 requires a monetization strategy that feels like a feature, not a disruption. This is the core philosophy behind <span style="color:var(--ch2);font-weight:700">AppsPrize.</span></p>
+  <div class="wrap rv">
+    <span class="tag" style="color:var(--ch2);border-color:var(--ch2)">Section 2.4</span>
+    <h3 style="font-family:var(--font-h);font-size:1.3rem;font-weight:700;margin-bottom:8px;color:var(--text)">Publisher Monetization: The AppsPrize Ecosystem</h3>
+    <p style="color:#666;font-size:.88rem;margin-bottom:16px;max-width:640px">For publishers, maximizing yield in 2026 requires a monetization strategy that feels like a feature, not a disruption. This is the core philosophy behind <span style="color:var(--ch2);font-weight:700">AppsPrize.</span></p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+      <div class="info-card" style="margin:0;border-top:3px solid var(--ch2);flex-direction:column"><div class="ic-icon" style="background:var(--purple-l);margin-bottom:8px"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div><h4>A "Native" Rewards Experience</h4><p>AppsPrize acts as a loyalty layer, rewarding users in the app's native currency for seamless exploration.</p></div>
+      <div class="info-card" style="margin:0;border-top:3px solid var(--ch2);flex-direction:column"><div class="ic-icon" style="background:var(--purple-l);margin-bottom:8px"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><circle cx="12" cy="12" r="5"/><path d="M12 7a5 5 0 0 1 0 10"/><path d="M9 5l-2-2M15 5l2-2M9 19l-2 2M15 19l2 2"/></svg></div><h4>Verified Human Engagement</h4><p>Built on playtime and level-based events, it inherently filters out low-quality traffic. Publishers provide a platform for verified user attachment.</p></div>
+      <div class="info-card" style="margin:0;border-top:3px solid var(--ch2);flex-direction:column"><div class="ic-icon" style="background:var(--purple-l);margin-bottom:8px"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div><h4>Visual &amp; Interactive Appeal</h4><p>A visually engaging way to discover new content, ensuring positive UX and greater attachment to both the advertised game and the host app.</p></div>
     </div>
-    <div class="rv-l" style="display:flex;flex-direction:column;gap:10px">
-      <div class="info-card" style="margin:0;border-left:3px solid var(--ch2)"><div class="ic-icon" style="background:var(--purple-l)"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div><div><h4>A "Native" Rewards Experience</h4><p>AppsPrize acts as a loyalty layer, rewarding users in the app's native currency for seamless exploration.</p></div></div>
-      <div class="info-card" style="margin:0;border-left:3px solid var(--ch2)"><div class="ic-icon" style="background:var(--purple-l)"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><circle cx="12" cy="12" r="5"/><path d="M12 7a5 5 0 0 1 0 10"/><path d="M9 5l-2-2M15 5l2-2M9 19l-2 2M15 19l2 2"/></svg></div><div><h4>Verified Human Engagement</h4><p>Because the model is built on playtime and level-based events, it inherently filters out low-quality traffic. Publishers aren't just selling ad space; they are providing a platform for "repeated gaming sessions" and verified user attachment.</p></div></div>
-      <div class="info-card" style="margin:0;border-left:3px solid var(--ch2)"><div class="ic-icon" style="background:var(--purple-l)"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div><div><h4>Visual &amp; Interactive Appeal</h4><p>By offering a visually engaging way to discover new content, AppsPrize ensures that the user experience remains positive, driving greater attachment to both the advertised game and the host app.</p></div></div>
-    </div>
-  </div></div>
+  </div>
 </section>
 
 <!-- ══════════════ CHAPTER 3 ══════════════ -->
@@ -1019,18 +1023,16 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 
 <!-- 3.3 Sophisticated Targeting -->
 <section class="sec sec-w">
-  <div class="wrap"><div class="story rv">
-    <div class="story-text rv-l">
-      <span class="tag" style="color:var(--ch3);border-color:var(--ch3)">Section 3.3</span>
-      <h3>Sophisticated Targeting: Moving Beyond Demographics</h3>
-      <p>The true power of OEM lies in the depth of data available at the hardware level. We've moved beyond simple age and gender filters to a more holistic understanding of user intent.</p>
+  <div class="wrap rv">
+    <span class="tag" style="color:var(--ch3);border-color:var(--ch3)">Section 3.3</span>
+    <h3 style="font-family:var(--font-h);font-size:1.3rem;font-weight:700;margin-bottom:8px;color:var(--text)">Sophisticated Targeting: Moving Beyond Demographics</h3>
+    <p style="color:#666;font-size:.88rem;margin-bottom:16px;max-width:640px">The true power of OEM lies in the depth of data available at the hardware level. We've moved beyond simple age and gender filters to a more holistic understanding of user intent.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+      <div class="info-card" style="margin:0;border-top:3px solid var(--green);flex-direction:column"><div class="ic-icon" style="margin-bottom:8px"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div><h4>Behavioral &amp; App Category</h4><p>Reach users based on their actual app usage patterns. Surface your game to users who frequently engage with similar genres.</p></div>
+      <div class="info-card" style="margin:0;border-top:3px solid var(--green);flex-direction:column"><div class="ic-icon" style="margin-bottom:8px"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><h4>Geographic &amp; Device Precision</h4><p>Tailor campaigns to specific device models. Promote flagship titles on premium hardware, utility apps on the broader mid-range market.</p></div>
+      <div class="info-card" style="margin:0;border-top:3px solid var(--green);flex-direction:column"><div class="ic-icon" style="background:var(--purple-l);margin-bottom:8px"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h4>Keyword &amp; Retargeting</h4><p>Capture intent the moment a user searches for a solution, or re-engage users who interacted with your brand but haven't converted.</p></div>
     </div>
-    <div class="rv-r" style="display:flex;flex-direction:column;gap:10px">
-      <div class="info-card" style="margin:0;border-left:3px solid var(--green)"><div class="ic-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div><div><h4>Behavioral &amp; App Category Targeting</h4><p>Reach users based on their actual app usage patterns. A mobile game can be specifically surfaced to users who frequently engage with similar genres, maximizing the likelihood of a high-value install.</p></div></div>
-      <div class="info-card" style="margin:0;border-left:3px solid var(--green)"><div class="ic-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><div><h4>Geographic &amp; Device Precision</h4><p>Tailor campaigns to specific device models. High-spec gaming titles can be promoted on flagship hardware, while essential utility apps can target the broader mid-range market.</p></div></div>
-      <div class="info-card" style="margin:0;border-left:3px solid var(--green)"><div class="ic-icon" style="background:var(--purple-l)"><svg viewBox="0 0 24 24" style="stroke:var(--purple)"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div><h4>Keyword &amp; Retargeting</h4><p>Using system-level search data to capture intent the moment a user looks for a solution, or re-engaging users who have previously interacted with the brand but haven't converted.</p></div></div>
-    </div>
-  </div></div>
+  </div>
 </section>
 
 <!-- 3.4 Cost Advantage -->
@@ -1075,33 +1077,42 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   </div>
 </section>
 
+<!-- 4.1 Performance-Led Optimization -->
 <section class="sec sec-w">
-  <div class="wrap"><div class="story rv">
-    <div class="story-text rv-l">
-      <span class="tag" style="color:var(--ch4);border-color:var(--ch4)">Section 4.1</span>
-      <h3>Performance-Led Optimization</h3>
-      <p>The most successful strategies are rooted in CPA and deep-funnel event optimization.</p>
-      <ul class="blist"><li><strong>Targeting Registrations, Not Just Installs:</strong> Moving beyond the "install" metric is essential. We focus on optimizing campaigns to achieve a target CPA for <strong>registrations</strong>. This ensures that the budget isn't just buying downloads, but active users who have crossed the first threshold of value.</li><li><strong>Event-Driven Bidding:</strong> By analyzing post-install behavior, we prioritize keywords that yield high event conversion rates (e.g., finishing a tutorial, making a first purchase, or setting up a profile). This granular optimization ensures that every dollar spent is tied to long-term LTV.</li></ul>
-      <!-- Keywords Table Placeholder -->
-      <table class="data-table" style="margin-top:12px">
-        <thead><tr><th>Keyword</th><th>Search Volume</th><th>Competition</th><th>Opportunity</th></tr></thead>
-        <tbody>
-          <tr><td><strong>puzzle games free</strong></td><td><span class="delta pos">Very High</span></td><td>High</td><td>Brand + Generic</td></tr>
-          <tr><td><strong>racing game</strong></td><td><span class="delta pos">High</span></td><td>Medium</td><td>Discovery</td></tr>
-          <tr><td><strong>idle tycoon</strong></td><td><span class="delta pos">High</span></td><td>Low</td><td>Competitor Conquest</td></tr>
-          <tr><td><strong>match 3 games</strong></td><td><span class="delta pos">High</span></td><td>High</td><td>Brand Defense</td></tr>
-          <tr><td><strong>action rpg</strong></td><td><span class="delta pos">Medium</span></td><td>Medium</td><td>Category</td></tr>
-          <tr><td><strong>strategy war game</strong></td><td><span class="delta pos">Medium</span></td><td>Low</td><td>Long-tail</td></tr>
-        </tbody>
-      </table>
+  <div class="wrap rv">
+    <span class="tag" style="color:var(--ch4);border-color:var(--ch4)">Section 4.1</span>
+    <h3 style="font-family:var(--font-h);font-size:1.3rem;font-weight:700;margin-bottom:8px;color:var(--text)">Performance-Led Optimization</h3>
+    <p style="color:#666;font-size:.88rem;margin-bottom:16px;max-width:640px">The most successful strategies are rooted in CPA and deep-funnel event optimization.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+      <div class="info-card" style="margin:0;border-left:3px solid var(--ch4)"><div class="ic-icon" style="background:rgba(0,244,244,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--ch4)"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div><h4>Targeting Registrations, Not Just Installs</h4><p>We optimize campaigns to achieve a target CPA for registrations — ensuring the budget buys active users, not just downloads.</p></div></div>
+      <div class="info-card" style="margin:0;border-left:3px solid var(--ch4)"><div class="ic-icon" style="background:rgba(0,244,244,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--ch4)"><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div><div><h4>Event-Driven Bidding</h4><p>We prioritize keywords that yield high event conversion rates — tutorial completion, first purchase, profile setup — tying every dollar to long-term LTV.</p></div></div>
     </div>
-    <div class="story-text rv-r">
-      <span class="tag" style="color:var(--ch4);border-color:var(--ch4)">Section 4.2</span>
-      <h3>Brand Protection &amp; Share of Voice</h3>
-      <p>Your brand name is your most valuable App Store asset. Defending your "home turf" is non-negotiable.</p>
-      <ul class="blist"><li><strong>Dominating SOV:</strong> Maximize Share of Voice for your brand keywords.</li><li><strong>Defensive Bidding:</strong> Use Custom Product Pages for specific features or promotions.</li></ul>
+    <table class="data-table">
+      <thead><tr><th>Keyword</th><th>Search Volume</th><th>Competition</th><th>Opportunity</th></tr></thead>
+      <tbody>
+        <tr><td><strong>puzzle games free</strong></td><td><span class="delta pos">Very High</span></td><td>High</td><td>Brand + Generic</td></tr>
+        <tr><td><strong>racing game</strong></td><td><span class="delta pos">High</span></td><td>Medium</td><td>Discovery</td></tr>
+        <tr><td><strong>idle tycoon</strong></td><td><span class="delta pos">High</span></td><td>Low</td><td>Competitor Conquest</td></tr>
+        <tr><td><strong>match 3 games</strong></td><td><span class="delta pos">High</span></td><td>High</td><td>Brand Defense</td></tr>
+        <tr><td><strong>action rpg</strong></td><td><span class="delta pos">Medium</span></td><td>Medium</td><td>Category</td></tr>
+        <tr><td><strong>strategy war game</strong></td><td><span class="delta pos">Medium</span></td><td>Low</td><td>Long-tail</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 4.2 Brand Protection -->
+<section class="sec sec-l">
+  <div class="wrap rv">
+    <span class="tag" style="color:var(--ch4);border-color:var(--ch4)">Section 4.2</span>
+    <h3 style="font-family:var(--font-h);font-size:1.3rem;font-weight:700;margin-bottom:12px;color:var(--text)">Brand Protection &amp; Share of Voice</h3>
+    <p style="color:#666;font-size:.88rem;margin-bottom:16px">Your brand name is your most valuable App Store asset. Defending your "home turf" is non-negotiable.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+      <div class="info-card" style="margin:0;border-top:3px solid var(--ch4);flex-direction:column;text-align:center;padding:24px 16px"><div class="ic-icon" style="background:rgba(0,244,244,.1);margin:0 auto 8px"><svg viewBox="0 0 24 24" style="stroke:var(--ch4)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Dominate SOV</h4><p style="font-size:.82rem">Maximize Share of Voice for your brand keywords. Competitors bidding on your name should never appear above you.</p></div>
+      <div class="info-card" style="margin:0;border-top:3px solid var(--ch4);flex-direction:column;text-align:center;padding:24px 16px"><div class="ic-icon" style="background:rgba(0,244,244,.1);margin:0 auto 8px"><svg viewBox="0 0 24 24" style="stroke:var(--ch4)"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h4>Defensive Bidding</h4><p style="font-size:.82rem">Use Custom Product Pages for specific features or promotions to capture competitor-related search intent.</p></div>
+      <div class="info-card" style="margin:0;border-top:3px solid var(--ch4);flex-direction:column;text-align:center;padding:24px 16px"><div class="ic-icon" style="background:rgba(0,244,244,.1);margin:0 auto 8px"><svg viewBox="0 0 24 24" style="stroke:var(--ch4)"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h4>Conquest Campaigns</h4><p style="font-size:.82rem">Strategically bid on competitor brand names to capture users actively searching for alternatives in your category.</p></div>
     </div>
-  </div></div>
+  </div>
 </section>
 
 <section class="sec sec-l">
@@ -1164,13 +1175,13 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
         </div>
       </div>
     </div>
-    <!-- Success metrics strip -->
-    <div class="success-strip rv">
-      <div class="success-item"><strong>72.3%</strong><span>Purchase Increase</span><span class="success-co">Beymen</span></div>
-      <div class="success-item"><strong>4×</strong><span>ROAS KPI Surpassed</span><span class="success-co">Gram Games</span></div>
-      <div class="success-item"><strong>230%</strong><span>DAU Increase</span><span class="success-co">Fitplan</span></div>
-      <div class="success-item"><strong>107%</strong><span>ROAS Achieved</span><span class="success-co">APPS</span></div>
-      <div class="success-item"><strong>46%</strong><span>Retention Boost</span><span class="success-co">Amazon Photos</span></div>
+    <!-- Success metrics strip — compact cards -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:24px" class="rv success-grid">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;text-align:center;border-top:3px solid var(--green)"><div style="font-family:var(--font-h);font-size:1.6rem;font-weight:800;color:var(--green)">72.3%</div><div style="font-size:.78rem;color:#666;margin:4px 0">Purchase Increase</div><div style="font-size:.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.5px">Beymen</div></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;text-align:center;border-top:3px solid var(--purple)"><div style="font-family:var(--font-h);font-size:1.6rem;font-weight:800;color:var(--purple)">4×</div><div style="font-size:.78rem;color:#666;margin:4px 0">ROAS KPI Surpassed</div><div style="font-size:.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.5px">Gram Games</div></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;text-align:center;border-top:3px solid var(--green)"><div style="font-family:var(--font-h);font-size:1.6rem;font-weight:800;color:var(--green)">230%</div><div style="font-size:.78rem;color:#666;margin:4px 0">DAU Increase</div><div style="font-size:.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.5px">Fitplan</div></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;text-align:center;border-top:3px solid var(--purple)"><div style="font-family:var(--font-h);font-size:1.6rem;font-weight:800;color:var(--purple)">107%</div><div style="font-size:.78rem;color:#666;margin:4px 0">ROAS Achieved</div><div style="font-size:.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.5px">APPS</div></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;text-align:center;border-top:3px solid var(--green)"><div style="font-family:var(--font-h);font-size:1.6rem;font-weight:800;color:var(--green)">46%</div><div style="font-size:.78rem;color:#666;margin:4px 0">Retention Boost</div><div style="font-size:.72rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.5px">Amazon Photos</div></div>
     </div>
   </div>
 </section>
@@ -1462,32 +1473,47 @@ function initGatedCharts(){
 
 /* Retention chart — update data in place */
 let retInst=null;let currentRetTab='d7';
-const retData={d7:{'Mid-core':42,Hybridcasual:44,Hypercasual:40,Casual:35},d30:{'Mid-core':38,Hybridcasual:41,Hypercasual:36,Casual:33},d1:{'Mid-core':39,Hybridcasual:40,Hypercasual:38,Casual:32},d365:{'Mid-core':41,Hybridcasual:40,Hypercasual:39,Casual:30}};
+/* Pre-computed retention curves — deterministic, visually distinct per tab */
+const retSeries={
+  d1:{'Mid-core':[48,46,45,44,43,42,41,40],Hybridcasual:[52,50,48,47,46,45,44,43],Hypercasual:[45,42,40,38,36,35,34,33],Casual:[40,37,35,33,31,30,29,28]},
+  d7:{'Mid-core':[42,40,39,38,37,36,35,34],Hybridcasual:[44,43,42,41,40,39,38,37],Hypercasual:[40,38,36,35,33,32,31,30],Casual:[35,33,31,29,28,27,26,25]},
+  d30:{'Mid-core':[32,30,28,27,26,25,24,23],Hybridcasual:[35,33,31,30,28,27,26,25],Hypercasual:[28,26,24,22,21,20,19,18],Casual:[25,23,21,19,18,17,16,15]},
+  d365:{'Mid-core':[18,17,16,15,14,14,13,12],Hybridcasual:[20,19,18,17,16,15,14,13],Hypercasual:[12,11,10,9,9,8,8,7],Casual:[10,9,8,7,7,6,6,5]}
+};
 const retC={'Mid-core':RED,Hybridcasual:PUR,Hypercasual:BLU,Casual:GRN};
 function retDatasets(tab){
-  const d=retData[tab];const labels=['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8'];
-  return Object.entries(d).map(([n,b])=>({label:n,data:labels.map((_,i)=>+(b-i*(Math.random()*1.2)).toFixed(1)),borderColor:retC[n],backgroundColor:'transparent',borderWidth:2,pointRadius:2,pointHoverRadius:5,tension:.3,borderDash:n==='Casual'?[5,3]:[]}));
+  const d=retSeries[tab];
+  return Object.entries(d).map(([n,pts])=>({label:n,data:pts,borderColor:retC[n],backgroundColor:'transparent',borderWidth:2,pointRadius:3,pointHoverRadius:6,tension:.3,borderDash:n==='Casual'?[5,3]:[]}));
 }
+const retYRange={d1:{min:20,max:55},d7:{min:20,max:50},d30:{min:10,max:40},d365:{min:0,max:25}};
 function renderRetention(tab){
   currentRetTab=tab;
   const c=$('#chartRetention');if(!c)return;
+  const r=retYRange[tab];
   if(retInst){
     retInst.data.datasets=retDatasets(tab);
+    retInst.options.scales.y.min=r.min;
+    retInst.options.scales.y.max=r.max;
     retInst.update('active');
     return;
   }
-  retInst=new Chart(c,{type:'line',data:{labels:['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8'],datasets:retDatasets(tab)},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'right',labels:{usePointStyle:true,pointStyle:'line',padding:10,font:{size:10},color:'#666'}},datalabels:{display:false}},scales:{y:{min:20,max:50,ticks:{callback:v=>v+'%',font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}},x:{grid:{display:false},ticks:{font:{size:10},color:'#666'}}}}});
+  retInst=new Chart(c,{type:'line',data:{labels:['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8'],datasets:retDatasets(tab)},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'right',labels:{usePointStyle:true,pointStyle:'line',padding:10,font:{size:10},color:'#666'}},datalabels:{display:false}},scales:{y:{min:r.min,max:r.max,ticks:{callback:v=>v+'%',font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}},x:{grid:{display:false},ticks:{font:{size:10},color:'#666'}}}}});
 }
 $('#retTabs')?.addEventListener('click',e=>{if(e.target.classList.contains('tab-btn')){$$('#retTabs .tab-btn').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');renderRetention(e.target.dataset.t)}});
 
 /* Trends chart — update data in place */
 let trendInst=null;let currentTrendTab='revenue';
-const trendData={revenue:{'2024':[30,28,12,8],'2025':[30,28,14,7]},downloads:{'2024':[15,18,8,10],'2025':[14,16,9,8]},sessions:{'2024':[100,150,100,80],'2025':[100,140,90,70]}};
+const trendData={
+  revenue:{'2024':[30,28,12,8],'2025':[35,32,16,9]},
+  downloads:{'2024':[48,22,15,12],'2025':[42,25,18,10]},
+  sessions:{'2024':[1.8,1.2,0.8,0.5],'2025':[2.1,1.4,1.0,0.6]}
+};
 function trendDatasets(tab){
   const d=trendData[tab];
   return [{label:'Casual',data:[d['2024'][0],d['2025'][0]],backgroundColor:GRN,borderRadius:2},{label:'Mid-core',data:[d['2024'][1],d['2025'][1]],backgroundColor:DRK,borderRadius:2},{label:'Hybridcasual',data:[d['2024'][2],d['2025'][2]],backgroundColor:PUR,borderRadius:2},{label:'Hypercasual',data:[d['2024'][3],d['2025'][3]],backgroundColor:GRY,borderRadius:2}];
 }
-function trendFormatter(tab){return v=>(tab==='revenue'?'$':'')+v+(tab==='revenue'?'B':tab==='sessions'?'B':'')}
+const trendUnits={revenue:{pre:'$',suf:'B'},downloads:{pre:'',suf:'B'},sessions:{pre:'',suf:'T'}};
+function trendFormatter(tab){const u=trendUnits[tab];return v=>u.pre+v+u.suf}
 function renderTrends(tab){
   currentTrendTab=tab;
   const c=$('#chartTrends');if(!c)return;
