@@ -1349,7 +1349,7 @@ function unlockGatedContent(scroll){
   const gated=$('#gatedContent');
   gated.classList.add('unlocked');
   setTimeout(()=>{$('#emailGate').style.display='none'},600);
-  setTimeout(()=>{initReveal();initCounters();initGatedCharts()},400);
+  setTimeout(()=>{initReveal();initCounters();initGatedCharts();setTimeout(()=>{if(retInst)retInst.resize();if(trendInst)trendInst.resize()},500)},600);
   if(scroll)setTimeout(()=>document.getElementById('ch2').scrollIntoView({behavior:'smooth'}),500);
 }
 function initGate(){
@@ -1459,16 +1459,11 @@ const retC={'Mid-core':RED,Hybridcasual:PUR,Hypercasual:BLU,Casual:GRN};
 function renderRetention(tab){
   currentRetTab=tab;
   if(retInst){retInst.destroy();retInst=null}
-  const oldC=$('#chartRetention');if(!oldC)return;
-  const parent=oldC.parentNode;
-  parent.style.minHeight=(parent.offsetHeight||260)+'px';
-  const newC=document.createElement('canvas');
-  newC.id='chartRetention';
-  parent.replaceChild(newC,oldC);
+  const c=$('#chartRetention');if(!c)return;
   const d=retData[tab];
   const labels=['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8'];
   const ds=Object.entries(d).map(([n,b])=>({label:n,data:labels.map((_,i)=>+(b-i*(Math.random()*1.2)).toFixed(1)),borderColor:retC[n],backgroundColor:'transparent',borderWidth:2,pointRadius:2,pointHoverRadius:5,tension:.3,borderDash:n==='Casual'?[5,3]:[]}));
-  retInst=new Chart(newC,{type:'line',data:{labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'right',labels:{usePointStyle:true,pointStyle:'line',padding:10,font:{size:10},color:'#666'}},datalabels:{display:false}},scales:{y:{min:20,max:50,ticks:{callback:v=>v+'%',font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}},x:{grid:{display:false},ticks:{font:{size:10},color:'#666'}}}}});
+  retInst=new Chart(c,{type:'line',data:{labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'right',labels:{usePointStyle:true,pointStyle:'line',padding:10,font:{size:10},color:'#666'}},datalabels:{display:false}},scales:{y:{min:20,max:50,ticks:{callback:v=>v+'%',font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}},x:{grid:{display:false},ticks:{font:{size:10},color:'#666'}}}}});
   requestAnimationFrame(()=>{if(retInst)retInst.resize()});
 }
 $('#retTabs')?.addEventListener('click',e=>{if(e.target.classList.contains('tab-btn')){$$('#retTabs .tab-btn').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');renderRetention(e.target.dataset.t)}});
@@ -1479,15 +1474,9 @@ const trendData={revenue:{'2024':[30,28,12,8],'2025':[30,28,14,7]},downloads:{'2
 function renderTrends(tab){
   currentTrendTab=tab;
   if(trendInst){trendInst.destroy();trendInst=null}
-  const oldC=$('#chartTrends');if(!oldC)return;
-  const parent=oldC.parentNode;
-  parent.style.minHeight=(parent.offsetHeight||280)+'px';
-  const newC=document.createElement('canvas');
-  newC.id='chartTrends';
-  parent.replaceChild(newC,oldC);
+  const c=$('#chartTrends');if(!c)return;
   const d=trendData[tab];
-  trendInst=new Chart(newC,{type:'bar',data:{labels:['2024','2025'],datasets:[{label:'Casual',data:[d['2024'][0],d['2025'][0]],backgroundColor:GRN,borderRadius:2},{label:'Mid-core',data:[d['2024'][1],d['2025'][1]],backgroundColor:DRK,borderRadius:2},{label:'Hybridcasual',data:[d['2024'][2],d['2025'][2]],backgroundColor:PUR,borderRadius:2},{label:'Hypercasual',data:[d['2024'][3],d['2025'][3]],backgroundColor:GRY,borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'top',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10},color:'#666'}},datalabels:{display:true,anchor:'end',align:'end',font:{size:9,weight:'bold'},color:'#666',formatter:v=>(tab==='revenue'?'$':'')+v+(tab==='revenue'?'B':tab==='sessions'?'B':'')}},scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11},color:'#666'}},y:{stacked:true,ticks:{callback:v=>(tab==='revenue'?'$':'')+v+'B',font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}}}}});
-  requestAnimationFrame(()=>{if(trendInst)trendInst.resize()});
+  trendInst=new Chart(c,{type:'bar',data:{labels:['2024','2025'],datasets:[{label:'Casual',data:[d['2024'][0],d['2025'][0]],backgroundColor:GRN,borderRadius:2},{label:'Mid-core',data:[d['2024'][1],d['2025'][1]],backgroundColor:DRK,borderRadius:2},{label:'Hybridcasual',data:[d['2024'][2],d['2025'][2]],backgroundColor:PUR,borderRadius:2},{label:'Hypercasual',data:[d['2024'][3],d['2025'][3]],backgroundColor:GRY,borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{tooltip:tooltipOpts,legend:{position:'top',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10},color:'#666'}},datalabels:{display:true,anchor:'end',align:'end',font:{size:9,weight:'bold'},color:'#666',formatter:v=>(tab==='revenue'?'$':'')+v+(tab==='revenue'?'B':tab==='sessions'?'B':'')}},scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11},color:'#666'}},y:{stacked:true,ticks:{callback:v=>(tab==='revenue'?'$':'')+v+'B',font:{size:10},color:'#666'},grid:{color:'#f0f0f0'}}}}});
 }
 $('#trendTabs')?.addEventListener('click',e=>{if(e.target.classList.contains('tab-btn')){$$('#trendTabs .tab-btn').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');renderTrends(e.target.dataset.t)}});
 
