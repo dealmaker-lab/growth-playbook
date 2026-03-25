@@ -314,6 +314,76 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 @keyframes gateSuccess{0%{transform:scale(0);opacity:0}50%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
 .gate-success-icon{display:none;font-size:48px;animation:gateSuccess .5s ease forwards}
 .gate-form.success~.gate-success-icon{display:block}
+
+/* ═══ LOGO WALL ═══ */
+.logo-wall{padding:48px 0;background:#fff;border-bottom:1px solid var(--border);overflow:hidden}
+.logo-wall-label{text-align:center;font-family:var(--font-h);font-size:13px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:28px}
+.logo-scroll{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);margin-bottom:12px}
+.logo-track{display:flex;gap:0;animation:logoScroll 35s linear infinite;width:max-content}
+.logo-scroll[style*="reverse"] .logo-track{animation-direction:reverse}
+.logo-item{flex-shrink:0;padding:12px 32px;font-family:var(--font-h);font-size:14px;font-weight:600;color:#bbb;white-space:nowrap;transition:color .3s}
+.logo-item:hover{color:#222}
+@keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ═══ METHODOLOGY ═══ */
+.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.method-card{background:#F5F7F9;border-radius:10px;padding:24px;display:flex;gap:16px;align-items:flex-start}
+.method-card .method-icon{font-size:24px;flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.method-card p{font-size:.85rem;color:#666;line-height:1.7;margin:0}
+.method-card strong{color:#222}
+
+/* ═══ TESTIMONIALS ═══ */
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:32px}
+.testimonial-card{background:#fff;border-radius:10px;padding:28px;border:1px solid #E8ECF1;box-shadow:0 4px 12px rgba(0,0,0,.04);display:flex;flex-direction:column;gap:20px}
+.testimonial-card::before{content:'\201C';font-family:var(--font-h);font-size:48px;font-weight:700;color:var(--green);line-height:1;margin-bottom:-12px}
+.testi-quote{font-size:.88rem;color:#666;line-height:1.75;flex:1}
+.testi-author{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid #E8ECF1}
+.testi-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:700;font-family:var(--font-h);flex-shrink:0}
+.testi-author strong{font-size:.85rem;color:#222}
+.testi-author span{font-size:.78rem;color:#999}
+.success-strip{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;padding:24px 0;border-top:1px solid #E8ECF1}
+.success-item{text-align:center}
+.success-item strong{display:block;font-family:var(--font-h);font-size:1.4rem;font-weight:700;color:var(--green)}
+.success-item span{display:block;font-size:.78rem;color:#666}
+.success-co{font-size:.7rem;color:#999;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+
+/* ═══ ABOUT STATS ═══ */
+.about-stats{display:flex;gap:32px;margin-top:20px}
+.about-stats div{text-align:left}
+.about-stats strong{display:block;font-family:var(--font-h);font-size:1.4rem;font-weight:700;color:var(--green)}
+.about-stats span{font-size:.78rem;color:#999}
+.pillar-icon{font-size:20px;margin-bottom:6px}
+
+/* ═══ MOBILE OPTIMIZATION ═══ */
+@media(max-width:768px){
+  .method-grid{grid-template-columns:1fr}
+  .method-card{flex-direction:column;gap:10px}
+  .method-card p{font-size:.82rem}
+  .testimonial-grid{grid-template-columns:1fr}
+  .success-strip{gap:16px}
+  .success-item strong{font-size:1.1rem}
+  .about-stats{flex-direction:column;gap:16px}
+  .logo-item{padding:10px 20px;font-size:12px}
+  .gate{padding:28px 0!important}
+  .gate h2{font-size:1.2rem!important}
+  .footer-grid{grid-template-columns:1fr 1fr!important;gap:24px}
+  .story{gap:24px}
+  .story-chart{padding:20px}
+  .info-card{padding:20px}
+  .bento{padding:40px 0}
+  .toc{padding:40px 0}
+}
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr!important}
+  .success-strip{gap:12px}
+  .success-item{min-width:calc(50% - 12px)}
+  .stat-callout{padding:20px;gap:16px}
+  .stat-callout .big-num{font-size:2rem!important;min-width:auto}
+  .data-table{display:block;overflow-x:auto}
+  .story-chart{padding:16px}
+  .ch-head{padding:32px 0 28px}
+  .ch-bg-num{display:none}
+}
 </style>
 </head>
 <body>
@@ -370,6 +440,73 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   </div>
 </section>
 
+<!-- ══════════════ TRUSTED BY ══════════════ -->
+<section class="logo-wall">
+  <div class="wrap">
+    <p class="logo-wall-label rv">Trusted by leading brands worldwide</p>
+    <div class="logo-scroll">
+      <div class="logo-track">
+        <!-- Row 1: Client logos -->
+        <span class="logo-item">Amazon</span>
+        <span class="logo-item">EA</span>
+        <span class="logo-item">Rovio</span>
+        <span class="logo-item">TapNation</span>
+        <span class="logo-item">Shahid</span>
+        <span class="logo-item">HBO Max</span>
+        <span class="logo-item">Nike</span>
+        <span class="logo-item">Gram Games</span>
+        <span class="logo-item">Domino's</span>
+        <span class="logo-item">Superplay</span>
+        <span class="logo-item">Rollic</span>
+        <span class="logo-item">Hepsiburada</span>
+        <!-- Duplicate for seamless scroll -->
+        <span class="logo-item">Amazon</span>
+        <span class="logo-item">EA</span>
+        <span class="logo-item">Rovio</span>
+        <span class="logo-item">TapNation</span>
+        <span class="logo-item">Shahid</span>
+        <span class="logo-item">HBO Max</span>
+        <span class="logo-item">Nike</span>
+        <span class="logo-item">Gram Games</span>
+        <span class="logo-item">Domino's</span>
+        <span class="logo-item">Superplay</span>
+        <span class="logo-item">Rollic</span>
+        <span class="logo-item">Hepsiburada</span>
+      </div>
+    </div>
+    <div class="logo-scroll" style="--scroll-dir:reverse">
+      <div class="logo-track">
+        <!-- Row 2: OEM + DSP partners -->
+        <span class="logo-item">Samsung</span>
+        <span class="logo-item">OPPO</span>
+        <span class="logo-item">Nokia</span>
+        <span class="logo-item">T-Mobile</span>
+        <span class="logo-item">Verizon</span>
+        <span class="logo-item">AT&amp;T</span>
+        <span class="logo-item">InMobi</span>
+        <span class="logo-item">Unity</span>
+        <span class="logo-item">AppLovin</span>
+        <span class="logo-item">Taboola</span>
+        <span class="logo-item">Smaato</span>
+        <span class="logo-item">Beymen</span>
+        <!-- Duplicate -->
+        <span class="logo-item">Samsung</span>
+        <span class="logo-item">OPPO</span>
+        <span class="logo-item">Nokia</span>
+        <span class="logo-item">T-Mobile</span>
+        <span class="logo-item">Verizon</span>
+        <span class="logo-item">AT&amp;T</span>
+        <span class="logo-item">InMobi</span>
+        <span class="logo-item">Unity</span>
+        <span class="logo-item">AppLovin</span>
+        <span class="logo-item">Taboola</span>
+        <span class="logo-item">Smaato</span>
+        <span class="logo-item">Beymen</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════════ TOC ══════════════ -->
 <section class="toc" id="toc">
   <div class="wrap">
@@ -380,6 +517,32 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <a href="#ch2" class="toc-card rv"><div class="toc-num">02</div><h3>Rewarded Models</h3><p>Mastering the Value-Exchange Economy through Rewarded Playtime and Offerwalls.</p></a>
       <a href="#ch3" class="toc-card rv"><div class="toc-num">03</div><h3>OEM &amp; On-Device Discovery</h3><p>Reaching users at the source before they even open an App Store.</p></a>
       <a href="#ch4" class="toc-card rv"><div class="toc-num">04</div><h3>Apple Search Ads &amp; ASO</h3><p>Mastering intent and managing cannibalization with a unified engine.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ METHODOLOGY ══════════════ -->
+<section class="sec sec-w" style="padding:48px 0">
+  <div class="wrap">
+    <div class="toc-label rv" style="margin-bottom:6px">About This Data</div>
+    <h3 class="rv" style="font-family:var(--font-h);font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:700;text-align:center;color:#222;margin-bottom:32px">Methodology &amp; Sources</h3>
+    <div class="method-grid rv">
+      <div class="method-card">
+        <div class="method-icon">📊</div>
+        <p>Market data sourced from <strong>Sensor Tower</strong>, <strong>Data.ai</strong>, and <strong>Statista</strong> covering iOS App Store and Google Play downloads and revenue estimates through December 2025.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">🎯</div>
+        <p>Campaign performance data aggregated from <strong>10,000+ campaigns</strong> managed through AppSamurai's DSP, OEM, and Rewarded Playtime platforms across 2024-2025.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">🔬</div>
+        <p>Creative analysis powered by <strong>Alison.AI</strong> examining 500,000+ ad creatives across iOS and Android to identify top-performing elements and trends.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">📱</div>
+        <p>In-app revenue figures are gross — inclusive of app store commissions. Download estimates are per-user, counting one download per Apple or Google account.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -965,6 +1128,45 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   </div>
 </section>
 
+<!-- ══════════════ TESTIMONIALS ══════════════ -->
+<section class="sec sec-l" style="padding:56px 0">
+  <div class="wrap">
+    <div class="toc-label rv">What Our Partners Say</div>
+    <h3 class="rv" style="font-family:var(--font-h);font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:700;text-align:center;color:#222;margin-bottom:36px">Trusted by Growth Teams Worldwide</h3>
+    <div class="testimonial-grid rv">
+      <div class="testimonial-card">
+        <div class="testi-quote">"AppSamurai has been a vital partner for Magiclab Studio's games via their rewarded UA campaigns. Their ability to deliver high-quality users at scale has been instrumental in our growth strategy."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--green)">ME</div>
+          <div><strong>Mert Ersoz</strong><br><span>Head of Growth, MagicLab</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testi-quote">"AppSamurai's strategic programmatic advertising expertise helped SHAHID boost user acquisition and achieve our subscription targets in a highly competitive streaming market."</div>
+        <div class="testi-author">
+          <img class="testi-avatar" src="assets/ali-shahid.png" alt="Ali Aktas" style="object-fit:cover">
+          <div><strong>Ali Aktas</strong><br><span>Head of Performance, Shahid</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testi-quote">"Partnering with AppSamurai has been a game-changer for us. Their growth strategies helped us exceed CPA and ROAS goals while maintaining user quality across all channels."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--purple)">AC</div>
+          <div><strong>Aleyna Cerrah</strong><br><span>UA Manager, APPS</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- Success metrics strip -->
+    <div class="success-strip rv">
+      <div class="success-item"><strong>72.3%</strong><span>Purchase Increase</span><span class="success-co">Beymen</span></div>
+      <div class="success-item"><strong>4×</strong><span>ROAS KPI Surpassed</span><span class="success-co">Gram Games</span></div>
+      <div class="success-item"><strong>230%</strong><span>DAU Increase</span><span class="success-co">Fitplan</span></div>
+      <div class="success-item"><strong>107%</strong><span>ROAS Achieved</span><span class="success-co">APPS</span></div>
+      <div class="success-item"><strong>46%</strong><span>Retention Boost</span><span class="success-co">Amazon Photos</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- Ch5/Ch6 removed — content merged into Ch1.2 -->
 <!-- PDF Gate -->
 <section class="gate" style="padding:36px 0">
@@ -983,18 +1185,23 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     <div class="rv">
       <div class="about-tag">About AppSamurai</div>
       <h2>The Growth Platform Built for Mobile</h2>
-      <p>AppSamurai is a comprehensive mobile growth platform that helps apps scale through AI-powered programmatic advertising, rewarded user acquisition, OEM on-device discovery, and Apple Search Ads management.</p>
-      <p>Our integrated ecosystem — including the AppsPrize rewards platform — enables growth teams to acquire high-value users, optimize retention, and maximize lifetime value.</p>
-      <button class="btn-primary" style="margin-top:8px">Get in Touch &rarr;</button>
+      <p>AppSamurai is a global mobile growth platform empowering apps to scale through AI-powered programmatic advertising, rewarded user acquisition, OEM on-device discovery, and Apple Search Ads management.</p>
+      <p>Our integrated ecosystem — including the AppsPrize rewards platform — enables growth teams to acquire high-value users, optimize retention, and maximize lifetime value across every stage of the funnel.</p>
+      <div class="about-stats">
+        <div><strong>10,000+</strong><span>Campaigns Managed</span></div>
+        <div><strong>3B+</strong><span>Users Reached</span></div>
+        <div><strong>50+</strong><span>Countries</span></div>
+      </div>
+      <a href="https://appsamurai.com/contact" class="btn-primary" style="margin-top:16px">Get in Touch &rarr;</a>
     </div>
     <div class="rv-r">
       <div class="pillar-grid">
-        <div class="pillar"><h4>DSP</h4><p>AI-Powered Programmatic</p></div>
-        <div class="pillar"><h4>Rewarded</h4><p>Playtime &amp; Offerwalls</p></div>
-        <div class="pillar"><h4>OEM</h4><p>On-Device Discovery</p></div>
-        <div class="pillar"><h4>ASA</h4><p>Search Ads &amp; ASO</p></div>
-        <div class="pillar"><h4>AppsPrize</h4><p>Publisher Monetization</p></div>
-        <div class="pillar"><h4>Analytics</h4><p>Attribution &amp; LTV</p></div>
+        <div class="pillar"><div class="pillar-icon">🚀</div><h4>DSP</h4><p>AI-Powered Programmatic</p></div>
+        <div class="pillar"><div class="pillar-icon">🎮</div><h4>Rewarded</h4><p>Playtime &amp; Offerwalls</p></div>
+        <div class="pillar"><div class="pillar-icon">📱</div><h4>OEM</h4><p>On-Device Discovery</p></div>
+        <div class="pillar"><div class="pillar-icon">🔍</div><h4>ASA</h4><p>Search Ads &amp; ASO</p></div>
+        <div class="pillar"><div class="pillar-icon">🏆</div><h4>AppsPrize</h4><p>Publisher Monetization</p></div>
+        <div class="pillar"><div class="pillar-icon">📈</div><h4>Analytics</h4><p>Attribution &amp; LTV</p></div>
       </div>
     </div>
   </div></div>
