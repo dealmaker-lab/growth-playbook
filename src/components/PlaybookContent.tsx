@@ -81,8 +81,7 @@ export default function PlaybookContent({
   const [gateLiftingDone, setGateLiftingDone] = useState(false);
   const [retTab, setRetTab] = useState('d7');
   const [trendTab, setTrendTab] = useState('revenue');
-  const [chartsReady, setChartsReady] = useState(false);
-  const [gatedChartsReady, setGatedChartsReady] = useState(false);
+  // chartsReady/gatedChartsReady removed — skeletons broke Chart.js (needs visible canvas)
 
   const lastY = useRef(0);
   const sessionId = useRef('');
@@ -515,7 +514,7 @@ export default function PlaybookContent({
       });
     }
 
-    setChartsReady(true);
+
   }, [externalTooltipHandler]);
 
   /* ── Init gated charts ── */
@@ -844,7 +843,7 @@ export default function PlaybookContent({
     renderRetentionChart('d7');
     renderTrendsChart('revenue');
 
-    setGatedChartsReady(true);
+
   }, [externalTooltipHandler]);
 
   /* ── Retention Chart ── */
@@ -1571,7 +1570,7 @@ export default function PlaybookContent({
                 <div className="stat-body"><h4>Organic Still Leads</h4><p>But paid channels are closing the gap fast</p></div>
               </div>
             </div>
-            <div className="story-chart"><div className="chart-wrap">{!chartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartDoughnut" style={{ display: chartsReady ? 'block' : 'none' }}></canvas></div></div>
+            <div className="story-chart"><div className="chart-wrap"><canvas id="chartDoughnut"></canvas></div></div>
           </div>
         </div>
       </section>
@@ -1630,7 +1629,7 @@ export default function PlaybookContent({
             <div className="story-chart sticky rv-r">
               <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '.85rem', marginBottom: '12px', textAlign: 'center', color: 'var(--text)' }}>Programmatic Ad Market Growth</h4>
               <div className="chart-sub" style={{ textAlign: 'center', fontSize: '.75rem', color: 'var(--text-faint)', marginBottom: '12px' }}>Projected market size by 2030</div>
-              <div className="chart-wrap" style={{ maxHeight: '300px' }}>{!chartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartProgrammatic" style={{ display: chartsReady ? 'block' : 'none' }}></canvas></div>
+              <div className="chart-wrap" style={{ maxHeight: '300px' }}><canvas id="chartProgrammatic"></canvas></div>
             </div>
           </div>
         </div>
@@ -1706,7 +1705,7 @@ export default function PlaybookContent({
             <div className="chart-box" style={{ margin: 0, padding: '20px 16px' }}>
               <div className="chart-h" style={{ fontSize: '.82rem', marginBottom: '4px' }}>Ad Type Impression Share</div>
               <div className="chart-sub" style={{ fontSize: '.65rem', marginBottom: '8px' }}>2024 vs 2025 worldwide</div>
-              <div className="chart-wrap" style={{ height: '180px' }}>{!chartsReady && <div className="chart-skeleton" style={{ height: 180 }}></div>}<canvas id="chartAdTypes" style={{ display: chartsReady ? 'block' : 'none' }}></canvas></div>
+              <div className="chart-wrap" style={{ height: '180px' }}><canvas id="chartAdTypes"></canvas></div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: '8px', fontSize: '.6rem', color: 'var(--text-muted)' }}>
                 <span>Video overtakes Image as dominant format</span>
                 <span>Playable ads double (+111%)</span>
@@ -1770,7 +1769,7 @@ export default function PlaybookContent({
           <div className="chart-card-new rv">
             <h4>Traditional vs Optimized Channel Mix</h4>
             <div className="chart-subtitle">Budget allocation by channel — shift spend to high-intent inventory</div>
-            <div className="chart-wrap">{!chartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartBudgetFlow" style={{ display: chartsReady ? 'block' : 'none' }}></canvas></div>
+            <div className="chart-wrap"><canvas id="chartBudgetFlow" ></canvas></div>
           </div>
         </div>
       </section>
@@ -1791,7 +1790,7 @@ export default function PlaybookContent({
           </div>
           <div className="case-chart" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <img src="/paycell-banner.png" alt="Paycell Case Study" style={{ width: '100%', borderRadius: '12px', marginBottom: '8px' }} />
-            {!chartsReady && <div className="chart-skeleton" style={{ height: 180 }}></div>}<canvas id="chartPaycell" height={180} style={{ display: chartsReady ? 'block' : 'none' }}></canvas>
+            <canvas id="chartPaycell" height={180} ></canvas>
           </div>
         </div></div>
       </section>
@@ -1827,7 +1826,7 @@ export default function PlaybookContent({
           <div className="chart-card-new rv">
             <h4>LTV Comparison by Acquisition Model</h4>
             <div className="chart-subtitle">Rewarded Playtime delivers 2-3x higher LTV than traditional models</div>
-            <div className="chart-wrap">{!chartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartLTVTeaser" style={{ display: chartsReady ? 'block' : 'none' }}></canvas></div>
+            <div className="chart-wrap"><canvas id="chartLTVTeaser" ></canvas></div>
           </div>
         </div>
       </section>
@@ -1922,7 +1921,7 @@ export default function PlaybookContent({
             <div className="chart-card-new rv">
               <h4>LTV Comparison by Acquisition Model</h4>
               <div className="chart-subtitle">Rewarded Playtime users generate significantly higher lifetime value at every milestone</div>
-              <div className="chart-wrap">{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartLTVFull" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
+              <div className="chart-wrap"><canvas id="chartLTVFull" ></canvas></div>
             </div>
           </div>
         </section>
@@ -1952,7 +1951,7 @@ export default function PlaybookContent({
             <div className="story-chart rv-l">
               <div className="chart-h" style={{ fontSize: '.95rem' }}>Download Channels Share by Genre</div>
               <div className="chart-sub">Share of downloads by product model</div>
-              <div className="chart-wrap" style={{ height: '300px' }}>{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 300 }}></div>}<canvas id="chartGenre" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
+              <div className="chart-wrap" style={{ height: '300px' }}><canvas id="chartGenre" ></canvas></div>
             </div>
             <div className="story-chart rv-r">
               <div className="chart-h" style={{ fontSize: '.95rem' }}>Mobile Game Retention Trends</div>
@@ -1961,7 +1960,7 @@ export default function PlaybookContent({
                   <button key={t} className={`tab-btn${retTab === t ? ' active' : ''}`} onClick={() => setRetTab(t)}>{t === 'd7' ? 'D7' : t === 'd30' ? 'D30' : t === 'd1' ? 'D1' : 'D365'}</button>
                 ))}
               </div></div>
-              <div className="chart-wrap" style={{ height: '260px' }}>{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartRetention" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
+              <div className="chart-wrap" style={{ height: '260px' }}><canvas id="chartRetention" ></canvas></div>
             </div>
           </div></div>
         </section>
@@ -1983,7 +1982,7 @@ export default function PlaybookContent({
                   <button key={t} className={`tab-btn${trendTab === t ? ' active' : ''}`} onClick={() => setTrendTab(t)}>{t.charAt(0).toUpperCase() + t.slice(1)}</button>
                 ))}
               </div></div>
-              <div className="chart-wrap" style={{ height: '280px' }}>{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 280 }}></div>}<canvas id="chartTrends" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
+              <div className="chart-wrap" style={{ height: '280px' }}><canvas id="chartTrends" ></canvas></div>
             </div>
           </div></div>
         </section>
@@ -2042,7 +2041,7 @@ export default function PlaybookContent({
             <div className="story-chart sticky rv-r">
               <div className="chart-h" style={{ fontSize: '.95rem' }}>iPhone vs Android Market Share</div>
               <div className="chart-sub">2009 — 2024</div>
-              <div className="chart-wrap" style={{ height: '300px' }}>{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 300 }}></div>}<canvas id="chartMarketShare" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
+              <div className="chart-wrap" style={{ height: '300px' }}><canvas id="chartMarketShare" ></canvas></div>
             </div>
           </div></div>
         </section>
@@ -2092,7 +2091,7 @@ export default function PlaybookContent({
             <div className="chart-card-new rv">
               <h4>OEM Format Comparison</h4>
               <div className="chart-subtitle">Radar analysis across 5 key dimensions — PAI leads in reach and brand safety</div>
-              <div className="chart-wrap" style={{ maxWidth: '500px', margin: '0 auto' }}>{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartOEMRadar" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
+              <div className="chart-wrap" style={{ maxWidth: '500px', margin: '0 auto' }}><canvas id="chartOEMRadar" ></canvas></div>
             </div>
           </div>
         </section>
@@ -2138,7 +2137,7 @@ export default function PlaybookContent({
                 <div style={{ background: 'rgba(175,156,255,.12)', borderRadius: '12px', padding: '16px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--green)' }}>ROAS+</div><div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.5)' }}>Target Achieved</div></div>
               </div>
             </div>
-            <div className="case-chart">{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 200 }}></div>}<canvas id="chartTapNation" height={200} style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
+            <div className="case-chart"><canvas id="chartTapNation" height={200} ></canvas></div>
           </div></div>
         </section>
 
@@ -2183,7 +2182,7 @@ export default function PlaybookContent({
             <div className="chart-card-new rv">
               <h4>ASA Keyword Strategy Map</h4>
               <div className="chart-subtitle">X: Search Volume, Y: Conversion Rate, Size: Opportunity Score</div>
-              <div className="chart-wrap">{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartASABubble" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
+              <div className="chart-wrap"><canvas id="chartASABubble" ></canvas></div>
             </div>
           </div>
         </section>
