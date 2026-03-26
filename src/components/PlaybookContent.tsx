@@ -185,6 +185,8 @@ export default function PlaybookContent({
     if (chartsInitRef.current) return;
     chartsInitRef.current = true;
 
+    try {
+
     const tooltipOpts = {
       enabled: false,
       external: externalTooltipHandler,
@@ -412,6 +414,10 @@ export default function PlaybookContent({
     }
 
 
+    } catch (err) {
+      console.error('[PlaybookCharts] initAllCharts failed:', err);
+      (window as any).__chartError = String(err);
+    }
   }, [externalTooltipHandler]);
 
   /* ── Init gated charts ── */
