@@ -1577,47 +1577,31 @@ export default function PlaybookContent({
         </div>
       </section>
 
-      {/* 1.2b Creative Intelligence + Ad Types -- condensed 3-col */}
+      {/* 1.2b Creative Intelligence — phone mockups + Ad Types chart */}
       <section className="sec sec-l">
         <div className="wrap rv">
           <span className="insight-badge">Creative Intelligence</span>
           <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, marginBottom: '16px', color: 'var(--text)' }}>Platform-Specific Creative Best Practices</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
-            {/* iOS */}
-            <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '20px 16px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}><span style={{ fontSize: '20px' }}>&#127822;</span><span style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '.82rem', color: 'var(--text)' }}>iOS Best Practices</span></div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                {[['Gameplay', 'var(--green)', '90%', '+45%'], ['Free-offer text', 'var(--green)', '60%', '+30%'], ['Centered logo', 'var(--green)', '58%', '+29%'], ['Sound-off', 'var(--purple)', '48%', '+24%'], ['Close-ups', 'var(--purple)', '32%', '+16%'], ['"Play Now!"', 'var(--purple)', '28%', '+14%']].map(([label, bg, width, val]) => (
-                  <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span style={{ fontSize: '.68rem', color: 'var(--text-muted)', width: '80px', flexShrink: 0, textAlign: 'right' }}>{label}</span>
-                    <div style={{ height: '16px', borderRadius: '3px', background: bg, width, position: 'relative' }}><span style={{ position: 'absolute', right: '5px', top: '1px', fontSize: '.6rem', color: '#fff', fontWeight: 700 }}>{val}</span></div>
-                  </div>
-                ))}
-              </div>
-              <p style={{ fontSize: '.6rem', color: 'var(--text-faint)', marginTop: '8px', textAlign: 'right' }}>Source: Alison.Ai</p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
+            {/* iOS mockup */}
+            <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)', padding: '24px', textAlign: 'center' }}>
+              <img src="/ios-android-age-1.png" alt="iOS Creative Best Practices — sound-off design, close-up gameplay, free-offer text, centered logo, Play Now CTA" style={{ maxWidth: '100%', maxHeight: '400px', borderRadius: '12px', objectFit: 'contain' }} />
+              <p style={{ fontSize: '.7rem', color: 'var(--text-faint)', marginTop: '8px' }}>Source: Alison.Ai</p>
             </div>
-            {/* Android */}
-            <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '20px 16px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}><span style={{ fontSize: '20px' }}>&#129302;</span><span style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '.82rem', color: 'var(--text)' }}>Android Best Practices</span></div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                {[['Split-screen', 'var(--cyan)', '100%', '+51%'], ['Multi scenes', 'var(--cyan)', '82%', '+42%'], ['No CTA end card', 'var(--cyan)', '61%', '+31%'], ['Gameplay', 'var(--green)', '26%', '+13%'], ['Sound effects', 'var(--green)', '24%', '+12%'], ['Falling coins', 'var(--green)', '22%', '+11%']].map(([label, bg, width, val]) => (
-                  <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span style={{ fontSize: '.68rem', color: 'var(--text-muted)', width: '80px', flexShrink: 0, textAlign: 'right' }}>{label}</span>
-                    <div style={{ height: '16px', borderRadius: '3px', background: bg, width, position: 'relative' }}><span style={{ position: 'absolute', right: '5px', top: '1px', fontSize: '.6rem', color: bg === 'var(--cyan)' ? '#000' : '#fff', fontWeight: 700 }}>{val}</span></div>
-                  </div>
-                ))}
-              </div>
-              <p style={{ fontSize: '.6rem', color: 'var(--text-faint)', marginTop: '8px', textAlign: 'right' }}>Source: Alison.Ai</p>
+            {/* Android mockup */}
+            <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)', padding: '24px', textAlign: 'center' }}>
+              <img src="/ios-android-age-2.png" alt="Android Creative Best Practices — split-screen, multi scenes, falling coins, sound effects" style={{ maxWidth: '100%', maxHeight: '400px', borderRadius: '12px', objectFit: 'contain' }} />
+              <p style={{ fontSize: '.7rem', color: 'var(--text-faint)', marginTop: '8px' }}>Source: Alison.Ai</p>
             </div>
-            {/* Ad Type Impression Share */}
-            <div className="chart-box" style={{ margin: 0, padding: '20px 16px' }}>
-              <div className="chart-h" style={{ fontSize: '.82rem', marginBottom: '4px' }}>Ad Type Impression Share</div>
-              <div className="chart-sub" style={{ fontSize: '.65rem', marginBottom: '8px' }}>2024 vs 2025 worldwide</div>
-              <div className="chart-wrap" style={{ height: '180px' }}><canvas id="chartAdTypes"></canvas></div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: '8px', fontSize: '.6rem', color: 'var(--text-muted)' }}>
-                <span>Video overtakes Image as dominant format</span>
-                <span>Playable ads double (+111%)</span>
-              </div>
+          </div>
+          {/* Ad Type Impression Share — full width below */}
+          <div className="chart-box" style={{ margin: 0, padding: '24px', maxWidth: '600px' }}>
+            <div className="chart-h" style={{ fontSize: '.95rem', marginBottom: '4px' }}>Ad Type Impression Share</div>
+            <div className="chart-sub" style={{ fontSize: '.75rem', marginBottom: '12px' }}>2024 vs 2025 worldwide</div>
+            <div className="chart-wrap" style={{ height: '240px' }}><canvas id="chartAdTypes"></canvas></div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: '10px', fontSize: '.72rem', color: 'var(--text-muted)' }}>
+              <span>Video overtakes Image as dominant format</span>
+              <span>Playable ads double (+111%)</span>
             </div>
           </div>
         </div>
