@@ -945,12 +945,18 @@ export default function PlaybookContent({
 
   /* ── Update retention/trends when tabs change ── */
   useEffect(() => {
-    // Always try to render — if chart doesn't exist yet, it will be created
-    renderRetentionChart(retTab);
+    // DOM needs a frame to mount the new canvas after key change
+    const raf = requestAnimationFrame(() => {
+      renderRetentionChart(retTab);
+    });
+    return () => cancelAnimationFrame(raf);
   }, [retTab, renderRetentionChart]);
 
   useEffect(() => {
-    renderTrendsChart(trendTab);
+    const raf = requestAnimationFrame(() => {
+      renderTrendsChart(trendTab);
+    });
+    return () => cancelAnimationFrame(raf);
   }, [trendTab, renderTrendsChart]);
 
   /* ── Scroll Reveal with Stagger ── */
@@ -2280,13 +2286,11 @@ export default function PlaybookContent({
               <a href="https://appsamurai.com/dsp" target="_blank" rel="noopener noreferrer">DSP Engine</a>
               <a href="https://appsamurai.com/rewarded-playtime" target="_blank" rel="noopener noreferrer">Rewarded Playtime</a>
               <a href="https://appsamurai.com/oem" target="_blank" rel="noopener noreferrer">OEM Discovery</a>
-              <a href="https://appsamurai.com/apple-search-ads" target="_blank" rel="noopener noreferrer">Apple Search Ads</a>
             </div>
             <div className="footer-col">
               <h4>Resources</h4>
               <a href="https://appsamurai.com/blog" target="_blank" rel="noopener noreferrer">Blog</a>
               <a href="https://appsamurai.com/success-stories" target="_blank" rel="noopener noreferrer">Success Stories</a>
-              <a href="https://appsamurai.com/documentation" target="_blank" rel="noopener noreferrer">Documentation</a>
               <a href="#hero">This Playbook</a>
             </div>
             <div className="footer-col">
