@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { createClient } from '@supabase/supabase-js';
 import { rateLimit } from '@/lib/rate-limit';
 
 const DISPOSABLE_DOMAINS = [
@@ -106,7 +106,10 @@ export async function POST(request: NextRequest) {
       body.user_agent || request.headers.get('user-agent') || null;
 
     // ── Upsert into Supabase ──
-    const supabase = await createSupabaseServerClient();
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
     const { error: dbError } = await supabase.from('playbook_leads').upsert(
       {
         email,
