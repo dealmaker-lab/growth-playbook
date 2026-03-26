@@ -816,10 +816,8 @@ export default function PlaybookContent({
           min: r.min,
           max: r.max,
         } as any;
-        retInstRef.current.update();
-        requestAnimationFrame(() => {
-          retInstRef.current?.draw();
-        });
+        retInstRef.current.update('none');
+        retInstRef.current.draw();
         return;
       }
 
@@ -916,10 +914,8 @@ export default function PlaybookContent({
         (
           trendInstRef.current.options.scales!.y as any
         ).ticks.callback = formatter;
-        trendInstRef.current.update();
-        requestAnimationFrame(() => {
-          trendInstRef.current?.draw();
-        });
+        trendInstRef.current.update('none');
+        trendInstRef.current.draw();
         return;
       }
 
