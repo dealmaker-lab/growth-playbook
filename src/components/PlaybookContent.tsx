@@ -438,18 +438,6 @@ export default function PlaybookContent({
   /* ── Init gated charts ── */
   const initGatedCharts = useCallback(() => {
     if (gatedChartsInitRef.current) return;
-
-    // Safety: verify at least one gated canvas has non-zero dimensions
-    // If not, the gated content is still hidden — retry later
-    const testCanvas = document.getElementById('chartGenre') as HTMLCanvasElement;
-    if (testCanvas && testCanvas.offsetWidth === 0) {
-      setTimeout(() => {
-        gatedChartsInitRef.current = false; // allow retry
-        initGatedCharts();
-      }, 200);
-      return;
-    }
-
     gatedChartsInitRef.current = true;
 
     const tooltipOpts = {
@@ -811,13 +799,9 @@ export default function PlaybookContent({
 
       if (retInstRef.current) {
         retInstRef.current.data.datasets = datasets as any;
-        retInstRef.current.options.scales!.y = {
-          ...retInstRef.current.options.scales!.y,
-          min: r.min,
-          max: r.max,
-        } as any;
-        retInstRef.current.update('none');
-        retInstRef.current.draw();
+        (retInstRef.current.options.scales as any).y.min = r.min;
+        (retInstRef.current.options.scales as any).y.max = r.max;
+        retInstRef.current.update();
         return;
       }
 
@@ -914,8 +898,7 @@ export default function PlaybookContent({
         (
           trendInstRef.current.options.scales!.y as any
         ).ticks.callback = formatter;
-        trendInstRef.current.update('none');
-        trendInstRef.current.draw();
+        trendInstRef.current.update();
         return;
       }
 
@@ -1176,18 +1159,19 @@ export default function PlaybookContent({
     // Logo fallback removed — all logos are now text-only
 
     // If already unlocked (returning visitor), init gated content
-    // Use double-rAF to ensure display:block has been painted before Chart.js measures canvases
+    // Use setTimeout(500ms) to ensure display:block has fully painted before Chart.js measures canvases
     if (gateUnlocked) {
-      requestAnimationFrame(() => {
+      setTimeout(() => {
         requestAnimationFrame(() => {
           initReveal();
           initCounters();
           initGatedCharts();
           // Force resize after paint
-          requestAnimationFrame(() => {
-            if (retInstRef.current) retInstRef.current.resize();
-            if (trendInstRef.current) trendInstRef.current.resize();
-          });
+          setTimeout(() => {
+            Object.values(Chart.instances).forEach((inst: any) => {
+              try { inst.resize(); } catch (_) {}
+            });
+          }, 300);
         });
       });
     }
@@ -1198,19 +1182,19 @@ export default function PlaybookContent({
     (scroll: boolean) => {
       setGateUnlocked(true);
       // Wait for React re-render + display:block paint, then init charts
+      // 500ms delay ensures browser has fully laid out the now-visible gated content
       setTimeout(() => {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            initReveal();
-            initCounters();
-            initGatedCharts();
-            requestAnimationFrame(() => {
-              if (retInstRef.current) retInstRef.current.resize();
-              if (trendInstRef.current) trendInstRef.current.resize();
-            });
+        initReveal();
+        initCounters();
+        gatedChartsInitRef.current = false; // reset so charts can init fresh
+        initGatedCharts();
+        // Force resize all charts after another paint cycle
+        setTimeout(() => {
+          Object.values(Chart.instances).forEach((inst: any) => {
+            try { inst.resize(); } catch (_) {}
           });
-        });
-      }, 100);
+        }, 300);
+      }, 500);
       if (scroll) {
         setTimeout(() => {
           document
@@ -1346,7 +1330,7 @@ export default function PlaybookContent({
       {/* HERO */}
       <div className="hero-wrap">
         <div className="hero-wrap">
-          <section className="hero" id="hero">
+          <section className="hero" id="hero" style={{ backgroundImage: 'url(/hero-bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
             <div className="rv">
               <span className="hero-badge">AppSamurai Industry Report 2026</span>
               <h1>
