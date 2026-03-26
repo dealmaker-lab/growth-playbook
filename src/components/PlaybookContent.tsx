@@ -417,6 +417,18 @@ export default function PlaybookContent({
   /* ── Init gated charts ── */
   const initGatedCharts = useCallback(() => {
     if (gatedChartsInitRef.current) return;
+
+    // Safety: verify at least one gated canvas has non-zero dimensions
+    // If not, the gated content is still hidden — retry later
+    const testCanvas = document.getElementById('chartGenre') as HTMLCanvasElement;
+    if (testCanvas && testCanvas.offsetWidth === 0) {
+      setTimeout(() => {
+        gatedChartsInitRef.current = false; // allow retry
+        initGatedCharts();
+      }, 200);
+      return;
+    }
+
     gatedChartsInitRef.current = true;
 
     const tooltipOpts = {
@@ -1131,19 +1143,20 @@ export default function PlaybookContent({
     // Logo fallback removed — all logos are now text-only
 
     // If already unlocked (returning visitor), init gated content
-    // Use longer delay to ensure CSS transition from gated-locked to unlocked completes
-    // (max-height:0 → max-height:none needs time for Chart.js to measure canvas)
+    // Use double-rAF to ensure display:block has been painted before Chart.js measures canvases
     if (gateUnlocked) {
-      setTimeout(() => {
-        initReveal();
-        initCounters();
-        initGatedCharts();
-        // Force resize after charts render (canvas may have wrong dimensions initially)
-        setTimeout(() => {
-          if (retInstRef.current) retInstRef.current.resize();
-          if (trendInstRef.current) trendInstRef.current.resize();
-        }, 300);
-      }, 500);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          initReveal();
+          initCounters();
+          initGatedCharts();
+          // Force resize after paint
+          requestAnimationFrame(() => {
+            if (retInstRef.current) retInstRef.current.resize();
+            if (trendInstRef.current) trendInstRef.current.resize();
+          });
+        });
+      });
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -1151,15 +1164,20 @@ export default function PlaybookContent({
   const unlockGatedContent = useCallback(
     (scroll: boolean) => {
       setGateUnlocked(true);
+      // Wait for React re-render + display:block paint, then init charts
       setTimeout(() => {
-        initReveal();
-        initCounters();
-        initGatedCharts();
-        setTimeout(() => {
-          if (retInstRef.current) retInstRef.current.resize();
-          if (trendInstRef.current) trendInstRef.current.resize();
-        }, 500);
-      }, 600);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            initReveal();
+            initCounters();
+            initGatedCharts();
+            requestAnimationFrame(() => {
+              if (retInstRef.current) retInstRef.current.resize();
+              if (trendInstRef.current) trendInstRef.current.resize();
+            });
+          });
+        });
+      }, 100);
       if (scroll) {
         setTimeout(() => {
           document
