@@ -3,74 +3,25 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Chart, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import {
+  DoughnutChart,
+  ProgrammaticChart,
+  LTVChart,
+  AdTypesChart,
+  GenreChart,
+  RetentionChart,
+  TrendsChart,
+  MarketShareChart,
+  OEMFormatChart,
+  ASABubbleChart,
+} from './charts';
 
+// Chart.js only used for TapNation case study chart
 Chart.register(...registerables, ChartDataLabels);
 
-// Expose Chart globally for debugging + force-resize workaround
-if (typeof window !== 'undefined') {
-  (window as any).Chart = Chart;
-}
-
-/* ── Chart color constants ── */
+/* ── Chart color constants (used by TapNation Chart.js chart) ── */
 const GRN = '#26BE81';
-const DRK = '#2A2A3E';
-const GRY = '#B0B0B0';
 const PUR = '#af9cff';
-const BLU = '#3B82F6';
-const CYN = '#00f4f4';
-const RED = '#F87171';
-
-/* ── Retention data ── */
-const retSeries: Record<string, Record<string, number[]>> = {
-  d1: {
-    'Mid-core': [48, 46, 45, 44, 43, 42, 41, 40],
-    Hybridcasual: [52, 50, 48, 47, 46, 45, 44, 43],
-    Hypercasual: [45, 42, 40, 38, 36, 35, 34, 33],
-    Casual: [40, 37, 35, 33, 31, 30, 29, 28],
-  },
-  d7: {
-    'Mid-core': [42, 40, 39, 38, 37, 36, 35, 34],
-    Hybridcasual: [44, 43, 42, 41, 40, 39, 38, 37],
-    Hypercasual: [40, 38, 36, 35, 33, 32, 31, 30],
-    Casual: [35, 33, 31, 29, 28, 27, 26, 25],
-  },
-  d30: {
-    'Mid-core': [32, 30, 28, 27, 26, 25, 24, 23],
-    Hybridcasual: [35, 33, 31, 30, 28, 27, 26, 25],
-    Hypercasual: [28, 26, 24, 22, 21, 20, 19, 18],
-    Casual: [25, 23, 21, 19, 18, 17, 16, 15],
-  },
-  d365: {
-    'Mid-core': [18, 17, 16, 15, 14, 14, 13, 12],
-    Hybridcasual: [20, 19, 18, 17, 16, 15, 14, 13],
-    Hypercasual: [12, 11, 10, 9, 9, 8, 8, 7],
-    Casual: [10, 9, 8, 7, 7, 6, 6, 5],
-  },
-};
-const retC: Record<string, string> = {
-  'Mid-core': RED,
-  Hybridcasual: PUR,
-  Hypercasual: BLU,
-  Casual: GRN,
-};
-const retYRange: Record<string, { min: number; max: number }> = {
-  d1: { min: 20, max: 55 },
-  d7: { min: 20, max: 50 },
-  d30: { min: 10, max: 40 },
-  d365: { min: 0, max: 25 },
-};
-
-/* ── Trends data ── */
-const trendData: Record<string, Record<string, number[]>> = {
-  revenue: { '2024': [30, 28, 12, 8], '2025': [35, 32, 16, 9] },
-  downloads: { '2024': [48, 22, 15, 12], '2025': [42, 25, 18, 10] },
-  sessions: { '2024': [1.8, 1.2, 0.8, 0.5], '2025': [2.1, 1.4, 1.0, 0.6] },
-};
-const trendUnits: Record<string, { pre: string; suf: string }> = {
-  revenue: { pre: '$', suf: 'B' },
-  downloads: { pre: '', suf: 'B' },
-  sessions: { pre: '', suf: 'T' },
-};
 
 interface PlaybookContentProps {
   initialUnlocked: boolean;
@@ -91,10 +42,7 @@ export default function PlaybookContent({
   const lastY = useRef(0);
   const sessionId = useRef('');
   const maxScrollDepth = useRef(0);
-  const retInstRef = useRef<Chart | null>(null);
-  const trendInstRef = useRef<Chart | null>(null);
-  const chartsInitRef = useRef(false);
-  const gatedChartsInitRef = useRef(false);
+  const tapNationInitRef = useRef(false);
 
   const emailRef = useRef<HTMLInputElement>(null);
   const gateFormRef = useRef<HTMLDivElement>(null);
@@ -155,7 +103,7 @@ export default function PlaybookContent({
     return () => obs.disconnect();
   }, [trackEvent]);
 
-  /* ── Rich HTML Tooltip ── */
+  /* ── Init TapNation Chart.js chart ── */
   const externalTooltipHandler = useCallback(
     (context: { tooltip: any; chart: any }) => {
       let el = document.getElementById('chartTooltip');
@@ -185,12 +133,8 @@ export default function PlaybookContent({
     []
   );
 
-  /* ── Init pre-gate charts ── */
-  const initAllCharts = useCallback(() => {
-    if (chartsInitRef.current) return;
-    chartsInitRef.current = true;
-
-    try {
+  const initTapNationChart = useCallback(() => {
+    if (tapNationInitRef.current) return;
 
     const tooltipOpts = {
       enabled: false,
@@ -198,425 +142,14 @@ export default function PlaybookContent({
       position: 'nearest' as const,
     };
 
-    // Configure Chart.js defaults
     Chart.defaults.font.family = "'Poppins',sans-serif";
     Chart.defaults.font.size = 12;
     Chart.defaults.animation = { duration: 1000, easing: 'easeOutQuart' as const };
     Chart.defaults.plugins.datalabels = { display: false } as any;
 
-    /* Doughnut */
-    const cD = document.getElementById('chartDoughnut') as HTMLCanvasElement;
-    if (cD) {
-      new Chart(cD, {
-        type: 'doughnut',
-        data: {
-          labels: [
-            'Organic',
-            'Paid UA',
-            'Cross-Promotion',
-            'Referral',
-            'OEM Pre-loads',
-          ],
-          datasets: [
-            {
-              data: [38, 28, 15, 11, 8],
-              backgroundColor: [GRN, DRK, GRY, '#555', '#111'],
-              borderWidth: 0,
-              hoverOffset: 8,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          cutout: '55%',
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: {
-              position: 'bottom',
-              labels: {
-                padding: 16,
-                usePointStyle: true,
-                pointStyle: 'circle',
-                font: { size: 11 },
-                color: '#666',
-              },
-            },
-            datalabels: {
-              display: true,
-              color: '#fff',
-              font: { weight: 'bold', size: 12 },
-              formatter: (v: number) => v + '%',
-            },
-          },
-        },
-      });
-    }
-
-    /* Programmatic Market Growth */
-    const cP2 = document.getElementById(
-      'chartProgrammatic'
-    ) as HTMLCanvasElement;
-    if (cP2) {
-      new Chart(cP2, {
-        type: 'bar',
-        data: {
-          labels: ['2022', '2023', '2024', '2025', '2026', '2028', '2030'],
-          datasets: [
-            {
-              label: 'Market Size ($B)',
-              data: [1.2, 1.5, 1.8, 2.0, 2.2, 2.4, 2.7],
-              backgroundColor: function (ctx: any) {
-                return ctx.dataIndex >= 4 ? GRN : 'rgba(38,190,129,.4)';
-              },
-              borderRadius: 4,
-              barPercentage: 0.65,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: { display: false },
-            datalabels: {
-              display: true,
-              anchor: 'end',
-              align: 'end',
-              color: '#666',
-              font: { weight: 'bold', size: 10 },
-              formatter: (v: number) => '$' + v + 'B',
-            },
-          },
-          scales: {
-            y: {
-              ticks: {
-                callback: (v: any) => '$' + v + 'B',
-                font: { size: 10 },
-                color: '#666',
-              },
-              grid: { color: '#f0f0f0' },
-            },
-            x: {
-              grid: { display: false },
-              ticks: { font: { size: 10 }, color: '#666' },
-            },
-          },
-        },
-      });
-    }
-
-    /* Paycell chart removed — replaced with banner image */
-
-    /* Budget Flow chart removed per user request */
-
-    /* LTV Comparison Teaser — Horizontal Bar (pre-gate) */
-    const cLTVt = document.getElementById('chartLTVTeaser') as HTMLCanvasElement;
-    if (cLTVt) {
-      new Chart(cLTVt, {
-        type: 'bar',
-        data: {
-          labels: ['D7 LTV', 'D30 LTV', 'D90 LTV'],
-          datasets: [
-            { label: 'Rewarded Playtime', data: [4.2, 8.5, 14.8], backgroundColor: GRN, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
-            { label: 'Traditional Offerwall', data: [2.1, 3.8, 5.2], backgroundColor: PUR, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
-            { label: 'Incentivized Install', data: [1.5, 2.2, 3.1], backgroundColor: GRY, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
-          ],
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', padding: 12, font: { size: 10 }, color: '#666' } },
-            datalabels: { display: true, anchor: 'end', align: 'end', color: '#666', font: { weight: 'bold', size: 10 }, formatter: (v: number) => '$' + v.toFixed(2) },
-          },
-          scales: {
-            x: { ticks: { callback: (v: any) => '$' + v, font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
-            y: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#666' } },
-          },
-        },
-      });
-    }
-
-    /* Ad Type Impression Share */
-    const cAT = document.getElementById('chartAdTypes') as HTMLCanvasElement;
-    if (cAT) {
-      new Chart(cAT, {
-        type: 'bar',
-        data: {
-          labels: ['2024', '2025'],
-          datasets: [
-            {
-              label: 'Image',
-              data: [48.9, 33.0],
-              backgroundColor: '#7C8CF8',
-              borderRadius: 2,
-              barPercentage: 0.7,
-              categoryPercentage: 0.6,
-            },
-            {
-              label: 'Playable',
-              data: [6.3, 13.3],
-              backgroundColor: '#C084FC',
-              borderRadius: 0,
-              barPercentage: 0.7,
-              categoryPercentage: 0.6,
-            },
-            {
-              label: 'Video',
-              data: [44.9, 53.7],
-              backgroundColor: '#5DE5C5',
-              borderRadius: 2,
-              barPercentage: 0.7,
-              categoryPercentage: 0.6,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: {
-              position: 'top',
-              labels: {
-                usePointStyle: true,
-                pointStyle: 'circle',
-                padding: 18,
-                font: { size: 12, weight: 'bold' },
-                color: '#666',
-              },
-            },
-            datalabels: {
-              display: true,
-              color: '#fff',
-              font: { size: 13, weight: 'bold' },
-              formatter: (v: number) => v + '%',
-            },
-          },
-          scales: {
-            x: {
-              stacked: true,
-              grid: { display: false },
-              ticks: { font: { size: 13, weight: 'bold' }, color: '#666' },
-            },
-            y: {
-              stacked: true,
-              max: 100,
-              ticks: {
-                callback: (v: any) => v + '%',
-                font: { size: 11 },
-                color: '#666',
-              },
-              grid: { color: '#f0f0f0' },
-            },
-          },
-        },
-      });
-    }
-
-
-    // Force all chart instances to resize+update — retry with delays
-    const forceCharts = () => {
-      Object.values(Chart.instances).forEach((inst: any) => {
-        try { inst.resize(); inst.update('none'); inst.draw(); } catch (_) {}
-      });
-    };
-    requestAnimationFrame(forceCharts);
-    setTimeout(forceCharts, 200);
-    setTimeout(forceCharts, 800);
-
-    } catch (err) {
-      console.error('[PlaybookCharts] initAllCharts failed:', err);
-      (window as any).__chartError = String(err);
-    }
-  }, [externalTooltipHandler]);
-
-  /* ── Init gated charts ── */
-  const initGatedCharts = useCallback(() => {
-    if (gatedChartsInitRef.current) return;
-    gatedChartsInitRef.current = true;
-
-    const tooltipOpts = {
-      enabled: false,
-      external: externalTooltipHandler,
-      position: 'nearest' as const,
-    };
-
-    /* Genre stacked */
-    const cG = document.getElementById('chartGenre') as HTMLCanvasElement;
-    if (cG) {
-      new Chart(cG, {
-        type: 'bar',
-        data: {
-          labels: ['Casual', 'Mid-core', 'Hybridcasual', 'Hypercasual'],
-          datasets: [
-            {
-              label: 'Casual',
-              data: [22.9, 34.0, 15.5, 19.2],
-              backgroundColor: GRN,
-              borderRadius: 0,
-              barPercentage: 0.6,
-              categoryPercentage: 0.8,
-            },
-            {
-              label: 'Mid-core',
-              data: [23.4, 29.6, 24.3, 31.5],
-              backgroundColor: DRK,
-              borderRadius: 0,
-              barPercentage: 0.6,
-              categoryPercentage: 0.8,
-            },
-            {
-              label: 'Hybridcasual',
-              data: [35.9, 28.8, 50.6, 41.7],
-              backgroundColor: PUR,
-              borderRadius: 0,
-              barPercentage: 0.6,
-              categoryPercentage: 0.8,
-            },
-            {
-              label: 'Hypercasual',
-              data: [6.6, 6.8, 5.0, 5.4],
-              backgroundColor: GRY,
-              borderRadius: 0,
-              barPercentage: 0.6,
-              categoryPercentage: 0.8,
-            },
-            {
-              label: 'Other',
-              data: [11.2, 0.8, 4.6, 2.2],
-              backgroundColor: 'rgba(38,190,129,.5)',
-              borderRadius: 0,
-              barPercentage: 0.6,
-              categoryPercentage: 0.8,
-            },
-          ],
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: {
-              position: 'top',
-              labels: {
-                usePointStyle: true,
-                pointStyle: 'circle',
-                padding: 12,
-                font: { size: 10 },
-                color: '#666',
-              },
-            },
-            datalabels: {
-              display: true,
-              color: '#fff',
-              font: { size: 9, weight: 'bold' },
-              formatter: (v: number) => (v > 5 ? v + '%' : ''),
-            },
-          },
-          scales: {
-            x: {
-              stacked: true,
-              max: 100,
-              ticks: {
-                callback: (v: any) => v + '%',
-                font: { size: 10 },
-                color: '#666',
-              },
-              grid: { color: '#f0f0f0' },
-            },
-            y: {
-              stacked: true,
-              grid: { display: false },
-              ticks: { font: { size: 10 }, color: '#666' },
-            },
-          },
-        },
-      });
-    }
-
-    /* Market Share */
-    const cM = document.getElementById(
-      'chartMarketShare'
-    ) as HTMLCanvasElement;
-    if (cM) {
-      const yrs = [
-        '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-        '20', '21', '22', '23', '24',
-      ];
-      new Chart(cM, {
-        type: 'bar',
-        data: {
-          labels: yrs,
-          datasets: [
-            {
-              label: 'iOS',
-              data: [
-                35, 25, 23, 35, 28, 25, 23, 22, 21, 20, 22, 27, 27, 28,
-                29, 29,
-              ],
-              backgroundColor: BLU,
-              borderRadius: 1,
-              barPercentage: 0.65,
-              categoryPercentage: 0.8,
-            },
-            {
-              label: 'Android',
-              data: [
-                3, 10, 20, 28, 30, 55, 65, 68, 72, 76, 77, 73, 72, 71,
-                71, 71,
-              ],
-              backgroundColor: CYN,
-              borderRadius: 1,
-              barPercentage: 0.65,
-              categoryPercentage: 0.8,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: {
-              position: 'top',
-              labels: {
-                usePointStyle: true,
-                pointStyle: 'circle',
-                padding: 14,
-                font: { size: 10 },
-                color: '#666',
-              },
-            },
-            datalabels: { display: false },
-          },
-          scales: {
-            y: {
-              max: 80,
-              ticks: {
-                callback: (v: any) => v + '%',
-                font: { size: 10 },
-                color: '#666',
-              },
-              grid: { color: '#f0f0f0' },
-            },
-            x: {
-              grid: { display: false },
-              ticks: { font: { size: 9 }, color: '#666' },
-            },
-          },
-        },
-      });
-    }
-
-    /* TapNation */
     const cT = document.getElementById('chartTapNation') as HTMLCanvasElement;
     if (cT) {
+      tapNationInitRef.current = true;
       new Chart(cT, {
         type: 'doughnut',
         data: {
@@ -656,308 +189,7 @@ export default function PlaybookContent({
         },
       });
     }
-
-    /* LTV Comparison Full — Horizontal Bar (Ch2 gated) */
-    const cLTV = document.getElementById('chartLTVFull') as HTMLCanvasElement;
-    if (cLTV) {
-      new Chart(cLTV, {
-        type: 'bar',
-        data: {
-          labels: ['D7 LTV', 'D30 LTV', 'D90 LTV'],
-          datasets: [
-            { label: 'Rewarded Playtime', data: [4.2, 8.5, 14.8], backgroundColor: GRN, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
-            { label: 'Traditional Offerwall', data: [2.1, 3.8, 5.2], backgroundColor: PUR, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
-            { label: 'Incentivized Install', data: [1.5, 2.2, 3.1], backgroundColor: GRY, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
-          ],
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', padding: 12, font: { size: 10 }, color: '#666' } },
-            datalabels: { display: true, anchor: 'end', align: 'end', color: '#666', font: { weight: 'bold', size: 10 }, formatter: (v: number) => '$' + v.toFixed(2) },
-          },
-          scales: {
-            x: { ticks: { callback: (v: any) => '$' + v, font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
-            y: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#666' } },
-          },
-        },
-      });
-    }
-
-    /* OEM Format Comparison — Grouped Horizontal Bar (Ch3) */
-    const cRadar = document.getElementById('chartOEMRadar') as HTMLCanvasElement;
-    if (cRadar) {
-      new Chart(cRadar, {
-        type: 'bar',
-        data: {
-          labels: ['PAI (Pre-loaded)', 'Icon Placement', 'Splash Screen', 'Push Notification'],
-          datasets: [
-            { label: 'Reach', data: [9, 7, 6, 5], backgroundColor: GRN, borderRadius: 3, barPercentage: 0.7 },
-            { label: 'Cost Efficiency', data: [7, 8, 5, 6], backgroundColor: PUR, borderRadius: 3, barPercentage: 0.7 },
-            { label: 'User Intent', data: [6, 5, 7, 8], backgroundColor: CYN, borderRadius: 3, barPercentage: 0.7 },
-            { label: 'Conversion Rate', data: [8, 6, 7, 5], backgroundColor: '#F4CB00', borderRadius: 3, barPercentage: 0.7 },
-            { label: 'Brand Safety', data: [9, 8, 6, 5], backgroundColor: '#F87171', borderRadius: 3, barPercentage: 0.7 },
-          ],
-        },
-        options: {
-          indexAxis: 'y' as const,
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', padding: 12, font: { size: 10 }, color: '#666' } },
-            datalabels: { display: true, anchor: 'end', align: 'end', font: { size: 9, weight: 'bold' }, color: '#666', formatter: (v: number) => v + '/10' },
-          },
-          scales: {
-            x: { max: 10, ticks: { callback: (v: any) => v + '/10', font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
-            y: { grid: { display: false }, ticks: { font: { size: 11, weight: 'bold' }, color: '#444' } },
-          },
-        },
-      });
-    }
-
-    /* ASA Keyword Bubble (Ch4) */
-    const cBubble = document.getElementById('chartASABubble') as HTMLCanvasElement;
-    if (cBubble) {
-      new Chart(cBubble, {
-        type: 'bubble',
-        data: {
-          datasets: [
-            { label: 'Brand', data: [{ x: 85, y: 78, r: 18 }], backgroundColor: 'rgba(38,190,129,.6)', borderColor: GRN, borderWidth: 1 },
-            { label: 'Generic', data: [{ x: 90, y: 25, r: 14 }], backgroundColor: 'rgba(175,156,255,.6)', borderColor: PUR, borderWidth: 1 },
-            { label: 'Competitor', data: [{ x: 55, y: 52, r: 13 }], backgroundColor: 'rgba(0,244,244,.5)', borderColor: CYN, borderWidth: 1 },
-            { label: 'Long-tail', data: [{ x: 20, y: 72, r: 9 }], backgroundColor: 'rgba(244,203,0,.5)', borderColor: '#F4CB00', borderWidth: 1 },
-            { label: 'Discovery', data: [{ x: 50, y: 30, r: 16 }], backgroundColor: 'rgba(176,176,176,.5)', borderColor: GRY, borderWidth: 1 },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', padding: 14, font: { size: 10 }, color: '#666' } },
-            datalabels: {
-              display: true,
-              color: '#333',
-              font: { weight: 'bold', size: 10 },
-              formatter: (_v: any, ctx: any) => ctx.dataset.label,
-              align: 'top',
-            },
-          },
-          scales: {
-            x: { title: { display: true, text: 'Search Volume', font: { size: 11 }, color: '#666' }, min: 0, max: 100, ticks: { font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
-            y: { title: { display: true, text: 'Conversion Rate', font: { size: 11 }, color: '#666' }, min: 0, max: 100, ticks: { font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
-          },
-        },
-      });
-    }
-
-    // Init retention + trends
-    renderRetentionChart('d7');
-    renderTrendsChart('revenue');
-
-    // Force all chart instances to resize+update — retry 3 times with increasing delays
-    // because React may not have painted gated content yet
-    const forceAllCharts = () => {
-      Object.values(Chart.instances).forEach((inst: any) => {
-        try { inst.resize(); inst.update('none'); inst.draw(); } catch (_) {}
-      });
-    };
-    requestAnimationFrame(forceAllCharts);
-    setTimeout(forceAllCharts, 200);
-    setTimeout(forceAllCharts, 800);
-
   }, [externalTooltipHandler]);
-
-  /* ── Retention Chart ── */
-  const renderRetentionChart = useCallback(
-    (tab: string) => {
-      const tooltipOpts = {
-        enabled: false,
-        external: externalTooltipHandler,
-        position: 'nearest' as const,
-      };
-      const c = document.getElementById(
-        `chartRetention-${tab}`
-      ) as HTMLCanvasElement;
-      if (!c) return;
-      const r = retYRange[tab];
-      const datasets = Object.entries(retSeries[tab]).map(([n, pts]) => ({
-        label: n,
-        data: pts,
-        borderColor: retC[n],
-        backgroundColor: 'transparent',
-        borderWidth: 2,
-        pointRadius: 3,
-        pointHoverRadius: 6,
-        tension: 0.3,
-        borderDash: n === 'Casual' ? [5, 3] : ([] as number[]),
-      }));
-
-      // React key prop creates a fresh canvas each tab switch — always create new
-      retInstRef.current = new Chart(c, {
-        type: 'line',
-        data: {
-          labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'],
-          datasets: datasets as any,
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: { duration: 600 },
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: {
-              position: 'right',
-              labels: {
-                usePointStyle: true,
-                pointStyle: 'line',
-                padding: 10,
-                font: { size: 10 },
-                color: '#666',
-              },
-            },
-            datalabels: { display: false },
-          },
-          scales: {
-            y: {
-              min: r.min,
-              max: r.max,
-              ticks: {
-                callback: (v: any) => v + '%',
-                font: { size: 10 },
-                color: '#666',
-              },
-              grid: { color: '#f0f0f0' },
-            },
-            x: {
-              grid: { display: false },
-              ticks: { font: { size: 10 }, color: '#666' },
-            },
-          },
-        },
-      });
-    },
-    [externalTooltipHandler]
-  );
-
-  /* ── Trends Chart ── */
-  const renderTrendsChart = useCallback(
-    (tab: string) => {
-      const tooltipOpts = {
-        enabled: false,
-        external: externalTooltipHandler,
-        position: 'nearest' as const,
-      };
-      const c = document.getElementById(`chartTrends-${tab}`) as HTMLCanvasElement;
-      if (!c) return;
-      const d = trendData[tab];
-      const u = trendUnits[tab];
-      const formatter = (v: number) => u.pre + v + u.suf;
-      // React key prop creates a fresh canvas — no need to destroy old one
-      const datasets = [
-        {
-          label: 'Casual',
-          data: [d['2024'][0], d['2025'][0]],
-          backgroundColor: GRN,
-          borderRadius: 2,
-        },
-        {
-          label: 'Mid-core',
-          data: [d['2024'][1], d['2025'][1]],
-          backgroundColor: DRK,
-          borderRadius: 2,
-        },
-        {
-          label: 'Hybridcasual',
-          data: [d['2024'][2], d['2025'][2]],
-          backgroundColor: PUR,
-          borderRadius: 2,
-        },
-        {
-          label: 'Hypercasual',
-          data: [d['2024'][3], d['2025'][3]],
-          backgroundColor: GRY,
-          borderRadius: 2,
-        },
-      ];
-
-      if (trendInstRef.current) {
-        trendInstRef.current.destroy();
-        trendInstRef.current = null;
-      }
-
-      trendInstRef.current = new Chart(c, {
-        type: 'bar',
-        data: {
-          labels: ['2024', '2025'],
-          datasets: datasets as any,
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: { duration: 600 },
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: {
-              position: 'top',
-              labels: {
-                usePointStyle: true,
-                pointStyle: 'circle',
-                padding: 12,
-                font: { size: 10 },
-                color: '#666',
-              },
-            },
-            datalabels: {
-              display: true,
-              anchor: 'end',
-              align: 'end',
-              font: { size: 9, weight: 'bold' },
-              color: '#666',
-              formatter,
-            },
-          },
-          scales: {
-            x: {
-              stacked: true,
-              grid: { display: false },
-              ticks: { font: { size: 11 }, color: '#666' },
-            },
-            y: {
-              stacked: true,
-              ticks: {
-                callback: formatter as any,
-                font: { size: 10 },
-                color: '#666',
-              },
-              grid: { color: '#f0f0f0' },
-            },
-          },
-        },
-      });
-    },
-    [externalTooltipHandler]
-  );
-
-  /* ── Update retention/trends when tabs change ── */
-  useEffect(() => {
-    // DOM needs a frame to mount the new canvas after key change
-    const raf = requestAnimationFrame(() => {
-      renderRetentionChart(retTab);
-    });
-    return () => cancelAnimationFrame(raf);
-  }, [retTab, renderRetentionChart]);
-
-  useEffect(() => {
-    const raf = requestAnimationFrame(() => {
-      renderTrendsChart(trendTab);
-    });
-    return () => cancelAnimationFrame(raf);
-  }, [trendTab, renderTrendsChart]);
 
   /* ── Scroll Reveal with Stagger ── */
   const initReveal = useCallback(() => {
@@ -1111,7 +343,7 @@ export default function PlaybookContent({
       updateProgress();
       updateNav();
 
-      // Hide tooltip on scroll
+      // Hide Chart.js tooltip on scroll (TapNation only)
       const tt = document.getElementById('chartTooltip');
       if (tt) tt.classList.remove('show');
 
@@ -1148,24 +380,14 @@ export default function PlaybookContent({
     initReveal();
     initCounters();
     initSideNav();
-    initAllCharts();
-
-    // Logo fallback removed — all logos are now text-only
 
     // If already unlocked (returning visitor), init gated content
-    // Use setTimeout(500ms) to ensure display:block has fully painted before Chart.js measures canvases
     if (gateUnlocked) {
       setTimeout(() => {
         requestAnimationFrame(() => {
           initReveal();
           initCounters();
-          initGatedCharts();
-          // Force resize after paint
-          setTimeout(() => {
-            Object.values(Chart.instances).forEach((inst: any) => {
-              try { inst.resize(); } catch (_) {}
-            });
-          }, 300);
+          initTapNationChart();
         });
       });
     }
@@ -1175,19 +397,11 @@ export default function PlaybookContent({
   const unlockGatedContent = useCallback(
     (scroll: boolean) => {
       setGateUnlocked(true);
-      // Wait for React re-render + display:block paint, then init charts
-      // 500ms delay ensures browser has fully laid out the now-visible gated content
+      // Wait for React re-render + display:block paint, then init remaining Chart.js charts
       setTimeout(() => {
         initReveal();
         initCounters();
-        gatedChartsInitRef.current = false; // reset so charts can init fresh
-        initGatedCharts();
-        // Force resize all charts after another paint cycle
-        setTimeout(() => {
-          Object.values(Chart.instances).forEach((inst: any) => {
-            try { inst.resize(); } catch (_) {}
-          });
-        }, 300);
+        initTapNationChart();
       }, 500);
       if (scroll) {
         setTimeout(() => {
@@ -1197,7 +411,7 @@ export default function PlaybookContent({
         }, 500);
       }
     },
-    [initReveal, initCounters, initGatedCharts]
+    [initReveal, initCounters, initTapNationChart]
   );
 
   /* ── Email gate submit ── */
@@ -1487,7 +701,7 @@ export default function PlaybookContent({
                 <div className="stat-body"><h4>Organic Still Leads</h4><p>But paid channels are closing the gap fast</p></div>
               </div>
             </div>
-            <div className="story-chart"><div className="chart-wrap"><canvas id="chartDoughnut"></canvas></div></div>
+            <div className="story-chart"><div className="chart-wrap"><DoughnutChart /></div></div>
           </div>
         </div>
       </section>
@@ -1546,7 +760,7 @@ export default function PlaybookContent({
             <div className="story-chart sticky rv-r">
               <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '.85rem', marginBottom: '12px', textAlign: 'center', color: 'var(--text)' }}>Programmatic Ad Market Growth</h4>
               <div className="chart-sub" style={{ textAlign: 'center', fontSize: '.75rem', color: 'var(--text-faint)', marginBottom: '12px' }}>Projected market size by 2030</div>
-              <div className="chart-wrap" style={{ maxHeight: '300px' }}><canvas id="chartProgrammatic"></canvas></div>
+              <div className="chart-wrap" style={{ maxHeight: '300px' }}><ProgrammaticChart /></div>
             </div>
           </div>
         </div>
@@ -1632,7 +846,7 @@ export default function PlaybookContent({
           <div className="chart-box" style={{ margin: 0, padding: '24px' }}>
             <div className="chart-h" style={{ fontSize: '.95rem', marginBottom: '4px' }}>Ad Type Impression Share, Worldwide</div>
             <div className="chart-sub" style={{ fontSize: '.75rem', marginBottom: '12px' }}>Image, Playable, and Video ad format share — 2024 vs 2025</div>
-            <div className="chart-wrap" style={{ height: '260px', maxWidth: '500px', margin: '0 auto' }}><canvas id="chartAdTypes"></canvas></div>
+            <div className="chart-wrap" style={{ height: '260px', maxWidth: '500px', margin: '0 auto' }}><AdTypesChart /></div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: '10px', fontSize: '.75rem', color: 'var(--text-muted)', textAlign: 'center' }}>
               <span>Video overtakes Image as dominant format. Playable ads double (+111%).</span>
             </div>
@@ -1739,7 +953,7 @@ export default function PlaybookContent({
           <div className="chart-card-new rv">
             <h4>LTV Comparison by Acquisition Model</h4>
             <div className="chart-subtitle">Rewarded Playtime delivers 2-3x higher LTV than traditional models</div>
-            <div className="chart-wrap"><canvas id="chartLTVTeaser" ></canvas></div>
+            <div className="chart-wrap"><LTVChart /></div>
             <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
               <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> Rewarded Playtime users generate $14.80 D90 LTV — nearly 3x higher than incentivized installs ($3.10). The reward mechanic drives genuine engagement, not just downloads.
             </div>
@@ -1837,7 +1051,7 @@ export default function PlaybookContent({
             <div className="chart-card-new rv">
               <h4>LTV Comparison by Acquisition Model</h4>
               <div className="chart-subtitle">Rewarded Playtime users generate significantly higher lifetime value at every milestone</div>
-              <div className="chart-wrap"><canvas id="chartLTVFull" ></canvas></div>
+              <div className="chart-wrap"><LTVChart /></div>
               <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
                 <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> The gap widens over time — at D90, Rewarded Playtime LTV ($14.80) is 4.8x higher than incentivized installs. This means rewarded users don&apos;t just install, they stay and spend.
               </div>
@@ -1887,7 +1101,7 @@ export default function PlaybookContent({
             <div className="story-chart rv-l">
               <div className="chart-h" style={{ fontSize: '.95rem' }}>Download Channels Share by Genre</div>
               <div className="chart-sub">Share of downloads by product model</div>
-              <div className="chart-wrap" style={{ height: '300px' }}><canvas id="chartGenre" ></canvas></div>
+              <div className="chart-wrap" style={{ height: '300px' }}><GenreChart /></div>
             </div>
             <div className="story-chart rv-r">
               <div className="chart-h" style={{ fontSize: '.95rem' }}>Mobile Game Retention Trends</div>
@@ -1896,7 +1110,7 @@ export default function PlaybookContent({
                   <button key={t} className={`tab-btn${retTab === t ? ' active' : ''}`} onClick={() => setRetTab(t)}>{t === 'd7' ? 'D7' : t === 'd30' ? 'D30' : t === 'd1' ? 'D1' : 'D365'}</button>
                 ))}
               </div></div>
-              <div className="chart-wrap" style={{ height: '260px' }}><canvas key={`ret-${retTab}`} id={`chartRetention-${retTab}`}></canvas></div>
+              <div className="chart-wrap" style={{ height: '260px' }}><RetentionChart tab={retTab} /></div>
             </div>
           </div></div>
         </section>
@@ -1918,7 +1132,7 @@ export default function PlaybookContent({
                   <button key={t} className={`tab-btn${trendTab === t ? ' active' : ''}`} onClick={() => setTrendTab(t)}>{t.charAt(0).toUpperCase() + t.slice(1)}</button>
                 ))}
               </div></div>
-              <div className="chart-wrap" style={{ height: '280px' }}><canvas key={`trend-${trendTab}`} id={`chartTrends-${trendTab}`}></canvas></div>
+              <div className="chart-wrap" style={{ height: '280px' }}><TrendsChart tab={trendTab} /></div>
             </div>
           </div></div>
         </section>
@@ -1977,7 +1191,7 @@ export default function PlaybookContent({
             <div className="story-chart sticky rv-r">
               <div className="chart-h" style={{ fontSize: '.95rem' }}>iPhone vs Android Market Share</div>
               <div className="chart-sub">2009 — 2024</div>
-              <div className="chart-wrap" style={{ height: '300px' }}><canvas id="chartMarketShare" ></canvas></div>
+              <div className="chart-wrap" style={{ height: '300px' }}><MarketShareChart /></div>
             </div>
           </div></div>
         </section>
@@ -2006,7 +1220,7 @@ export default function PlaybookContent({
             <div className="chart-card-new rv">
               <h4>OEM Format Comparison</h4>
               <div className="chart-subtitle">Scored across 5 dimensions (out of 10) — PAI leads in reach and brand safety</div>
-              <div className="chart-wrap" style={{ height: '300px' }}><canvas id="chartOEMRadar"></canvas></div>
+              <div className="chart-wrap" style={{ height: '300px' }}><OEMFormatChart /></div>
               <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
                 <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> PAI (Pre-loaded App Install) scores highest overall — it reaches users at first device setup with zero friction. Push notifications score highest on user intent but lowest on brand safety. Icon Placement offers the best cost efficiency.
               </div>
@@ -2101,7 +1315,7 @@ export default function PlaybookContent({
               <h4>ASA Keyword Strategy Map</h4>
               <div className="chart-subtitle">Bubble size = opportunity score. Top-right = highest ROI keywords.</div>
               <div className="chart-wrap" style={{ position: 'relative' }}>
-                <canvas id="chartASABubble"></canvas>
+                <ASABubbleChart />
                 <div style={{ position: 'absolute', top: 8, right: 12, fontSize: '0.7rem', color: 'var(--green)', fontWeight: 600, opacity: 0.5 }}>Sweet Spot ↗</div>
                 <div style={{ position: 'absolute', top: 8, left: 12, fontSize: '0.7rem', color: '#f4cb00', fontWeight: 600, opacity: 0.5 }}>Hidden Gems ↖</div>
                 <div style={{ position: 'absolute', bottom: 28, right: 12, fontSize: '0.7rem', color: '#F87171', fontWeight: 600, opacity: 0.5 }}>Budget Burners ↘</div>

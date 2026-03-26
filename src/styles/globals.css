@@ -191,6 +191,8 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .chart-h{font-family:var(--font-h);font-size:1.15rem;font-weight:700;margin-bottom:6px;text-align:center;color:var(--text)}
 .chart-sub{font-size:.82rem;color:var(--text-faint);text-align:center;margin-bottom:24px}
 .chart-wrap{position:relative;width:100%;max-width:780px;margin:0 auto}
+/* G2 Chart containers */
+.chart-wrap canvas{border-radius:8px}
 
 /* === TABS === */
 .tabs{display:inline-flex;gap:3px;background:var(--bg-alt);border-radius:100px;padding:3px;margin:0 auto 20px;width:fit-content;border:1px solid var(--border)}
