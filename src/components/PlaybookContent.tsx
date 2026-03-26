@@ -300,72 +300,7 @@ export default function PlaybookContent({
       });
     }
 
-    /* Paycell */
-    const cP = document.getElementById('chartPaycell') as HTMLCanvasElement;
-    if (cP) {
-      new Chart(cP, {
-        type: 'bar',
-        data: {
-          labels: ['CPI', 'ROAS D7', 'ROAS D30', 'Retention D7'],
-          datasets: [
-            {
-              label: 'Before',
-              data: [2.8, 85, 120, 28],
-              backgroundColor: 'rgba(255,255,255,.08)',
-              borderRadius: 3,
-              barPercentage: 0.55,
-            },
-            {
-              label: 'After',
-              data: [1.9, 145, 210, 42],
-              backgroundColor: GRN,
-              borderRadius: 3,
-              barPercentage: 0.55,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: {
-              position: 'top',
-              labels: {
-                color: 'rgba(255,255,255,.5)',
-                usePointStyle: true,
-                pointStyle: 'circle',
-                padding: 10,
-                font: { size: 10 },
-              },
-            },
-            datalabels: {
-              display: true,
-              anchor: 'end',
-              align: 'end',
-              color: 'rgba(255,255,255,.7)',
-              font: { weight: 'bold', size: 10 },
-            },
-          },
-          scales: {
-            y: {
-              ticks: {
-                color: 'rgba(255,255,255,.35)',
-                font: { size: 10 },
-              },
-              grid: { color: 'rgba(255,255,255,.04)' },
-            },
-            x: {
-              ticks: {
-                color: 'rgba(255,255,255,.35)',
-                font: { size: 10 },
-              },
-              grid: { display: false },
-            },
-          },
-        },
-      });
-    }
+    /* Paycell chart removed — replaced with banner image */
 
     /* Budget Flow chart removed per user request */
 
@@ -1564,7 +1499,7 @@ export default function PlaybookContent({
       {/* Shahid Quote */}
       <section className="quote-block sec-l">
         <div className="wrap"><div className="quote-inner rv">
-          <img className="quote-avatar" src="/ali-shahid.png" alt="Ali Aktas" style={{ objectFit: 'cover' }} />
+          <img className="quote-avatar" src="/ali-shahid.png" alt="Ali Aktas" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} />
           <div>
             <p className="quote-text">AppSamurai&apos;s strategic programmatic advertising expertise helped SHAHID boost user acquisition, drive subscriptions and strengthen our position as the leading MENA VOD service. Their partnership was vital to our mobile growth success.</p>
             <p className="quote-attr">Ali Aktas, Head of Performance, @Shahid</p>
@@ -1597,35 +1532,37 @@ export default function PlaybookContent({
       {/* 1.1 Detail Cards */}
       <section className="sec sec-l">
         <div className="wrap">
-          <div className="info-card rv"><div className="ic-icon"><img className="ic-img" src="/icons/predictive roas modeling.png" alt="Predictive ROAS" /></div><div><h4>Predictive ROAS Modeling</h4><p>Real-time machine learning enables deep-funnel, CPA-based optimization. Identifying users with high propensity for specific actions achieves a more predictable path to profitability.</p></div></div>
-          <div className="info-card rv"><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/brindging the intent gap.png" alt="Intent Gap" /></div><div><h4>Bridging the &ldquo;Intent Gap&rdquo;</h4><p>Programmatic inventory captures &ldquo;active engagement&rdquo; moments. Shifting spend to these high-receptivity lulls ensures your brand reaches users when their cognitive load is primed for discovery.</p></div></div>
-          <div className="info-card rv"><div className="ic-icon"><img className="ic-img" src="/icons/scalibility paradox.png" alt="Scalability" /></div><div><h4>The Scalability Paradox</h4><p>To scale without losing efficiency, Automated Whitelisting ensures presence on top-performing platforms. Automated Blacklisting filters out low-intent inventory in real-time.</p></div></div>
-          <div className="info-card rv"><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/transparency_mandate.png" alt="Transparency" /></div><div><h4>The Transparency Mandate</h4><p>You cannot scale what you cannot see. Total visibility into bid floors, session depth, and loss notifications allows growth teams to uncover high-value inventory pockets.</p></div></div>
+          <div className="info-card rv"><div className="ic-icon"><img className="ic-img" src="/icons/predictive roas modeling.png" alt="Predictive ROAS" /></div><div><h4>Predictive ROAS Modeling</h4><p>The industry has moved toward real-time machine learning that enables deep-funnel, CPA-based optimization. By identifying users with a high propensity for specific actions&mdash;such as reaching a gameplay milestone or starting a subscription trial&mdash;brands are achieving a more predictable and stable path to profitability.</p></div></div>
+          <div className="info-card rv"><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/brindging the intent gap.png" alt="Intent Gap" /></div><div><h4>Bridging the &ldquo;Intent Gap&rdquo;</h4><p>Traditional social platforms often capture &ldquo;passive scrolling,&rdquo; leading to high ad fatigue. In contrast, programmatic inventory captures &ldquo;active engagement&rdquo; moments. Shifting spend to these high-receptivity lulls (e.g., between game levels or during utility tasks) ensures your brand reaches users when their cognitive load is primed for discovery, not just distraction.</p></div></div>
+          <div className="info-card rv"><div className="ic-icon"><img className="ic-img" src="/icons/scalibility paradox.png" alt="Scalability" /></div><div><h4>The Scalability Paradox (Precision Control)</h4><p>To scale without losing efficiency, granular control is non-negotiable. Automated Whitelisting ensures your presence is consolidated on top-performing platforms that align with your core audience. Simultaneously, Automated Blacklisting acts as a dynamic shield, filtering out low-intent inventory in real-time so that as your budget grows, your waste doesn&apos;t.</p></div></div>
+          <div className="info-card rv"><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/transparency_mandate.png" alt="Transparency" /></div><div><h4>The Transparency Mandate</h4><p>You cannot scale what you cannot see. Success in the 2026 open internet requires total visibility into bid floors, session depth, and loss notifications. This level of bid-level transparency allows growth teams to uncover high-value &ldquo;pockets&rdquo; of inventory that others overlook, shifting the strategy from chasing volume to securing quality.</p></div></div>
         </div>
       </section>
 
       {/* 1.2 Creative Strategy */}
       <section className="sec sec-w">
-        <div className="wrap"><div className="story reverse rv">
-          <div className="story-text rv-r">
-            <span className="tag" style={{ color: 'var(--ch1)', borderColor: 'var(--ch1)' }}>Section 1.2</span>
-            <h3>Creative Strategy: Targeting Through Psychology</h3>
-            <p>Creatives have become the new targeting. With granular ID-based targeting fading, the visual asset itself must do the heavy lifting of finding the right audience.</p>
-            <div className="stat-callout" style={{ borderLeftColor: 'var(--yellow)' }}>
-              <div className="big-num" style={{ color: 'var(--yellow)' }} data-count="30" data-suffix="%">0%</div>
-              <div className="stat-body"><h4>CPA Reduction</h4><p>Through cultural authenticity in emerging markets</p></div>
+        <div className="wrap">
+          <div className="story rv">
+            <div className="story-text rv-l">
+              <span className="tag" style={{ color: 'var(--ch1)', borderColor: 'var(--ch1)' }}>Section 1.2</span>
+              <h3>Creative Strategy: Targeting Through Psychology</h3>
+              <p>Creatives have become the new targeting. With granular ID-based targeting fading, the visual asset itself must do the heavy lifting of finding the right audience.</p>
+              <div className="stat-callout" style={{ borderLeftColor: 'var(--yellow)' }}>
+                <div className="big-num" style={{ color: 'var(--yellow)' }} data-count="30" data-suffix="%">0%</div>
+                <div className="stat-body"><h4>CPA Reduction</h4><p>Through cultural authenticity in emerging markets</p></div>
+              </div>
+            </div>
+            <div className="rv-r" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch1)' }}><div className="ic-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M22 5l-4 2 2 4"/><circle cx="12" cy="12" r="2"/></svg></div><div><h4>Psychological Hooks over Aesthetics</h4><p>High-performing assets in 2026 are built on user psychology&mdash;addressing specific pain points, FOMO, or the desire for efficiency. When a creative resonates with a specific psychological profile, the algorithm naturally finds similar audiences.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch1)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><h4>The AI-Driven Speed Requirement</h4><p>Manual A/B testing is no longer viable at scale. The industry benchmark has moved toward AI-powered rotation, identifying winning visual hooks (like localized gameplay mechanics) in real-time.</p></div></div>
             </div>
           </div>
-          <div className="story-chart rv-l">
-            <ul className="blist" style={{ margin: 0 }}>
-              <li><strong>Psychological Hooks over Aesthetics:</strong> High-performing assets are built on user psychology — FOMO, efficiency, pain points.</li>
-              <li><strong>AI-Driven Speed:</strong> Manual A/B testing is no longer viable. The benchmark is AI-powered rotation.</li>
-              <li><strong>Contextual Resonance:</strong> Tailoring creative themes to local seasonal events or dayparting has become a primary lever.</li>
-              <li><strong>Cultural Authenticity:</strong> Regional creators, local slang, and culturally relevant scenarios lower CPAs by up to 30%.</li>
-              <li><strong>Creative as Market Research:</strong> Creative data is now a primary insights engine, analyzing iterations that drive long-term LTV.</li>
-            </ul>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px', marginTop: '20px' }}>
+            <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}><div className="ic-icon" style={{ marginBottom: '8px' }}><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><h4>Contextual Resonance over Broad Reach</h4><p>Visibility is only valuable when it is contextually relevant. For high-volume platforms (such as those in the VOD and streaming space), tailoring creative themes to match local seasonal events or utilizing dayparting (aligning themes with peak viewing times) has become a primary lever for driving down subscription costs.</p></div>
+            <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}><div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h4>Cultural Authenticity as a Performance Benchmark</h4><p>In 2026, localization has evolved far beyond simple translation. To scale effectively in global markets, ads must feel &ldquo;native&rdquo; to the local culture. Utilizing regional creators, local slang, and culturally relevant scenarios is now a strict performance requirement; in emerging markets, this has been shown to lower CPAs by up to 30%.</p></div>
+            <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}><div className="ic-icon" style={{ marginBottom: '8px' }}><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div><h4>Creative as Market Research</h4><p>Creative data is now a primary insights engine. By analyzing which iterations drive long-term LTV rather than just clicks, brands are feeding these findings back into their broader product development.</p></div>
           </div>
-        </div></div>
+        </div>
       </section>
 
       {/* 1.2b Creative Intelligence + Ad Types -- condensed 3-col */}
@@ -1691,13 +1628,13 @@ export default function PlaybookContent({
 
       {/* 1.4 Bid-Level Visibility */}
       <section className="sec sec-l">
-        <div className="wrap"><div className="story reverse rv">
-          <div className="story-text rv-r">
+        <div className="wrap"><div className="story rv">
+          <div className="story-text rv-l">
             <span className="tag" style={{ color: 'var(--ch1)', borderColor: 'var(--ch1)' }}>Section 1.4</span>
             <h3>The Transparency Requirement: Bid-Level Visibility</h3>
             <p>You cannot scale what you cannot see. The &ldquo;black box&rdquo; approach to programmatic is being rejected in favor of total supply-chain visibility.</p>
           </div>
-          <div className="rv-l" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div className="rv-r" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch1)' }}><div className="ic-icon"><img className="ic-img" src="/icons/inventory quality control.png" alt="Inventory QC" /></div><div><h4>Inventory Quality Control</h4><p>Scaling requires granular control via automated whitelisting (targeting top-tier platforms) and blacklisting (filtering low-intent inventory).</p></div></div>
             <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch1)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/Winning the Auction.png" alt="Winning Auction" /></div><div><h4>Winning the Auction</h4><p>Visibility into bid floors, session depth, and loss notifications is essential. This data allows growth teams to identify high-value &ldquo;pockets&rdquo; of inventory that competitors overlook, optimizing for <strong>quality over volume</strong>.</p></div></div>
           </div>
@@ -1722,25 +1659,13 @@ export default function PlaybookContent({
         </div>
       </section>
 
-      {/* Paycell Case Study */}
+      {/* Paycell Case Study Banner */}
       <section className="sec sec-w">
-        <div className="wrap"><div className="case-card rv">
-          <div>
-            <div className="case-tag">Case Study</div>
-            <h4 style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--green)', marginBottom: '4px', fontFamily: 'var(--font-h)' }}>Paycell</h4>
-            <h4>Paycell Celebrated High-Intent Users with AppSamurai DSP</h4>
-            <p>By leveraging AppSamurai&apos;s programmatic engine, Paycell achieved significant improvements in user acquisition quality and cost efficiency.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '16px' }}>
-              <div style={{ background: 'rgba(38,190,129,.12)', borderRadius: '12px', padding: '16px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--green)' }}>32%</div><div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.5)' }}>Increase in MAU</div></div>
-              <div style={{ background: 'rgba(38,190,129,.12)', borderRadius: '12px', padding: '16px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--green)' }}>+120K</div><div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.5)' }}>Users Gained</div></div>
-            </div>
-            <div style={{ background: 'rgba(38,190,129,.12)', borderRadius: '12px', padding: '16px', textAlign: 'center', marginTop: '10px' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--green)' }}>49%</div><div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.5)' }}>Install-to-QR Payment Increased</div></div>
-          </div>
-          <div className="case-chart" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <img src="/paycell-banner.png" alt="Paycell Case Study" style={{ width: '100%', borderRadius: '12px', marginBottom: '8px' }} />
-            <canvas id="chartPaycell" height={180} ></canvas>
-          </div>
-        </div></div>
+        <div className="wrap rv" style={{ textAlign: 'center' }}>
+          <a href="https://appsamurai.com/success-stories/paycell" target="_blank" rel="noopener noreferrer" style={{ display: 'block' }}>
+            <img src="/paycell-banner.png" alt="Paycell Case Study — 32% MAU increase, +120K users, 49% QR payment increase with AppSamurai DSP" style={{ width: '100%', maxWidth: '900px', borderRadius: '16px', margin: '0 auto', display: 'block' }} />
+          </a>
+        </div>
       </section>
 
       {/* Paycell CTA */}
@@ -1749,23 +1674,54 @@ export default function PlaybookContent({
         <button className="btn-primary" style={{ whiteSpace: 'nowrap' }}>Book a Demo &rarr;</button>
       </div></div></section>
 
-      {/* 1.5 Retention Loop */}
+      {/* 1.5 The Re-Engagement Imperative */}
       <section className="sec sec-l">
-        <div className="wrap"><div className="story reverse rv">
-          <div className="story-text rv-r">
-            <span className="tag" style={{ color: 'var(--ch1)', borderColor: 'var(--ch1)' }}>Section 1.5</span>
-            <h3>The Retention Loop: Full-Funnel Re-engagement</h3>
-            <p>The average mobile app loses 77% of its DAUs within 3 days. Global in-app spend hit $150B in 2024, yet competition keeps CPIs elevated. Re-engaging existing users is far more efficient than hunting new installs.</p>
-            <div className="stat-callout" style={{ borderLeftColor: 'var(--delta-neg)' }}>
-              <div className="big-num" style={{ color: 'var(--delta-neg)' }} data-count="77" data-suffix="%">0%</div>
-              <div className="stat-body"><h4>DAU Loss in 3 Days</h4><p>Average mobile app retention cliff</p></div>
+        <div className="wrap rv">
+          <span className="tag" style={{ color: 'var(--ch1)', borderColor: 'var(--ch1)' }}>Section 1.5</span>
+          <h3 style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1.3rem,2.5vw,1.8rem)', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>The Re-Engagement Imperative</h3>
+          <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.75, marginBottom: '24px', maxWidth: '720px' }}>True growth in 2026 is a &ldquo;leaky bucket&rdquo; problem. Turning an install into a loyal user requires a three-phase retargeting framework.</p>
+
+          {/* Stat callout cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '16px', marginBottom: '32px' }}>
+            <div className="stat-callout rv" style={{ flexDirection: 'column', textAlign: 'center', borderLeft: 'none', borderTop: '3px solid var(--delta-neg)' }}>
+              <div className="big-num" style={{ color: 'var(--delta-neg)', fontSize: '2.4rem' }} data-count="77" data-suffix="%">0%</div>
+              <div className="stat-body"><h4>DAU Lost in First 3 Days</h4><p style={{ fontSize: '.75rem' }}>Source: Statista</p></div>
+            </div>
+            <div className="stat-callout rv" style={{ flexDirection: 'column', textAlign: 'center', borderLeft: 'none', borderTop: '3px solid var(--green)' }}>
+              <div className="big-num" style={{ color: 'var(--green)', fontSize: '2.4rem' }}>$150B</div>
+              <div className="stat-body"><h4>Mobile IAP Revenue 2024</h4><p style={{ fontSize: '.75rem' }}>Source: Sensor Tower</p></div>
+            </div>
+            <div className="stat-callout rv" style={{ flexDirection: 'column', textAlign: 'center', borderLeft: 'none', borderTop: '3px solid var(--yellow)' }}>
+              <div className="big-num" style={{ color: 'var(--yellow)', fontSize: '2.4rem' }}>70-80%</div>
+              <div className="stat-body"><h4>Users Lost Without Engagement</h4><p style={{ fontSize: '.75rem' }}>Industry Benchmark</p></div>
             </div>
           </div>
-          <div className="rv-l" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div className="info-card" style={{ margin: 0 }}><div className="ic-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M22 5l-4 2 2 4"/><circle cx="12" cy="12" r="2"/></svg></div><div><h4>Data-Driven Buckets</h4><p>Users segmented by churn risk. Inactive 10+ days receives awareness messaging. High-value inactive 7 days receives personalized rewards.</p></div></div>
-            <div className="info-card" style={{ margin: 0 }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><circle cx="12" cy="12" r="10"/><path d="M12 7v5l3.5 3.5"/></svg></div><div><h4>The &ldquo;Churn Window&rdquo; Insight</h4><p>Using recency and frequency rules to identify the exact tipping point where a user is likely to churn permanently.</p></div></div>
+
+          {/* Three-phase framework */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '16px' }}>
+            <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--green)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontFamily: 'var(--font-h)', fontSize: '.85rem', flexShrink: 0 }}>1</div>
+                <h4 style={{ margin: 0 }}>Strategic Win-Backs</h4>
+              </div>
+              <p>Not all dormant users are the same. The industry has moved toward Intelligent Segmentation based on inactivity duration and historical value. Users are segmented by churn risk&mdash;a user inactive 10+ days without purchases receives awareness messaging, while a high-value user inactive 7 days gets a personalized reward. The key is identifying the exact &ldquo;churn window&rdquo; for surgical intervention.</p>
+            </div>
+            <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--green)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontFamily: 'var(--font-h)', fontSize: '.85rem', flexShrink: 0 }}>2</div>
+                <h4 style={{ margin: 0 }}>Optimizing Engagement</h4>
+              </div>
+              <p>Retargeting moves active users deeper into the funnel through Strategic Timing and Frictionless Re-entry. Optimal Window Targeting (dayparting) pinpoints when users are most receptive. Direct Deep Linking bypasses the App Store, landing users exactly where they need to be&mdash;a product page, new feature, or pending game level.</p>
+            </div>
+            <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--green)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontFamily: 'var(--font-h)', fontSize: '.85rem', flexShrink: 0 }}>3</div>
+                <h4 style={{ margin: 0 }}>Revenue Maximization</h4>
+              </div>
+              <p>AI engines identify and reward high-value segments for revenue outcomes. Cart Recovery serves time-sensitive rewards to users with abandoned carts. Loyalty programs drive repeat purchases through personalized deals. In gaming and fintech, &ldquo;whale&rdquo; retention keeps the highest-value users engaged with exclusive experiences.</p>
+            </div>
           </div>
-        </div></div>
+        </div>
       </section>
 
       {/* LTV Comparison Teaser (pre-gate) */}
@@ -1880,23 +1836,25 @@ export default function PlaybookContent({
           </div>
         </section>
 
-        <section className="sec sec-w rv">
-          <div className="wrap">
-            <div style={{ background: 'linear-gradient(135deg, #f0faf5 0%, #e8f5ee 50%, #f5f7f9 100%)', borderRadius: 'var(--r-lg)', padding: '36px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '32px', border: '1px solid rgba(38,190,129,.15)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flex: 1 }}>
-                <div style={{ width: '56px', height: '56px', borderRadius: '14px', background: 'var(--green)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/></svg>
-                </div>
+        <section className="sec sec-l">
+          <div className="wrap rv">
+            <a href="https://appsamurai.com/roas/" target="_blank" rel="noopener noreferrer"
+               style={{ display: 'block', background: 'linear-gradient(135deg, #f0fdf6, #e8f5ee)', borderRadius: 16, padding: '32px 40px', textDecoration: 'none', border: '1px solid rgba(38,190,129,.15)', transition: 'box-shadow 0.3s' }}
+               onClick={() => trackEvent('cta_click', 'roas_banner', { destination: 'roas' })}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
                 <div>
-                  <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '4px', color: 'var(--text)' }}>What&apos;s Your Rewarded UA Potential?</h3>
-                  <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', margin: 0 }}>Find out with our ROAS forecaster — before you invest.</p>
+                  <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#222', fontFamily: 'var(--font-h)', marginBottom: 4 }}>
+                    What&apos;s Your Rewarded UA Potential?
+                  </div>
+                  <div style={{ color: '#666', fontSize: '0.9rem' }}>
+                    Try our ROAS Forecaster &mdash; estimate returns before you invest.
+                  </div>
+                </div>
+                <div style={{ background: 'var(--green)', color: '#fff', padding: '12px 28px', borderRadius: 29, fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap' }}>
+                  Try ROAS Forecaster &rarr;
                 </div>
               </div>
-              <a href="https://appsamurai.com/roas/" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ whiteSpace: 'nowrap', textDecoration: 'none', padding: '14px 28px', flexShrink: 0 }}
-                 onClick={() => trackEvent('cta_click', 'roas_banner', { destination: 'roas' })}>
-                Try ROAS Forecaster →
-              </a>
-            </div>
+            </a>
           </div>
         </section>
 
@@ -2243,7 +2201,7 @@ export default function PlaybookContent({
               </div>
               <div className="testimonial-card">
                 <div className="testi-quote">&ldquo;AppSamurai&apos;s strategic programmatic advertising expertise helped SHAHID boost user acquisition and achieve our subscription targets in a highly competitive streaming market.&rdquo;</div>
-                <div className="testi-author"><img className="testi-avatar" src="/ali-shahid.png" alt="Ali Aktas" style={{ objectFit: 'cover' }} /><div><strong>Ali Aktas</strong><br /><span>Head of Performance, Shahid</span></div></div>
+                <div className="testi-author"><img className="testi-avatar" src="/ali-shahid.png" alt="Ali Aktas" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} /><div><strong>Ali Aktas</strong><br /><span>Head of Performance, Shahid</span></div></div>
               </div>
               <div className="testimonial-card">
                 <div className="testi-quote">&ldquo;Partnering with AppSamurai has been a game-changer for us. Their growth strategies helped us exceed CPA and ROAS goals while maintaining user quality across all channels.&rdquo;</div>
