@@ -1526,7 +1526,7 @@ export default function PlaybookContent({
             <h2>The Programmatic Engine<br />Navigating the Open Internet</h2>
             <div className="ch-desc">The 2026 Thesis: As &ldquo;Walled Gardens&rdquo; reach inventory saturation and rising costs, the most significant growth opportunities have shifted to the Open Internet. Users spend over 60% of their mobile time in independent apps. We scale by tapping into this massive inventory, reaching users during &ldquo;lean-back&rdquo; moments.</div>
           </div>
-          <img src="/dsp-screen.png" alt="AppSamurai DSP Platform" style={{ maxWidth: '320px', borderRadius: '16px', boxShadow: '0 16px 40px rgba(0,0,0,.1)', display: 'block' }} />
+          <img src="/dsp-hero.png" alt="AppSamurai DSP Platform" style={{ maxWidth: '400px', borderRadius: '16px', display: 'block' }} />
         </div>
       </section>
 
