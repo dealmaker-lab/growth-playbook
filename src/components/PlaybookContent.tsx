@@ -1034,13 +1034,14 @@ export default function PlaybookContent({
 
   /* ── Update retention/trends when tabs change ── */
   useEffect(() => {
-    if (gatedChartsInitRef.current) {
+    // Only update if the chart instance already exists (means gated charts were initialized)
+    if (retInstRef.current) {
       renderRetentionChart(retTab);
     }
   }, [retTab, renderRetentionChart]);
 
   useEffect(() => {
-    if (gatedChartsInitRef.current) {
+    if (trendInstRef.current) {
       renderTrendsChart(trendTab);
     }
   }, [trendTab, renderTrendsChart]);
