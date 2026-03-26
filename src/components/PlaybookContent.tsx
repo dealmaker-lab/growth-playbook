@@ -81,8 +81,12 @@ export default function PlaybookContent({
   const [gateLiftingDone, setGateLiftingDone] = useState(false);
   const [retTab, setRetTab] = useState('d7');
   const [trendTab, setTrendTab] = useState('revenue');
+  const [chartsReady, setChartsReady] = useState(false);
+  const [gatedChartsReady, setGatedChartsReady] = useState(false);
 
   const lastY = useRef(0);
+  const sessionId = useRef('');
+  const maxScrollDepth = useRef(0);
   const retInstRef = useRef<Chart | null>(null);
   const trendInstRef = useRef<Chart | null>(null);
   const chartsInitRef = useRef(false);
@@ -90,6 +94,62 @@ export default function PlaybookContent({
 
   const emailRef = useRef<HTMLInputElement>(null);
   const gateFormRef = useRef<HTMLDivElement>(null);
+
+  /* ── Analytics ── */
+  const trackEvent = useCallback((event_type: string, section?: string, metadata?: Record<string, unknown>) => {
+    fetch('/api/analytics', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId.current, event_type, section, metadata }),
+    }).catch(() => {}); // fire and forget
+  }, []);
+
+  /* ── Analytics: page_view + scroll_depth on beforeunload ── */
+  useEffect(() => {
+    sessionId.current = crypto.randomUUID();
+    trackEvent('page_view');
+
+    function handleScroll() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = Math.max(0, Math.min(100, Math.round((scrollTop / docHeight) * 100)));
+      if (pct > maxScrollDepth.current) maxScrollDepth.current = pct;
+    }
+
+    function handleBeforeUnload() {
+      trackEvent('scroll_depth', undefined, { max_percent: maxScrollDepth.current });
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [trackEvent]);
+
+  /* ── Analytics: section_view via IntersectionObserver ── */
+  useEffect(() => {
+    const sectionIds = ['hero', 'toc', 'ch1', 'ch2', 'ch3', 'ch4', 'emailGate', 'about'];
+    const seen = new Set<string>();
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !seen.has(entry.target.id)) {
+          seen.add(entry.target.id);
+          const label = entry.target.id === 'emailGate' ? 'gate' : entry.target.id;
+          trackEvent('section_view', label);
+        }
+      });
+    }, { threshold: 0.1 });
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) obs.observe(el);
+    });
+    // Also observe calculator section if it exists
+    const calcEl = document.getElementById('calculatorTeaser');
+    if (calcEl) obs.observe(calcEl);
+    return () => obs.disconnect();
+  }, [trackEvent]);
 
   /* ── Rich HTML Tooltip ── */
   const externalTooltipHandler = useCallback(
@@ -454,6 +514,8 @@ export default function PlaybookContent({
         },
       });
     }
+
+    setChartsReady(true);
   }, [externalTooltipHandler]);
 
   /* ── Init gated charts ── */
@@ -781,6 +843,8 @@ export default function PlaybookContent({
     // Init retention + trends
     renderRetentionChart('d7');
     renderTrendsChart('revenue');
+
+    setGatedChartsReady(true);
   }, [externalTooltipHandler]);
 
   /* ── Retention Chart ── */
@@ -1261,6 +1325,7 @@ export default function PlaybookContent({
 
       if (res.ok) {
         setGateSuccess(true);
+        trackEvent('gate_unlock', 'gate', { email_domain: email.split('@')[1] });
         // Show success animation for 1.5s, then lift the gate curtain
         setTimeout(() => {
           setGateLiftingDone(true);
@@ -1281,7 +1346,7 @@ export default function PlaybookContent({
       setGateError('Something went wrong. Please try again.');
       setGateLoading(false);
     }
-  }, [unlockGatedContent]);
+  }, [unlockGatedContent, trackEvent]);
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -1306,7 +1371,7 @@ export default function PlaybookContent({
           <a href="https://appsamurai.com/solutions" className="nav-link" target="_blank" rel="noopener noreferrer">Solutions</a>
           <a href="https://appsamurai.com/blog" className="nav-link" target="_blank" rel="noopener noreferrer">Blog</a>
           <a href="https://appsamurai.com/contact" className="nav-link" target="_blank" rel="noopener noreferrer">Contact</a>
-          <button className="btn-sm" onClick={() => scrollTo('emailGate')}>
+          <button className="btn-sm" onClick={() => { trackEvent('cta_click', 'nav', { destination: 'gate' }); scrollTo('emailGate'); }}>
             Get Full Report
           </button>
         </div>
@@ -1365,7 +1430,7 @@ export default function PlaybookContent({
               </button>
               <button
                 className="btn-outline"
-                onClick={() => scrollTo('emailGate')}
+                onClick={() => { trackEvent('cta_click', 'hero', { destination: 'pdf' }); scrollTo('emailGate'); }}
               >
                 Download PDF
               </button>
@@ -1506,7 +1571,7 @@ export default function PlaybookContent({
                 <div className="stat-body"><h4>Organic Still Leads</h4><p>But paid channels are closing the gap fast</p></div>
               </div>
             </div>
-            <div className="story-chart"><div className="chart-wrap"><canvas id="chartDoughnut"></canvas></div></div>
+            <div className="story-chart"><div className="chart-wrap">{!chartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartDoughnut" style={{ display: chartsReady ? 'block' : 'none' }}></canvas></div></div>
           </div>
         </div>
       </section>
@@ -1565,7 +1630,7 @@ export default function PlaybookContent({
             <div className="story-chart sticky rv-r">
               <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '.85rem', marginBottom: '12px', textAlign: 'center', color: 'var(--text)' }}>Programmatic Ad Market Growth</h4>
               <div className="chart-sub" style={{ textAlign: 'center', fontSize: '.75rem', color: 'var(--text-faint)', marginBottom: '12px' }}>Projected market size by 2030</div>
-              <div className="chart-wrap" style={{ maxHeight: '300px' }}><canvas id="chartProgrammatic"></canvas></div>
+              <div className="chart-wrap" style={{ maxHeight: '300px' }}>{!chartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartProgrammatic" style={{ display: chartsReady ? 'block' : 'none' }}></canvas></div>
             </div>
           </div>
         </div>
@@ -1641,7 +1706,7 @@ export default function PlaybookContent({
             <div className="chart-box" style={{ margin: 0, padding: '20px 16px' }}>
               <div className="chart-h" style={{ fontSize: '.82rem', marginBottom: '4px' }}>Ad Type Impression Share</div>
               <div className="chart-sub" style={{ fontSize: '.65rem', marginBottom: '8px' }}>2024 vs 2025 worldwide</div>
-              <div className="chart-wrap" style={{ height: '180px' }}><canvas id="chartAdTypes"></canvas></div>
+              <div className="chart-wrap" style={{ height: '180px' }}>{!chartsReady && <div className="chart-skeleton" style={{ height: 180 }}></div>}<canvas id="chartAdTypes" style={{ display: chartsReady ? 'block' : 'none' }}></canvas></div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: '8px', fontSize: '.6rem', color: 'var(--text-muted)' }}>
                 <span>Video overtakes Image as dominant format</span>
                 <span>Playable ads double (+111%)</span>
@@ -1705,7 +1770,7 @@ export default function PlaybookContent({
           <div className="chart-card-new rv">
             <h4>Traditional vs Optimized Channel Mix</h4>
             <div className="chart-subtitle">Budget allocation by channel — shift spend to high-intent inventory</div>
-            <div className="chart-wrap"><canvas id="chartBudgetFlow"></canvas></div>
+            <div className="chart-wrap">{!chartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartBudgetFlow" style={{ display: chartsReady ? 'block' : 'none' }}></canvas></div>
           </div>
         </div>
       </section>
@@ -1726,7 +1791,7 @@ export default function PlaybookContent({
           </div>
           <div className="case-chart" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <img src="/paycell-banner.png" alt="Paycell Case Study" style={{ width: '100%', borderRadius: '12px', marginBottom: '8px' }} />
-            <canvas id="chartPaycell" height={180}></canvas>
+            {!chartsReady && <div className="chart-skeleton" style={{ height: 180 }}></div>}<canvas id="chartPaycell" height={180} style={{ display: chartsReady ? 'block' : 'none' }}></canvas>
           </div>
         </div></div>
       </section>
@@ -1757,12 +1822,12 @@ export default function PlaybookContent({
       </section>
 
       {/* LTV Comparison Teaser (pre-gate) */}
-      <section className="sec sec-l">
+      <section className={`sec sec-l${!gateUnlocked ? ' gate-tease' : ''}`}>
         <div className="wrap">
           <div className="chart-card-new rv">
             <h4>LTV Comparison by Acquisition Model</h4>
             <div className="chart-subtitle">Rewarded Playtime delivers 2-3x higher LTV than traditional models</div>
-            <div className="chart-wrap"><canvas id="chartLTVTeaser"></canvas></div>
+            <div className="chart-wrap">{!chartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartLTVTeaser" style={{ display: chartsReady ? 'block' : 'none' }}></canvas></div>
           </div>
         </div>
       </section>
@@ -1857,7 +1922,7 @@ export default function PlaybookContent({
             <div className="chart-card-new rv">
               <h4>LTV Comparison by Acquisition Model</h4>
               <div className="chart-subtitle">Rewarded Playtime users generate significantly higher lifetime value at every milestone</div>
-              <div className="chart-wrap"><canvas id="chartLTVFull"></canvas></div>
+              <div className="chart-wrap">{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartLTVFull" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
             </div>
           </div>
         </section>
@@ -1887,7 +1952,7 @@ export default function PlaybookContent({
             <div className="story-chart rv-l">
               <div className="chart-h" style={{ fontSize: '.95rem' }}>Download Channels Share by Genre</div>
               <div className="chart-sub">Share of downloads by product model</div>
-              <div className="chart-wrap" style={{ height: '300px' }}><canvas id="chartGenre"></canvas></div>
+              <div className="chart-wrap" style={{ height: '300px' }}>{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 300 }}></div>}<canvas id="chartGenre" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
             </div>
             <div className="story-chart rv-r">
               <div className="chart-h" style={{ fontSize: '.95rem' }}>Mobile Game Retention Trends</div>
@@ -1896,7 +1961,7 @@ export default function PlaybookContent({
                   <button key={t} className={`tab-btn${retTab === t ? ' active' : ''}`} onClick={() => setRetTab(t)}>{t === 'd7' ? 'D7' : t === 'd30' ? 'D30' : t === 'd1' ? 'D1' : 'D365'}</button>
                 ))}
               </div></div>
-              <div className="chart-wrap" style={{ height: '260px' }}><canvas id="chartRetention"></canvas></div>
+              <div className="chart-wrap" style={{ height: '260px' }}>{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartRetention" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
             </div>
           </div></div>
         </section>
@@ -1918,7 +1983,7 @@ export default function PlaybookContent({
                   <button key={t} className={`tab-btn${trendTab === t ? ' active' : ''}`} onClick={() => setTrendTab(t)}>{t.charAt(0).toUpperCase() + t.slice(1)}</button>
                 ))}
               </div></div>
-              <div className="chart-wrap" style={{ height: '280px' }}><canvas id="chartTrends"></canvas></div>
+              <div className="chart-wrap" style={{ height: '280px' }}>{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 280 }}></div>}<canvas id="chartTrends" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
             </div>
           </div></div>
         </section>
@@ -1977,7 +2042,7 @@ export default function PlaybookContent({
             <div className="story-chart sticky rv-r">
               <div className="chart-h" style={{ fontSize: '.95rem' }}>iPhone vs Android Market Share</div>
               <div className="chart-sub">2009 — 2024</div>
-              <div className="chart-wrap" style={{ height: '300px' }}><canvas id="chartMarketShare"></canvas></div>
+              <div className="chart-wrap" style={{ height: '300px' }}>{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 300 }}></div>}<canvas id="chartMarketShare" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
             </div>
           </div></div>
         </section>
@@ -2027,7 +2092,7 @@ export default function PlaybookContent({
             <div className="chart-card-new rv">
               <h4>OEM Format Comparison</h4>
               <div className="chart-subtitle">Radar analysis across 5 key dimensions — PAI leads in reach and brand safety</div>
-              <div className="chart-wrap" style={{ maxWidth: '500px', margin: '0 auto' }}><canvas id="chartOEMRadar"></canvas></div>
+              <div className="chart-wrap" style={{ maxWidth: '500px', margin: '0 auto' }}>{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartOEMRadar" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
             </div>
           </div>
         </section>
@@ -2073,7 +2138,7 @@ export default function PlaybookContent({
                 <div style={{ background: 'rgba(175,156,255,.12)', borderRadius: '12px', padding: '16px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--green)' }}>ROAS+</div><div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.5)' }}>Target Achieved</div></div>
               </div>
             </div>
-            <div className="case-chart"><canvas id="chartTapNation" height={200}></canvas></div>
+            <div className="case-chart">{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 200 }}></div>}<canvas id="chartTapNation" height={200} style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
           </div></div>
         </section>
 
@@ -2118,7 +2183,7 @@ export default function PlaybookContent({
             <div className="chart-card-new rv">
               <h4>ASA Keyword Strategy Map</h4>
               <div className="chart-subtitle">X: Search Volume, Y: Conversion Rate, Size: Opportunity Score</div>
-              <div className="chart-wrap"><canvas id="chartASABubble"></canvas></div>
+              <div className="chart-wrap">{!gatedChartsReady && <div className="chart-skeleton" style={{ height: 260 }}></div>}<canvas id="chartASABubble" style={{ display: gatedChartsReady ? 'block' : 'none' }}></canvas></div>
             </div>
           </div>
         </section>
@@ -2166,6 +2231,23 @@ export default function PlaybookContent({
                 <p style={{ color: 'rgba(255,255,255,.55)', fontSize: '.88rem', lineHeight: 1.7 }}>When you run high-impact campaigns via DSP or OEM, brand searches surge. By increasing your ASA presence during these periods, you capture 100% of that &ldquo;manufactured&rdquo; demand at the most efficient price point. ASA does not exist in a vacuum — it is the net that catches the demand created by your other channels.</p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* CALCULATOR TEASER */}
+        <section className="sec sec-l rv" id="calculatorTeaser">
+          <div className="wrap" style={{ textAlign: 'center' }}>
+            <span className="insight-badge" style={{ marginBottom: '12px', display: 'inline-block' }}>Interactive Tool</span>
+            <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.5rem', fontWeight: 800, marginBottom: '8px' }}>
+              Calculate Your Optimal Channel Mix
+            </h3>
+            <p style={{ color: 'var(--text-muted)', maxWidth: '500px', margin: '0 auto 20px', fontSize: '0.92rem' }}>
+              Input your app category, budget, and goals — get a personalized channel allocation with estimated CAC and ROAS.
+            </p>
+            <a href="/calculator" className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none', padding: '14px 36px' }}
+               onClick={() => trackEvent('cta_click', 'calculator_teaser', { destination: 'calculator' })}>
+              Open ROI Calculator &rarr;
+            </a>
           </div>
         </section>
 
@@ -2231,7 +2313,7 @@ export default function PlaybookContent({
                 <div><strong>3B+</strong><span>Users Reached</span></div>
                 <div><strong>50+</strong><span>Countries</span></div>
               </div>
-              <a href="https://appsamurai.com/contact" className="btn-primary" style={{ marginTop: '16px' }}>Get in Touch &rarr;</a>
+              <a href="https://appsamurai.com/contact" className="btn-primary" style={{ marginTop: '16px' }} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('cta_click', 'about', { destination: 'contact' })}>Get in Touch &rarr;</a>
             </div>
             <div className="rv-r">
               <div className="pillar-grid">
@@ -2244,6 +2326,23 @@ export default function PlaybookContent({
               </div>
             </div>
           </div></div>
+        </section>
+
+        {/* FINAL CTA */}
+        <section className="sec sec-w" style={{ textAlign: 'center' }}>
+          <div className="wrap">
+            <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.8rem', fontWeight: 800, marginBottom: '12px' }}>
+              Ready to Put This Playbook Into Action?
+            </h3>
+            <p style={{ color: 'var(--text-muted)', maxWidth: '540px', margin: '0 auto 24px', lineHeight: 1.7 }}>
+              Our growth team has helped 500+ apps scale with the exact strategies in this playbook. Let&apos;s build your custom growth plan.
+            </p>
+            <a href="https://appsamurai.com/contact" target="_blank" rel="noopener noreferrer"
+               className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none', fontSize: '1rem', padding: '16px 40px' }}
+               onClick={() => trackEvent('cta_click', 'final_cta', { destination: 'contact' })}>
+              Talk to Our Growth Team &rarr;
+            </a>
+          </div>
         </section>
 
       </div>{/* END gatedContent */}
@@ -2287,7 +2386,7 @@ export default function PlaybookContent({
       {/* LEAD BAR */}
       <div className="lead-bar" id="leadBar">
         <p>Get the full 2026 Mobile Growth Playbook</p>
-        <button className="btn-primary" onClick={() => scrollTo('emailGate')}>Unlock Full Report</button>
+        <button className="btn-primary" onClick={() => { trackEvent('cta_click', 'lead_bar', { destination: 'gate' }); scrollTo('emailGate'); }}>Unlock Full Report</button>
       </div>
     </>
   );

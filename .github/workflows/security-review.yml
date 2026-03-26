@@ -1,0 +1,20 @@
+name: Security Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  security-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Anthropic Security Review
+        uses: anthropics/anthropic-security-review@main
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}

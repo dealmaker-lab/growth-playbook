@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import Script from 'next/script';
 import '@/styles/globals.css';
 
 const poppins = Poppins({
@@ -11,6 +12,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: 'AppSamurai 2026 Growth Playbook',
+  icons: { icon: '/favicon.ico' },
   description:
     'The definitive playbook for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads — built for growth teams who need to scale smarter in 2026.',
   openGraph: {
@@ -34,9 +36,24 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
     <html lang="en">
-      <body className={poppins.className}>{children}</body>
+      <body className={poppins.className}>
+        {children}
+        {gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="gtag-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{page_path:window.location.pathname});`}
+            </Script>
+          </>
+        )}
+      </body>
     </html>
   );
 }
