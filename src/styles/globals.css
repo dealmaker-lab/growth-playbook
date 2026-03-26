@@ -67,7 +67,10 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .hero-wrap::before{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(38,190,129,.07) 0%,transparent 70%);pointer-events:none}
 .hero-wrap::after{content:'';position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(175,156,255,.05) 0%,transparent 70%);pointer-events:none}
 .hero-wrap{background:url('/hero-bg.png') center center/cover no-repeat;position:relative;overflow:hidden}
+.hero-wrap::before,.hero-wrap::after{z-index:0}
+.hero-wrap>*{position:relative;z-index:2}
 .hero{max-width:var(--max-w);margin:0 auto;padding:100px 40px 88px;text-align:center;position:relative;z-index:1}
+.hero .rv{position:relative;z-index:2;background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(245,247,249,.92) 0%,rgba(245,247,249,.7) 60%,transparent 100%);padding:40px 20px;border-radius:24px}
 .hero-badge{display:inline-block;background:rgba(38,190,129,.08);color:var(--green);font-size:11px;font-weight:700;font-family:var(--font-h);padding:7px 20px;border-radius:100px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:28px;border:1px solid rgba(38,190,129,.15)}
 .hero h1{font-family:var(--font-h);font-size:clamp(2.4rem,5.5vw,4rem);font-weight:700;color:#222;line-height:1.08;margin-bottom:20px;letter-spacing:-.03em}
 .hero h1 em{font-style:normal;color:var(--green)}
@@ -435,6 +438,13 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   .ch-head{padding:32px 0 28px}
   .ch-bg-num{display:none}
 }
+
+/* === CREATIVE MOCKUP CARDS === */
+.creative-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;margin-bottom:16px;display:grid;grid-template-columns:280px 1fr;gap:28px;align-items:center}
+@media(max-width:768px){.creative-card{grid-template-columns:1fr;text-align:center}.creative-card img{max-height:280px;margin:0 auto}}
+
+/* === NAV MOBILE FIX === */
+@media(max-width:480px){.top-nav .btn-primary{font-size:.72rem;padding:10px 16px}}
 
 /* === CHART SKELETON === */
 .chart-skeleton{background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;min-height:200px}

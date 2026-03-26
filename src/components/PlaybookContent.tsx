@@ -1317,8 +1317,7 @@ export default function PlaybookContent({
 
       {/* HERO */}
       <div className="hero-wrap">
-        <div className="hero-wrap">
-          <section className="hero" id="hero" style={{ backgroundImage: 'url(/hero-bg.png)', backgroundSize: '100% auto', backgroundPosition: 'center top', backgroundRepeat: 'no-repeat' }}>
+          <section className="hero" id="hero">
             <div className="rv">
               <span className="hero-badge">AppSamurai Industry Report 2026</span>
               <h1>
@@ -1348,7 +1347,6 @@ export default function PlaybookContent({
               </div>
             </div>
           </section>
-        </div>
       </div>
 
       {/* BENTO GRID */}
@@ -1464,7 +1462,7 @@ export default function PlaybookContent({
           <div className="method-grid rv">
             <div className="method-card"><div className="method-icon">&#128202;</div><p>Market data sourced from <strong>Sensor Tower</strong>, <strong>Data.ai</strong>, and <strong>Statista</strong> covering iOS App Store and Google Play downloads and revenue estimates through December 2025.</p></div>
             <div className="method-card"><div className="method-icon">&#127919;</div><p>Campaign performance data aggregated from <strong>10,000+ campaigns</strong> managed through AppSamurai&apos;s DSP, OEM, and Rewarded Playtime platforms across 2024-2025.</p></div>
-            <div className="method-card"><div className="method-icon">&#128300;</div><p>Creative analysis powered by <strong>Alison.AI</strong> examining 500,000+ ad creatives across iOS and Android to identify top-performing elements and trends.</p></div>
+            <div className="method-card"><div className="method-icon">&#128300;</div><p>Creative analysis powered by <strong>Adjust</strong> examining 500,000+ ad creatives across iOS and Android to identify top-performing elements and trends.</p></div>
             <div className="method-card"><div className="method-icon">&#128241;</div><p>In-app revenue figures are gross — inclusive of app store commissions. Download estimates are per-user, counting one download per Apple or Google account.</p></div>
           </div>
         </div>
@@ -1591,7 +1589,7 @@ export default function PlaybookContent({
           <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, marginBottom: '20px', color: 'var(--text)' }}>Platform-Specific Creative Best Practices</h3>
 
           {/* iOS — image left, text right */}
-          <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)', padding: '28px', marginBottom: '16px', display: 'grid', gridTemplateColumns: '280px 1fr', gap: '28px', alignItems: 'center' }}>
+          <div className="creative-card">
             <div style={{ textAlign: 'center' }}>
               <img src="/ios-android-age-1.png" alt="iOS Creative Best Practices" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
             </div>
@@ -1608,7 +1606,7 @@ export default function PlaybookContent({
           </div>
 
           {/* Android — image left, text right */}
-          <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)', padding: '28px', marginBottom: '24px', display: 'grid', gridTemplateColumns: '280px 1fr', gap: '28px', alignItems: 'center' }}>
+          <div className="creative-card">
             <div style={{ textAlign: 'center' }}>
               <img src="/ios-android-age-2.png" alt="Android Creative Best Practices" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
             </div>
