@@ -816,7 +816,10 @@ export default function PlaybookContent({
           min: r.min,
           max: r.max,
         } as any;
-        retInstRef.current.update('active');
+        retInstRef.current.update();
+        requestAnimationFrame(() => {
+          retInstRef.current?.draw();
+        });
         return;
       }
 
@@ -913,7 +916,10 @@ export default function PlaybookContent({
         (
           trendInstRef.current.options.scales!.y as any
         ).ticks.callback = formatter;
-        trendInstRef.current.update('active');
+        trendInstRef.current.update();
+        requestAnimationFrame(() => {
+          trendInstRef.current?.draw();
+        });
         return;
       }
 
@@ -1996,28 +2002,7 @@ export default function PlaybookContent({
           </div></div>
         </section>
 
-        {/* Creative Best Practices -- iOS & Android */}
-        <section className="sec sec-l">
-          <div className="wrap rv">
-            <div style={{ textAlign: 'right', marginBottom: '8px' }}><span style={{ fontSize: '.72rem', color: '#999' }}>Source:</span> <span style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '.82rem', color: '#666' }}>Alison.Ai</span></div>
-            {/* iOS */}
-            <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)', padding: '32px', marginBottom: '20px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', alignItems: 'center' }}>
-              <div style={{ textAlign: 'center' }}><img src="/ios-android-age-1.png" alt="iOS Creative Best Practices" style={{ maxWidth: '100%', borderRadius: '12px' }} /></div>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}><span style={{ fontSize: '28px' }}>&#127822;</span><h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, color: '#222' }}>iOS Creative Best Practices</h4></div>
-                <p style={{ fontSize: '.88rem', color: '#666', lineHeight: 1.75 }}>iOS users respond well to a sound-off design (+24%), that open with close-up shots (+16%) of gameplay (+45%), introduce free-offer text early (+30%), and feature a large centered logo (+29%) at the end paired with the CTA text &apos;Play Now!&apos; (+14%).</p>
-              </div>
-            </div>
-            {/* Android */}
-            <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)', padding: '32px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', alignItems: 'center' }}>
-              <div style={{ textAlign: 'center' }}><img src="/ios-android-age-2.png" alt="Android Creative Best Practices" style={{ maxWidth: '100%', borderRadius: '12px' }} /></div>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}><span style={{ fontSize: '28px' }}>&#129302;</span><h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, color: '#222' }}>Android Creative Best Practices</h4></div>
-                <p style={{ fontSize: '.88rem', color: '#666', lineHeight: 1.75 }}>Android users respond well to videos that use sound effects (+12%), split-screen (+51%) scenes showcasing gameplay (+13%), and multiple scenes (+42%), with an end card that omits a CTA (+31%) but features falling coins (+11%).</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Creative Best Practices removed — images used in Ch1 Creative Intelligence section */}
 
         {/* OEM Format Table */}
         <section className="sec sec-l">
