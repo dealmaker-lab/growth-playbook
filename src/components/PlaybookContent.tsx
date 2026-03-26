@@ -422,7 +422,7 @@ export default function PlaybookContent({
     // Force all chart instances to resize+update — retry with delays
     const forceCharts = () => {
       Object.values(Chart.instances).forEach((inst: any) => {
-        try { inst.resize(); inst.update('none'); } catch (_) {}
+        try { inst.resize(); inst.update('none'); inst.draw(); } catch (_) {}
       });
     };
     requestAnimationFrame(forceCharts);
@@ -775,7 +775,7 @@ export default function PlaybookContent({
     // because React may not have painted gated content yet
     const forceAllCharts = () => {
       Object.values(Chart.instances).forEach((inst: any) => {
-        try { inst.resize(); inst.update('none'); } catch (_) {}
+        try { inst.resize(); inst.update('none'); inst.draw(); } catch (_) {}
       });
     };
     requestAnimationFrame(forceAllCharts);
