@@ -1926,10 +1926,25 @@ export default function PlaybookContent({
           </div>
         </section>
 
-        <section className="cta-banner"><div className="wrap"><div className="cta-flex rv">
-          <h3>Want to Know Your Rewarded UA Potential?<small>Find out with our ROAS forecaster, before you invest.</small></h3>
-          <button className="btn-primary" style={{ whiteSpace: 'nowrap' }}>Try ROAS Forecaster &rarr;</button>
-        </div></div></section>
+        <section className="sec sec-w rv">
+          <div className="wrap">
+            <div style={{ background: 'linear-gradient(135deg, #f0faf5 0%, #e8f5ee 50%, #f5f7f9 100%)', borderRadius: 'var(--r-lg)', padding: '36px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '32px', border: '1px solid rgba(38,190,129,.15)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flex: 1 }}>
+                <div style={{ width: '56px', height: '56px', borderRadius: '14px', background: 'var(--green)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/></svg>
+                </div>
+                <div>
+                  <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.15rem', fontWeight: 700, marginBottom: '4px', color: 'var(--text)' }}>What&apos;s Your Rewarded UA Potential?</h3>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', margin: 0 }}>Find out with our ROAS forecaster — before you invest.</p>
+                </div>
+              </div>
+              <a href="https://appsamurai.com/roas/" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ whiteSpace: 'nowrap', textDecoration: 'none', padding: '14px 28px', flexShrink: 0 }}
+                 onClick={() => trackEvent('cta_click', 'roas_banner', { destination: 'roas' })}>
+                Try ROAS Forecaster →
+              </a>
+            </div>
+          </div>
+        </section>
 
         {/* 2.2 Aha Moment */}
         <section className="sec sec-l">
