@@ -76,7 +76,7 @@ export default function PlaybookContent({
 }: PlaybookContentProps) {
   const [gateUnlocked, setGateUnlocked] = useState(initialUnlocked);
   const [gateLoading, setGateLoading] = useState(false);
-  const [gateError, setGateError] = useState(false);
+  const [gateError, setGateError] = useState<string | false>(false);
   const [gateSuccess, setGateSuccess] = useState(false);
   const [retTab, setRetTab] = useState('d7');
   const [trendTab, setTrendTab] = useState('revenue');
@@ -1050,7 +1050,7 @@ export default function PlaybookContent({
         void gateFormRef.current.offsetWidth;
         gateFormRef.current.classList.add('shake');
       }
-      setGateError(true);
+      setGateError('Please enter a valid work email address');
       return;
     }
 
@@ -1058,10 +1058,19 @@ export default function PlaybookContent({
     if (emailRef.current) emailRef.current.style.borderColor = 'var(--green)';
 
     try {
+      // Read UTM params from URL
+      const params = new URLSearchParams(window.location.search);
+
       const res = await fetch('/api/unlock', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({
+          email,
+          utm_source: params.get('utm_source') || undefined,
+          utm_medium: params.get('utm_medium') || undefined,
+          utm_campaign: params.get('utm_campaign') || undefined,
+          referrer: document.referrer || undefined,
+        }),
       });
 
       if (res.ok) {
@@ -1069,11 +1078,18 @@ export default function PlaybookContent({
         if (gateFormRef.current) gateFormRef.current.classList.add('success');
         setTimeout(() => unlockGatedContent(true), 600);
       } else {
-        setGateError(true);
+        const data = await res.json().catch(() => null);
+        if (res.status === 429) {
+          setGateError('Too many attempts. Please try again later.');
+        } else if (data?.error) {
+          setGateError(data.error);
+        } else {
+          setGateError('Something went wrong. Please try again.');
+        }
         setGateLoading(false);
       }
     } catch {
-      setGateError(true);
+      setGateError('Something went wrong. Please try again.');
       setGateLoading(false);
     }
   }, [unlockGatedContent]);
@@ -1094,11 +1110,13 @@ export default function PlaybookContent({
 
       {/* TOP NAV */}
       <nav className="top-nav" id="topNav">
-        <a href="#hero" className="nav-logo">
+        <a href="https://appsamurai.com" className="nav-logo" target="_blank" rel="noopener noreferrer">
           <span className="mark">A</span>AppSamurai
         </a>
         <div className="nav-right">
-          <span className="nav-tag">2026 Growth Playbook</span>
+          <a href="https://appsamurai.com/solutions" className="nav-link" target="_blank" rel="noopener noreferrer">Solutions</a>
+          <a href="https://appsamurai.com/blog" className="nav-link" target="_blank" rel="noopener noreferrer">Blog</a>
+          <a href="https://appsamurai.com/contact" className="nav-link" target="_blank" rel="noopener noreferrer">Contact</a>
           <button className="btn-sm" onClick={() => scrollTo('emailGate')}>
             Get Full Report
           </button>
@@ -1560,7 +1578,7 @@ export default function PlaybookContent({
             >
               {gateLoading ? 'Unlocking...' : 'Get Access'}
             </button>
-            {gateError && <div className="gate-error-msg" style={{ opacity: 1 }}>Please enter a valid work email address</div>}
+            {gateError && <div className="gate-error-msg" style={{ opacity: 1 }}>{gateError}</div>}
           </div>
           {gateSuccess && <div className="gate-success-icon" id="gateSuccessIcon" style={{ display: 'block' }}>&#10003;</div>}
           <div className="gate-note">No spam. Instant access. Unsubscribe anytime.</div>
@@ -1973,23 +1991,24 @@ export default function PlaybookContent({
             </div>
             <div className="footer-col">
               <h4>Solutions</h4>
-              <a href="#ch1">DSP Engine</a>
-              <a href="#ch2">Rewarded Playtime</a>
-              <a href="#ch3">OEM Discovery</a>
-              <a href="#ch4">Apple Search Ads</a>
+              <a href="https://appsamurai.com/dsp" target="_blank" rel="noopener noreferrer">DSP Engine</a>
+              <a href="https://appsamurai.com/rewarded-playtime" target="_blank" rel="noopener noreferrer">Rewarded Playtime</a>
+              <a href="https://appsamurai.com/oem" target="_blank" rel="noopener noreferrer">OEM Discovery</a>
+              <a href="https://appsamurai.com/apple-search-ads" target="_blank" rel="noopener noreferrer">Apple Search Ads</a>
             </div>
             <div className="footer-col">
               <h4>Resources</h4>
-              <a href="https://appsamurai.com/blog">Blog</a>
-              <a href="#">Success Stories</a>
-              <a href="#">Help Center</a>
+              <a href="https://appsamurai.com/blog" target="_blank" rel="noopener noreferrer">Blog</a>
+              <a href="https://appsamurai.com/success-stories" target="_blank" rel="noopener noreferrer">Success Stories</a>
+              <a href="https://appsamurai.com/documentation" target="_blank" rel="noopener noreferrer">Documentation</a>
+              <a href="#hero">This Playbook</a>
             </div>
             <div className="footer-col">
               <h4>Company</h4>
-              <a href="https://appsamurai.com/about">About</a>
-              <a href="#">Culture</a>
-              <a href="#">Careers</a>
-              <a href="https://appsamurai.com/contact">Contact</a>
+              <a href="https://appsamurai.com/about" target="_blank" rel="noopener noreferrer">About</a>
+              <a href="https://appsamurai.com/culture" target="_blank" rel="noopener noreferrer">Culture</a>
+              <a href="https://appsamurai.com/careers" target="_blank" rel="noopener noreferrer">Careers</a>
+              <a href="https://appsamurai.com/contact" target="_blank" rel="noopener noreferrer">Contact</a>
             </div>
           </div>
           <div className="footer-bottom">

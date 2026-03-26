@@ -1,0 +1,1445 @@
+'use client';
+
+import { useState, useRef, useEffect, useCallback } from 'react';
+import Link from 'next/link';
+import {
+  Chart as ChartJS,
+  ArcElement,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Doughnut, Bar } from 'react-chartjs-2';
+
+ChartJS.register(
+  ArcElement,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+  ChartDataLabels
+);
+
+/* ── Types ─────────────────────────────────────────────────────────── */
+
+type Category = 'Gaming' | 'E-commerce' | 'FinTech' | 'Health & Fitness' | 'Utility';
+type Region = 'North America' | 'LATAM' | 'SEA' | 'EMEA' | 'MENA' | 'APAC';
+type Channel = 'Meta' | 'Google UAC' | 'TikTok' | 'Apple Search Ads' | 'Programmatic' | 'None yet';
+type Goal = 'Install Volume' | 'ROAS Target' | 'LTV Optimization' | 'Market Expansion';
+
+interface ChannelMix {
+  dsp: number;
+  rewarded: number;
+  oem: number;
+  asa: number;
+}
+interface CACRange {
+  dsp: number;
+  rewarded: number;
+  oem: number;
+  asa: number;
+}
+interface Results {
+  mix: ChannelMix;
+  cac: CACRange;
+  roas: number;
+  takeaways: string[];
+}
+
+/* ── Palette ───────────────────────────────────────────────────────── */
+
+const COLORS = {
+  green: '#26BE81',
+  purple: '#af9cff',
+  cyan: '#00c4c4',
+  dark: '#1A1A2E',
+  greenHover: '#1DA367',
+  bgAlt: '#F5F7F9',
+  border: '#E8ECF1',
+  text: '#222222',
+  muted: '#666666',
+  faint: '#999',
+};
+
+const CHART_COLORS = [COLORS.green, COLORS.purple, COLORS.dark, COLORS.cyan];
+
+/* ── Benchmark engine ──────────────────────────────────────────────── */
+
+const BASE_MIX: Record<Category, ChannelMix> = {
+  Gaming:             { dsp: 30, rewarded: 30, oem: 20, asa: 20 },
+  'E-commerce':       { dsp: 40, rewarded: 15, oem: 30, asa: 15 },
+  FinTech:            { dsp: 30, rewarded: 10, oem: 20, asa: 40 },
+  'Health & Fitness': { dsp: 35, rewarded: 20, oem: 25, asa: 20 },
+  Utility:            { dsp: 25, rewarded: 25, oem: 35, asa: 15 },
+};
+
+const REGION_SHIFT: Record<Region, Partial<ChannelMix>> = {
+  'North America': { asa: 10, dsp: -5, oem: -5 },
+  LATAM:           { oem: 10, asa: -8, dsp: -2 },
+  SEA:             { rewarded: 8, asa: -6, dsp: -2 },
+  EMEA:            { dsp: 5, asa: -3, rewarded: -2 },
+  MENA:            { oem: 6, dsp: -3, rewarded: -3 },
+  APAC:            { rewarded: 5, oem: 3, asa: -5, dsp: -3 },
+};
+
+const GOAL_SHIFT: Record<Goal, Partial<ChannelMix>> = {
+  'Install Volume':    { dsp: 5, rewarded: 5, asa: -5, oem: -5 },
+  'ROAS Target':       { asa: 8, dsp: -3, rewarded: -3, oem: -2 },
+  'LTV Optimization':  { rewarded: 6, asa: 4, dsp: -5, oem: -5 },
+  'Market Expansion':  { oem: 8, dsp: 4, asa: -6, rewarded: -6 },
+};
+
+const CAC_BASE: Record<Category, CACRange> = {
+  Gaming:             { dsp: 1.20, rewarded: 0.80, oem: 0.50, asa: 2.20 },
+  'E-commerce':       { dsp: 2.00, rewarded: 1.30, oem: 0.90, asa: 3.00 },
+  FinTech:            { dsp: 2.80, rewarded: 1.60, oem: 1.10, asa: 4.00 },
+  'Health & Fitness': { dsp: 1.60, rewarded: 1.00, oem: 0.70, asa: 2.80 },
+  Utility:            { dsp: 1.40, rewarded: 0.90, oem: 0.60, asa: 2.50 },
+};
+
+const REGION_CAC_MULT: Record<Region, number> = {
+  'North America': 1.25,
+  LATAM: 0.65,
+  SEA: 0.55,
+  EMEA: 1.10,
+  MENA: 0.80,
+  APAC: 0.75,
+};
+
+function clampMix(mix: ChannelMix): ChannelMix {
+  const keys: (keyof ChannelMix)[] = ['dsp', 'rewarded', 'oem', 'asa'];
+  const clamped = { ...mix };
+  keys.forEach((k) => { clamped[k] = Math.max(clamped[k], 5); });
+  const total = keys.reduce((s, k) => s + clamped[k], 0);
+  keys.forEach((k) => { clamped[k] = Math.round((clamped[k] / total) * 100); });
+  // Fix rounding so sum === 100
+  const sum = keys.reduce((s, k) => s + clamped[k], 0);
+  clamped.dsp += 100 - sum;
+  return clamped;
+}
+
+function calculate(
+  category: Category,
+  regions: Region[],
+  budget: number,
+  _channel: Channel,
+  goal: Goal
+): Results {
+  // Start from base
+  let mix = { ...BASE_MIX[category] };
+
+  // Average region shifts
+  if (regions.length > 0) {
+    const avg: ChannelMix = { dsp: 0, rewarded: 0, oem: 0, asa: 0 };
+    regions.forEach((r) => {
+      const s = REGION_SHIFT[r];
+      (Object.keys(s) as (keyof ChannelMix)[]).forEach((k) => { avg[k] += (s[k] || 0); });
+    });
+    (Object.keys(avg) as (keyof ChannelMix)[]).forEach((k) => {
+      mix[k] += avg[k] / regions.length;
+    });
+  }
+
+  // Goal shift
+  const gs = GOAL_SHIFT[goal];
+  (Object.keys(gs) as (keyof ChannelMix)[]).forEach((k) => { mix[k] += gs[k] || 0; });
+
+  // Budget influence: higher budgets push toward DSP + OEM (scale channels)
+  const budgetFactor = (budget - 5000) / 495000; // 0..1
+  mix.dsp += budgetFactor * 8;
+  mix.oem += budgetFactor * 4;
+  mix.rewarded -= budgetFactor * 6;
+  mix.asa -= budgetFactor * 6;
+
+  const finalMix = clampMix(mix);
+
+  // CAC
+  const baseCac = { ...CAC_BASE[category] };
+  const regionMult =
+    regions.length > 0
+      ? regions.reduce((s, r) => s + REGION_CAC_MULT[r], 0) / regions.length
+      : 1;
+  // Budget scale: slight discount at higher spend
+  const budgetDiscount = 1 - budgetFactor * 0.15;
+  const cac: CACRange = {
+    dsp: Math.round(baseCac.dsp * regionMult * budgetDiscount * 100) / 100,
+    rewarded: Math.round(baseCac.rewarded * regionMult * budgetDiscount * 100) / 100,
+    oem: Math.round(baseCac.oem * regionMult * budgetDiscount * 100) / 100,
+    asa: Math.round(baseCac.asa * regionMult * budgetDiscount * 100) / 100,
+  };
+
+  // ROAS: weighted inverse CAC (simplified model)
+  const weightedCAC =
+    (finalMix.dsp * cac.dsp +
+      finalMix.rewarded * cac.rewarded +
+      finalMix.oem * cac.oem +
+      finalMix.asa * cac.asa) / 100;
+  // Assume average LTV of $8 for gaming, $12 for e-commerce, $15 for fintech, $10 others
+  const ltvMap: Record<Category, number> = {
+    Gaming: 8, 'E-commerce': 12, FinTech: 15, 'Health & Fitness': 10, Utility: 9,
+  };
+  const roas = Math.round((ltvMap[category] / weightedCAC) * 100) / 100;
+
+  // Takeaways
+  const takeaways: string[] = [];
+  const topChannel = (['dsp', 'rewarded', 'oem', 'asa'] as (keyof ChannelMix)[]).reduce((a, b) =>
+    finalMix[a] > finalMix[b] ? a : b
+  );
+  const channelLabels: Record<keyof ChannelMix, string> = {
+    dsp: 'Programmatic DSP',
+    rewarded: 'Rewarded Playtime',
+    oem: 'OEM Discovery',
+    asa: 'Apple Search Ads',
+  };
+
+  takeaways.push(
+    `${channelLabels[topChannel]} should be your primary channel at ${finalMix[topChannel]}% of spend, delivering the best balance of scale and efficiency for ${category} apps.`
+  );
+
+  if (budget >= 100000) {
+    takeaways.push(
+      `At $${(budget / 1000).toFixed(0)}K/mo, you have enough scale to run all four channels simultaneously. Diversification reduces platform-dependency risk.`
+    );
+  } else {
+    takeaways.push(
+      `At $${(budget / 1000).toFixed(0)}K/mo, focus on 2-3 channels first. Scale ${channelLabels[topChannel]} before expanding to smaller allocations.`
+    );
+  }
+
+  if (goal === 'ROAS Target') {
+    takeaways.push(
+      `For ROAS-focused campaigns, Apple Search Ads and Rewarded Playtime deliver the highest intent users. Monitor D7 ROAS daily to optimize spend.`
+    );
+  } else if (goal === 'Install Volume') {
+    takeaways.push(
+      `For volume campaigns, Programmatic DSP and OEM Discovery provide broad reach at lower CACs. Pair with retargeting for quality uplift.`
+    );
+  } else if (goal === 'Market Expansion') {
+    takeaways.push(
+      `OEM pre-install partnerships are your fastest path into new markets. Combine with localized ASA campaigns for high-intent capture.`
+    );
+  } else {
+    takeaways.push(
+      `Rewarded Playtime users show 2-3x higher D30 retention. Allocate incrementally and measure cohort LTV before scaling.`
+    );
+  }
+
+  return { mix: finalMix, cac, roas, takeaways };
+}
+
+/* ── Helpers ───────────────────────────────────────────────────────── */
+
+const CATEGORIES: Category[] = ['Gaming', 'E-commerce', 'FinTech', 'Health & Fitness', 'Utility'];
+const REGIONS: Region[] = ['North America', 'LATAM', 'SEA', 'EMEA', 'MENA', 'APAC'];
+const CHANNELS: Channel[] = ['Meta', 'Google UAC', 'TikTok', 'Apple Search Ads', 'Programmatic', 'None yet'];
+const GOALS: Goal[] = ['Install Volume', 'ROAS Target', 'LTV Optimization', 'Market Expansion'];
+const GOAL_ICONS: Record<Goal, string> = {
+  'Install Volume': '📈',
+  'ROAS Target': '🎯',
+  'LTV Optimization': '💎',
+  'Market Expansion': '🌍',
+};
+
+function formatBudget(v: number): string {
+  if (v >= 1000) return `$${(v / 1000).toFixed(0)}K`;
+  return `$${v}`;
+}
+
+/* ── Component ─────────────────────────────────────────────────────── */
+
+export default function CalculatorPage() {
+  const [step, setStep] = useState(1);
+  const [category, setCategory] = useState<Category>('Gaming');
+  const [regions, setRegions] = useState<Region[]>([]);
+  const [budget, setBudget] = useState(50000);
+  const [channel, setChannel] = useState<Channel>('None yet');
+  const [goal, setGoal] = useState<Goal>('Install Volume');
+  const [results, setResults] = useState<Results | null>(null);
+  const [showResults, setShowResults] = useState(false);
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  const toggleRegion = (r: Region) => {
+    setRegions((prev) =>
+      prev.includes(r) ? prev.filter((x) => x !== r) : [...prev, r]
+    );
+  };
+
+  const handleCalculate = useCallback(() => {
+    const r = calculate(category, regions.length > 0 ? regions : ['North America'], budget, channel, goal);
+    setResults(r);
+    setShowResults(true);
+  }, [category, regions, budget, channel, goal]);
+
+  useEffect(() => {
+    if (showResults && resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [showResults]);
+
+  const canAdvance = () => {
+    if (step === 1) return regions.length > 0;
+    return true;
+  };
+
+  return (
+    <>
+      <style>{styles}</style>
+
+      {/* ── Header ── */}
+      <header className="calc-header">
+        <div className="calc-header-inner">
+          <Link href="/" className="calc-back">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10 12L6 8l4-4" />
+            </svg>
+            Back to Playbook
+          </Link>
+          <div className="calc-logo">
+            <span className="calc-logo-mark">A</span>
+            <span>AppSamurai</span>
+            <span className="calc-logo-divider">/</span>
+            <span className="calc-logo-title">ROI Calculator</span>
+          </div>
+          <div style={{ width: 140 }} />
+        </div>
+      </header>
+
+      <main className="calc-main">
+        {/* ── Hero ── */}
+        <section className="calc-hero">
+          <span className="calc-badge">Interactive Tool</span>
+          <h1>Channel Mix &amp; ROI Calculator</h1>
+          <p className="calc-hero-sub">
+            Model your ideal channel allocation across Programmatic DSP, Rewarded Playtime,
+            OEM Discovery, and Apple Search Ads — with estimated CAC and ROAS benchmarks.
+          </p>
+        </section>
+
+        {/* ── Steps indicator ── */}
+        <div className="steps-bar">
+          {[1, 2, 3].map((s) => (
+            <button
+              key={s}
+              className={`step-dot ${step === s ? 'active' : ''} ${s < step ? 'done' : ''}`}
+              onClick={() => { if (s <= step || (s === step + 1 && canAdvance())) setStep(s); }}
+            >
+              {s < step ? (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round"><path d="M3 7l3 3 5-5" /></svg>
+              ) : (
+                s
+              )}
+            </button>
+          ))}
+          <div className="step-line">
+            <div className="step-line-fill" style={{ width: `${((step - 1) / 2) * 100}%` }} />
+          </div>
+        </div>
+
+        {/* ── Step 1: Your App ── */}
+        {step === 1 && (
+          <div className="calc-card fade-in">
+            <div className="card-step-label">Step 1 of 3</div>
+            <h2>Tell us about your app</h2>
+
+            <label className="field-label">App Category</label>
+            <div className="select-wrap">
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value as Category)}
+                className="calc-select"
+              >
+                {CATEGORIES.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+              <svg className="select-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke={COLORS.muted} strokeWidth="2" strokeLinecap="round"><path d="M3 4.5l3 3 3-3" /></svg>
+            </div>
+
+            <label className="field-label">Target Regions <span className="field-hint">(select all that apply)</span></label>
+            <div className="chips">
+              {REGIONS.map((r) => (
+                <button
+                  key={r}
+                  className={`chip ${regions.includes(r) ? 'selected' : ''}`}
+                  onClick={() => toggleRegion(r)}
+                >
+                  {r}
+                </button>
+              ))}
+            </div>
+            {regions.length === 0 && (
+              <p className="field-error">Select at least one region to continue</p>
+            )}
+
+            <div className="card-actions">
+              <div />
+              <button
+                className="btn-next"
+                disabled={!canAdvance()}
+                onClick={() => setStep(2)}
+              >
+                Next: Budget
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M5 3l4 4-4 4" /></svg>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ── Step 2: Your Budget ── */}
+        {step === 2 && (
+          <div className="calc-card fade-in">
+            <div className="card-step-label">Step 2 of 3</div>
+            <h2>Set your budget</h2>
+
+            <label className="field-label">
+              Monthly UA Budget: <strong>{formatBudget(budget)}</strong>
+            </label>
+            <div className="slider-wrap">
+              <span className="slider-min">$5K</span>
+              <input
+                type="range"
+                min={5000}
+                max={500000}
+                step={5000}
+                value={budget}
+                onChange={(e) => setBudget(Number(e.target.value))}
+                className="calc-slider"
+                style={{
+                  background: `linear-gradient(to right, ${COLORS.green} ${((budget - 5000) / 495000) * 100}%, ${COLORS.border} ${((budget - 5000) / 495000) * 100}%)`,
+                }}
+              />
+              <span className="slider-max">$500K</span>
+            </div>
+            <div className="budget-input-row">
+              <span className="budget-dollar">$</span>
+              <input
+                type="number"
+                min={5000}
+                max={500000}
+                step={5000}
+                value={budget}
+                onChange={(e) => {
+                  const v = Math.min(500000, Math.max(5000, Number(e.target.value)));
+                  setBudget(v);
+                }}
+                className="budget-input"
+              />
+              <span className="budget-period">/month</span>
+            </div>
+
+            <label className="field-label">Current Primary Channel</label>
+            <div className="select-wrap">
+              <select
+                value={channel}
+                onChange={(e) => setChannel(e.target.value as Channel)}
+                className="calc-select"
+              >
+                {CHANNELS.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+              <svg className="select-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke={COLORS.muted} strokeWidth="2" strokeLinecap="round"><path d="M3 4.5l3 3 3-3" /></svg>
+            </div>
+
+            <div className="card-actions">
+              <button className="btn-back" onClick={() => setStep(1)}>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 3l-4 4 4 4" /></svg>
+                Back
+              </button>
+              <button className="btn-next" onClick={() => setStep(3)}>
+                Next: Goal
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M5 3l4 4-4 4" /></svg>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ── Step 3: Your Goal ── */}
+        {step === 3 && (
+          <div className="calc-card fade-in">
+            <div className="card-step-label">Step 3 of 3</div>
+            <h2>What&apos;s your campaign goal?</h2>
+
+            <div className="goal-grid">
+              {GOALS.map((g) => (
+                <button
+                  key={g}
+                  className={`goal-card ${goal === g ? 'selected' : ''}`}
+                  onClick={() => setGoal(g)}
+                >
+                  <span className="goal-icon">{GOAL_ICONS[g]}</span>
+                  <span className="goal-label">{g}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="card-actions">
+              <button className="btn-back" onClick={() => setStep(2)}>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 3l-4 4 4 4" /></svg>
+                Back
+              </button>
+              <button className="btn-calculate" onClick={handleCalculate}>
+                Calculate ROI
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 8h8M8 4v8" /></svg>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ── Results ── */}
+        {showResults && results && (
+          <div ref={resultsRef} className="results-section fade-in">
+            <h2 className="results-heading">Your Personalized Growth Model</h2>
+            <p className="results-sub">
+              Based on a <strong>{category}</strong> app targeting{' '}
+              <strong>{regions.join(', ')}</strong> with{' '}
+              <strong>{formatBudget(budget)}/mo</strong> focused on{' '}
+              <strong>{goal}</strong>.
+            </p>
+
+            <div className="results-grid">
+              {/* Donut */}
+              <div className="result-card">
+                <h3>Recommended Channel Mix</h3>
+                <div className="chart-container donut-container">
+                  <Doughnut
+                    data={{
+                      labels: ['Programmatic DSP', 'Rewarded Playtime', 'OEM Discovery', 'Apple Search Ads'],
+                      datasets: [
+                        {
+                          data: [results.mix.dsp, results.mix.rewarded, results.mix.oem, results.mix.asa],
+                          backgroundColor: CHART_COLORS,
+                          borderWidth: 0,
+                          hoverBorderWidth: 2,
+                          hoverBorderColor: '#fff',
+                        },
+                      ],
+                    }}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      cutout: '62%',
+                      plugins: {
+                        legend: {
+                          position: 'bottom' as const,
+                          labels: {
+                            padding: 16,
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            font: { family: 'Poppins', size: 12, weight: 600 },
+                            color: COLORS.text,
+                          },
+                        },
+                        tooltip: {
+                          backgroundColor: '#fff',
+                          titleColor: COLORS.text,
+                          bodyColor: COLORS.muted,
+                          borderColor: COLORS.border,
+                          borderWidth: 1,
+                          padding: 12,
+                          titleFont: { family: 'Poppins', weight: 700, size: 13 },
+                          bodyFont: { family: 'Poppins', size: 12 },
+                          callbacks: {
+                            label: (ctx: { label?: string; parsed: number }) =>
+                              ` ${ctx.label}: ${ctx.parsed}%`,
+                          },
+                        },
+                        datalabels: {
+                          color: '#fff',
+                          font: { family: 'Poppins', weight: 700, size: 13 },
+                          formatter: (value: number) => `${value}%`,
+                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                          display: (ctx: any) =>
+                            (ctx.dataset.data[ctx.dataIndex] as number) >= 10,
+                        },
+                      },
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Bar */}
+              <div className="result-card">
+                <h3>Estimated CAC per Channel</h3>
+                <div className="chart-container bar-container">
+                  <Bar
+                    data={{
+                      labels: ['DSP', 'Rewarded', 'OEM', 'ASA'],
+                      datasets: [
+                        {
+                          data: [results.cac.dsp, results.cac.rewarded, results.cac.oem, results.cac.asa],
+                          backgroundColor: CHART_COLORS,
+                          borderRadius: 6,
+                          barThickness: 36,
+                        },
+                      ],
+                    }}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      indexAxis: 'y' as const,
+                      plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                          backgroundColor: '#fff',
+                          titleColor: COLORS.text,
+                          bodyColor: COLORS.muted,
+                          borderColor: COLORS.border,
+                          borderWidth: 1,
+                          padding: 12,
+                          titleFont: { family: 'Poppins', weight: 700, size: 13 },
+                          bodyFont: { family: 'Poppins', size: 12 },
+                          callbacks: {
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            label: (ctx: any) =>
+                              ` $${(ctx.parsed?.x ?? 0).toFixed(2)} CAC`,
+                          },
+                        },
+                        datalabels: {
+                          anchor: 'end' as const,
+                          align: 'end' as const,
+                          color: COLORS.text,
+                          font: { family: 'Poppins', weight: 700, size: 13 },
+                          formatter: (value: number) => `$${value.toFixed(2)}`,
+                        },
+                      },
+                      scales: {
+                        x: {
+                          grid: { color: COLORS.border, drawTicks: false },
+                          ticks: {
+                            font: { family: 'Poppins', size: 11 },
+                            color: COLORS.faint,
+                            callback: (value: string | number) => `$${value}`,
+                          },
+                          border: { display: false },
+                        },
+                        y: {
+                          grid: { display: false },
+                          ticks: {
+                            font: { family: 'Poppins', weight: 600, size: 12 },
+                            color: COLORS.text,
+                          },
+                          border: { display: false },
+                        },
+                      },
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* ROAS */}
+            <div className="roas-card">
+              <div className="roas-label">Estimated Blended ROAS</div>
+              <div className={`roas-value ${results.roas >= 3 ? 'roas-great' : results.roas >= 2 ? 'roas-good' : 'roas-ok'}`}>
+                {results.roas.toFixed(1)}x
+              </div>
+              <div className="roas-indicator">
+                {results.roas >= 3 ? 'Excellent' : results.roas >= 2 ? 'Strong' : 'Moderate'}
+                {' '}&mdash;{' '}
+                {results.roas >= 3
+                  ? 'well above industry benchmarks'
+                  : results.roas >= 2
+                    ? 'on par with top performers'
+                    : 'room to optimize channel mix'}
+              </div>
+            </div>
+
+            {/* Takeaways */}
+            <div className="summary-card">
+              <h3>Personalized Takeaways</h3>
+              <ul className="takeaway-list">
+                {results.takeaways.map((t, i) => (
+                  <li key={i}>{t}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Budget breakdown */}
+            <div className="breakdown-card">
+              <h3>Suggested Monthly Spend Breakdown</h3>
+              <div className="breakdown-grid">
+                {([
+                  ['Programmatic DSP', results.mix.dsp, COLORS.green],
+                  ['Rewarded Playtime', results.mix.rewarded, COLORS.purple],
+                  ['OEM Discovery', results.mix.oem, COLORS.dark],
+                  ['Apple Search Ads', results.mix.asa, COLORS.cyan],
+                ] as [string, number, string][]).map(([label, pct, color]) => (
+                  <div key={label} className="breakdown-item">
+                    <div className="breakdown-bar-bg">
+                      <div
+                        className="breakdown-bar-fill"
+                        style={{ width: `${pct}%`, background: color }}
+                      />
+                    </div>
+                    <div className="breakdown-meta">
+                      <span className="breakdown-label">{label}</span>
+                      <span className="breakdown-amount">
+                        {formatBudget(Math.round(budget * pct / 100))} <span className="breakdown-pct">({pct}%)</span>
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="cta-card">
+              <p>Want to validate these numbers with real campaign data?</p>
+              <a
+                href="https://appsamurai.com/contact"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-cta"
+              >
+                Talk to our growth team
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 8h8M9 5l3 3-3 3" /></svg>
+              </a>
+            </div>
+
+            {/* Recalculate */}
+            <div className="recalc-row">
+              <button
+                className="btn-recalc"
+                onClick={() => {
+                  setShowResults(false);
+                  setResults(null);
+                  setStep(1);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Start Over
+              </button>
+            </div>
+
+            <p className="disclaimer">
+              Estimates based on industry benchmarks and AppSamurai campaign data. Actual results may vary based on
+              creative quality, targeting, seasonality, and app-specific factors.
+            </p>
+          </div>
+        )}
+      </main>
+    </>
+  );
+}
+
+/* ── Styles ─────────────────────────────────────────────────────────── */
+
+const styles = `
+  /* Reset for this page */
+  .calc-main { padding-top: 0; }
+
+  /* Header */
+  .calc-header {
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    height: 60px;
+  }
+  .calc-header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .calc-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green);
+    transition: color .2s;
+  }
+  .calc-back:hover { color: var(--green-h); }
+  .calc-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .calc-logo-mark {
+    width: 26px;
+    height: 26px;
+    background: var(--green);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 700;
+  }
+  .calc-logo-divider {
+    color: var(--border);
+    font-weight: 300;
+    font-size: 18px;
+  }
+  .calc-logo-title {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* Hero */
+  .calc-hero {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 24px 32px;
+    text-align: center;
+  }
+  .calc-badge {
+    display: inline-block;
+    background: rgba(38,190,129,.08);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 7px 20px;
+    border-radius: 100px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border: 1px solid rgba(38,190,129,.15);
+  }
+  .calc-hero h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 14px;
+    letter-spacing: -.02em;
+  }
+  .calc-hero-sub {
+    font-size: clamp(.88rem, 1.4vw, 1rem);
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* Steps bar */
+  .steps-bar {
+    max-width: 280px;
+    margin: 0 auto 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 8px;
+  }
+  .step-line {
+    position: absolute;
+    top: 50%;
+    left: 28px;
+    right: 28px;
+    height: 2px;
+    background: var(--border);
+    transform: translateY(-50%);
+    z-index: 0;
+    border-radius: 1px;
+  }
+  .step-line-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 1px;
+    transition: width .4s cubic-bezier(.22,1,.36,1);
+  }
+  .step-dot {
+    position: relative;
+    z-index: 1;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-faint);
+    cursor: pointer;
+    transition: all .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step-dot.active {
+    border-color: var(--green);
+    color: var(--green);
+    box-shadow: 0 0 0 4px rgba(38,190,129,.1);
+  }
+  .step-dot.done {
+    border-color: var(--green);
+    background: var(--green);
+    color: #fff;
+  }
+
+  /* Card */
+  .calc-card {
+    max-width: 660px;
+    margin: 0 auto 32px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    border: 1px solid var(--border);
+  }
+  .card-step-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 8px;
+  }
+  .calc-card h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 28px;
+    letter-spacing: -.01em;
+  }
+
+  /* Fields */
+  .field-label {
+    display: block;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .field-label strong {
+    color: var(--green);
+    font-weight: 700;
+  }
+  .field-hint {
+    font-weight: 400;
+    color: var(--text-faint);
+    font-size: .8rem;
+  }
+  .field-error {
+    font-size: .78rem;
+    color: #F87171;
+    margin-top: 6px;
+    margin-bottom: 0;
+  }
+
+  /* Select */
+  .select-wrap {
+    position: relative;
+    margin-bottom: 24px;
+  }
+  .calc-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: .9rem;
+    font-family: inherit;
+    color: var(--text);
+    background: #fff;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .calc-select:focus {
+    outline: none;
+    border-color: var(--green);
+  }
+  .select-chevron {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  /* Chips */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .chip {
+    padding: 9px 18px;
+    border-radius: 29px;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    font-size: .82rem;
+    font-family: inherit;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .chip:hover {
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .chip.selected {
+    background: rgba(38,190,129,.08);
+    border-color: var(--green);
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* Slider */
+  .slider-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .slider-min, .slider-max {
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--text-faint);
+    flex-shrink: 0;
+    width: 40px;
+  }
+  .slider-max { text-align: right; }
+  .calc-slider {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .calc-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 3px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    cursor: pointer;
+    transition: transform .15s;
+  }
+  .calc-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+  .calc-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 3px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    cursor: pointer;
+  }
+
+  /* Budget input */
+  .budget-input-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 28px;
+    max-width: 200px;
+  }
+  .budget-dollar {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+  .budget-input {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: .9rem;
+    font-family: inherit;
+    color: var(--text);
+    width: 120px;
+  }
+  .budget-input:focus {
+    outline: none;
+    border-color: var(--green);
+  }
+  .budget-period {
+    font-size: .82rem;
+    color: var(--text-faint);
+  }
+
+  /* Goals */
+  .goal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .goal-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: inherit;
+  }
+  .goal-card:hover {
+    border-color: var(--green);
+    background: rgba(38,190,129,.03);
+  }
+  .goal-card.selected {
+    border-color: var(--green);
+    background: rgba(38,190,129,.06);
+    box-shadow: 0 0 0 3px rgba(38,190,129,.1);
+  }
+  .goal-icon {
+    font-size: 24px;
+  }
+  .goal-label {
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+  }
+
+  /* Card actions */
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
+  .btn-next, .btn-calculate {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green);
+    color: #fff;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: .88rem;
+    padding: 12px 28px;
+    border-radius: 29px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s;
+  }
+  .btn-next:hover, .btn-calculate:hover {
+    background: var(--green-h);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(38,190,129,.2);
+  }
+  .btn-next:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: .85rem;
+    padding: 10px 16px;
+    border-radius: 29px;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-back:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+  }
+
+  /* Animation */
+  .fade-in {
+    animation: fadeInUp .5s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Results */
+  .results-section {
+    max-width: 900px;
+    margin: 16px auto 0;
+    padding: 0 24px 64px;
+  }
+  .results-heading {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    font-weight: 700;
+    text-align: center;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -.01em;
+  }
+  .results-sub {
+    text-align: center;
+    font-size: .9rem;
+    color: var(--text-muted);
+    margin-bottom: 36px;
+    line-height: 1.7;
+  }
+  .results-sub strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .result-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 28px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    border: 1px solid var(--border);
+  }
+  .result-card h3 {
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .chart-container {
+    position: relative;
+    width: 100%;
+  }
+  .donut-container {
+    height: 280px;
+  }
+  .bar-container {
+    height: 240px;
+  }
+
+  /* ROAS */
+  .roas-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 36px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    border: 1px solid var(--border);
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .roas-label {
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .roas-value {
+    font-size: clamp(2.4rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .roas-great { color: var(--green); }
+  .roas-good { color: #26BE81; }
+  .roas-ok { color: #f4cb00; }
+  .roas-indicator {
+    font-size: .88rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* Summary */
+  .summary-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 32px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .summary-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .takeaway-list {
+    list-style: none;
+    padding: 0;
+  }
+  .takeaway-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 14px;
+    font-size: .88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .takeaway-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  /* Breakdown */
+  .breakdown-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 32px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .breakdown-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .breakdown-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .breakdown-bar-bg {
+    height: 8px;
+    background: var(--bg-alt);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .breakdown-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width .6s cubic-bezier(.22,1,.36,1);
+  }
+  .breakdown-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .breakdown-label {
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .breakdown-amount {
+    font-size: .85rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .breakdown-pct {
+    font-weight: 500;
+    color: var(--text-faint);
+    font-size: .78rem;
+  }
+
+  /* CTA */
+  .cta-card {
+    background: var(--bg-alt);
+    border-radius: 10px;
+    padding: 36px;
+    text-align: center;
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .cta-card p {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green);
+    color: #fff;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: .92rem;
+    padding: 14px 32px;
+    border-radius: 29px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s;
+    text-decoration: none;
+  }
+  .btn-cta:hover {
+    background: var(--green-h);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(38,190,129,.2);
+  }
+
+  /* Recalculate */
+  .recalc-row {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .btn-recalc {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: .85rem;
+    padding: 10px 24px;
+    border-radius: 29px;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-recalc:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+  }
+
+  /* Disclaimer */
+  .disclaimer {
+    text-align: center;
+    font-size: .75rem;
+    color: var(--text-faint);
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .calc-card { padding: 28px 20px; }
+    .results-grid { grid-template-columns: 1fr; }
+    .goal-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .donut-container { height: 260px; }
+    .bar-container { height: 220px; }
+    .calc-header-inner { padding: 0 16px; }
+    .calc-back span { display: none; }
+    .calc-logo-title { display: none; }
+    .calc-logo-divider { display: none; }
+  }
+  @media (max-width: 480px) {
+    .goal-grid { grid-template-columns: 1fr; }
+    .chips { gap: 6px; }
+    .chip { padding: 7px 14px; font-size: .78rem; }
+  }
+`;
