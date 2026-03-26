@@ -419,13 +419,15 @@ export default function PlaybookContent({
     }
 
 
-    // Force all chart instances to resize+update after creation
-    // Chart.js 4.x defers initial render to rAF which can get dropped in React
-    requestAnimationFrame(() => {
+    // Force all chart instances to resize+update — retry with delays
+    const forceCharts = () => {
       Object.values(Chart.instances).forEach((inst: any) => {
         try { inst.resize(); inst.update('none'); } catch (_) {}
       });
-    });
+    };
+    requestAnimationFrame(forceCharts);
+    setTimeout(forceCharts, 200);
+    setTimeout(forceCharts, 800);
 
     } catch (err) {
       console.error('[PlaybookCharts] initAllCharts failed:', err);
@@ -769,12 +771,16 @@ export default function PlaybookContent({
     renderRetentionChart('d7');
     renderTrendsChart('revenue');
 
-    // Force all chart instances to resize+update
-    requestAnimationFrame(() => {
+    // Force all chart instances to resize+update — retry 3 times with increasing delays
+    // because React may not have painted gated content yet
+    const forceAllCharts = () => {
       Object.values(Chart.instances).forEach((inst: any) => {
         try { inst.resize(); inst.update('none'); } catch (_) {}
       });
-    });
+    };
+    requestAnimationFrame(forceAllCharts);
+    setTimeout(forceAllCharts, 200);
+    setTimeout(forceAllCharts, 800);
 
   }, [externalTooltipHandler]);
 
