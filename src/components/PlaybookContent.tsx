@@ -1345,36 +1345,38 @@ export default function PlaybookContent({
 
       {/* HERO */}
       <div className="hero-wrap">
-        <section className="hero" id="hero">
-          <div className="rv">
-            <span className="hero-badge">AppSamurai Industry Report 2026</span>
-            <h1>
-              Scale <em>Smarter</em> in 2026
-            </h1>
-            <p style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1rem,2vw,1.3rem)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px', letterSpacing: '-.01em' }}>
-              2026 Mobile Growth Strategy Guide
-            </p>
-            <p className="hero-sub">
-              The definitive strategy guide for Rewarded Playtime, Programmatic DSP,
-              OEM Discovery, and Apple Search Ads — built for growth teams who
-              need to scale smarter in 2026.
-            </p>
-            <div className="hero-cta">
-              <button
-                className="btn-primary"
-                onClick={() => scrollTo('toc')}
-              >
-                Explore the Guide <span>&darr;</span>
-              </button>
-              <button
-                className="btn-outline"
-                onClick={() => { trackEvent('cta_click', 'hero', { destination: 'pdf' }); scrollTo('emailGate'); }}
-              >
-                Download PDF
-              </button>
+        <div className="hero-wrap">
+          <section className="hero" id="hero">
+            <div className="rv">
+              <span className="hero-badge">AppSamurai Industry Report 2026</span>
+              <h1>
+                Scale <em>Smarter</em> in 2026
+              </h1>
+              <p style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1rem,2vw,1.3rem)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px', letterSpacing: '-.01em' }}>
+                2026 Mobile Growth Strategy Guide
+              </p>
+              <p className="hero-sub">
+                The definitive strategy guide for Rewarded Playtime, Programmatic DSP,
+                OEM Discovery, and Apple Search Ads — built for growth teams who
+                need to scale smarter in 2026.
+              </p>
+              <div className="hero-cta">
+                <button
+                  className="btn-primary"
+                  onClick={() => scrollTo('toc')}
+                >
+                  Explore the Guide <span>&darr;</span>
+                </button>
+                <button
+                  className="btn-outline"
+                  onClick={() => { trackEvent('cta_click', 'hero', { destination: 'pdf' }); scrollTo('emailGate'); }}
+                >
+                  Download PDF
+                </button>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
 
       {/* BENTO GRID */}
