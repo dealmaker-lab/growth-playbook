@@ -8,3 +8,4 @@ export { default as TrendsChart } from './TrendsChart';
 export { default as MarketShareChart } from './MarketShareChart';
 export { default as OEMFormatChart } from './OEMFormatChart';
 export { default as ASABubbleChart } from './ASABubbleChart';
+export { default as TapNationChart } from './TapNationChart';

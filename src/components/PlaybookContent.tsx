@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Chart, registerables } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   DoughnutChart,
   ProgrammaticChart,
@@ -14,14 +12,8 @@ import {
   MarketShareChart,
   OEMFormatChart,
   ASABubbleChart,
+  TapNationChart,
 } from './charts';
-
-// Chart.js only used for TapNation case study chart
-Chart.register(...registerables, ChartDataLabels);
-
-/* ── Chart color constants (used by TapNation Chart.js chart) ── */
-const GRN = '#26BE81';
-const PUR = '#af9cff';
 
 interface PlaybookContentProps {
   initialUnlocked: boolean;
@@ -42,7 +34,6 @@ export default function PlaybookContent({
   const lastY = useRef(0);
   const sessionId = useRef('');
   const maxScrollDepth = useRef(0);
-  const tapNationInitRef = useRef(false);
 
   const emailRef = useRef<HTMLInputElement>(null);
   const gateFormRef = useRef<HTMLDivElement>(null);
@@ -103,93 +94,7 @@ export default function PlaybookContent({
     return () => obs.disconnect();
   }, [trackEvent]);
 
-  /* ── Init TapNation Chart.js chart ── */
-  const externalTooltipHandler = useCallback(
-    (context: { tooltip: any; chart: any }) => {
-      let el = document.getElementById('chartTooltip');
-      if (!el) {
-        el = document.createElement('div');
-        el.id = 'chartTooltip';
-        el.className = 'chart-tooltip';
-        document.body.appendChild(el);
-      }
-      const tooltip = context.tooltip;
-      if (tooltip.opacity === 0) {
-        el.classList.remove('show');
-        return;
-      }
-      let html = '<div class="tt-title">' + tooltip.title[0] + '</div>';
-      tooltip.body.forEach((b: any, i: number) => {
-        const colors = tooltip.labelColors[i];
-        html += `<div class="tt-row"><span class="tt-dot" style="background:${colors.backgroundColor}"></span>${b.lines[0]}</div>`;
-      });
-      el.innerHTML = html;
-      el.classList.add('show');
-      const pos = context.chart.canvas.getBoundingClientRect();
-      el.style.left = pos.left + tooltip.caretX + 'px';
-      el.style.top =
-        pos.top + tooltip.caretY - el.offsetHeight - 10 + 'px';
-    },
-    []
-  );
-
-  const initTapNationChart = useCallback(() => {
-    if (tapNationInitRef.current) return;
-
-    const tooltipOpts = {
-      enabled: false,
-      external: externalTooltipHandler,
-      position: 'nearest' as const,
-    };
-
-    Chart.defaults.font.family = "'Poppins',sans-serif";
-    Chart.defaults.font.size = 12;
-    Chart.defaults.animation = { duration: 1000, easing: 'easeOutQuart' as const };
-    Chart.defaults.plugins.datalabels = { display: false } as any;
-
-    const cT = document.getElementById('chartTapNation') as HTMLCanvasElement;
-    if (cT) {
-      tapNationInitRef.current = true;
-      new Chart(cT, {
-        type: 'doughnut',
-        data: {
-          labels: ['OEM Discovery', 'Programmatic', 'Organic Uplift'],
-          datasets: [
-            {
-              data: [45, 35, 20],
-              backgroundColor: [PUR, GRN, 'rgba(255,255,255,.08)'],
-              borderWidth: 0,
-              hoverOffset: 6,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          cutout: '55%',
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: {
-              position: 'bottom',
-              labels: {
-                color: 'rgba(255,255,255,.45)',
-                padding: 12,
-                usePointStyle: true,
-                pointStyle: 'circle',
-                font: { size: 10 },
-              },
-            },
-            datalabels: {
-              display: true,
-              color: '#fff',
-              font: { weight: 'bold', size: 12 },
-              formatter: (v: number) => v + '%',
-            },
-          },
-        },
-      });
-    }
-  }, [externalTooltipHandler]);
+  /* ── TapNation now uses AntV G2 component ── */
 
   /* ── Scroll Reveal with Stagger ── */
   const initReveal = useCallback(() => {
@@ -343,10 +248,6 @@ export default function PlaybookContent({
       updateProgress();
       updateNav();
 
-      // Hide Chart.js tooltip on scroll (TapNation only)
-      const tt = document.getElementById('chartTooltip');
-      if (tt) tt.classList.remove('show');
-
       // Lead bar
       const bar = document.getElementById('leadBar');
       const gate = document.getElementById('emailGate');
@@ -387,7 +288,6 @@ export default function PlaybookContent({
         requestAnimationFrame(() => {
           initReveal();
           initCounters();
-          initTapNationChart();
         });
       });
     }
@@ -397,11 +297,9 @@ export default function PlaybookContent({
   const unlockGatedContent = useCallback(
     (scroll: boolean) => {
       setGateUnlocked(true);
-      // Wait for React re-render + display:block paint, then init remaining Chart.js charts
       setTimeout(() => {
         initReveal();
         initCounters();
-        initTapNationChart();
       }, 500);
       if (scroll) {
         setTimeout(() => {
@@ -411,7 +309,7 @@ export default function PlaybookContent({
         }, 500);
       }
     },
-    [initReveal, initCounters, initTapNationChart]
+    [initReveal, initCounters]
   );
 
   /* ── Email gate submit ── */
@@ -1243,22 +1141,24 @@ export default function PlaybookContent({
           </div>
         </section>
 
-        {/* TapNation Case Study */}
+        {/* TapNation Case Study — Light Mode */}
         <section className="sec sec-w">
-          <div className="wrap"><div className="case-card rv">
-            <div>
-              <div className="case-tag">Case Study</div>
-              <h4 style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--purple)', marginBottom: '4px', fontFamily: 'var(--font-h)' }}>TapNation</h4>
-              <h4>How TapNation Achieved ROAS+ via AppSamurai&apos;s OEM (AppDiscovery) Campaign</h4>
-              <p>TapNation leveraged AppSamurai&apos;s OEM channel to reach users at the device level, achieving strong ROAS targets through pre-install strategies and on-device discovery.</p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', marginTop: '16px' }}>
-                <div style={{ background: 'rgba(175,156,255,.12)', borderRadius: '12px', padding: '16px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--purple)' }}>45%</div><div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.5)' }}>OEM Discovery Share</div></div>
-                <div style={{ background: 'rgba(175,156,255,.12)', borderRadius: '12px', padding: '16px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--purple)' }}>35%</div><div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.5)' }}>Programmatic Share</div></div>
-                <div style={{ background: 'rgba(175,156,255,.12)', borderRadius: '12px', padding: '16px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--green)' }}>ROAS+</div><div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.5)' }}>Target Achieved</div></div>
+          <div className="wrap">
+            <div className="chart-card-new rv" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', alignItems: 'center' }}>
+              <div>
+                <span className="insight-badge" style={{ marginBottom: '8px', display: 'inline-block', background: 'rgba(175,156,255,.08)', color: 'var(--purple)', borderColor: 'rgba(175,156,255,.2)' }}>Case Study</span>
+                <h4 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--purple)', marginBottom: '4px', fontFamily: 'var(--font-h)' }}>TapNation</h4>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '8px', color: 'var(--text)' }}>How TapNation Achieved ROAS+ via AppSamurai&apos;s OEM Campaign</h4>
+                <p style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '16px' }}>TapNation leveraged AppSamurai&apos;s OEM channel to reach users at the device level, achieving strong ROAS targets through pre-install strategies and on-device discovery.</p>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
+                  <div style={{ background: 'var(--purple-l)', borderRadius: '10px', padding: '14px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--purple)' }}>45%</div><div style={{ fontSize: '.72rem', color: 'var(--text-muted)' }}>OEM Discovery</div></div>
+                  <div style={{ background: 'var(--purple-l)', borderRadius: '10px', padding: '14px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--purple)' }}>35%</div><div style={{ fontSize: '.72rem', color: 'var(--text-muted)' }}>Programmatic</div></div>
+                  <div style={{ background: 'var(--green-l)', borderRadius: '10px', padding: '14px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--green)' }}>ROAS+</div><div style={{ fontSize: '.72rem', color: 'var(--text-muted)' }}>Target Achieved</div></div>
+                </div>
               </div>
+              <div><TapNationChart /></div>
             </div>
-            <div className="case-chart"><canvas id="chartTapNation" height={200} ></canvas></div>
-          </div></div>
+          </div>
         </section>
 
         {/* CHAPTER 4 */}
@@ -1349,14 +1249,14 @@ export default function PlaybookContent({
 
         <section className="sec sec-w">
           <div className="wrap rv">
-            <div style={{ background: 'linear-gradient(135deg,var(--dark2),#0a1628)', borderRadius: 'var(--r-lg)', padding: '40px', display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '32px', alignItems: 'center', color: '#fff' }}>
+            <div style={{ background: 'var(--bg-alt)', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)', padding: '32px', display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '28px', alignItems: 'center' }}>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 700, color: 'var(--ch4)', lineHeight: 1.2, marginBottom: '8px' }}>DSP + OEM<br />+ ASA</div>
-                <span className="insight-badge" style={{ background: 'rgba(0,244,244,.1)', color: 'var(--ch4)', borderColor: 'rgba(0,244,244,.2)' }}>Cross-Channel</span>
+                <div style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1.2rem,2.5vw,1.6rem)', fontWeight: 700, color: 'var(--green)', lineHeight: 1.2, marginBottom: '8px' }}>DSP + OEM<br />+ ASA</div>
+                <span className="insight-badge">Cross-Channel</span>
               </div>
               <div>
-                <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, marginBottom: '8px' }}>4.5 The Demand Capture Flywheel</h4>
-                <p style={{ color: 'rgba(255,255,255,.55)', fontSize: '.88rem', lineHeight: 1.7 }}>When you run high-impact campaigns via DSP or OEM, brand searches surge. By increasing your ASA presence during these periods, you capture 100% of that &ldquo;manufactured&rdquo; demand at the most efficient price point. ASA does not exist in a vacuum — it is the net that catches the demand created by your other channels.</p>
+                <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.05rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>4.5 The Demand Capture Flywheel</h4>
+                <p style={{ color: 'var(--text-muted)', fontSize: '.88rem', lineHeight: 1.7 }}>When you run high-impact campaigns via DSP or OEM, brand searches surge. By increasing your ASA presence during these periods, you capture 100% of that &ldquo;manufactured&rdquo; demand at the most efficient price point. ASA does not exist in a vacuum — it is the net that catches the demand created by your other channels.</p>
               </div>
             </div>
           </div>
