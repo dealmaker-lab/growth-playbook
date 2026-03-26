@@ -378,14 +378,14 @@ export default function PlaybookContent({
             {
               label: 'Traditional',
               data: [35, 40, 25, 0],
-              backgroundColor: 'rgba(38,190,129,.4)',
+              backgroundColor: 'rgba(38,190,129,.35)',
               borderRadius: 3,
               barPercentage: 0.6,
             },
             {
-              label: 'Optimized',
+              label: 'Optimized (AppSamurai)',
               data: [50, 25, 15, 10],
-              backgroundColor: [GRN, PUR, BLU, CYN],
+              backgroundColor: GRN,
               borderRadius: 3,
               barPercentage: 0.6,
             },
