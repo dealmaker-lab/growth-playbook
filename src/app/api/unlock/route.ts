@@ -105,12 +105,12 @@ export async function POST(request: NextRequest) {
     const user_agent =
       body.user_agent || request.headers.get('user-agent') || null;
 
-    // ── Upsert into Supabase ──
+    // ── Insert into Supabase (ignore duplicate emails) ──
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
-    const { error: dbError } = await supabase.from('playbook_leads').upsert(
+    const { error: dbError } = await supabase.from('playbook_leads').insert(
       {
         email,
         source: 'gate',
@@ -120,13 +120,12 @@ export async function POST(request: NextRequest) {
         utm_source,
         utm_medium,
         utm_campaign,
-        created_at: new Date().toISOString(),
-      },
-      { onConflict: 'email' }
+      }
     );
 
-    if (dbError) {
-      console.error('[unlock] Supabase upsert error:', dbError);
+    // Duplicate email (23505) is fine — treat as success (returning visitor)
+    if (dbError && dbError.code !== '23505') {
+      console.error('[unlock] Supabase insert error:', dbError);
       return NextResponse.json(
         { success: false, error: 'Something went wrong. Please try again.' },
         { status: 500 }
