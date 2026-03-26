@@ -11,20 +11,20 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'AppSamurai 2026 Growth Playbook',
+  title: 'AppSamurai 2026 Mobile Growth Strategy Guide',
   icons: { icon: '/favicon.ico' },
   description:
-    'The definitive playbook for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads — built for growth teams who need to scale smarter in 2026.',
+    'The definitive strategy guide for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads — built for growth teams who need to scale smarter in 2026.',
   openGraph: {
-    title: 'AppSamurai 2026 Growth Playbook',
+    title: 'AppSamurai 2026 Mobile Growth Strategy Guide',
     description:
-      'The definitive playbook for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads — built for growth teams who need to scale smarter in 2026.',
+      'The definitive strategy guide for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads — built for growth teams who need to scale smarter in 2026.',
     type: 'website',
     images: ['/cover.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AppSamurai 2026 Growth Playbook',
+    title: 'AppSamurai 2026 Mobile Growth Strategy Guide',
     description:
       'The definitive playbook for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads.',
     images: ['/cover.png'],

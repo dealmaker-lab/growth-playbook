@@ -1250,13 +1250,20 @@ export default function PlaybookContent({
       };
     });
 
-    // If already unlocked, init gated content
+    // If already unlocked (returning visitor), init gated content
+    // Use longer delay to ensure CSS transition from gated-locked to unlocked completes
+    // (max-height:0 → max-height:none needs time for Chart.js to measure canvas)
     if (gateUnlocked) {
       setTimeout(() => {
         initReveal();
         initCounters();
         initGatedCharts();
-      }, 100);
+        // Force resize after charts render (canvas may have wrong dimensions initially)
+        setTimeout(() => {
+          if (retInstRef.current) retInstRef.current.resize();
+          if (trendInstRef.current) trendInstRef.current.resize();
+        }, 300);
+      }, 500);
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -1414,10 +1421,10 @@ export default function PlaybookContent({
               Scale <em>Smarter</em> in 2026
             </h1>
             <p style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1rem,2vw,1.3rem)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px', letterSpacing: '-.01em' }}>
-              The 2026 Growth Playbook
+              2026 Mobile Growth Strategy Guide
             </p>
             <p className="hero-sub">
-              The definitive playbook for Rewarded Playtime, Programmatic DSP,
+              The definitive strategy guide for Rewarded Playtime, Programmatic DSP,
               OEM Discovery, and Apple Search Ads — built for growth teams who
               need to scale smarter in 2026.
             </p>
@@ -1426,7 +1433,7 @@ export default function PlaybookContent({
                 className="btn-primary"
                 onClick={() => scrollTo('toc')}
               >
-                Explore the Playbook <span>&darr;</span>
+                Explore the Guide <span>&darr;</span>
               </button>
               <button
                 className="btn-outline"
@@ -1534,7 +1541,7 @@ export default function PlaybookContent({
       <section className="toc" id="toc">
         <div className="wrap">
           <div className="toc-label rv">What&apos;s Inside</div>
-          <h2 className="rv">The Complete 2026 Growth Playbook</h2>
+          <h2 className="rv">The Complete 2026 Mobile Growth Strategy Guide</h2>
           <div className="toc-grid">
             <a href="#ch1" className="toc-card rv"><div className="toc-num">01</div><h3>The Programmatic Engine</h3><p>Scaling beyond walled gardens with AI, transparency, creative intelligence, and bid-level precision.</p></a>
             <a href="#ch2" className="toc-card rv"><div className="toc-num">02</div><h3>Rewarded Models</h3><p>Mastering the Value-Exchange Economy through Rewarded Playtime and Offerwalls.</p></a>
@@ -1848,7 +1855,7 @@ export default function PlaybookContent({
           ) : (
             <>
               <div className="gate-icon">&#128274;</div>
-              <h2>Unlock the Full 2026 Playbook</h2>
+              <h2>Unlock the Full 2026 Strategy Guide</h2>
               <p>You&apos;ve seen Chapter 1. Get instant access to all 4 chapters — including Rewarded Models, OEM Discovery, ASA strategies, and advanced growth tactics.</p>
               <div className="gate-form" id="gateForm" ref={gateFormRef}>
                 <input
@@ -2400,7 +2407,7 @@ export default function PlaybookContent({
 
       {/* LEAD BAR */}
       <div className="lead-bar" id="leadBar">
-        <p>Get the full 2026 Mobile Growth Playbook</p>
+        <p>Get the full 2026 Mobile Growth Strategy Guide</p>
         <button className="btn-primary" onClick={() => { trackEvent('cta_click', 'lead_bar', { destination: 'gate' }); scrollTo('emailGate'); }}>Unlock Full Report</button>
       </div>
     </>
