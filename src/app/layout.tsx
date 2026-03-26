@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     description:
       'The definitive strategy guide for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads — built for growth teams who need to scale smarter in 2026.',
     type: 'website',
-    images: ['/cover.png'],
+    images: ['/hero-bg.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'AppSamurai 2026 Mobile Growth Strategy Guide',
     description:
       'The definitive playbook for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads.',
-    images: ['/cover.png'],
+    images: ['/hero-bg.png'],
   },
 };
 
