@@ -1237,18 +1237,7 @@ export default function PlaybookContent({
     initSideNav();
     initAllCharts();
 
-    // Logo fallback
-    document.querySelectorAll('.logo-item img').forEach((img) => {
-      (img as HTMLImageElement).onerror = function () {
-        const span = document.createElement('span');
-        span.className = 'logo-item--text';
-        span.textContent = (this as HTMLImageElement).alt;
-        (this as HTMLImageElement).parentNode!.replaceChild(
-          span,
-          this as HTMLImageElement
-        );
-      };
-    });
+    // Logo fallback removed — all logos are now text-only
 
     // If already unlocked (returning visitor), init gated content
     // Use longer delay to ensure CSS transition from gated-locked to unlocked completes
@@ -1480,24 +1469,24 @@ export default function PlaybookContent({
           <p className="logo-wall-label rv">Trusted by leading brands worldwide</p>
           <div className="logo-scroll">
             <div className="logo-track">
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/ea/999999" alt="EA" loading="lazy" /></span>
+              <span className="logo-item logo-item--text">EA</span>
               <span className="logo-item logo-item--text">Rovio</span>
               <span className="logo-item logo-item--text">TapNation</span>
               <span className="logo-item logo-item--text">Shahid</span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/hbo/999999" alt="HBO Max" loading="lazy" /></span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/nike/999999" alt="Nike" loading="lazy" /></span>
+              <span className="logo-item logo-item--text">HBO Max</span>
+              <span className="logo-item logo-item--text">Nike</span>
               <span className="logo-item logo-item--text">Gram Games</span>
               <span className="logo-item logo-item--text">Domino&apos;s</span>
               <span className="logo-item logo-item--text">Superplay</span>
               <span className="logo-item logo-item--text">Rollic</span>
               <span className="logo-item logo-item--text">Hepsiburada</span>
               {/* Duplicate for seamless scroll */}
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/ea/999999" alt="EA" loading="lazy" /></span>
+              <span className="logo-item logo-item--text">EA</span>
               <span className="logo-item logo-item--text">Rovio</span>
               <span className="logo-item logo-item--text">TapNation</span>
               <span className="logo-item logo-item--text">Shahid</span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/hbo/999999" alt="HBO Max" loading="lazy" /></span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/nike/999999" alt="Nike" loading="lazy" /></span>
+              <span className="logo-item logo-item--text">HBO Max</span>
+              <span className="logo-item logo-item--text">Nike</span>
               <span className="logo-item logo-item--text">Gram Games</span>
               <span className="logo-item logo-item--text">Domino&apos;s</span>
               <span className="logo-item logo-item--text">Superplay</span>
@@ -1507,27 +1496,27 @@ export default function PlaybookContent({
           </div>
           <div className="logo-scroll" style={{ ['--scroll-dir' as any]: 'reverse' }}>
             <div className="logo-track">
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/samsung/999999" alt="Samsung" loading="lazy" /></span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/oppo/999999" alt="OPPO" loading="lazy" /></span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/nokia/999999" alt="Nokia" loading="lazy" /></span>
+              <span className="logo-item logo-item--text">Samsung</span>
+              <span className="logo-item logo-item--text">OPPO</span>
+              <span className="logo-item logo-item--text">Nokia</span>
               <span className="logo-item logo-item--text">T-Mobile</span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/verizon/999999" alt="Verizon" loading="lazy" /></span>
+              <span className="logo-item logo-item--text">Verizon</span>
               <span className="logo-item logo-item--text">AT&amp;T</span>
               <span className="logo-item logo-item--text">InMobi</span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/unity/999999" alt="Unity" loading="lazy" /></span>
+              <span className="logo-item logo-item--text">Unity</span>
               <span className="logo-item logo-item--text">AppLovin</span>
               <span className="logo-item logo-item--text">Taboola</span>
               <span className="logo-item logo-item--text">Smaato</span>
               <span className="logo-item logo-item--text">Beymen</span>
               {/* Duplicate */}
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/samsung/999999" alt="Samsung" loading="lazy" /></span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/oppo/999999" alt="OPPO" loading="lazy" /></span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/nokia/999999" alt="Nokia" loading="lazy" /></span>
+              <span className="logo-item logo-item--text">Samsung</span>
+              <span className="logo-item logo-item--text">OPPO</span>
+              <span className="logo-item logo-item--text">Nokia</span>
               <span className="logo-item logo-item--text">T-Mobile</span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/verizon/999999" alt="Verizon" loading="lazy" /></span>
+              <span className="logo-item logo-item--text">Verizon</span>
               <span className="logo-item logo-item--text">AT&amp;T</span>
               <span className="logo-item logo-item--text">InMobi</span>
-              <span className="logo-item"><img src="https://cdn.simpleicons.org/unity/999999" alt="Unity" loading="lazy" /></span>
+              <span className="logo-item logo-item--text">Unity</span>
               <span className="logo-item logo-item--text">AppLovin</span>
               <span className="logo-item logo-item--text">Taboola</span>
               <span className="logo-item logo-item--text">Smaato</span>

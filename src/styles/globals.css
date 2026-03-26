@@ -311,9 +311,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .logo-track{display:flex;gap:0;animation:logoScroll 40s linear infinite;width:max-content}
 .logo-scroll[style*="reverse"] .logo-track{animation-direction:reverse}
 .logo-item{flex-shrink:0;padding:8px 36px;display:flex;align-items:center;justify-content:center;height:48px}
-.logo-item img{height:auto;width:100px;object-fit:contain;opacity:.4;transition:opacity .3s,transform .3s}
-.logo-item img:hover{opacity:.8;transform:scale(1.05)}
-.logo-item--text{font-family:var(--font-h);font-size:18px;font-weight:700;color:#bbb;white-space:nowrap;transition:color .3s;display:flex;align-items:center;height:48px;padding:8px 40px}
+.logo-item--text{font-family:var(--font-h);font-weight:700;font-size:1.1rem;color:#bbb;letter-spacing:-0.02em;white-space:nowrap;min-width:100px;text-align:center;transition:color .3s;display:flex;align-items:center;height:48px;padding:8px 40px}
 .logo-item--text:hover{color:#555}
 @keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
