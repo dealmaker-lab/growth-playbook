@@ -798,11 +798,8 @@ export default function PlaybookContent({
       }));
 
       if (retInstRef.current) {
-        retInstRef.current.data.datasets = datasets as any;
-        (retInstRef.current.options.scales as any).y.min = r.min;
-        (retInstRef.current.options.scales as any).y.max = r.max;
-        retInstRef.current.update();
-        return;
+        retInstRef.current.destroy();
+        retInstRef.current = null;
       }
 
       retInstRef.current = new Chart(c, {
@@ -892,14 +889,8 @@ export default function PlaybookContent({
       ];
 
       if (trendInstRef.current) {
-        trendInstRef.current.data.datasets = datasets as any;
-        (trendInstRef.current.options.plugins!.datalabels as any).formatter =
-          formatter;
-        (
-          trendInstRef.current.options.scales!.y as any
-        ).ticks.callback = formatter;
-        trendInstRef.current.update();
-        return;
+        trendInstRef.current.destroy();
+        trendInstRef.current = null;
       }
 
       trendInstRef.current = new Chart(c, {
@@ -1615,7 +1606,7 @@ export default function PlaybookContent({
               <p style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.75 }}>
                 iOS users respond well to a sound-off design (+24%), that open with close-up shots (+16%) of gameplay (+45%), introduce free-offer text early (+30%), and feature a large centered logo (+29%) at the end paired with the CTA text &apos;Play Now!&apos; (+14%).
               </p>
-              <p style={{ fontSize: '.7rem', color: 'var(--text-faint)', marginTop: '10px' }}>Source: Alison.Ai</p>
+              <p style={{ fontSize: '.7rem', color: 'var(--text-faint)', marginTop: '10px' }}>Source: Adjust</p>
             </div>
           </div>
 
@@ -1632,7 +1623,7 @@ export default function PlaybookContent({
               <p style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.75 }}>
                 Android users respond well to videos that use sound effects (+12%), split-screen (+51%) scenes showcasing gameplay (+13%), and multiple scenes (+42%), with an end card that omits a CTA (+31%) but features falling coins (+11%).
               </p>
-              <p style={{ fontSize: '.7rem', color: 'var(--text-faint)', marginTop: '10px' }}>Source: Alison.Ai</p>
+              <p style={{ fontSize: '.7rem', color: 'var(--text-faint)', marginTop: '10px' }}>Source: Adjust</p>
             </div>
           </div>
 
@@ -1678,23 +1669,7 @@ export default function PlaybookContent({
         </div></div>
       </section>
 
-      {/* Data Table: Gaming Sessions YoY */}
-      <section className="sec sec-l">
-        <div className="wrap">
-          <h3 style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '1.1rem', marginBottom: '16px', color: 'var(--text)' }} className="rv">Gaming Sessions YoY by Region</h3>
-          <table className="data-table rv">
-            <thead><tr><th>Rank</th><th>Region</th><th>Sessions YoY</th><th>Trend</th></tr></thead>
-            <tbody>
-              <tr><td><span className="rank-badge">1</span></td><td>MENA</td><td><span className="delta pos">&#9650; +7%</span></td><td><div style={{ background: 'rgba(38,190,129,.3)', width: '70%', height: '14px', borderRadius: '4px' }}></div></td></tr>
-              <tr><td><span className="rank-badge" style={{ background: 'var(--purple)' }}>2</span></td><td>Europe</td><td><span className="delta pos">&#9650; +3%</span></td><td><div style={{ background: 'rgba(38,190,129,.3)', width: '30%', height: '14px', borderRadius: '4px' }}></div></td></tr>
-              <tr><td><span className="rank-badge" style={{ background: 'var(--cyan)' }}>3</span></td><td>Global</td><td><span className="delta pos">&#9650; +1%</span></td><td><div style={{ background: 'rgba(38,190,129,.3)', width: '10%', height: '14px', borderRadius: '4px' }}></div></td></tr>
-              <tr><td><span className="rank-badge" style={{ background: 'var(--yellow)' }}>4</span></td><td>LATAM</td><td><span className="delta pos">&#9650; +0.4%</span></td><td><div style={{ background: 'rgba(244,203,0,.3)', width: '5%', height: '14px', borderRadius: '4px' }}></div></td></tr>
-              <tr><td><span className="rank-badge" style={{ background: 'var(--text-faint)' }}>5</span></td><td>APAC</td><td><span className="delta neg">&#9660; -1%</span></td><td><div style={{ background: 'rgba(248,113,113,.3)', width: '10%', height: '14px', borderRadius: '4px' }}></div></td></tr>
-              <tr><td><span className="rank-badge" style={{ background: 'var(--delta-neg)' }}>6</span></td><td>N. America</td><td><span className="delta neg">&#9660; -2%</span></td><td><div style={{ background: 'rgba(248,113,113,.3)', width: '20%', height: '14px', borderRadius: '4px' }}></div></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      {/* Gaming Sessions YoY table removed per team feedback */}
 
       {/* Paycell Case Study Banner */}
       <section className="sec sec-w">
