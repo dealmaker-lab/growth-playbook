@@ -78,6 +78,7 @@ export default function PlaybookContent({
   const [gateLoading, setGateLoading] = useState(false);
   const [gateError, setGateError] = useState<string | false>(false);
   const [gateSuccess, setGateSuccess] = useState(false);
+  const [gateLiftingDone, setGateLiftingDone] = useState(false);
   const [retTab, setRetTab] = useState('d7');
   const [trendTab, setTrendTab] = useState('revenue');
 
@@ -302,6 +303,76 @@ export default function PlaybookContent({
               },
               grid: { display: false },
             },
+          },
+        },
+      });
+    }
+
+    /* DSP Budget Flow — Grouped Bar (Ch1) */
+    const cBF = document.getElementById('chartBudgetFlow') as HTMLCanvasElement;
+    if (cBF) {
+      new Chart(cBF, {
+        type: 'bar',
+        data: {
+          labels: ['Programmatic', 'Social', 'Search', 'OEM'],
+          datasets: [
+            {
+              label: 'Traditional',
+              data: [35, 40, 25, 0],
+              backgroundColor: 'rgba(38,190,129,.4)',
+              borderRadius: 3,
+              barPercentage: 0.6,
+            },
+            {
+              label: 'Optimized',
+              data: [50, 25, 15, 10],
+              backgroundColor: [GRN, PUR, BLU, CYN],
+              borderRadius: 3,
+              barPercentage: 0.6,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            tooltip: tooltipOpts,
+            legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', padding: 14, font: { size: 11 }, color: '#666' } },
+            datalabels: { display: true, anchor: 'end', align: 'end', color: '#666', font: { weight: 'bold', size: 10 }, formatter: (v: number) => v + '%' },
+          },
+          scales: {
+            y: { ticks: { callback: (v: any) => v + '%', font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
+            x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#666' } },
+          },
+        },
+      });
+    }
+
+    /* LTV Comparison Teaser — Horizontal Bar (pre-gate) */
+    const cLTVt = document.getElementById('chartLTVTeaser') as HTMLCanvasElement;
+    if (cLTVt) {
+      new Chart(cLTVt, {
+        type: 'bar',
+        data: {
+          labels: ['D7 LTV', 'D30 LTV', 'D90 LTV'],
+          datasets: [
+            { label: 'Rewarded Playtime', data: [4.2, 8.5, 14.8], backgroundColor: GRN, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
+            { label: 'Traditional Offerwall', data: [2.1, 3.8, 5.2], backgroundColor: PUR, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
+            { label: 'Incentivized Install', data: [1.5, 2.2, 3.1], backgroundColor: GRY, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
+          ],
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            tooltip: tooltipOpts,
+            legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', padding: 12, font: { size: 10 }, color: '#666' } },
+            datalabels: { display: true, anchor: 'end', align: 'end', color: '#666', font: { weight: 'bold', size: 10 }, formatter: (v: number) => '$' + v.toFixed(2) },
+          },
+          scales: {
+            x: { ticks: { callback: (v: any) => '$' + v, font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
+            y: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#666' } },
           },
         },
       });
@@ -607,6 +678,106 @@ export default function PlaybookContent({
       });
     }
 
+    /* LTV Comparison Full — Horizontal Bar (Ch2 gated) */
+    const cLTV = document.getElementById('chartLTVFull') as HTMLCanvasElement;
+    if (cLTV) {
+      new Chart(cLTV, {
+        type: 'bar',
+        data: {
+          labels: ['D7 LTV', 'D30 LTV', 'D90 LTV'],
+          datasets: [
+            { label: 'Rewarded Playtime', data: [4.2, 8.5, 14.8], backgroundColor: GRN, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
+            { label: 'Traditional Offerwall', data: [2.1, 3.8, 5.2], backgroundColor: PUR, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
+            { label: 'Incentivized Install', data: [1.5, 2.2, 3.1], backgroundColor: GRY, borderRadius: 3, barPercentage: 0.5, categoryPercentage: 0.7 },
+          ],
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            tooltip: tooltipOpts,
+            legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', padding: 12, font: { size: 10 }, color: '#666' } },
+            datalabels: { display: true, anchor: 'end', align: 'end', color: '#666', font: { weight: 'bold', size: 10 }, formatter: (v: number) => '$' + v.toFixed(2) },
+          },
+          scales: {
+            x: { ticks: { callback: (v: any) => '$' + v, font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
+            y: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#666' } },
+          },
+        },
+      });
+    }
+
+    /* OEM Format Radar (Ch3) */
+    const cRadar = document.getElementById('chartOEMRadar') as HTMLCanvasElement;
+    if (cRadar) {
+      new Chart(cRadar, {
+        type: 'radar',
+        data: {
+          labels: ['Reach', 'Cost Efficiency', 'User Intent', 'Conversion Rate', 'Brand Safety'],
+          datasets: [
+            { label: 'PAI', data: [9, 7, 6, 8, 9], borderColor: GRN, backgroundColor: 'rgba(38,190,129,.15)', pointBackgroundColor: GRN, borderWidth: 2 },
+            { label: 'Icon Placement', data: [7, 8, 5, 6, 8], borderColor: PUR, backgroundColor: 'rgba(175,156,255,.15)', pointBackgroundColor: PUR, borderWidth: 2 },
+            { label: 'Splash Screen', data: [6, 5, 7, 7, 6], borderColor: CYN, backgroundColor: 'rgba(0,244,244,.12)', pointBackgroundColor: CYN, borderWidth: 2 },
+            { label: 'Push Notification', data: [5, 6, 8, 5, 5], borderColor: '#F4CB00', backgroundColor: 'rgba(244,203,0,.12)', pointBackgroundColor: '#F4CB00', borderWidth: 2 },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            tooltip: tooltipOpts,
+            legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', padding: 14, font: { size: 10 }, color: '#666' } },
+            datalabels: { display: false },
+          },
+          scales: {
+            r: {
+              beginAtZero: true, max: 10,
+              pointLabels: { font: { size: 10 }, color: '#666' },
+              grid: { color: '#e8e8e8' },
+              ticks: { display: false },
+            },
+          },
+        },
+      });
+    }
+
+    /* ASA Keyword Bubble (Ch4) */
+    const cBubble = document.getElementById('chartASABubble') as HTMLCanvasElement;
+    if (cBubble) {
+      new Chart(cBubble, {
+        type: 'bubble',
+        data: {
+          datasets: [
+            { label: 'Brand', data: [{ x: 85, y: 78, r: 18 }], backgroundColor: 'rgba(38,190,129,.6)', borderColor: GRN, borderWidth: 1 },
+            { label: 'Generic', data: [{ x: 90, y: 25, r: 14 }], backgroundColor: 'rgba(175,156,255,.6)', borderColor: PUR, borderWidth: 1 },
+            { label: 'Competitor', data: [{ x: 55, y: 52, r: 13 }], backgroundColor: 'rgba(0,244,244,.5)', borderColor: CYN, borderWidth: 1 },
+            { label: 'Long-tail', data: [{ x: 20, y: 72, r: 9 }], backgroundColor: 'rgba(244,203,0,.5)', borderColor: '#F4CB00', borderWidth: 1 },
+            { label: 'Discovery', data: [{ x: 50, y: 30, r: 16 }], backgroundColor: 'rgba(176,176,176,.5)', borderColor: GRY, borderWidth: 1 },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            tooltip: tooltipOpts,
+            legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', padding: 14, font: { size: 10 }, color: '#666' } },
+            datalabels: {
+              display: true,
+              color: '#333',
+              font: { weight: 'bold', size: 10 },
+              formatter: (_v: any, ctx: any) => ctx.dataset.label,
+              align: 'top',
+            },
+          },
+          scales: {
+            x: { title: { display: true, text: 'Search Volume', font: { size: 11 }, color: '#666' }, min: 0, max: 100, ticks: { font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
+            y: { title: { display: true, text: 'Conversion Rate', font: { size: 11 }, color: '#666' }, min: 0, max: 100, ticks: { font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
+          },
+        },
+      });
+    }
+
     // Init retention + trends
     renderRetentionChart('d7');
     renderTrendsChart('revenue');
@@ -811,16 +982,27 @@ export default function PlaybookContent({
     }
   }, [trendTab, renderTrendsChart]);
 
-  /* ── Scroll Reveal ── */
+  /* ── Scroll Reveal with Stagger ── */
   const initReveal = useCallback(() => {
     const prefersRM = window.matchMedia(
       '(prefers-reduced-motion:reduce)'
     ).matches;
-    const els = document.querySelectorAll('.rv,.rv-l,.rv-r');
+    const els = document.querySelectorAll('.rv,.rv-l,.rv-r,.ch-enter-right,.ch-enter-scale,.ch-enter-left,.ch-enter-bottom');
     if (prefersRM) {
       els.forEach((e) => e.classList.add('vis'));
       return;
     }
+
+    // Apply stagger classes to sibling .rv elements within each section
+    document.querySelectorAll('.sec, .ch-head, .bento, .toc').forEach((section) => {
+      const rvChildren = section.querySelectorAll(':scope > .wrap > .rv, :scope > .wrap > div > .rv');
+      rvChildren.forEach((el, i) => {
+        if (i > 0 && i <= 3) {
+          el.classList.add(`rv-stagger-${i}`);
+        }
+      });
+    });
+
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -853,17 +1035,21 @@ export default function PlaybookContent({
           const target = +el.dataset.count!;
           const prefix = el.dataset.prefix || '';
           const suffix = el.dataset.suffix || '';
+          const decimal = el.dataset.decimal ? +el.dataset.decimal : 0;
           const duration = 1400;
           const start = performance.now();
           function tick(now: number) {
             const elapsed = now - start;
             const progress = Math.min(elapsed / duration, 1);
             const eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = prefix + Math.round(eased * target) + suffix;
+            const val = eased * target;
+            const display = decimal > 0 ? (val / Math.pow(10, decimal)).toFixed(1) : String(Math.round(val));
+            el.textContent = prefix + display + suffix;
             if (progress < 1) requestAnimationFrame(tick);
           }
           if (prefersRM) {
-            el.textContent = prefix + target + suffix;
+            const finalDisplay = decimal > 0 ? (target / Math.pow(10, decimal)).toFixed(1) : String(target);
+            el.textContent = prefix + finalDisplay + suffix;
           } else {
             requestAnimationFrame(tick);
           }
@@ -1075,8 +1261,11 @@ export default function PlaybookContent({
 
       if (res.ok) {
         setGateSuccess(true);
-        if (gateFormRef.current) gateFormRef.current.classList.add('success');
-        setTimeout(() => unlockGatedContent(true), 600);
+        // Show success animation for 1.5s, then lift the gate curtain
+        setTimeout(() => {
+          setGateLiftingDone(true);
+          unlockGatedContent(true);
+        }, 1500);
       } else {
         const data = await res.json().catch(() => null);
         if (res.status === 429) {
@@ -1157,10 +1346,11 @@ export default function PlaybookContent({
           <div className="rv">
             <span className="hero-badge">AppSamurai Industry Report 2026</span>
             <h1>
-              The 2026
-              <br />
-              <em>Growth Playbook</em>
+              Scale <em>Smarter</em> in 2026
             </h1>
+            <p style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1rem,2vw,1.3rem)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px', letterSpacing: '-.01em' }}>
+              The 2026 Growth Playbook
+            </p>
             <p className="hero-sub">
               The definitive playbook for Rewarded Playtime, Programmatic DSP,
               OEM Discovery, and Apple Search Ads — built for growth teams who
@@ -1189,22 +1379,22 @@ export default function PlaybookContent({
         <div className="wrap">
           <div className="bento-grid">
             <div className="bento-card b-green rv">
-              <div className="bento-val">$167B</div>
+              <div className="bento-val" data-count="167" data-prefix="$" data-suffix="B">$0B</div>
               <div className="bento-lbl">Consumer In-App Spending 2025</div>
               <span className="delta pos">&#9650; +10.6% YoY</span>
             </div>
             <div className="bento-card b-yellow rv">
-              <div className="bento-val">5.3T</div>
+              <div className="bento-val" data-count="53" data-prefix="" data-suffix="T" data-decimal="1">0T</div>
               <div className="bento-lbl">Hours Spent in Apps Globally</div>
               <span className="delta pos">&#9650; 600+ hrs/person</span>
             </div>
             <div className="bento-card b-cyan rv">
-              <div className="bento-val">3B+</div>
+              <div className="bento-val" data-count="3" data-prefix="" data-suffix="B+">0B+</div>
               <div className="bento-lbl">Active Android Users via OEM</div>
               <span className="delta pos">&#9650; 72% market share</span>
             </div>
             <div className="bento-card b-purple rv">
-              <div className="bento-val">34</div>
+              <div className="bento-val" data-count="34" data-prefix="" data-suffix="">0</div>
               <div className="bento-lbl">Apps Used Monthly per Person</div>
               <span className="delta pos">&#9650; 10 unique/day</span>
             </div>
@@ -1324,7 +1514,7 @@ export default function PlaybookContent({
       {/* CHAPTER 1 */}
       <hr className="divider green" />
       <section className="ch-head ch-green" id="ch1">
-        <div className="wrap rv" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr auto', gap: '32px', alignItems: 'center' }}>
+        <div className="wrap rv ch-enter-right" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr auto', gap: '32px', alignItems: 'center' }}>
           <div>
             <span className="ch-bg-num">01</span>
             <div className="ch-num" style={{ color: 'var(--ch1)' }}>1.0</div>
@@ -1509,6 +1699,17 @@ export default function PlaybookContent({
         </div>
       </section>
 
+      {/* Budget Allocation Chart (Ch1) */}
+      <section className="sec sec-w">
+        <div className="wrap">
+          <div className="chart-card-new rv">
+            <h4>Traditional vs Optimized Channel Mix</h4>
+            <div className="chart-subtitle">Budget allocation by channel — shift spend to high-intent inventory</div>
+            <div className="chart-wrap"><canvas id="chartBudgetFlow"></canvas></div>
+          </div>
+        </div>
+      </section>
+
       {/* Paycell Case Study */}
       <section className="sec sec-w">
         <div className="wrap"><div className="case-card rv">
@@ -1555,43 +1756,76 @@ export default function PlaybookContent({
         </div></div>
       </section>
 
-      {/* EMAIL GATE */}
-      <section className="gate" id="emailGate" style={{ display: gateUnlocked && !initialUnlocked ? 'none' : undefined }}>
-        <div className="gate-inner rv">
-          <div className="gate-icon">&#128274;</div>
-          <h2>Unlock the Full 2026 Playbook</h2>
-          <p>You&apos;ve seen Chapter 1. Get instant access to all 4 chapters — including Rewarded Models, OEM Discovery, ASA strategies, and advanced growth tactics.</p>
-          <div className="gate-form" id="gateForm" ref={gateFormRef}>
-            <input
-              className="gate-input"
-              type="email"
-              placeholder="Enter your work email"
-              id="gateEmail"
-              ref={emailRef}
-              required
-              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleGateSubmit(); } }}
-            />
-            <button
-              className={`gate-submit${gateLoading ? ' loading' : ''}`}
-              id="gateBtn"
-              onClick={handleGateSubmit}
-            >
-              {gateLoading ? 'Unlocking...' : 'Get Access'}
-            </button>
-            {gateError && <div className="gate-error-msg" style={{ opacity: 1 }}>{gateError}</div>}
+      {/* LTV Comparison Teaser (pre-gate) */}
+      <section className="sec sec-l">
+        <div className="wrap">
+          <div className="chart-card-new rv">
+            <h4>LTV Comparison by Acquisition Model</h4>
+            <div className="chart-subtitle">Rewarded Playtime delivers 2-3x higher LTV than traditional models</div>
+            <div className="chart-wrap"><canvas id="chartLTVTeaser"></canvas></div>
           </div>
-          {gateSuccess && <div className="gate-success-icon" id="gateSuccessIcon" style={{ display: 'block' }}>&#10003;</div>}
-          <div className="gate-note">No spam. Instant access. Unsubscribe anytime.</div>
+        </div>
+      </section>
+
+      {/* EMAIL GATE */}
+      <section
+        className={`gate${gateLiftingDone ? ' gate-lifting' : ''}`}
+        id="emailGate"
+        style={{ display: gateUnlocked && !initialUnlocked ? 'none' : undefined }}
+        onAnimationEnd={(e) => { if (e.animationName === 'liftUp') { (e.currentTarget as HTMLElement).style.display = 'none'; } }}
+      >
+        <div className="gate-inner rv">
+          {gateSuccess ? (
+            <div className="gate-success">
+              <div className="checkmark">&#10003;</div>
+              <div className="success-msg">Welcome! Unlocking your content...</div>
+            </div>
+          ) : (
+            <>
+              <div className="gate-icon">&#128274;</div>
+              <h2>Unlock the Full 2026 Playbook</h2>
+              <p>You&apos;ve seen Chapter 1. Get instant access to all 4 chapters — including Rewarded Models, OEM Discovery, ASA strategies, and advanced growth tactics.</p>
+              <div className="gate-form" id="gateForm" ref={gateFormRef}>
+                <input
+                  className="gate-input"
+                  type="email"
+                  placeholder="Enter your work email"
+                  id="gateEmail"
+                  ref={emailRef}
+                  required
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleGateSubmit(); } }}
+                />
+                <button
+                  className={`gate-submit${gateLoading ? ' btn-loading' : ''}`}
+                  id="gateBtn"
+                  onClick={handleGateSubmit}
+                >
+                  {gateLoading ? (
+                    <>
+                      <svg className="spinner" viewBox="0 0 24 24" fill="none" style={{ width: 18, height: 18 }}>
+                        <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" strokeWidth="3" />
+                        <path d="M12 2a10 10 0 0 1 10 10" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
+                      </svg>
+                      Unlocking...
+                    </>
+                  ) : 'Get Access'}
+                </button>
+              </div>
+              {gateError && <div className="gate-error-msg" style={{ opacity: 1, fontSize: '.75rem', color: '#F87171', marginTop: '8px', textAlign: 'center' }}>{gateError}</div>}
+              <div className="social-proof" style={{ marginTop: '12px' }}>Join <strong>2,500+</strong> growth leaders who&apos;ve read this playbook</div>
+              <div className="gate-note">No spam. Instant access. Unsubscribe anytime.</div>
+            </>
+          )}
         </div>
       </section>
 
       {/* GATED CONTENT */}
-      <div id="gatedContent" className={gateUnlocked ? 'gated-locked unlocked' : 'gated-locked'}>
+      <div id="gatedContent" className={`${gateUnlocked ? 'gated-locked unlocked' : 'gated-locked'}${gateUnlocked && !initialUnlocked ? ' gated-reveal' : ''}`}>
 
         {/* CHAPTER 2 */}
         <hr className="divider purple" />
         <section className="ch-head ch-purple" id="ch2">
-          <div className="wrap rv" style={{ position: 'relative' }}>
+          <div className="wrap rv ch-enter-scale" style={{ position: 'relative' }}>
             <span className="ch-bg-num">02</span>
             <div className="ch-num" style={{ color: 'var(--ch2)' }}>2.0</div>
             <h2>Rewarded Models<br />Mastering the Value-Exchange Economy</h2>
@@ -1615,6 +1849,17 @@ export default function PlaybookContent({
               <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch2)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><circle cx="8" cy="8" r="4"/><circle cx="16" cy="8" r="4"/><circle cx="12" cy="16" r="4"/></svg></div><div><h4>Systematic Segment Optimization</h4><p>By analyzing mobile interests, demographics, and geographic data, growth teams can optimize each segment individually for maximum ROI.</p></div></div>
             </div>
           </div></div>
+        </section>
+
+        {/* LTV Comparison Full (Ch2) */}
+        <section className="sec sec-l">
+          <div className="wrap">
+            <div className="chart-card-new rv">
+              <h4>LTV Comparison by Acquisition Model</h4>
+              <div className="chart-subtitle">Rewarded Playtime users generate significantly higher lifetime value at every milestone</div>
+              <div className="chart-wrap"><canvas id="chartLTVFull"></canvas></div>
+            </div>
+          </div>
         </section>
 
         <section className="cta-banner"><div className="wrap"><div className="cta-flex rv">
@@ -1706,7 +1951,7 @@ export default function PlaybookContent({
         {/* CHAPTER 3 */}
         <hr className="divider dark" />
         <section className="ch-head ch-dark" id="ch3">
-          <div className="wrap rv" style={{ position: 'relative' }}>
+          <div className="wrap rv ch-enter-left" style={{ position: 'relative' }}>
             <span className="ch-bg-num">03</span>
             <div className="ch-num" style={{ color: 'var(--green)' }}>3.0</div>
             <h2>OEM &amp; On-Device Discovery</h2>
@@ -1776,6 +2021,17 @@ export default function PlaybookContent({
           </div>
         </section>
 
+        {/* OEM Format Radar (Ch3) */}
+        <section className="sec sec-w">
+          <div className="wrap">
+            <div className="chart-card-new rv">
+              <h4>OEM Format Comparison</h4>
+              <div className="chart-subtitle">Radar analysis across 5 key dimensions — PAI leads in reach and brand safety</div>
+              <div className="chart-wrap" style={{ maxWidth: '500px', margin: '0 auto' }}><canvas id="chartOEMRadar"></canvas></div>
+            </div>
+          </div>
+        </section>
+
         {/* 3.3 Sophisticated Targeting */}
         <section className="sec sec-w">
           <div className="wrap rv">
@@ -1824,7 +2080,7 @@ export default function PlaybookContent({
         {/* CHAPTER 4 */}
         <hr className="divider cyan" />
         <section className="ch-head ch-cyan" id="ch4">
-          <div className="wrap rv" style={{ position: 'relative' }}>
+          <div className="wrap rv ch-enter-bottom" style={{ position: 'relative' }}>
             <span className="ch-bg-num">04</span>
             <div className="ch-num" style={{ color: 'var(--ch4)' }}>4.0</div>
             <h2>Apple Search Ads &amp; ASO Synergy</h2>
@@ -1853,6 +2109,17 @@ export default function PlaybookContent({
                 <tr><td><strong>strategy war game</strong></td><td><span className="delta pos">Medium</span></td><td>Low</td><td>Long-tail</td></tr>
               </tbody>
             </table>
+          </div>
+        </section>
+
+        {/* ASA Keyword Strategy Map (Ch4) */}
+        <section className="sec sec-w">
+          <div className="wrap">
+            <div className="chart-card-new rv">
+              <h4>ASA Keyword Strategy Map</h4>
+              <div className="chart-subtitle">X: Search Volume, Y: Conversion Rate, Size: Opportunity Score</div>
+              <div className="chart-wrap"><canvas id="chartASABubble"></canvas></div>
+            </div>
           </div>
         </section>
 

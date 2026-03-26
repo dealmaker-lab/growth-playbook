@@ -346,8 +346,57 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .about-stats span{font-size:.78rem;color:#999}
 .pillar-icon{font-size:20px;margin-bottom:6px}
 
+/* === GATE LOADING STATE === */
+.btn-loading{pointer-events:none;opacity:.8}
+.btn-loading .spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* === GATE SUCCESS === */
+.gate-success{text-align:center;padding:32px}
+.gate-success .checkmark{font-size:48px;color:var(--green);animation:scaleIn .4s var(--ease)}
+@keyframes scaleIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.gate-success .success-msg{font-family:var(--font-h);font-weight:600;font-size:1rem;color:var(--text);margin-top:12px;opacity:0;animation:fadeInMsg .5s var(--ease) .3s forwards}
+@keyframes fadeInMsg{to{opacity:1}}
+
+/* === GATE CURTAIN LIFT === */
+.gate-lifting{animation:liftUp .6s var(--ease) forwards}
+@keyframes liftUp{to{opacity:0;transform:translateY(-30px);max-height:0;overflow:hidden}}
+.gated-reveal{animation:fadeInUp .8s var(--ease) .3s both}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* === SHAKE ANIMATION FOR VALIDATION === */
+.shake{animation:shake .4s ease-in-out}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+/* === STAGGERED REVEAL === */
+.rv-stagger-1{transition-delay:100ms!important}
+.rv-stagger-2{transition-delay:200ms!important}
+.rv-stagger-3{transition-delay:300ms!important}
+
+/* === CHAPTER ENTRANCES === */
+.ch-enter-right{opacity:0;transform:translateX(40px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.ch-enter-left{opacity:0;transform:translateX(-40px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.ch-enter-scale{opacity:0;transform:scale(.95);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.ch-enter-bottom{opacity:0;transform:translateY(40px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.ch-enter-right.vis,.ch-enter-left.vis,.ch-enter-scale.vis,.ch-enter-bottom.vis{opacity:1;transform:translate(0) scale(1)}
+
+/* === SOCIAL PROOF === */
+.social-proof{font-size:13px;color:var(--text-muted);margin-top:8px;text-align:center}
+.social-proof strong{color:var(--green)}
+
+/* === TABULAR NUMS === */
+.big-num,.bento-val,[data-count]{font-variant-numeric:tabular-nums}
+
+/* === CHART CARD WRAPPER === */
+.chart-card-new{background:var(--card-bg);border-radius:var(--r-lg);padding:32px;box-shadow:0 4px 12px var(--card-shadow);border:1px solid var(--border);margin:24px 0}
+.chart-card-new h4{font-family:var(--font-h);font-size:1.1rem;font-weight:700;margin-bottom:4px;color:var(--text)}
+.chart-card-new .chart-subtitle{font-size:.85rem;color:var(--text-muted);margin-bottom:16px}
+.chart-card-new canvas{max-height:320px}
+
 /* === MOBILE OPTIMIZATION === */
 @media(max-width:768px){
+  .chart-card-new{padding:20px;margin:16px 0}
+  .chart-card-new canvas{max-height:260px}
   .method-grid{grid-template-columns:1fr}
   .method-card{flex-direction:column;gap:10px}
   .method-card p{font-size:.82rem}
