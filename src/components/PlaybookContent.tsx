@@ -666,35 +666,33 @@ export default function PlaybookContent({
       });
     }
 
-    /* OEM Format Radar (Ch3) */
+    /* OEM Format Comparison — Grouped Horizontal Bar (Ch3) */
     const cRadar = document.getElementById('chartOEMRadar') as HTMLCanvasElement;
     if (cRadar) {
       new Chart(cRadar, {
-        type: 'radar',
+        type: 'bar',
         data: {
-          labels: ['Reach', 'Cost Efficiency', 'User Intent', 'Conversion Rate', 'Brand Safety'],
+          labels: ['PAI (Pre-loaded)', 'Icon Placement', 'Splash Screen', 'Push Notification'],
           datasets: [
-            { label: 'PAI', data: [9, 7, 6, 8, 9], borderColor: GRN, backgroundColor: 'rgba(38,190,129,.15)', pointBackgroundColor: GRN, borderWidth: 2 },
-            { label: 'Icon Placement', data: [7, 8, 5, 6, 8], borderColor: PUR, backgroundColor: 'rgba(175,156,255,.15)', pointBackgroundColor: PUR, borderWidth: 2 },
-            { label: 'Splash Screen', data: [6, 5, 7, 7, 6], borderColor: CYN, backgroundColor: 'rgba(0,244,244,.12)', pointBackgroundColor: CYN, borderWidth: 2 },
-            { label: 'Push Notification', data: [5, 6, 8, 5, 5], borderColor: '#F4CB00', backgroundColor: 'rgba(244,203,0,.12)', pointBackgroundColor: '#F4CB00', borderWidth: 2 },
+            { label: 'Reach', data: [9, 7, 6, 5], backgroundColor: GRN, borderRadius: 3, barPercentage: 0.7 },
+            { label: 'Cost Efficiency', data: [7, 8, 5, 6], backgroundColor: PUR, borderRadius: 3, barPercentage: 0.7 },
+            { label: 'User Intent', data: [6, 5, 7, 8], backgroundColor: CYN, borderRadius: 3, barPercentage: 0.7 },
+            { label: 'Conversion Rate', data: [8, 6, 7, 5], backgroundColor: '#F4CB00', borderRadius: 3, barPercentage: 0.7 },
+            { label: 'Brand Safety', data: [9, 8, 6, 5], backgroundColor: '#F87171', borderRadius: 3, barPercentage: 0.7 },
           ],
         },
         options: {
+          indexAxis: 'y' as const,
           responsive: true,
-          maintainAspectRatio: true,
+          maintainAspectRatio: false,
           plugins: {
             tooltip: tooltipOpts,
-            legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', padding: 14, font: { size: 10 }, color: '#666' } },
-            datalabels: { display: false },
+            legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', padding: 12, font: { size: 10 }, color: '#666' } },
+            datalabels: { display: true, anchor: 'end', align: 'end', font: { size: 9, weight: 'bold' }, color: '#666', formatter: (v: number) => v + '/10' },
           },
           scales: {
-            r: {
-              beginAtZero: true, max: 10,
-              pointLabels: { font: { size: 10 }, color: '#666' },
-              grid: { color: '#e8e8e8' },
-              ticks: { display: false },
-            },
+            x: { max: 10, ticks: { callback: (v: any) => v + '/10', font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
+            y: { grid: { display: false }, ticks: { font: { size: 11, weight: 'bold' }, color: '#444' } },
           },
         },
       });
@@ -931,16 +929,12 @@ export default function PlaybookContent({
 
   /* ── Update retention/trends when tabs change ── */
   useEffect(() => {
-    // Only update if the chart instance already exists (means gated charts were initialized)
-    if (retInstRef.current) {
-      renderRetentionChart(retTab);
-    }
+    // Always try to render — if chart doesn't exist yet, it will be created
+    renderRetentionChart(retTab);
   }, [retTab, renderRetentionChart]);
 
   useEffect(() => {
-    if (trendInstRef.current) {
-      renderTrendsChart(trendTab);
-    }
+    renderTrendsChart(trendTab);
   }, [trendTab, renderTrendsChart]);
 
   /* ── Scroll Reveal with Stagger ── */
@@ -1662,17 +1656,13 @@ export default function PlaybookContent({
       {/* Paycell Case Study Banner */}
       <section className="sec sec-w">
         <div className="wrap rv" style={{ textAlign: 'center' }}>
-          <a href="https://appsamurai.com/success-stories/paycell" target="_blank" rel="noopener noreferrer" style={{ display: 'block' }}>
-            <img src="/paycell-banner.png" alt="Paycell Case Study — 32% MAU increase, +120K users, 49% QR payment increase with AppSamurai DSP" style={{ width: '100%', maxWidth: '900px', borderRadius: '16px', margin: '0 auto', display: 'block' }} />
+          <a href="https://appsamurai.com/contact-us/" target="_blank" rel="noopener noreferrer" style={{ display: 'block' }}>
+            <img src="/paycell-banner.png" alt="Paycell Case Study — 32% MAU increase, +120K users, 49% QR payment increase with AppSamurai DSP" style={{ width: '100%', maxWidth: '900px', borderRadius: '16px', margin: '0 auto', display: 'block', cursor: 'pointer' }} />
           </a>
         </div>
       </section>
 
-      {/* Paycell CTA */}
-      <section className="cta-banner" style={{ background: 'var(--dark2)' }}><div className="wrap"><div className="cta-flex rv">
-        <h3 style={{ color: '#fff' }}>Learn More About What AppSamurai DSP Can Achieve for Your App<small style={{ color: 'rgba(255,255,255,.4)' }}>See how our programmatic engine delivers real results.</small></h3>
-        <button className="btn-primary" style={{ whiteSpace: 'nowrap' }}>Book a Demo &rarr;</button>
-      </div></div></section>
+      {/* Paycell CTA banner removed — case study image links to contact-us */}
 
       {/* 1.5 The Re-Engagement Imperative */}
       <section className="sec sec-l">
@@ -1836,10 +1826,10 @@ export default function PlaybookContent({
           </div>
         </section>
 
-        <section className="sec sec-l">
+        <section className="sec sec-l" style={{ padding: '24px 0' }}>
           <div className="wrap rv">
             <a href="https://appsamurai.com/roas/" target="_blank" rel="noopener noreferrer"
-               style={{ display: 'block', background: 'linear-gradient(135deg, #f0fdf6, #e8f5ee)', borderRadius: 16, padding: '32px 40px', textDecoration: 'none', border: '1px solid rgba(38,190,129,.15)', transition: 'box-shadow 0.3s' }}
+               style={{ display: 'block', background: 'linear-gradient(135deg, #f0fdf6, #e8f5ee)', borderRadius: 16, padding: '24px 32px', textDecoration: 'none', border: '1px solid rgba(38,190,129,.15)', transition: 'box-shadow 0.3s' }}
                onClick={() => trackEvent('cta_click', 'roas_banner', { destination: 'roas' })}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
                 <div>
@@ -2017,10 +2007,10 @@ export default function PlaybookContent({
           <div className="wrap">
             <div className="chart-card-new rv">
               <h4>OEM Format Comparison</h4>
-              <div className="chart-subtitle">Radar analysis across 5 key dimensions — PAI leads in reach and brand safety</div>
-              <div className="chart-wrap" style={{ maxWidth: '500px', margin: '0 auto' }}><canvas id="chartOEMRadar" ></canvas></div>
+              <div className="chart-subtitle">Scored across 5 dimensions (out of 10) — PAI leads in reach and brand safety</div>
+              <div className="chart-wrap" style={{ height: '300px' }}><canvas id="chartOEMRadar"></canvas></div>
               <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> Pre-loaded App Install (PAI) scores highest overall — it reaches users at first device setup with zero friction. Splash Screen ads deliver higher intent but lower reach. Push notifications are cheapest but risk user fatigue.
+                <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> PAI (Pre-loaded App Install) scores highest overall — it reaches users at first device setup with zero friction. Push notifications score highest on user intent but lowest on brand safety. Icon Placement offers the best cost efficiency.
               </div>
             </div>
           </div>
