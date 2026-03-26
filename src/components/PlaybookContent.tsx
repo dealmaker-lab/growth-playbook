@@ -781,7 +781,7 @@ export default function PlaybookContent({
         position: 'nearest' as const,
       };
       const c = document.getElementById(
-        'chartRetention'
+        `chartRetention-${tab}`
       ) as HTMLCanvasElement;
       if (!c) return;
       const r = retYRange[tab];
@@ -797,11 +797,7 @@ export default function PlaybookContent({
         borderDash: n === 'Casual' ? [5, 3] : ([] as number[]),
       }));
 
-      if (retInstRef.current) {
-        retInstRef.current.destroy();
-        retInstRef.current = null;
-      }
-
+      // React key prop creates a fresh canvas each tab switch — always create new
       retInstRef.current = new Chart(c, {
         type: 'line',
         data: {
@@ -856,11 +852,12 @@ export default function PlaybookContent({
         external: externalTooltipHandler,
         position: 'nearest' as const,
       };
-      const c = document.getElementById('chartTrends') as HTMLCanvasElement;
+      const c = document.getElementById(`chartTrends-${tab}`) as HTMLCanvasElement;
       if (!c) return;
       const d = trendData[tab];
       const u = trendUnits[tab];
       const formatter = (v: number) => u.pre + v + u.suf;
+      // React key prop creates a fresh canvas — no need to destroy old one
       const datasets = [
         {
           label: 'Casual',
@@ -1321,7 +1318,7 @@ export default function PlaybookContent({
       {/* HERO */}
       <div className="hero-wrap">
         <div className="hero-wrap">
-          <section className="hero" id="hero" style={{ backgroundImage: 'url(/hero-bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+          <section className="hero" id="hero" style={{ backgroundImage: 'url(/hero-bg.png)', backgroundSize: 'contain', backgroundPosition: 'center top', backgroundRepeat: 'no-repeat' }}>
             <div className="rv">
               <span className="hero-badge">AppSamurai Industry Report 2026</span>
               <h1>
@@ -1895,7 +1892,7 @@ export default function PlaybookContent({
                   <button key={t} className={`tab-btn${retTab === t ? ' active' : ''}`} onClick={() => setRetTab(t)}>{t === 'd7' ? 'D7' : t === 'd30' ? 'D30' : t === 'd1' ? 'D1' : 'D365'}</button>
                 ))}
               </div></div>
-              <div className="chart-wrap" style={{ height: '260px' }}><canvas id="chartRetention" ></canvas></div>
+              <div className="chart-wrap" style={{ height: '260px' }}><canvas key={`ret-${retTab}`} id={`chartRetention-${retTab}`}></canvas></div>
             </div>
           </div></div>
         </section>
@@ -1917,7 +1914,7 @@ export default function PlaybookContent({
                   <button key={t} className={`tab-btn${trendTab === t ? ' active' : ''}`} onClick={() => setTrendTab(t)}>{t.charAt(0).toUpperCase() + t.slice(1)}</button>
                 ))}
               </div></div>
-              <div className="chart-wrap" style={{ height: '280px' }}><canvas id="chartTrends" ></canvas></div>
+              <div className="chart-wrap" style={{ height: '280px' }}><canvas key={`trend-${trendTab}`} id={`chartTrends-${trendTab}`}></canvas></div>
             </div>
           </div></div>
         </section>
