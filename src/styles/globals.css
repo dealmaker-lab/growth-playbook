@@ -30,6 +30,9 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 
 /* === SCROLL REVEAL === */
 .rv{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+/* Fix: Chart.js needs visible canvases to render. Any .rv ancestor that contains
+   a canvas must start visible. :has() supported in all modern browsers (2023+). */
+.rv:has(canvas){opacity:1;transform:none}
 .rv-l{opacity:0;transform:translateX(-30px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .rv-r{opacity:0;transform:translateX(30px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .rv.vis,.rv-l.vis,.rv-r.vis{opacity:1;transform:none}
