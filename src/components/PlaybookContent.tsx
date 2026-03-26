@@ -1318,7 +1318,7 @@ export default function PlaybookContent({
       {/* HERO */}
       <div className="hero-wrap">
         <div className="hero-wrap">
-          <section className="hero" id="hero" style={{ backgroundImage: 'url(/hero-bg.png)', backgroundSize: 'contain', backgroundPosition: 'center top', backgroundRepeat: 'no-repeat' }}>
+          <section className="hero" id="hero" style={{ backgroundImage: 'url(/hero-bg.png)', backgroundSize: '100% auto', backgroundPosition: 'center top', backgroundRepeat: 'no-repeat' }}>
             <div className="rv">
               <span className="hero-badge">AppSamurai Industry Report 2026</span>
               <h1>
