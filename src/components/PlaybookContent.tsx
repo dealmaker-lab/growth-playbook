@@ -367,45 +367,7 @@ export default function PlaybookContent({
       });
     }
 
-    /* DSP Budget Flow — Grouped Bar (Ch1) */
-    const cBF = document.getElementById('chartBudgetFlow') as HTMLCanvasElement;
-    if (cBF) {
-      new Chart(cBF, {
-        type: 'bar',
-        data: {
-          labels: ['Programmatic', 'Social', 'Search', 'OEM'],
-          datasets: [
-            {
-              label: 'Traditional',
-              data: [35, 40, 25, 0],
-              backgroundColor: 'rgba(38,190,129,.35)',
-              borderRadius: 3,
-              barPercentage: 0.6,
-            },
-            {
-              label: 'Optimized (AppSamurai)',
-              data: [50, 25, 15, 10],
-              backgroundColor: GRN,
-              borderRadius: 3,
-              barPercentage: 0.6,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: {
-            tooltip: tooltipOpts,
-            legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', padding: 14, font: { size: 11 }, color: '#666' } },
-            datalabels: { display: true, anchor: 'end', align: 'end', color: '#666', font: { weight: 'bold', size: 10 }, formatter: (v: number) => v + '%' },
-          },
-          scales: {
-            y: { ticks: { callback: (v: any) => v + '%', font: { size: 10 }, color: '#666' }, grid: { color: '#f0f0f0' } },
-            x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#666' } },
-          },
-        },
-      });
-    }
+    /* Budget Flow chart removed per user request */
 
     /* LTV Comparison Teaser — Horizontal Bar (pre-gate) */
     const cLTVt = document.getElementById('chartLTVTeaser') as HTMLCanvasElement;
@@ -1760,17 +1722,6 @@ export default function PlaybookContent({
         </div>
       </section>
 
-      {/* Budget Allocation Chart (Ch1) */}
-      <section className="sec sec-w">
-        <div className="wrap">
-          <div className="chart-card-new rv">
-            <h4>Traditional vs Optimized Channel Mix</h4>
-            <div className="chart-subtitle">Budget allocation by channel — shift spend to high-intent inventory</div>
-            <div className="chart-wrap"><canvas id="chartBudgetFlow" ></canvas></div>
-          </div>
-        </div>
-      </section>
-
       {/* Paycell Case Study */}
       <section className="sec sec-w">
         <div className="wrap"><div className="case-card rv">
@@ -1824,6 +1775,9 @@ export default function PlaybookContent({
             <h4>LTV Comparison by Acquisition Model</h4>
             <div className="chart-subtitle">Rewarded Playtime delivers 2-3x higher LTV than traditional models</div>
             <div className="chart-wrap"><canvas id="chartLTVTeaser" ></canvas></div>
+            <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+              <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> Rewarded Playtime users generate $14.80 D90 LTV — nearly 3x higher than incentivized installs ($3.10). The reward mechanic drives genuine engagement, not just downloads.
+            </div>
           </div>
         </div>
       </section>
@@ -1919,6 +1873,9 @@ export default function PlaybookContent({
               <h4>LTV Comparison by Acquisition Model</h4>
               <div className="chart-subtitle">Rewarded Playtime users generate significantly higher lifetime value at every milestone</div>
               <div className="chart-wrap"><canvas id="chartLTVFull" ></canvas></div>
+              <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> The gap widens over time — at D90, Rewarded Playtime LTV ($14.80) is 4.8x higher than incentivized installs. This means rewarded users don&apos;t just install, they stay and spend.
+              </div>
             </div>
           </div>
         </section>
@@ -2104,6 +2061,9 @@ export default function PlaybookContent({
               <h4>OEM Format Comparison</h4>
               <div className="chart-subtitle">Radar analysis across 5 key dimensions — PAI leads in reach and brand safety</div>
               <div className="chart-wrap" style={{ maxWidth: '500px', margin: '0 auto' }}><canvas id="chartOEMRadar" ></canvas></div>
+              <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> Pre-loaded App Install (PAI) scores highest overall — it reaches users at first device setup with zero friction. Splash Screen ads deliver higher intent but lower reach. Push notifications are cheapest but risk user fatigue.
+              </div>
             </div>
           </div>
         </section>
@@ -2193,8 +2153,17 @@ export default function PlaybookContent({
           <div className="wrap">
             <div className="chart-card-new rv">
               <h4>ASA Keyword Strategy Map</h4>
-              <div className="chart-subtitle">X: Search Volume, Y: Conversion Rate, Size: Opportunity Score</div>
-              <div className="chart-wrap"><canvas id="chartASABubble" ></canvas></div>
+              <div className="chart-subtitle">Bubble size = opportunity score. Top-right = highest ROI keywords.</div>
+              <div className="chart-wrap" style={{ position: 'relative' }}>
+                <canvas id="chartASABubble"></canvas>
+                <div style={{ position: 'absolute', top: 8, right: 12, fontSize: '0.7rem', color: 'var(--green)', fontWeight: 600, opacity: 0.5 }}>Sweet Spot ↗</div>
+                <div style={{ position: 'absolute', top: 8, left: 12, fontSize: '0.7rem', color: '#f4cb00', fontWeight: 600, opacity: 0.5 }}>Hidden Gems ↖</div>
+                <div style={{ position: 'absolute', bottom: 28, right: 12, fontSize: '0.7rem', color: '#F87171', fontWeight: 600, opacity: 0.5 }}>Budget Burners ↘</div>
+                <div style={{ position: 'absolute', bottom: 28, left: 12, fontSize: '0.7rem', color: '#999', fontWeight: 600, opacity: 0.5 }}>Avoid ↙</div>
+              </div>
+              <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                <strong style={{ color: 'var(--text)' }}>How to read:</strong> Brand keywords (top-right) convert best — high volume with high conversion rates. Long-tail keywords are hidden gems — low competition but high conversion. Generic keywords burn budget — high volume but low conversion. Focus ASA spend on Brand defense and Long-tail capture.
+              </div>
             </div>
           </div>
         </section>
