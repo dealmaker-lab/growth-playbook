@@ -6,6 +6,11 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 Chart.register(...registerables, ChartDataLabels);
 
+// Expose Chart globally for debugging + force-resize workaround
+if (typeof window !== 'undefined') {
+  (window as any).Chart = Chart;
+}
+
 /* ── Chart color constants ── */
 const GRN = '#26BE81';
 const DRK = '#2A2A3E';
@@ -414,6 +419,14 @@ export default function PlaybookContent({
     }
 
 
+    // Force all chart instances to resize+update after creation
+    // Chart.js 4.x defers initial render to rAF which can get dropped in React
+    requestAnimationFrame(() => {
+      Object.values(Chart.instances).forEach((inst: any) => {
+        try { inst.resize(); inst.update('none'); } catch (_) {}
+      });
+    });
+
     } catch (err) {
       console.error('[PlaybookCharts] initAllCharts failed:', err);
       (window as any).__chartError = String(err);
@@ -756,6 +769,12 @@ export default function PlaybookContent({
     renderRetentionChart('d7');
     renderTrendsChart('revenue');
 
+    // Force all chart instances to resize+update
+    requestAnimationFrame(() => {
+      Object.values(Chart.instances).forEach((inst: any) => {
+        try { inst.resize(); inst.update('none'); } catch (_) {}
+      });
+    });
 
   }, [externalTooltipHandler]);
 
