@@ -1045,19 +1045,7 @@ export default function PlaybookContent({
           </div></div>
         </section>
 
-        {/* LTV Comparison Full (Ch2) */}
-        <section className="sec sec-l">
-          <div className="wrap">
-            <div className="chart-card-new rv">
-              <h4>LTV Comparison by Acquisition Model</h4>
-              <div className="chart-subtitle">Rewarded Playtime users generate significantly higher lifetime value at every milestone</div>
-              <div className="chart-wrap"><LTVChart /></div>
-              <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> The gap widens over time — at D90, Rewarded Playtime LTV ($14.80) is 4.8x higher than incentivized installs. This means rewarded users don&apos;t just install, they stay and spend.
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* LTV chart removed — shown in pre-gate teaser to avoid duplication */}
 
         <section className="sec sec-l" style={{ padding: '24px 0' }}>
           <div className="wrap rv">
