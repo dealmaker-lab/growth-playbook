@@ -1612,31 +1612,53 @@ export default function PlaybookContent({
         </div>
       </section>
 
-      {/* 1.2b Creative Intelligence — phone mockups + Ad Types chart */}
+      {/* 1.2b Creative Intelligence — phone mockups with text + Ad Types chart */}
       <section className="sec sec-l">
         <div className="wrap rv">
           <span className="insight-badge">Creative Intelligence</span>
-          <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, marginBottom: '16px', color: 'var(--text)' }}>Platform-Specific Creative Best Practices</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
-            {/* iOS mockup */}
-            <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)', padding: '24px', textAlign: 'center' }}>
-              <img src="/ios-android-age-1.png" alt="iOS Creative Best Practices — sound-off design, close-up gameplay, free-offer text, centered logo, Play Now CTA" style={{ maxWidth: '100%', maxHeight: '400px', borderRadius: '12px', objectFit: 'contain' }} />
-              <p style={{ fontSize: '.7rem', color: 'var(--text-faint)', marginTop: '8px' }}>Source: Alison.Ai</p>
+          <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, marginBottom: '20px', color: 'var(--text)' }}>Platform-Specific Creative Best Practices</h3>
+
+          {/* iOS — image left, text right */}
+          <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)', padding: '28px', marginBottom: '16px', display: 'grid', gridTemplateColumns: '280px 1fr', gap: '28px', alignItems: 'center' }}>
+            <div style={{ textAlign: 'center' }}>
+              <img src="/ios-android-age-1.png" alt="iOS Creative Best Practices" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
             </div>
-            {/* Android mockup */}
-            <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)', padding: '24px', textAlign: 'center' }}>
-              <img src="/ios-android-age-2.png" alt="Android Creative Best Practices — split-screen, multi scenes, falling coins, sound effects" style={{ maxWidth: '100%', maxHeight: '400px', borderRadius: '12px', objectFit: 'contain' }} />
-              <p style={{ fontSize: '.7rem', color: 'var(--text-faint)', marginTop: '8px' }}>Source: Alison.Ai</p>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                <span style={{ fontSize: '24px' }}>&#127822;</span>
+                <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--text)' }}>iOS Creative Best Practices</h4>
+              </div>
+              <p style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.75 }}>
+                iOS users respond well to a sound-off design (+24%), that open with close-up shots (+16%) of gameplay (+45%), introduce free-offer text early (+30%), and feature a large centered logo (+29%) at the end paired with the CTA text &apos;Play Now!&apos; (+14%).
+              </p>
+              <p style={{ fontSize: '.7rem', color: 'var(--text-faint)', marginTop: '10px' }}>Source: Alison.Ai</p>
             </div>
           </div>
+
+          {/* Android — image left, text right */}
+          <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-lg)', padding: '28px', marginBottom: '24px', display: 'grid', gridTemplateColumns: '280px 1fr', gap: '28px', alignItems: 'center' }}>
+            <div style={{ textAlign: 'center' }}>
+              <img src="/ios-android-age-2.png" alt="Android Creative Best Practices" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
+            </div>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                <span style={{ fontSize: '24px' }}>&#129302;</span>
+                <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--text)' }}>Android Creative Best Practices</h4>
+              </div>
+              <p style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.75 }}>
+                Android users respond well to videos that use sound effects (+12%), split-screen (+51%) scenes showcasing gameplay (+13%), and multiple scenes (+42%), with an end card that omits a CTA (+31%) but features falling coins (+11%).
+              </p>
+              <p style={{ fontSize: '.7rem', color: 'var(--text-faint)', marginTop: '10px' }}>Source: Alison.Ai</p>
+            </div>
+          </div>
+
           {/* Ad Type Impression Share — full width below */}
-          <div className="chart-box" style={{ margin: 0, padding: '24px', maxWidth: '600px' }}>
-            <div className="chart-h" style={{ fontSize: '.95rem', marginBottom: '4px' }}>Ad Type Impression Share</div>
-            <div className="chart-sub" style={{ fontSize: '.75rem', marginBottom: '12px' }}>2024 vs 2025 worldwide</div>
-            <div className="chart-wrap" style={{ height: '240px' }}><canvas id="chartAdTypes"></canvas></div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: '10px', fontSize: '.72rem', color: 'var(--text-muted)' }}>
-              <span>Video overtakes Image as dominant format</span>
-              <span>Playable ads double (+111%)</span>
+          <div className="chart-box" style={{ margin: 0, padding: '24px' }}>
+            <div className="chart-h" style={{ fontSize: '.95rem', marginBottom: '4px' }}>Ad Type Impression Share, Worldwide</div>
+            <div className="chart-sub" style={{ fontSize: '.75rem', marginBottom: '12px' }}>Image, Playable, and Video ad format share — 2024 vs 2025</div>
+            <div className="chart-wrap" style={{ height: '260px', maxWidth: '500px', margin: '0 auto' }}><canvas id="chartAdTypes"></canvas></div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: '10px', fontSize: '.75rem', color: 'var(--text-muted)', textAlign: 'center' }}>
+              <span>Video overtakes Image as dominant format. Playable ads double (+111%).</span>
             </div>
           </div>
         </div>
