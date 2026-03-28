@@ -29,15 +29,18 @@ export async function GET(request: Request) {
     .order('volume', { ascending: false })
     .limit(15);
 
-  if (error) {
-    return Response.json({ keywords: [] });
+  if (error || !data?.length) {
+    return Response.json(
+      { keywords: [] },
+      { headers: { 'Cache-Control': 'no-store' } }
+    );
   }
 
   return Response.json(
-    { keywords: data || [] },
+    { keywords: data },
     {
       headers: {
-        'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=43200',
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=1800',
       },
     }
   );

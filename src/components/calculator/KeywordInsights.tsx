@@ -21,7 +21,7 @@ export default function KeywordInsights({ category }: KeywordInsightsProps) {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/api/keywords?category=${encodeURIComponent(category)}`)
+    fetch(`/api/keywords?category=${encodeURIComponent(category)}&_t=${Date.now()}`)
       .then((r) => r.json())
       .then((data) => {
         setKeywords(data.keywords || []);
