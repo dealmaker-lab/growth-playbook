@@ -30,15 +30,14 @@ const CALCULATOR_SEEDS: Record<string, string[]> = {
 };
 
 export async function POST(request: Request) {
-  // Auth check
+  // Auth check — try cookie first, then request body password
   const cookieStore = await cookies();
   const session = cookieStore.get('admin_session')?.value;
-  if (session !== '1') {
-    // Also check request body for password
-    const body = await request.json().catch(() => ({}));
-    if (body.password !== process.env.ADMIN_PASSWORD) {
-      return Response.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+  const body = await request.json().catch(() => ({} as Record<string, unknown>));
+  const adminPw = process.env.ADMIN_PASSWORD;
+
+  if (session !== '1' && (!adminPw || body.password !== adminPw)) {
+    return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   const results: Record<string, unknown> = {};
