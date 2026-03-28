@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { fetchKeywordVolumes, fetchKeywordSuggestions } from '@/lib/dataforseo';
+import { fetchKeywordVolumes } from '@/lib/dataforseo';
 import { createSupabaseAdmin } from '@/lib/supabase/admin';
 
 const PLAYBOOK_KEYWORDS = [
@@ -21,12 +21,37 @@ const PLAYBOOK_KEYWORDS = [
   'UA channel mix strategy', 'mobile advertising ROI', 'cross-channel mobile marketing',
 ];
 
-const CALCULATOR_SEEDS: Record<string, string[]> = {
-  gaming: ['mobile game', 'puzzle game app', 'idle game', 'strategy game app', 'racing game app'],
-  ecommerce: ['shopping app', 'ecommerce app', 'deals app', 'online shopping'],
-  fintech: ['finance app', 'investment app', 'banking app', 'payment app'],
-  health: ['fitness app', 'health tracker', 'workout app', 'meditation app'],
-  utility: ['utility app', 'productivity app', 'vpn app', 'file manager app'],
+const CALCULATOR_KEYWORDS: Record<string, string[]> = {
+  gaming: [
+    'mobile game', 'puzzle games free', 'idle tycoon game', 'racing game multiplayer',
+    'match 3 games', 'strategy war game', 'casual games offline', 'action rpg mobile',
+    'hypercasual game', 'word puzzle game', 'merge game', 'tower defense game',
+    'simulation game mobile', 'card game app', 'arcade game free',
+  ],
+  ecommerce: [
+    'shopping app', 'online shopping deals', 'fashion shopping app', 'grocery delivery app',
+    'coupon app', 'flash sale app', 'price comparison app', 'marketplace app',
+    'secondhand shopping app', 'luxury shopping app', 'cashback shopping',
+    'buy now pay later app', 'daily deals app', 'wholesale app', 'thrift store app',
+  ],
+  fintech: [
+    'finance app', 'investment app', 'stock trading app', 'crypto wallet app',
+    'budget tracker app', 'banking app', 'payment app', 'money transfer app',
+    'credit score app', 'tax filing app', 'savings app', 'insurance app',
+    'loan calculator app', 'expense tracker', 'digital wallet',
+  ],
+  health: [
+    'fitness app', 'workout app', 'meditation app', 'calorie counter app',
+    'step counter app', 'yoga app', 'running tracker app', 'sleep tracker app',
+    'mental health app', 'diet plan app', 'home workout app', 'health tracker',
+    'water reminder app', 'period tracker app', 'nutrition app',
+  ],
+  utility: [
+    'vpn app', 'file manager app', 'qr code scanner app', 'weather app',
+    'calculator app', 'notes app', 'password manager app', 'pdf reader app',
+    'photo editor app', 'screen recorder app', 'battery saver app', 'cleaner app',
+    'wifi analyzer app', 'flashlight app', 'translator app',
+  ],
 };
 
 export async function POST(request: Request) {
@@ -46,16 +71,12 @@ export async function POST(request: Request) {
   const playbookData = await fetchKeywordVolumes(PLAYBOOK_KEYWORDS);
   results.playbook = { count: Object.keys(playbookData).length };
 
-  // 2. Fetch calculator keyword suggestions per category
-  const calculatorData: Record<string, unknown[]> = {};
-  for (const [category, seeds] of Object.entries(CALCULATOR_SEEDS)) {
-    const categoryResults: unknown[] = [];
-    for (const seed of seeds) {
-      const suggestions = await fetchKeywordSuggestions(seed, 5);
-      categoryResults.push(...suggestions);
-    }
-    calculatorData[category] = categoryResults;
-    results[`calculator_${category}`] = { count: categoryResults.length };
+  // 2. Fetch calculator keyword volumes per category (using search_volume endpoint)
+  const calculatorData: Record<string, Record<string, { volume: number; cpc: number; competition: string }>> = {};
+  for (const [category, keywords] of Object.entries(CALCULATOR_KEYWORDS)) {
+    const volumes = await fetchKeywordVolumes(keywords);
+    calculatorData[category] = volumes;
+    results[`calculator_${category}`] = { count: Object.keys(volumes).length };
   }
 
   // 3. Store in Supabase
@@ -79,18 +100,18 @@ export async function POST(request: Request) {
   }
 
   // Upsert calculator keywords
-  for (const [category, keywords] of Object.entries(calculatorData)) {
-    for (const kw of keywords as Array<{ keyword: string; volume: number; cpc: number; competition: string }>) {
-      const opportunity = deriveOpportunity(kw.volume, kw.competition);
+  for (const [category, volumes] of Object.entries(calculatorData)) {
+    for (const [keyword, data] of Object.entries(volumes)) {
+      const opportunity = deriveOpportunity(data.volume, data.competition);
       await supabase
         .from('playbook_keyword_cache')
         .upsert(
           {
-            keyword: kw.keyword,
+            keyword,
             category: `calculator-${category}`,
-            volume: kw.volume,
-            cpc: kw.cpc,
-            competition: kw.competition,
+            volume: data.volume,
+            cpc: data.cpc,
+            competition: data.competition,
             opportunity,
             updated_at: new Date().toISOString(),
           },
