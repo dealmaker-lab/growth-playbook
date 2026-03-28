@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import KeywordInsights from '@/components/calculator/KeywordInsights';
 import {
   Chart as ChartJS,
   ArcElement,
@@ -700,6 +701,9 @@ export default function CalculatorPage() {
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 8h8M9 5l3 3-3 3" /></svg>
               </a>
             </div>
+
+            {/* Keyword Intelligence from DataForSEO */}
+            <KeywordInsights category={category} />
 
             {/* Recalculate */}
             <div className="recalc-row">

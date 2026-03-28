@@ -15,7 +15,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://cdn.simpleicons.org https://www.google-analytics.com",
       "font-src 'self' data:",
-      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com",
+      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://api.dataforseo.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
