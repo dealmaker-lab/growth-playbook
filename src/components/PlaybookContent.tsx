@@ -502,26 +502,26 @@ export default function PlaybookContent({
           <p className="logo-wall-label rv">Trusted by leading brands worldwide</p>
           <div className="logo-scroll">
             <div className="logo-track">
-              <span className="logo-item logo-item--text">EA</span>
+              <span className="logo-item"><img src="/logos/ea.svg" alt="EA" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">Rovio</span>
               <span className="logo-item logo-item--text">TapNation</span>
               <span className="logo-item logo-item--text">Shahid</span>
-              <span className="logo-item logo-item--text">HBO Max</span>
-              <span className="logo-item logo-item--text">Nike</span>
+              <span className="logo-item"><img src="/logos/hbo.svg" alt="HBO Max" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/nike.svg" alt="Nike" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">Gram Games</span>
-              <span className="logo-item logo-item--text">Domino&apos;s</span>
+              <span className="logo-item"><img src="/logos/dominos.svg" alt="Domino's" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">Superplay</span>
               <span className="logo-item logo-item--text">Rollic</span>
               <span className="logo-item logo-item--text">Hepsiburada</span>
               {/* Duplicate for seamless scroll */}
-              <span className="logo-item logo-item--text">EA</span>
+              <span className="logo-item"><img src="/logos/ea.svg" alt="EA" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">Rovio</span>
               <span className="logo-item logo-item--text">TapNation</span>
               <span className="logo-item logo-item--text">Shahid</span>
-              <span className="logo-item logo-item--text">HBO Max</span>
-              <span className="logo-item logo-item--text">Nike</span>
+              <span className="logo-item"><img src="/logos/hbo.svg" alt="HBO Max" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/nike.svg" alt="Nike" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">Gram Games</span>
-              <span className="logo-item logo-item--text">Domino&apos;s</span>
+              <span className="logo-item"><img src="/logos/dominos.svg" alt="Domino's" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">Superplay</span>
               <span className="logo-item logo-item--text">Rollic</span>
               <span className="logo-item logo-item--text">Hepsiburada</span>
@@ -529,27 +529,27 @@ export default function PlaybookContent({
           </div>
           <div className="logo-scroll" style={{ ['--scroll-dir' as any]: 'reverse' }}>
             <div className="logo-track">
-              <span className="logo-item logo-item--text">Samsung</span>
-              <span className="logo-item logo-item--text">OPPO</span>
-              <span className="logo-item logo-item--text">Nokia</span>
-              <span className="logo-item logo-item--text">T-Mobile</span>
-              <span className="logo-item logo-item--text">Verizon</span>
-              <span className="logo-item logo-item--text">AT&amp;T</span>
+              <span className="logo-item"><img src="/logos/samsung.svg" alt="Samsung" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/oppo.svg" alt="OPPO" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/nokia.svg" alt="Nokia" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/t-mobile.svg" alt="T-Mobile" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/verizon.svg" alt="Verizon" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/att.svg" alt="AT&amp;T" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">InMobi</span>
-              <span className="logo-item logo-item--text">Unity</span>
+              <span className="logo-item"><img src="/logos/unity.svg" alt="Unity" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">AppLovin</span>
               <span className="logo-item logo-item--text">Taboola</span>
               <span className="logo-item logo-item--text">Smaato</span>
               <span className="logo-item logo-item--text">Beymen</span>
               {/* Duplicate */}
-              <span className="logo-item logo-item--text">Samsung</span>
-              <span className="logo-item logo-item--text">OPPO</span>
-              <span className="logo-item logo-item--text">Nokia</span>
-              <span className="logo-item logo-item--text">T-Mobile</span>
-              <span className="logo-item logo-item--text">Verizon</span>
-              <span className="logo-item logo-item--text">AT&amp;T</span>
+              <span className="logo-item"><img src="/logos/samsung.svg" alt="Samsung" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/oppo.svg" alt="OPPO" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/nokia.svg" alt="Nokia" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/t-mobile.svg" alt="T-Mobile" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/verizon.svg" alt="Verizon" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/att.svg" alt="AT&amp;T" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">InMobi</span>
-              <span className="logo-item logo-item--text">Unity</span>
+              <span className="logo-item"><img src="/logos/unity.svg" alt="Unity" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">AppLovin</span>
               <span className="logo-item logo-item--text">Taboola</span>
               <span className="logo-item logo-item--text">Smaato</span>
