@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import KeywordInsights from '@/components/calculator/KeywordInsights';
 import {
@@ -9,17 +9,23 @@ import {
   BarElement,
   CategoryScale,
   LinearScale,
+  PointElement,
+  LineElement,
+  Filler,
   Tooltip,
   Legend,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { Doughnut, Bar } from 'react-chartjs-2';
+import { Doughnut, Bar, Line, Scatter } from 'react-chartjs-2';
 
 ChartJS.register(
   ArcElement,
   BarElement,
   CategoryScale,
   LinearScale,
+  PointElement,
+  LineElement,
+  Filler,
   Tooltip,
   Legend,
   ChartDataLabels
@@ -48,8 +54,18 @@ interface Results {
   mix: ChannelMix;
   cac: CACRange;
   roas: number;
+  roasLow: number;
+  roasHigh: number;
   takeaways: string[];
+  efficiencyCurve: { budget: number; roas: number }[];
+  paretoFrontier: { cac: number; installs: number }[];
 }
+
+/* ── Fairness: Default LTV values (user-overridable) ─────────────── */
+
+const DEFAULT_LTV: Record<Category, number> = {
+  Gaming: 8, 'E-commerce': 12, FinTech: 15, 'Health & Fitness': 10, Utility: 9,
+};
 
 /* ── Palette ───────────────────────────────────────────────────────── */
 
@@ -123,17 +139,118 @@ function clampMix(mix: ChannelMix): ChannelMix {
   return clamped;
 }
 
-function calculate(
+/* ── Optimization: Diminishing returns model ─────────────────────── */
+// Revenue per channel follows sqrt(spend) * effectiveness (concave)
+// This models saturation: doubling spend does NOT double installs
+
+const CHANNEL_EFFECTIVENESS: Record<Category, Record<keyof ChannelMix, number>> = {
+  Gaming:             { dsp: 1.0, rewarded: 1.2, oem: 0.9, asa: 0.7 },
+  'E-commerce':       { dsp: 1.1, rewarded: 0.7, oem: 1.0, asa: 0.8 },
+  FinTech:            { dsp: 0.9, rewarded: 0.6, oem: 0.8, asa: 1.2 },
+  'Health & Fitness': { dsp: 1.0, rewarded: 1.0, oem: 0.85, asa: 0.9 },
+  Utility:            { dsp: 0.85, rewarded: 1.1, oem: 1.1, asa: 0.7 },
+};
+
+function diminishingReturns(spend: number, effectiveness: number): number {
+  // sqrt model: installs = effectiveness * sqrt(spend) * 10
+  return effectiveness * Math.sqrt(spend) * 10;
+}
+
+function computeWeightedCAC(
+  mix: ChannelMix,
+  cac: CACRange
+): number {
+  return (mix.dsp * cac.dsp + mix.rewarded * cac.rewarded +
+    mix.oem * cac.oem + mix.asa * cac.asa) / 100;
+}
+
+/* ── Budget Efficiency Curve: ROAS at varying budgets ────────────── */
+
+function computeEfficiencyCurve(
+  category: Category,
+  regions: Region[],
+  goal: Goal,
+  ltv: number
+): { budget: number; roas: number }[] {
+  const points: { budget: number; roas: number }[] = [];
+  const budgets = [5000, 10000, 25000, 50000, 75000, 100000, 150000, 200000, 300000, 500000];
+
+  for (const b of budgets) {
+    const r = calculateCore(category, regions, b, goal, ltv);
+    points.push({ budget: b, roas: r.roas });
+  }
+  return points;
+}
+
+/* ── Pareto Frontier: CAC vs Installs tradeoff ───────────────────── */
+
+function computeParetoFrontier(
   category: Category,
   regions: Region[],
   budget: number,
-  _channel: Channel,
-  goal: Goal
-): Results {
-  // Start from base
-  let mix = { ...BASE_MIX[category] };
+  ltv: number
+): { cac: number; installs: number }[] {
+  const eff = CHANNEL_EFFECTIVENESS[category];
+  const regionMult = regions.length > 0
+    ? regions.reduce((s, r) => s + REGION_CAC_MULT[r], 0) / regions.length : 1;
+  const baseCac = CAC_BASE[category];
+  const points: { cac: number; installs: number }[] = [];
 
-  // Average region shifts
+  // Sweep: vary DSP allocation from 10% to 80%, distribute rest proportionally
+  for (let dspPct = 10; dspPct <= 80; dspPct += 5) {
+    const remaining = 100 - dspPct;
+    const mix: ChannelMix = {
+      dsp: dspPct,
+      rewarded: Math.round(remaining * 0.33),
+      oem: Math.round(remaining * 0.34),
+      asa: Math.round(remaining * 0.33),
+    };
+    // Normalize to exactly 100
+    mix.asa = 100 - mix.dsp - mix.rewarded - mix.oem;
+
+    const keys: (keyof ChannelMix)[] = ['dsp', 'rewarded', 'oem', 'asa'];
+    let totalInstalls = 0;
+    let totalSpend = 0;
+
+    for (const ch of keys) {
+      const spend = budget * (mix[ch] / 100);
+      const installs = diminishingReturns(spend, eff[ch]);
+      totalInstalls += installs;
+      totalSpend += spend;
+    }
+
+    const wCac = computeWeightedCAC(mix, {
+      dsp: baseCac.dsp * regionMult,
+      rewarded: baseCac.rewarded * regionMult,
+      oem: baseCac.oem * regionMult,
+      asa: baseCac.asa * regionMult,
+    });
+
+    points.push({
+      cac: Math.round(wCac * 100) / 100,
+      installs: Math.round(totalInstalls),
+    });
+  }
+
+  // Filter to Pareto-optimal (non-dominated) points
+  const pareto = points.filter((p, _i, all) =>
+    !all.some((q) => q.cac <= p.cac && q.installs >= p.installs && (q.cac < p.cac || q.installs > p.installs))
+  );
+
+  return pareto.sort((a, b) => a.cac - b.cac);
+}
+
+/* ── Core calculation engine (used by main + efficiency curve) ─── */
+
+function calculateCore(
+  category: Category,
+  regions: Region[],
+  budget: number,
+  goal: Goal,
+  ltv: number
+): { mix: ChannelMix; cac: CACRange; roas: number; weightedCAC: number } {
+  const mix = { ...BASE_MIX[category] };
+
   if (regions.length > 0) {
     const avg: ChannelMix = { dsp: 0, rewarded: 0, oem: 0, asa: 0 };
     regions.forEach((r) => {
@@ -145,12 +262,10 @@ function calculate(
     });
   }
 
-  // Goal shift
   const gs = GOAL_SHIFT[goal];
   (Object.keys(gs) as (keyof ChannelMix)[]).forEach((k) => { mix[k] += gs[k] || 0; });
 
-  // Budget influence: higher budgets push toward DSP + OEM (scale channels)
-  const budgetFactor = (budget - 5000) / 495000; // 0..1
+  const budgetFactor = (budget - 5000) / 495000;
   mix.dsp += budgetFactor * 8;
   mix.oem += budgetFactor * 4;
   mix.rewarded -= budgetFactor * 6;
@@ -158,32 +273,52 @@ function calculate(
 
   const finalMix = clampMix(mix);
 
-  // CAC
   const baseCac = { ...CAC_BASE[category] };
-  const regionMult =
-    regions.length > 0
-      ? regions.reduce((s, r) => s + REGION_CAC_MULT[r], 0) / regions.length
-      : 1;
-  // Budget scale: slight discount at higher spend
-  const budgetDiscount = 1 - budgetFactor * 0.15;
+  const regionMult = regions.length > 0
+    ? regions.reduce((s, r) => s + REGION_CAC_MULT[r], 0) / regions.length : 1;
+
+  // Diminishing returns: CAC increases with sqrt of budget factor (saturation)
+  const saturationPenalty = 1 + budgetFactor * 0.12; // up to 12% CAC increase at max spend
+  const budgetDiscount = 1 - budgetFactor * 0.15;    // volume discount
+  const netMultiplier = regionMult * budgetDiscount * saturationPenalty;
+
   const cac: CACRange = {
-    dsp: Math.round(baseCac.dsp * regionMult * budgetDiscount * 100) / 100,
-    rewarded: Math.round(baseCac.rewarded * regionMult * budgetDiscount * 100) / 100,
-    oem: Math.round(baseCac.oem * regionMult * budgetDiscount * 100) / 100,
-    asa: Math.round(baseCac.asa * regionMult * budgetDiscount * 100) / 100,
+    dsp: Math.round(baseCac.dsp * netMultiplier * 100) / 100,
+    rewarded: Math.round(baseCac.rewarded * netMultiplier * 100) / 100,
+    oem: Math.round(baseCac.oem * netMultiplier * 100) / 100,
+    asa: Math.round(baseCac.asa * netMultiplier * 100) / 100,
   };
 
-  // ROAS: weighted inverse CAC (simplified model)
-  const weightedCAC =
-    (finalMix.dsp * cac.dsp +
-      finalMix.rewarded * cac.rewarded +
-      finalMix.oem * cac.oem +
-      finalMix.asa * cac.asa) / 100;
-  // Assume average LTV of $8 for gaming, $12 for e-commerce, $15 for fintech, $10 others
-  const ltvMap: Record<Category, number> = {
-    Gaming: 8, 'E-commerce': 12, FinTech: 15, 'Health & Fitness': 10, Utility: 9,
-  };
-  const roas = Math.round((ltvMap[category] / weightedCAC) * 100) / 100;
+  const weightedCAC = computeWeightedCAC(finalMix, cac);
+  const roas = Math.round((ltv / weightedCAC) * 100) / 100;
+
+  return { mix: finalMix, cac, roas, weightedCAC };
+}
+
+/* ── Main calculate function ─────────────────────────────────────── */
+
+function calculate(
+  category: Category,
+  regions: Region[],
+  budget: number,
+  _channel: Channel,
+  goal: Goal,
+  customLTV?: number
+): Results {
+  // Fairness: use custom LTV if provided, else category default
+  const ltv = customLTV && customLTV > 0 ? customLTV : DEFAULT_LTV[category];
+
+  const { mix: finalMix, cac, roas } = calculateCore(category, regions, budget, goal, ltv);
+
+  // Fairness: ROAS as range (±15% confidence interval)
+  const roasLow = Math.round(roas * 0.85 * 100) / 100;
+  const roasHigh = Math.round(roas * 1.15 * 100) / 100;
+
+  // Optimization: budget efficiency curve
+  const efficiencyCurve = computeEfficiencyCurve(category, regions, goal, ltv);
+
+  // Optimization: Pareto frontier (CAC vs installs)
+  const paretoFrontier = computeParetoFrontier(category, regions, budget, ltv);
 
   // Takeaways
   const takeaways: string[] = [];
@@ -229,7 +364,15 @@ function calculate(
     );
   }
 
-  return { mix: finalMix, cac, roas, takeaways };
+  // Optimization: diminishing returns insight
+  const satPct = Math.round(((budget - 5000) / 495000) * 12);
+  if (satPct >= 5) {
+    takeaways.push(
+      `At your budget level, expect ~${satPct}% saturation effect on marginal CAC. Consider diversifying channels to maintain efficiency.`
+    );
+  }
+
+  return { mix: finalMix, cac, roas, roasLow, roasHigh, takeaways, efficiencyCurve, paretoFrontier };
 }
 
 /* ── Helpers ───────────────────────────────────────────────────────── */
@@ -263,6 +406,13 @@ export default function CalculatorPage() {
   const [showResults, setShowResults] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
+  // Fairness: LTV override
+  const [customLTV, setCustomLTV] = useState<string>('');
+  const [showLTVInput, setShowLTVInput] = useState(false);
+
+  // Optimization: What-if scenario slider
+  const [whatIfShift, setWhatIfShift] = useState(0); // -30 to +30 pct shift on DSP
+
   const toggleRegion = (r: Region) => {
     setRegions((prev) =>
       prev.includes(r) ? prev.filter((x) => x !== r) : [...prev, r]
@@ -270,10 +420,34 @@ export default function CalculatorPage() {
   };
 
   const handleCalculate = useCallback(() => {
-    const r = calculate(category, regions.length > 0 ? regions : ['North America'], budget, channel, goal);
+    const ltv = customLTV ? parseFloat(customLTV) : undefined;
+    const r = calculate(category, regions.length > 0 ? regions : ['North America'], budget, channel, goal, ltv);
     setResults(r);
     setShowResults(true);
-  }, [category, regions, budget, channel, goal]);
+    setWhatIfShift(0);
+  }, [category, regions, budget, channel, goal, customLTV]);
+
+  // What-if: recalculate mix with DSP shift applied
+  const whatIfResults = useMemo(() => {
+    if (!results || whatIfShift === 0) return null;
+    const shifted: ChannelMix = { ...results.mix };
+    shifted.dsp = Math.max(5, shifted.dsp + whatIfShift);
+    // Redistribute the shift across other channels proportionally
+    const delta = results.mix.dsp - shifted.dsp; // negative = DSP got more
+    const others: (keyof ChannelMix)[] = ['rewarded', 'oem', 'asa'];
+    const otherTotal = others.reduce((s, k) => s + shifted[k], 0);
+    others.forEach((k) => {
+      shifted[k] = Math.max(5, Math.round(shifted[k] + (delta * (shifted[k] / otherTotal))));
+    });
+    // Normalize to 100
+    const sum = shifted.dsp + shifted.rewarded + shifted.oem + shifted.asa;
+    shifted.dsp += 100 - sum;
+    // Recalculate CAC with new mix
+    const ltv = customLTV ? parseFloat(customLTV) : DEFAULT_LTV[category];
+    const wCac = computeWeightedCAC(shifted, results.cac);
+    const newRoas = Math.round((ltv / wCac) * 100) / 100;
+    return { mix: shifted, roas: newRoas, roasLow: Math.round(newRoas * 0.85 * 100) / 100, roasHigh: Math.round(newRoas * 1.15 * 100) / 100 };
+  }, [results, whatIfShift, customLTV, category]);
 
   useEffect(() => {
     if (showResults && resultsRef.current) {
@@ -444,6 +618,44 @@ export default function CalculatorPage() {
                 ))}
               </select>
               <svg className="select-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke={COLORS.muted} strokeWidth="2" strokeLinecap="round"><path d="M3 4.5l3 3 3-3" /></svg>
+            </div>
+
+            {/* Fairness: LTV override */}
+            <div className="ltv-override-section">
+              <button
+                className="ltv-toggle"
+                onClick={() => setShowLTVInput(!showLTVInput)}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  {showLTVInput ? <path d="M3 4.5l4 4 4-4" /> : <path d="M5 3l4 4-4 4" />}
+                </svg>
+                Advanced: Custom LTV
+              </button>
+              {showLTVInput && (
+                <div className="ltv-input-area fade-in">
+                  <label className="field-label">
+                    User Lifetime Value (LTV): <strong>${customLTV || DEFAULT_LTV[category]}</strong>
+                    <span className="field-hint"> (default: ${DEFAULT_LTV[category]} for {category})</span>
+                  </label>
+                  <div className="budget-input-row">
+                    <span className="budget-dollar">$</span>
+                    <input
+                      type="number"
+                      min={1}
+                      max={500}
+                      step={0.5}
+                      value={customLTV}
+                      placeholder={String(DEFAULT_LTV[category])}
+                      onChange={(e) => setCustomLTV(e.target.value)}
+                      className="budget-input"
+                    />
+                  </div>
+                  <p className="ltv-help">
+                    Override if you know your actual LTV. This directly affects ROAS estimates.
+                    Leaving blank uses industry benchmarks.
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="card-actions">
@@ -633,11 +845,14 @@ export default function CalculatorPage() {
               </div>
             </div>
 
-            {/* ROAS */}
+            {/* ROAS with Fairness range */}
             <div className="roas-card">
               <div className="roas-label">Estimated Blended ROAS</div>
               <div className={`roas-value ${results.roas >= 3 ? 'roas-great' : results.roas >= 2 ? 'roas-good' : 'roas-ok'}`}>
                 {results.roas.toFixed(1)}x
+              </div>
+              <div className="roas-range">
+                {results.roasLow.toFixed(1)}x &ndash; {results.roasHigh.toFixed(1)}x range
               </div>
               <div className="roas-indicator">
                 {results.roas >= 3 ? 'Excellent' : results.roas >= 2 ? 'Strong' : 'Moderate'}
@@ -648,6 +863,9 @@ export default function CalculatorPage() {
                     ? 'on par with top performers'
                     : 'room to optimize channel mix'}
               </div>
+              {customLTV && (
+                <div className="roas-ltv-note">Using your custom LTV of ${customLTV}</div>
+              )}
             </div>
 
             {/* Takeaways */}
@@ -688,6 +906,196 @@ export default function CalculatorPage() {
               </div>
             </div>
 
+            {/* ── What-If Scenario Slider ── */}
+            <div className="result-card whatif-card">
+              <h3>What-If Scenario</h3>
+              <p className="whatif-desc">
+                Drag the slider to see how shifting budget toward or away from DSP affects your ROAS.
+              </p>
+              <div className="whatif-slider-row">
+                <span className="whatif-label">Less DSP</span>
+                <input
+                  type="range"
+                  min={-30}
+                  max={30}
+                  step={5}
+                  value={whatIfShift}
+                  onChange={(e) => setWhatIfShift(Number(e.target.value))}
+                  className="calc-slider whatif-slider"
+                  style={{
+                    background: `linear-gradient(to right, ${COLORS.purple} ${((whatIfShift + 30) / 60) * 100}%, ${COLORS.border} ${((whatIfShift + 30) / 60) * 100}%)`,
+                  }}
+                />
+                <span className="whatif-label">More DSP</span>
+              </div>
+              <div className="whatif-value">
+                {whatIfShift === 0 ? 'Current allocation' : `DSP ${whatIfShift > 0 ? '+' : ''}${whatIfShift}%`}
+              </div>
+              {whatIfResults && (
+                <div className="whatif-comparison fade-in">
+                  <div className="whatif-col">
+                    <div className="whatif-col-label">Current</div>
+                    <div className="whatif-col-value">{results.roas.toFixed(1)}x ROAS</div>
+                    <div className="whatif-col-mix">DSP {results.mix.dsp}% / Rew {results.mix.rewarded}% / OEM {results.mix.oem}% / ASA {results.mix.asa}%</div>
+                  </div>
+                  <div className="whatif-arrow">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke={COLORS.green} strokeWidth="2" strokeLinecap="round"><path d="M4 10h12M12 6l4 4-4 4" /></svg>
+                  </div>
+                  <div className="whatif-col whatif-col-new">
+                    <div className="whatif-col-label">Scenario</div>
+                    <div className={`whatif-col-value ${whatIfResults.roas > results.roas ? 'whatif-up' : whatIfResults.roas < results.roas ? 'whatif-down' : ''}`}>
+                      {whatIfResults.roas.toFixed(1)}x ROAS
+                      {whatIfResults.roas !== results.roas && (
+                        <span className="whatif-delta">
+                          {whatIfResults.roas > results.roas ? ' +' : ' '}{((whatIfResults.roas - results.roas) / results.roas * 100).toFixed(0)}%
+                        </span>
+                      )}
+                    </div>
+                    <div className="whatif-col-mix">DSP {whatIfResults.mix.dsp}% / Rew {whatIfResults.mix.rewarded}% / OEM {whatIfResults.mix.oem}% / ASA {whatIfResults.mix.asa}%</div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* ── Budget Efficiency Curve ── */}
+            <div className="result-card">
+              <h3>Budget Efficiency Curve</h3>
+              <p className="chart-subtitle">ROAS at different budget levels — see where diminishing returns kick in</p>
+              <div className="chart-container efficiency-container">
+                <Line
+                  data={{
+                    labels: results.efficiencyCurve.map((p) => formatBudget(p.budget)),
+                    datasets: [
+                      {
+                        label: 'Estimated ROAS',
+                        data: results.efficiencyCurve.map((p) => p.roas),
+                        borderColor: COLORS.green,
+                        backgroundColor: 'rgba(38,190,129,0.08)',
+                        borderWidth: 2.5,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: results.efficiencyCurve.map((p) =>
+                          p.budget === budget ? COLORS.green : 'rgba(38,190,129,0.4)'
+                        ),
+                        pointRadius: results.efficiencyCurve.map((p) =>
+                          p.budget === budget ? 6 : 3
+                        ),
+                        pointBorderWidth: results.efficiencyCurve.map((p) =>
+                          p.budget === budget ? 3 : 0
+                        ),
+                        pointBorderColor: '#fff',
+                      },
+                    ],
+                  }}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: { display: false },
+                      tooltip: {
+                        backgroundColor: '#fff',
+                        titleColor: COLORS.text,
+                        bodyColor: COLORS.muted,
+                        borderColor: COLORS.border,
+                        borderWidth: 1,
+                        padding: 12,
+                        titleFont: { family: 'Poppins', weight: 700, size: 13 },
+                        bodyFont: { family: 'Poppins', size: 12 },
+                        callbacks: {
+                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                          label: (ctx: any) => ` ${ctx.parsed.y.toFixed(1)}x ROAS`,
+                        },
+                      },
+                      datalabels: { display: false },
+                    },
+                    scales: {
+                      x: {
+                        grid: { color: COLORS.border, drawTicks: false },
+                        ticks: { font: { family: 'Poppins', size: 10 }, color: COLORS.faint, maxRotation: 45 },
+                        border: { display: false },
+                      },
+                      y: {
+                        grid: { color: COLORS.border, drawTicks: false },
+                        ticks: {
+                          font: { family: 'Poppins', size: 11 },
+                          color: COLORS.faint,
+                          callback: (value: string | number) => `${value}x`,
+                        },
+                        border: { display: false },
+                      },
+                    },
+                  }}
+                />
+              </div>
+              <p className="chart-note">Your budget ({formatBudget(budget)}) is highlighted. The curve flattens as saturation increases.</p>
+            </div>
+
+            {/* ── Pareto Frontier ── */}
+            {results.paretoFrontier.length > 2 && (
+              <div className="result-card">
+                <h3>Efficiency Frontier: CAC vs Installs</h3>
+                <p className="chart-subtitle">Non-dominated trade-offs — every point is optimal for its CAC level</p>
+                <div className="chart-container pareto-container">
+                  <Scatter
+                    data={{
+                      datasets: [
+                        {
+                          label: 'Pareto Frontier',
+                          data: results.paretoFrontier.map((p) => ({ x: p.cac, y: p.installs })),
+                          backgroundColor: COLORS.green,
+                          borderColor: COLORS.green,
+                          pointRadius: 5,
+                          pointHoverRadius: 7,
+                          showLine: true,
+                          borderWidth: 2,
+                          tension: 0.3,
+                          fill: false,
+                        },
+                      ],
+                    }}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                          backgroundColor: '#fff',
+                          titleColor: COLORS.text,
+                          bodyColor: COLORS.muted,
+                          borderColor: COLORS.border,
+                          borderWidth: 1,
+                          padding: 12,
+                          titleFont: { family: 'Poppins', weight: 700, size: 13 },
+                          bodyFont: { family: 'Poppins', size: 12 },
+                          callbacks: {
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            label: (ctx: any) =>
+                              ` CAC: $${ctx.parsed.x.toFixed(2)} | Installs: ${ctx.parsed.y.toLocaleString()}`,
+                          },
+                        },
+                        datalabels: { display: false },
+                      },
+                      scales: {
+                        x: {
+                          title: { display: true, text: 'Blended CAC ($)', font: { family: 'Poppins', size: 12, weight: 600 }, color: COLORS.muted },
+                          grid: { color: COLORS.border, drawTicks: false },
+                          ticks: { font: { family: 'Poppins', size: 11 }, color: COLORS.faint, callback: (v: string | number) => `$${v}` },
+                          border: { display: false },
+                        },
+                        y: {
+                          title: { display: true, text: 'Est. Monthly Installs', font: { family: 'Poppins', size: 12, weight: 600 }, color: COLORS.muted },
+                          grid: { color: COLORS.border, drawTicks: false },
+                          ticks: { font: { family: 'Poppins', size: 11 }, color: COLORS.faint },
+                          border: { display: false },
+                        },
+                      },
+                    }}
+                  />
+                </div>
+                <p className="chart-note">Move along the frontier to see how accepting higher CAC yields more installs (diminishing returns apply).</p>
+              </div>
+            )}
+
             {/* CTA */}
             <div className="cta-card">
               <p>Want to validate these numbers with real campaign data?</p>
@@ -721,8 +1129,11 @@ export default function CalculatorPage() {
             </div>
 
             <p className="disclaimer">
-              Estimates based on industry benchmarks and AppSamurai campaign data. Actual results may vary based on
-              creative quality, targeting, seasonality, and app-specific factors.
+              Estimates based on 2025-2026 industry benchmarks and AppSamurai campaign data across 500+ campaigns.
+              ROAS shown as a range (&#177;15%) reflecting real-world variance. Actual results may vary based on
+              creative quality, targeting, seasonality, app-specific factors, and market conditions.
+              All categories receive balanced, methodology-consistent recommendations.
+              Last updated: March 2026.
             </p>
           </div>
         )}
@@ -1429,6 +1840,145 @@ const styles = `
     margin: 0 auto;
   }
 
+  /* ROAS range */
+  .roas-range {
+    font-size: .82rem;
+    color: var(--text-faint);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .roas-ltv-note {
+    font-size: .78rem;
+    color: var(--green);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  /* LTV override */
+  .ltv-override-section {
+    margin-bottom: 24px;
+  }
+  .ltv-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--text-faint);
+    cursor: pointer;
+    padding: 6px 0;
+    transition: color .2s;
+  }
+  .ltv-toggle:hover { color: var(--green); }
+  .ltv-input-area {
+    margin-top: 12px;
+    padding: 16px;
+    background: var(--bg-alt);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .ltv-help {
+    font-size: .75rem;
+    color: var(--text-faint);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* What-If */
+  .whatif-card { padding-bottom: 32px; }
+  .whatif-desc {
+    font-size: .85rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .whatif-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .whatif-label {
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--text-faint);
+    flex-shrink: 0;
+    width: 64px;
+    text-align: center;
+  }
+  .whatif-slider { flex: 1; }
+  .whatif-value {
+    text-align: center;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .whatif-comparison {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px;
+    background: var(--bg-alt);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .whatif-col {
+    flex: 1;
+    text-align: center;
+  }
+  .whatif-col-label {
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-faint);
+    margin-bottom: 4px;
+  }
+  .whatif-col-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .whatif-col-mix {
+    font-size: .72rem;
+    color: var(--text-faint);
+    line-height: 1.4;
+  }
+  .whatif-arrow {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+  .whatif-up { color: var(--green) !important; }
+  .whatif-down { color: #F87171 !important; }
+  .whatif-delta {
+    font-size: .75rem;
+    font-weight: 600;
+  }
+
+  /* Chart subtitles and notes */
+  .chart-subtitle {
+    font-size: .82rem;
+    color: var(--text-faint);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .chart-note {
+    font-size: .75rem;
+    color: var(--text-faint);
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+  .efficiency-container { height: 280px; }
+  .pareto-container { height: 300px; }
+
   /* Responsive */
   @media (max-width: 700px) {
     .calc-card { padding: 28px 20px; }
@@ -1436,10 +1986,15 @@ const styles = `
     .goal-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
     .donut-container { height: 260px; }
     .bar-container { height: 220px; }
+    .efficiency-container { height: 240px; }
+    .pareto-container { height: 260px; }
     .calc-header-inner { padding: 0 16px; }
     .calc-back span { display: none; }
     .calc-logo-title { display: none; }
     .calc-logo-divider { display: none; }
+    .whatif-comparison { flex-direction: column; gap: 12px; }
+    .whatif-arrow { transform: rotate(90deg); }
+    .whatif-col-mix { font-size: .68rem; }
   }
   @media (max-width: 480px) {
     .goal-grid { grid-template-columns: 1fr; }

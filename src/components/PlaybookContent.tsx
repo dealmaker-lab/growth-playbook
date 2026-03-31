@@ -15,6 +15,7 @@ import {
   TapNationChart,
 } from './charts';
 import FAQ, { DSP_FAQ, REWARDED_FAQ, OEM_FAQ, ASA_FAQ } from './FAQ';
+import TrendingContent from './TrendingContent';
 
 interface PlaybookContentProps {
   initialUnlocked: boolean;
@@ -558,6 +559,9 @@ export default function PlaybookContent({
           </div>
         </div>
       </section>
+
+      {/* ML Foundations: Trending Content Ranking */}
+      <TrendingContent />
 
       {/* TOC */}
       <section className="toc" id="toc">
