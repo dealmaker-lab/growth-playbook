@@ -14,8 +14,9 @@ import {
   Filler,
   Tooltip,
   Legend,
+  type TooltipItem,
 } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import ChartDataLabels, { type Context } from 'chartjs-plugin-datalabels';
 import { Doughnut, Bar, Line, Scatter } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -773,8 +774,8 @@ export default function CalculatorPage() {
                           color: '#fff',
                           font: { family: 'Poppins', weight: 700, size: 13 },
                           formatter: (value: number) => `${value}%`,
-                          display: (ctx: { dataset: { data: number[] }; dataIndex: number }) =>
-                            ctx.dataset.data[ctx.dataIndex] >= 10,
+                          display: (ctx: Context) =>
+                            (ctx.dataset.data[ctx.dataIndex] as number) >= 10,
                         },
                       },
                     }}
@@ -814,7 +815,7 @@ export default function CalculatorPage() {
                           titleFont: { family: 'Poppins', weight: 700, size: 13 },
                           bodyFont: { family: 'Poppins', size: 12 },
                           callbacks: {
-                            label: (ctx: { parsed: { x: number; y: number } }) =>
+                            label: (ctx: TooltipItem<'bar'>) =>
                               ` $${(ctx.parsed?.x ?? 0).toFixed(2)} CAC`,
                           },
                         },
@@ -1008,7 +1009,7 @@ export default function CalculatorPage() {
                         titleFont: { family: 'Poppins', weight: 700, size: 13 },
                         bodyFont: { family: 'Poppins', size: 12 },
                         callbacks: {
-                          label: (ctx: { parsed: { x: number; y: number } }) => ` ${ctx.parsed.y.toFixed(1)}x ROAS`,
+                          label: (ctx: TooltipItem<'line'>) => ` ${(ctx.parsed.y ?? 0).toFixed(1)}x ROAS`,
                         },
                       },
                       datalabels: { display: false },
@@ -1073,8 +1074,8 @@ export default function CalculatorPage() {
                           titleFont: { family: 'Poppins', weight: 700, size: 13 },
                           bodyFont: { family: 'Poppins', size: 12 },
                           callbacks: {
-                            label: (ctx: { parsed: { x: number; y: number } }) =>
-                              ` CAC: $${ctx.parsed.x.toFixed(2)} | Installs: ${ctx.parsed.y.toLocaleString()}`,
+                            label: (ctx: TooltipItem<'scatter'>) =>
+                              ` CAC: $${(ctx.parsed.x ?? 0).toFixed(2)} | Installs: ${(ctx.parsed.y ?? 0).toLocaleString()}`,
                           },
                         },
                         datalabels: { display: false },

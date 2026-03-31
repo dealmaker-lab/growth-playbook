@@ -1,5 +1,5 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useG2Chart } from '@/hooks/useG2Chart';
 
 const GRN = '#26BE81';
@@ -34,7 +34,7 @@ function buildData(tab: string) {
 
 export default function TrendsChart({ tab }: { tab: string }) {
   const tabRef = useRef(tab);
-  tabRef.current = tab;
+  useEffect(() => { tabRef.current = tab; }, [tab]);
 
   const containerRef = useG2Chart(
     (chart) => {

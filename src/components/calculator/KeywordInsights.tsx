@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 
 interface KeywordRow {
@@ -19,21 +19,30 @@ interface KeywordInsightsProps {
 export default function KeywordInsights({ category }: KeywordInsightsProps) {
   const [keywords, setKeywords] = useState<KeywordRow[]>([]);
   const [loading, setLoading] = useState(true);
-
-  const fetchKeywords = useCallback((cat: string) => {
-    setLoading(true);
-    fetch(`/api/keywords?category=${encodeURIComponent(cat)}&_t=${Date.now()}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setKeywords(data.keywords || []);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+  const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
-    fetchKeywords(category);
-  }, [category, fetchKeywords]);
+    // Abort any in-flight request when category changes
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
+    fetch(`/api/keywords?category=${encodeURIComponent(category)}&_t=${Date.now()}`, {
+      signal: controller.signal,
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (!controller.signal.aborted) {
+          setKeywords(data.keywords || []);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setLoading(false);
+      });
+
+    return () => controller.abort();
+  }, [category]);
 
   if (loading) {
     return (
