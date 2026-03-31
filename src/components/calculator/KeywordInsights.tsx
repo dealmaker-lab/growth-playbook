@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import Link from 'next/link';
 
 interface KeywordRow {
   keyword: string;
@@ -19,16 +20,20 @@ export default function KeywordInsights({ category }: KeywordInsightsProps) {
   const [keywords, setKeywords] = useState<KeywordRow[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchKeywords = useCallback((cat: string) => {
     setLoading(true);
-    fetch(`/api/keywords?category=${encodeURIComponent(category)}&_t=${Date.now()}`)
+    fetch(`/api/keywords?category=${encodeURIComponent(cat)}&_t=${Date.now()}`)
       .then((r) => r.json())
       .then((data) => {
         setKeywords(data.keywords || []);
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [category]);
+  }, []);
+
+  useEffect(() => {
+    fetchKeywords(category);
+  }, [category, fetchKeywords]);
 
   if (loading) {
     return (
@@ -108,9 +113,9 @@ export default function KeywordInsights({ category }: KeywordInsightsProps) {
 
       <div style={{ marginTop: '16px', padding: '12px 16px', background: '#fff', borderRadius: '8px', border: '1px solid #E8ECF1', fontSize: '.82rem', color: '#666', lineHeight: 1.6 }}>
         <strong style={{ color: '#222' }}>&#128161; Tip:</strong> Focus your ASA budget on Low difficulty keywords first — they convert at 2-3x the rate of High competition terms. Feed winners into your ASO metadata for organic ranking.{' '}
-        <a href="/#ch4" style={{ color: 'var(--cyan)', fontWeight: 600, textDecoration: 'none' }}>
+        <Link href="/#ch4" style={{ color: 'var(--cyan)', fontWeight: 600, textDecoration: 'none' }}>
           Learn more in Chapter 4 &rarr;
-        </a>
+        </Link>
       </div>
     </div>
   );

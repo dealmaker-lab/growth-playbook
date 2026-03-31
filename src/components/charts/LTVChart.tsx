@@ -1,6 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import { Chart } from '@antv/g2';
+import { useG2Chart } from '@/hooks/useG2Chart';
 
 const GRN = '#26BE81';
 const PUR = '#af9cff';
@@ -19,17 +18,7 @@ const data = [
 ];
 
 export default function LTVChart() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<Chart | null>(null);
-
-  useEffect(() => {
-    if (!containerRef.current || chartRef.current) return;
-
-    const chart = new Chart({
-      container: containerRef.current,
-      autoFit: true,
-    });
-
+  const containerRef = useG2Chart((chart) => {
     chart.coordinate({ transform: [{ type: 'transpose' }] });
 
     chart
@@ -81,15 +70,7 @@ export default function LTVChart() {
       .state('inactive', { opacity: 0.4 });
 
     chart.interaction('elementHighlight', { background: true });
-
-    chart.render();
-    chartRef.current = chart;
-
-    return () => {
-      chartRef.current?.destroy();
-      chartRef.current = null;
-    };
-  }, []);
+  });
 
   return <div ref={containerRef} style={{ width: '100%', height: '100%', minHeight: 220 }} />;
 }

@@ -1,6 +1,6 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import { Chart } from '@antv/g2';
+import { useRef } from 'react';
+import { useG2Chart } from '@/hooks/useG2Chart';
 
 const GRN = '#26BE81';
 const DRK = '#2A2A3E';
@@ -33,92 +33,72 @@ function buildData(tab: string) {
 }
 
 export default function TrendsChart({ tab }: { tab: string }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<Chart | null>(null);
   const tabRef = useRef(tab);
+  tabRef.current = tab;
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+  const containerRef = useG2Chart(
+    (chart) => {
+      const data = buildData(tab);
+      const u = trendUnits[tab];
 
-    const newData = buildData(tab);
-    tabRef.current = tab;
-
-    if (chartRef.current) {
-      chartRef.current.changeData(newData);
-      return;
-    }
-
-    const chart = new Chart({
-      container: containerRef.current,
-      autoFit: true,
-      height: 280,
-    });
-
-    const u = trendUnits[tab];
-
-    chart
-      .interval()
-      .data(newData)
-      .encode('x', 'year')
-      .encode('y', 'value')
-      .encode('color', 'genre')
-      .transform({ type: 'stackY' })
-      .scale('color', {
-        domain: genres,
-        range: [GRN, DRK, PUR, GRY],
-      })
-      .axis('y', {
-        labelFormatter: (v: number) => u.pre + v + u.suf,
-        labelFontSize: 10,
-        labelFill: '#666',
-        gridStroke: '#f0f0f0',
-        title: false,
-      })
-      .axis('x', {
-        labelFontSize: 11,
-        labelFill: '#666',
-        grid: false,
-        title: false,
-      })
-      .legend('color', {
-        position: 'top',
-        itemMarker: 'circle',
-        itemLabelFontSize: 10,
-        itemLabelFill: '#666',
-        itemSpacing: 12,
-      })
-      .label({
-        text: (d: { value: number }) => {
+      chart
+        .interval()
+        .data(data)
+        .encode('x', 'year')
+        .encode('y', 'value')
+        .encode('color', 'genre')
+        .transform({ type: 'stackY' })
+        .scale('color', {
+          domain: genres,
+          range: [GRN, DRK, PUR, GRY],
+        })
+        .axis('y', {
+          labelFormatter: (v: number) => u.pre + v + u.suf,
+          labelFontSize: 10,
+          labelFill: '#666',
+          gridStroke: '#f0f0f0',
+          title: false,
+        })
+        .axis('x', {
+          labelFontSize: 11,
+          labelFill: '#666',
+          grid: false,
+          title: false,
+        })
+        .legend('color', {
+          position: 'top',
+          itemMarker: 'circle',
+          itemLabelFontSize: 10,
+          itemLabelFill: '#666',
+          itemSpacing: 12,
+        })
+        .label({
+          text: (d: { value: number }) => {
+            const unit = trendUnits[tabRef.current];
+            return unit.pre + d.value + unit.suf;
+          },
+          position: 'inside',
+          fill: '#fff',
+          fontWeight: 'bold',
+          fontSize: 9,
+        })
+        .tooltip((d: { genre: string; value: number; year: string }) => {
           const unit = trendUnits[tabRef.current];
-          return unit.pre + d.value + unit.suf;
-        },
-        position: 'inside',
-        fill: '#fff',
-        fontWeight: 'bold',
-        fontSize: 9,
-      })
-      .tooltip((d: { genre: string; value: number; year: string }) => {
-        const unit = trendUnits[tabRef.current];
-        return {
-          name: d.genre,
-          value: unit.pre + d.value + unit.suf,
-        };
-      })
-      .style('radiusTopLeft', 2)
-      .style('radiusTopRight', 2)
-      .state('active', { stroke: '#fff', lineWidth: 1 })
-      .state('inactive', { opacity: 0.4 });
+          return {
+            name: d.genre,
+            value: unit.pre + d.value + unit.suf,
+          };
+        })
+        .style('radiusTopLeft', 2)
+        .style('radiusTopRight', 2)
+        .state('active', { stroke: '#fff', lineWidth: 1 })
+        .state('inactive', { opacity: 0.4 });
 
-    chart.interaction('elementHighlight', { background: true });
-
-    chart.render();
-    chartRef.current = chart;
-
-    return () => {
-      chartRef.current?.destroy();
-      chartRef.current = null;
-    };
-  }, [tab]);
+      chart.interaction('elementHighlight', { background: true });
+    },
+    [tab],
+    { buildData: (t) => buildData(t as string), height: 280 }
+  );
 
   return <div ref={containerRef} style={{ width: '100%', height: 280 }} />;
 }

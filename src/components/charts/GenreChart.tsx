@@ -1,6 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import { Chart } from '@antv/g2';
+import { useG2Chart } from '@/hooks/useG2Chart';
 
 const GRN = '#26BE81';
 const DRK = '#2A2A3E';
@@ -31,76 +30,61 @@ const data = [
 ];
 
 export default function GenreChart() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<Chart | null>(null);
+  const containerRef = useG2Chart(
+    (chart) => {
+      chart.coordinate({ transform: [{ type: 'transpose' }] });
 
-  useEffect(() => {
-    if (!containerRef.current || chartRef.current) return;
+      chart
+        .interval()
+        .data(data)
+        .encode('x', 'genre')
+        .encode('y', 'value')
+        .encode('color', 'category')
+        .transform({ type: 'stackY' })
+        .scale('color', {
+          domain: ['Casual', 'Mid-core', 'Hybridcasual', 'Hypercasual', 'Other'],
+          range: [GRN, DRK, PUR, GRY, 'rgba(38,190,129,.5)'],
+        })
+        .scale('y', { domain: [0, 100] })
+        .axis('y', {
+          labelFormatter: (v: number) => v + '%',
+          labelFontSize: 10,
+          labelFill: '#666',
+          gridStroke: '#f0f0f0',
+          title: false,
+        })
+        .axis('x', {
+          labelFontSize: 10,
+          labelFill: '#666',
+          grid: false,
+          title: false,
+        })
+        .legend('color', {
+          position: 'top',
+          itemMarker: 'circle',
+          itemLabelFontSize: 10,
+          itemLabelFill: '#666',
+          itemSpacing: 12,
+        })
+        .label({
+          text: (d: { value: number }) => (d.value > 5 ? d.value + '%' : ''),
+          position: 'inside',
+          fill: '#fff',
+          fontWeight: 'bold',
+          fontSize: 9,
+        })
+        .tooltip((d: { genre: string; category: string; value: number }) => ({
+          name: d.category,
+          value: d.value + '%',
+        }))
+        .state('active', { stroke: '#fff', lineWidth: 1 })
+        .state('inactive', { opacity: 0.4 });
 
-    const chart = new Chart({
-      container: containerRef.current,
-      autoFit: true,
-      height: 300,
-    });
-
-    chart.coordinate({ transform: [{ type: 'transpose' }] });
-
-    chart
-      .interval()
-      .data(data)
-      .encode('x', 'genre')
-      .encode('y', 'value')
-      .encode('color', 'category')
-      .transform({ type: 'stackY' })
-      .scale('color', {
-        domain: ['Casual', 'Mid-core', 'Hybridcasual', 'Hypercasual', 'Other'],
-        range: [GRN, DRK, PUR, GRY, 'rgba(38,190,129,.5)'],
-      })
-      .scale('y', { domain: [0, 100] })
-      .axis('y', {
-        labelFormatter: (v: number) => v + '%',
-        labelFontSize: 10,
-        labelFill: '#666',
-        gridStroke: '#f0f0f0',
-        title: false,
-      })
-      .axis('x', {
-        labelFontSize: 10,
-        labelFill: '#666',
-        grid: false,
-        title: false,
-      })
-      .legend('color', {
-        position: 'top',
-        itemMarker: 'circle',
-        itemLabelFontSize: 10,
-        itemLabelFill: '#666',
-        itemSpacing: 12,
-      })
-      .label({
-        text: (d: { value: number }) => d.value > 5 ? d.value + '%' : '',
-        position: 'inside',
-        fill: '#fff',
-        fontWeight: 'bold',
-        fontSize: 9,
-      })
-      .tooltip((d: { genre: string; category: string; value: number }) => ({
-        name: d.category,
-        value: d.value + '%',
-      }))
-      .state('active', { stroke: '#fff', lineWidth: 1 })
-      .state('inactive', { opacity: 0.4 });
-
-    chart.interaction('elementHighlight', { background: true });
-
-    chart.render();
-    chartRef.current = chart;
-
-    return () => {
-      chartRef.current?.destroy();
-      chartRef.current = null;
-    };
-  }, []);
+      chart.interaction('elementHighlight', { background: true });
+    },
+    [],
+    { height: 300 }
+  );
 
   return <div ref={containerRef} style={{ width: '100%', height: 300 }} />;
 }

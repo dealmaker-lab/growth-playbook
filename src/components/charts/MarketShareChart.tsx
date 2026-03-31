@@ -1,6 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import { Chart } from '@antv/g2';
+import { useG2Chart } from '@/hooks/useG2Chart';
 
 const BLU = '#3B82F6';
 const CYN = '#00f4f4';
@@ -15,69 +14,54 @@ const data = [
 ];
 
 export default function MarketShareChart() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<Chart | null>(null);
+  const containerRef = useG2Chart(
+    (chart) => {
+      chart
+        .interval()
+        .data(data)
+        .encode('x', 'year')
+        .encode('y', 'value')
+        .encode('color', 'platform')
+        .transform({ type: 'dodgeX' })
+        .scale('color', {
+          domain: ['iOS', 'Android'],
+          range: [BLU, CYN],
+        })
+        .scale('y', { domain: [0, 80], nice: true })
+        .axis('y', {
+          labelFormatter: (v: number) => v + '%',
+          labelFontSize: 10,
+          labelFill: '#666',
+          gridStroke: '#f0f0f0',
+          title: false,
+        })
+        .axis('x', {
+          labelFontSize: 9,
+          labelFill: '#666',
+          grid: false,
+          title: false,
+        })
+        .legend('color', {
+          position: 'top',
+          itemMarker: 'circle',
+          itemLabelFontSize: 10,
+          itemLabelFill: '#666',
+          itemSpacing: 14,
+        })
+        .tooltip((d: { platform: string; value: number; year: string }) => ({
+          name: d.platform,
+          value: d.value + '%',
+        }))
+        .style('radiusTopLeft', 1)
+        .style('radiusTopRight', 1)
+        .state('active', { stroke: '#fff', lineWidth: 1 })
+        .state('inactive', { opacity: 0.3 });
 
-  useEffect(() => {
-    if (!containerRef.current || chartRef.current) return;
-
-    const chart = new Chart({
-      container: containerRef.current,
-      autoFit: true,
-      height: 300,
-    });
-
-    chart
-      .interval()
-      .data(data)
-      .encode('x', 'year')
-      .encode('y', 'value')
-      .encode('color', 'platform')
-      .transform({ type: 'dodgeX' })
-      .scale('color', {
-        domain: ['iOS', 'Android'],
-        range: [BLU, CYN],
-      })
-      .scale('y', { domain: [0, 80], nice: true })
-      .axis('y', {
-        labelFormatter: (v: number) => v + '%',
-        labelFontSize: 10,
-        labelFill: '#666',
-        gridStroke: '#f0f0f0',
-        title: false,
-      })
-      .axis('x', {
-        labelFontSize: 9,
-        labelFill: '#666',
-        grid: false,
-        title: false,
-      })
-      .legend('color', {
-        position: 'top',
-        itemMarker: 'circle',
-        itemLabelFontSize: 10,
-        itemLabelFill: '#666',
-        itemSpacing: 14,
-      })
-      .tooltip((d: { platform: string; value: number; year: string }) => ({
-        name: d.platform,
-        value: d.value + '%',
-      }))
-      .style('radiusTopLeft', 1)
-      .style('radiusTopRight', 1)
-      .state('active', { stroke: '#fff', lineWidth: 1 })
-      .state('inactive', { opacity: 0.3 });
-
-    chart.interaction('elementHighlight', { background: true });
-
-    chart.render();
-    chartRef.current = chart;
-
-    return () => {
-      chartRef.current?.destroy();
-      chartRef.current = null;
-    };
-  }, []);
+      chart.interaction('elementHighlight', { background: true });
+    },
+    [],
+    { height: 300 }
+  );
 
   return <div ref={containerRef} style={{ width: '100%', height: 300 }} />;
 }

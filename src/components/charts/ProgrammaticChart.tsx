@@ -1,6 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import { Chart } from '@antv/g2';
+import { useG2Chart } from '@/hooks/useG2Chart';
 
 const GRN = '#26BE81';
 
@@ -15,70 +14,55 @@ const data = [
 ];
 
 export default function ProgrammaticChart() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<Chart | null>(null);
+  const containerRef = useG2Chart(
+    (chart) => {
+      chart
+        .interval()
+        .data(data)
+        .encode('x', 'year')
+        .encode('y', 'value')
+        .encode('color', (d: { projected: boolean }) => (d.projected ? 'Projected' : 'Actual'))
+        .scale('color', {
+          domain: ['Actual', 'Projected'],
+          range: ['rgba(38,190,129,.4)', GRN],
+        })
+        .axis('y', {
+          labelFormatter: (v: number) => '$' + v + 'B',
+          labelFontSize: 10,
+          labelFill: '#666',
+          gridStroke: '#f0f0f0',
+          title: false,
+        })
+        .axis('x', {
+          labelFontSize: 10,
+          labelFill: '#666',
+          grid: false,
+          title: false,
+        })
+        .label({
+          text: (d: { value: number }) => '$' + d.value + 'B',
+          position: 'top',
+          fill: '#666',
+          fontWeight: 'bold',
+          fontSize: 10,
+          dy: -4,
+        })
+        .tooltip((d: { year: string; value: number }) => ({
+          name: 'Market Size',
+          value: '$' + d.value + 'B',
+        }))
+        .legend(false)
+        .style('radiusTopLeft', 4)
+        .style('radiusTopRight', 4)
+        .style('maxWidth', 40)
+        .state('active', { fill: GRN })
+        .state('inactive', { opacity: 0.5 });
 
-  useEffect(() => {
-    if (!containerRef.current || chartRef.current) return;
-
-    const chart = new Chart({
-      container: containerRef.current,
-      autoFit: true,
-      height: 280,
-    });
-
-    chart
-      .interval()
-      .data(data)
-      .encode('x', 'year')
-      .encode('y', 'value')
-      .encode('color', (d: { projected: boolean }) => d.projected ? 'Projected' : 'Actual')
-      .scale('color', {
-        domain: ['Actual', 'Projected'],
-        range: ['rgba(38,190,129,.4)', GRN],
-      })
-      .axis('y', {
-        labelFormatter: (v: number) => '$' + v + 'B',
-        labelFontSize: 10,
-        labelFill: '#666',
-        gridStroke: '#f0f0f0',
-        title: false,
-      })
-      .axis('x', {
-        labelFontSize: 10,
-        labelFill: '#666',
-        grid: false,
-        title: false,
-      })
-      .label({
-        text: (d: { value: number }) => '$' + d.value + 'B',
-        position: 'top',
-        fill: '#666',
-        fontWeight: 'bold',
-        fontSize: 10,
-        dy: -4,
-      })
-      .tooltip((d: { year: string; value: number }) => ({
-        name: 'Market Size',
-        value: '$' + d.value + 'B',
-      }))
-      .legend(false)
-      .style('radiusTopLeft', 4)
-      .style('radiusTopRight', 4)
-      .style('maxWidth', 40)
-      .state('active', { fill: GRN })
-      .state('inactive', { opacity: 0.5 });
-
-    chart.interaction('elementHighlight', { background: true });
-
-    chart.render();
-    chartRef.current = chart;
-
-    return () => {
-      chartRef.current?.destroy();
-      chartRef.current = null;
-    };
-  }, []);
+      chart.interaction('elementHighlight', { background: true });
+    },
+    [],
+    { height: 280 }
+  );
 
   return <div ref={containerRef} style={{ width: '100%', height: 280, maxHeight: 300 }} />;
 }

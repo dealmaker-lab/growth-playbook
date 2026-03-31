@@ -291,7 +291,7 @@ export default function PlaybookContent({
         });
       });
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [initReveal, initCounters, initSideNav, gateUnlocked]);
 
   /* ── Unlock gated content ── */
   const unlockGatedContent = useCallback(
@@ -526,7 +526,7 @@ export default function PlaybookContent({
               <span className="logo-item logo-item--text">Hepsiburada</span>
             </div>
           </div>
-          <div className="logo-scroll" style={{ ['--scroll-dir' as any]: 'reverse' }}>
+          <div className="logo-scroll" style={{ '--scroll-dir': 'reverse' } as React.CSSProperties}>
             <div className="logo-track">
               <span className="logo-item"><img src="/logos/samsung.svg" alt="Samsung" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/oppo.svg" alt="OPPO" className="logo-svg" /></span>

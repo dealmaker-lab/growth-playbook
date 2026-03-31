@@ -773,9 +773,8 @@ export default function CalculatorPage() {
                           color: '#fff',
                           font: { family: 'Poppins', weight: 700, size: 13 },
                           formatter: (value: number) => `${value}%`,
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          display: (ctx: any) =>
-                            (ctx.dataset.data[ctx.dataIndex] as number) >= 10,
+                          display: (ctx: { dataset: { data: number[] }; dataIndex: number }) =>
+                            ctx.dataset.data[ctx.dataIndex] >= 10,
                         },
                       },
                     }}
@@ -815,8 +814,7 @@ export default function CalculatorPage() {
                           titleFont: { family: 'Poppins', weight: 700, size: 13 },
                           bodyFont: { family: 'Poppins', size: 12 },
                           callbacks: {
-                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                            label: (ctx: any) =>
+                            label: (ctx: { parsed: { x: number; y: number } }) =>
                               ` $${(ctx.parsed?.x ?? 0).toFixed(2)} CAC`,
                           },
                         },
@@ -1010,8 +1008,7 @@ export default function CalculatorPage() {
                         titleFont: { family: 'Poppins', weight: 700, size: 13 },
                         bodyFont: { family: 'Poppins', size: 12 },
                         callbacks: {
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          label: (ctx: any) => ` ${ctx.parsed.y.toFixed(1)}x ROAS`,
+                          label: (ctx: { parsed: { x: number; y: number } }) => ` ${ctx.parsed.y.toFixed(1)}x ROAS`,
                         },
                       },
                       datalabels: { display: false },
@@ -1076,8 +1073,7 @@ export default function CalculatorPage() {
                           titleFont: { family: 'Poppins', weight: 700, size: 13 },
                           bodyFont: { family: 'Poppins', size: 12 },
                           callbacks: {
-                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                            label: (ctx: any) =>
+                            label: (ctx: { parsed: { x: number; y: number } }) =>
                               ` CAC: $${ctx.parsed.x.toFixed(2)} | Installs: ${ctx.parsed.y.toLocaleString()}`,
                           },
                         },

@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import Link from 'next/link';
 import { createSupabaseAdmin } from '@/lib/supabase/admin';
 import LoginForm from './LoginForm';
 import { FunnelChart, SectionChart } from './AdminCharts';
@@ -159,9 +160,9 @@ export default async function AdminAnalyticsPage() {
             Growth Playbook lead capture and engagement data
           </p>
         </div>
-        <a href="/" style={styles.backLink}>
+        <Link href="/" style={styles.backLink}>
           &larr; Back to Playbook
-        </a>
+        </Link>
       </header>
 
       {/* Lead Stats Cards */}

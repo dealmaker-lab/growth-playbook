@@ -1,6 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import { Chart } from '@antv/g2';
+import { useG2Chart } from '@/hooks/useG2Chart';
 
 const RED = '#F87171';
 const PUR = '#af9cff';
@@ -41,91 +40,71 @@ function buildData(tab: string) {
 }
 
 export default function RetentionChart({ tab }: { tab: string }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<Chart | null>(null);
+  const containerRef = useG2Chart(
+    (chart) => {
+      const data = buildData(tab);
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+      chart
+        .line()
+        .data(data)
+        .encode('x', 'quarter')
+        .encode('y', 'value')
+        .encode('color', 'genre')
+        .encode('shape', 'smooth')
+        .scale('color', {
+          domain: ['Mid-core', 'Hybridcasual', 'Hypercasual', 'Casual'],
+          range: [RED, PUR, BLU, GRN],
+        })
+        .scale('y', { nice: true })
+        .axis('y', {
+          labelFormatter: (v: number) => v + '%',
+          labelFontSize: 10,
+          labelFill: '#666',
+          gridStroke: '#f0f0f0',
+          title: false,
+        })
+        .axis('x', {
+          labelFontSize: 10,
+          labelFill: '#666',
+          grid: false,
+          title: false,
+        })
+        .legend('color', {
+          position: 'right',
+          itemMarker: 'line',
+          itemLabelFontSize: 10,
+          itemLabelFill: '#666',
+          itemSpacing: 10,
+        })
+        .tooltip({
+          title: (d: { quarter: string }) => d.quarter,
+          items: [{ channel: 'y', valueFormatter: (v: number) => v + '%' }],
+        })
+        .style('lineWidth', 2)
+        .state('active', { lineWidth: 3 })
+        .state('inactive', { opacity: 0.3 });
 
-    const newData = buildData(tab);
+      chart
+        .point()
+        .data(data)
+        .encode('x', 'quarter')
+        .encode('y', 'value')
+        .encode('color', 'genre')
+        .scale('color', {
+          domain: ['Mid-core', 'Hybridcasual', 'Hypercasual', 'Casual'],
+          range: [RED, PUR, BLU, GRN],
+        })
+        .style('r', 3)
+        .tooltip(false)
+        .legend(false)
+        .state('active', { r: 6 })
+        .state('inactive', { opacity: 0.3 });
 
-    if (chartRef.current) {
-      chartRef.current.changeData(newData);
-      return;
-    }
-
-    const chart = new Chart({
-      container: containerRef.current,
-      autoFit: true,
-      height: 260,
-    });
-
-    chart
-      .line()
-      .data(newData)
-      .encode('x', 'quarter')
-      .encode('y', 'value')
-      .encode('color', 'genre')
-      .encode('shape', 'smooth')
-      .scale('color', {
-        domain: ['Mid-core', 'Hybridcasual', 'Hypercasual', 'Casual'],
-        range: [RED, PUR, BLU, GRN],
-      })
-      .scale('y', { nice: true })
-      .axis('y', {
-        labelFormatter: (v: number) => v + '%',
-        labelFontSize: 10,
-        labelFill: '#666',
-        gridStroke: '#f0f0f0',
-        title: false,
-      })
-      .axis('x', {
-        labelFontSize: 10,
-        labelFill: '#666',
-        grid: false,
-        title: false,
-      })
-      .legend('color', {
-        position: 'right',
-        itemMarker: 'line',
-        itemLabelFontSize: 10,
-        itemLabelFill: '#666',
-        itemSpacing: 10,
-      })
-      .tooltip({
-        title: (d: { quarter: string }) => d.quarter,
-        items: [{ channel: 'y', valueFormatter: (v: number) => v + '%' }],
-      })
-      .style('lineWidth', 2)
-      .state('active', { lineWidth: 3 })
-      .state('inactive', { opacity: 0.3 });
-
-    chart
-      .point()
-      .data(newData)
-      .encode('x', 'quarter')
-      .encode('y', 'value')
-      .encode('color', 'genre')
-      .scale('color', {
-        domain: ['Mid-core', 'Hybridcasual', 'Hypercasual', 'Casual'],
-        range: [RED, PUR, BLU, GRN],
-      })
-      .style('r', 3)
-      .tooltip(false)
-      .legend(false)
-      .state('active', { r: 6 })
-      .state('inactive', { opacity: 0.3 });
-
-    chart.interaction('elementHighlight', { background: true });
-
-    chart.render();
-    chartRef.current = chart;
-
-    return () => {
-      chartRef.current?.destroy();
-      chartRef.current = null;
-    };
-  }, [tab]);
+      chart.interaction('elementHighlight', { background: true });
+    },
+    [tab],
+    { buildData: (t) => buildData(t as string), height: 260 }
+  );
 
   return <div ref={containerRef} style={{ width: '100%', height: 260 }} />;
 }
