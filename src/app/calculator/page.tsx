@@ -196,44 +196,53 @@ function computeParetoFrontier(
   const baseCac = CAC_BASE[category];
   const points: { cac: number; installs: number }[] = [];
 
-  // Sweep: vary DSP allocation from 10% to 80%, distribute rest proportionally
-  for (let dspPct = 10; dspPct <= 80; dspPct += 5) {
-    const remaining = 100 - dspPct;
-    const mix: ChannelMix = {
-      dsp: dspPct,
-      rewarded: Math.round(remaining * 0.33),
-      oem: Math.round(remaining * 0.34),
-      asa: Math.round(remaining * 0.33),
-    };
-    // Normalize to exactly 100
-    mix.asa = 100 - mix.dsp - mix.rewarded - mix.oem;
+  // Sweep across multiple allocation strategies to generate diverse frontier
+  const strategies = [
+    // [dsp, rewarded, oem, asa] — different emphasis profiles
+    (w: number) => ({ dsp: w, rewarded: Math.round((100 - w) * 0.5), oem: Math.round((100 - w) * 0.3), asa: 100 - w - Math.round((100 - w) * 0.5) - Math.round((100 - w) * 0.3) }),
+    (w: number) => ({ dsp: Math.round((100 - w) * 0.3), rewarded: w, oem: Math.round((100 - w) * 0.4), asa: 100 - Math.round((100 - w) * 0.3) - w - Math.round((100 - w) * 0.4) }),
+    (w: number) => ({ dsp: Math.round((100 - w) * 0.25), rewarded: Math.round((100 - w) * 0.25), oem: w, asa: 100 - Math.round((100 - w) * 0.25) - Math.round((100 - w) * 0.25) - w }),
+  ];
 
-    const keys: (keyof ChannelMix)[] = ['dsp', 'rewarded', 'oem', 'asa'];
-    let totalInstalls = 0;
-    let totalSpend = 0;
+  const regionCac = {
+    dsp: baseCac.dsp * regionMult,
+    rewarded: baseCac.rewarded * regionMult,
+    oem: baseCac.oem * regionMult,
+    asa: baseCac.asa * regionMult,
+  };
 
-    for (const ch of keys) {
-      const spend = budget * (mix[ch] / 100);
-      const installs = diminishingReturns(spend, eff[ch]);
-      totalInstalls += installs;
-      totalSpend += spend;
+  for (const strategyFn of strategies) {
+    for (let weight = 15; weight <= 70; weight += 5) {
+      const mix = strategyFn(weight) as ChannelMix;
+      // Clamp minimums
+      const keys: (keyof ChannelMix)[] = ['dsp', 'rewarded', 'oem', 'asa'];
+      keys.forEach((k) => { mix[k] = Math.max(5, mix[k]); });
+      const sum = keys.reduce((s, k) => s + mix[k], 0);
+      keys.forEach((k) => { mix[k] = Math.round((mix[k] / sum) * 100); });
+      mix.dsp += 100 - keys.reduce((s, k) => s + mix[k], 0);
+
+      let totalInstalls = 0;
+      for (const ch of keys) {
+        const spend = budget * (mix[ch] / 100);
+        totalInstalls += diminishingReturns(spend, eff[ch]);
+      }
+
+      const wCac = computeWeightedCAC(mix, regionCac);
+      points.push({ cac: Math.round(wCac * 100) / 100, installs: Math.round(totalInstalls) });
     }
-
-    const wCac = computeWeightedCAC(mix, {
-      dsp: baseCac.dsp * regionMult,
-      rewarded: baseCac.rewarded * regionMult,
-      oem: baseCac.oem * regionMult,
-      asa: baseCac.asa * regionMult,
-    });
-
-    points.push({
-      cac: Math.round(wCac * 100) / 100,
-      installs: Math.round(totalInstalls),
-    });
   }
 
+  // Deduplicate by rounding
+  const seen = new Set<string>();
+  const unique = points.filter((p) => {
+    const key = `${p.cac}-${p.installs}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
   // Filter to Pareto-optimal (non-dominated) points
-  const pareto = points.filter((p, _i, all) =>
+  const pareto = unique.filter((p, _i, all) =>
     !all.some((q) => q.cac <= p.cac && q.installs >= p.installs && (q.cac < p.cac || q.installs > p.installs))
   );
 
