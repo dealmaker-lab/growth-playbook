@@ -31,8 +31,6 @@ export default function PlaybookContent({
   const [gateLiftingDone, setGateLiftingDone] = useState(false);
   const [retTab, setRetTab] = useState('d7');
   const [trendTab, setTrendTab] = useState('revenue');
-  // chartsReady/gatedChartsReady removed — skeletons broke Chart.js (needs visible canvas)
-
   const lastY = useRef(0);
   const sessionId = useRef('');
   const maxScrollDepth = useRef(0);
@@ -788,8 +786,6 @@ export default function PlaybookContent({
         </div></div>
       </section>
 
-      {/* Gaming Sessions YoY table removed per team feedback */}
-
       {/* Paycell Case Study Banner */}
       <section className="sec sec-w">
         <div className="wrap rv" style={{ textAlign: 'center' }}>
@@ -798,8 +794,6 @@ export default function PlaybookContent({
           </a>
         </div>
       </section>
-
-      {/* Paycell CTA banner removed — case study image links to contact-us */}
 
       {/* 1.5 The Re-Engagement Imperative */}
       <section className="sec sec-l">
@@ -953,8 +947,6 @@ export default function PlaybookContent({
           </div></div>
         </section>
 
-        {/* LTV chart removed — shown in pre-gate teaser to avoid duplication */}
-
         <section className="sec sec-l" style={{ padding: '24px 0' }}>
           <div className="wrap rv">
             <a href="https://appsamurai.com/roas/" target="_blank" rel="noopener noreferrer"
@@ -1095,8 +1087,6 @@ export default function PlaybookContent({
             </div>
           </div></div>
         </section>
-
-        {/* Creative Best Practices removed — images used in Ch1 Creative Intelligence section */}
 
         {/* OEM Format Table */}
         <section className="sec sec-l">

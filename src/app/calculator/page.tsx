@@ -310,7 +310,6 @@ function calculate(
   category: Category,
   regions: Region[],
   budget: number,
-  _channel: Channel,
   goal: Goal,
   customLTV?: number
 ): Results {
@@ -430,11 +429,11 @@ export default function CalculatorPage() {
 
   const handleCalculate = useCallback(() => {
     const ltv = customLTV ? parseFloat(customLTV) : undefined;
-    const r = calculate(category, regions.length > 0 ? regions : ['North America'], budget, channel, goal, ltv);
+    const r = calculate(category, regions.length > 0 ? regions : ['North America'], budget, goal, ltv);
     setResults(r);
     setShowResults(true);
     setWhatIfShift(0);
-  }, [category, regions, budget, channel, goal, customLTV]);
+  }, [category, regions, budget, goal, customLTV]);
 
   // What-if: recalculate mix with DSP shift applied
   const whatIfResults = useMemo(() => {
