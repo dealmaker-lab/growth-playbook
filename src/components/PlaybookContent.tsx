@@ -508,7 +508,7 @@ export default function PlaybookContent({
               <span className="logo-item"><img src="/logos/hbo.svg" alt="HBO Max" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/nike.svg" alt="Nike" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">Gram Games</span>
-              <span className="logo-item"><img src="/logos/dominos.svg" alt="Domino's" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/dominos.svg" alt="Domino's" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">Superplay</span>
               <span className="logo-item logo-item--text">Rollic</span>
               <span className="logo-item logo-item--text">Hepsiburada</span>
@@ -520,7 +520,7 @@ export default function PlaybookContent({
               <span className="logo-item"><img src="/logos/hbo.svg" alt="HBO Max" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/nike.svg" alt="Nike" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">Gram Games</span>
-              <span className="logo-item"><img src="/logos/dominos.svg" alt="Domino's" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/dominos.svg" alt="Domino's" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">Superplay</span>
               <span className="logo-item logo-item--text">Rollic</span>
               <span className="logo-item logo-item--text">Hepsiburada</span>
@@ -531,9 +531,9 @@ export default function PlaybookContent({
               <span className="logo-item"><img src="/logos/samsung.svg" alt="Samsung" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/oppo.svg" alt="OPPO" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/nokia.svg" alt="Nokia" className="logo-svg" /></span>
-              <span className="logo-item"><img src="/logos/t-mobile.svg" alt="T-Mobile" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/t-mobile.svg" alt="T-Mobile" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item"><img src="/logos/verizon.svg" alt="Verizon" className="logo-svg" /></span>
-              <span className="logo-item"><img src="/logos/att.svg" alt="AT&amp;T" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/att.svg" alt="AT&amp;T" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">InMobi</span>
               <span className="logo-item"><img src="/logos/unity.svg" alt="Unity" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">AppLovin</span>
@@ -544,9 +544,9 @@ export default function PlaybookContent({
               <span className="logo-item"><img src="/logos/samsung.svg" alt="Samsung" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/oppo.svg" alt="OPPO" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/nokia.svg" alt="Nokia" className="logo-svg" /></span>
-              <span className="logo-item"><img src="/logos/t-mobile.svg" alt="T-Mobile" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/t-mobile.svg" alt="T-Mobile" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item"><img src="/logos/verizon.svg" alt="Verizon" className="logo-svg" /></span>
-              <span className="logo-item"><img src="/logos/att.svg" alt="AT&amp;T" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/att.svg" alt="AT&amp;T" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">InMobi</span>
               <span className="logo-item"><img src="/logos/unity.svg" alt="Unity" className="logo-svg" /></span>
               <span className="logo-item logo-item--text">AppLovin</span>
