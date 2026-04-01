@@ -506,7 +506,7 @@ export default function PlaybookContent({
               <span className="logo-item logo-item--text">TapNation</span>
               <span className="logo-item logo-item--text">Shahid</span>
               <span className="logo-item"><img src="/logos/hbo.svg" alt="HBO Max" className="logo-svg" /></span>
-              <span className="logo-item"><img src="/logos/nike.svg" alt="Nike" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/nike.svg" alt="Nike" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">Gram Games</span>
               <span className="logo-item"><img src="/logos/dominos.svg" alt="Domino's" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">Superplay</span>
@@ -518,7 +518,7 @@ export default function PlaybookContent({
               <span className="logo-item logo-item--text">TapNation</span>
               <span className="logo-item logo-item--text">Shahid</span>
               <span className="logo-item"><img src="/logos/hbo.svg" alt="HBO Max" className="logo-svg" /></span>
-              <span className="logo-item"><img src="/logos/nike.svg" alt="Nike" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/nike.svg" alt="Nike" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">Gram Games</span>
               <span className="logo-item"><img src="/logos/dominos.svg" alt="Domino's" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">Superplay</span>
@@ -535,7 +535,7 @@ export default function PlaybookContent({
               <span className="logo-item"><img src="/logos/verizon.svg" alt="Verizon" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/att.svg" alt="AT&amp;T" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">InMobi</span>
-              <span className="logo-item"><img src="/logos/unity.svg" alt="Unity" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/unity.svg" alt="Unity" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">AppLovin</span>
               <span className="logo-item logo-item--text">Taboola</span>
               <span className="logo-item logo-item--text">Smaato</span>
@@ -548,7 +548,7 @@ export default function PlaybookContent({
               <span className="logo-item"><img src="/logos/verizon.svg" alt="Verizon" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/att.svg" alt="AT&amp;T" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">InMobi</span>
-              <span className="logo-item"><img src="/logos/unity.svg" alt="Unity" className="logo-svg" /></span>
+              <span className="logo-item"><img src="/logos/unity.svg" alt="Unity" className="logo-svg logo-svg--icon" /></span>
               <span className="logo-item logo-item--text">AppLovin</span>
               <span className="logo-item logo-item--text">Taboola</span>
               <span className="logo-item logo-item--text">Smaato</span>
