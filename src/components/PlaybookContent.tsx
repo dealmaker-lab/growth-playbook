@@ -528,9 +528,9 @@ export default function PlaybookContent({
           </div>
           <div className="logo-scroll" style={{ '--scroll-dir': 'reverse' } as React.CSSProperties}>
             <div className="logo-track">
-              <span className="logo-item"><img src="/logos/samsung.svg" alt="Samsung" className="logo-svg" /></span>
-              <span className="logo-item"><img src="/logos/oppo.svg" alt="OPPO" className="logo-svg" /></span>
-              <span className="logo-item"><img src="/logos/nokia.svg" alt="Nokia" className="logo-svg" /></span>
+              <span className="logo-item logo-item--text">Samsung</span>
+              <span className="logo-item logo-item--text">OPPO</span>
+              <span className="logo-item logo-item--text">Nokia</span>
               <span className="logo-item"><img src="/logos/t-mobile.svg" alt="T-Mobile" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/verizon.svg" alt="Verizon" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/att.svg" alt="AT&amp;T" className="logo-svg" /></span>
@@ -541,9 +541,9 @@ export default function PlaybookContent({
               <span className="logo-item logo-item--text">Smaato</span>
               <span className="logo-item logo-item--text">Beymen</span>
               {/* Duplicate */}
-              <span className="logo-item"><img src="/logos/samsung.svg" alt="Samsung" className="logo-svg" /></span>
-              <span className="logo-item"><img src="/logos/oppo.svg" alt="OPPO" className="logo-svg" /></span>
-              <span className="logo-item"><img src="/logos/nokia.svg" alt="Nokia" className="logo-svg" /></span>
+              <span className="logo-item logo-item--text">Samsung</span>
+              <span className="logo-item logo-item--text">OPPO</span>
+              <span className="logo-item logo-item--text">Nokia</span>
               <span className="logo-item"><img src="/logos/t-mobile.svg" alt="T-Mobile" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/verizon.svg" alt="Verizon" className="logo-svg" /></span>
               <span className="logo-item"><img src="/logos/att.svg" alt="AT&amp;T" className="logo-svg" /></span>
