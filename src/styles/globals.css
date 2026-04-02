@@ -432,6 +432,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   .toc{padding:40px 0}
   [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
   [style*="grid-template-columns:1fr 1fr;gap:32px"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr!important}
 }
 @media(max-width:480px){
   .footer-grid{grid-template-columns:1fr!important}

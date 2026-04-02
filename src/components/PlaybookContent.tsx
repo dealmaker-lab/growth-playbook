@@ -1281,25 +1281,57 @@ export default function PlaybookContent({
           </div>
         </section>
 
-        {/* Chapter 4 FAQ */}
-        <FAQ items={ASA_FAQ} chapterColor="var(--ch4)" />
-
-        {/* CALCULATOR TEASER */}
-        <section className="sec sec-l rv" id="calculatorTeaser">
-          <div className="wrap" style={{ textAlign: 'center' }}>
-            <span className="insight-badge" style={{ marginBottom: '12px', display: 'inline-block' }}>Interactive Tool</span>
-            <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.5rem', fontWeight: 800, marginBottom: '8px' }}>
-              Calculate Your Optimal Channel Mix
-            </h3>
-            <p style={{ color: 'var(--text-muted)', maxWidth: '500px', margin: '0 auto 20px', fontSize: '0.92rem' }}>
-              Input your app category, budget, and goals — get a personalized channel allocation with estimated CAC and ROAS.
-            </p>
-            <a href="/calculator" className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none', padding: '14px 36px' }}
-               onClick={() => trackEvent('cta_click', 'calculator_teaser', { destination: 'calculator' })}>
-              Open ROI Calculator &rarr;
-            </a>
+        {/* CALCULATOR CTA — "What's Next" after reading all 4 pillars */}
+        <section className="sec sec-w rv" id="calculatorTeaser" style={{ padding: '56px 0' }}>
+          <div className="wrap">
+            <div style={{ background: 'linear-gradient(135deg, #f0fdf6 0%, #e8f5ee 50%, #f0f4ff 100%)', border: '1px solid rgba(38,190,129,.15)', borderRadius: 'var(--r-lg)', padding: '48px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'center' }}>
+              <div>
+                <span className="insight-badge" style={{ marginBottom: '16px', display: 'inline-block' }}>Your Next Step</span>
+                <h3 style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1.4rem, 3vw, 1.8rem)', fontWeight: 800, marginBottom: '12px', color: 'var(--text)', lineHeight: 1.2 }}>
+                  You&apos;ve Seen the Strategy.<br />Now Model It for Your App.
+                </h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '.92rem', lineHeight: 1.7, marginBottom: '20px', maxWidth: '440px' }}>
+                  Combine all 4 pillars — DSP, Rewarded, OEM, and ASA — into a personalized budget allocation with estimated CAC and ROAS projections.
+                </p>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '24px' }}>
+                  <span style={{ padding: '6px 14px', borderRadius: '20px', fontSize: '.75rem', fontWeight: 600, background: 'rgba(38,190,129,.08)', color: 'var(--green)', border: '1px solid rgba(38,190,129,.15)' }}>Programmatic DSP</span>
+                  <span style={{ padding: '6px 14px', borderRadius: '20px', fontSize: '.75rem', fontWeight: 600, background: 'rgba(175,156,255,.08)', color: 'var(--purple)', border: '1px solid rgba(175,156,255,.15)' }}>Rewarded Playtime</span>
+                  <span style={{ padding: '6px 14px', borderRadius: '20px', fontSize: '.75rem', fontWeight: 600, background: 'rgba(85,85,85,.06)', color: '#555', border: '1px solid rgba(85,85,85,.12)' }}>OEM Discovery</span>
+                  <span style={{ padding: '6px 14px', borderRadius: '20px', fontSize: '.75rem', fontWeight: 600, background: 'rgba(0,244,244,.06)', color: '#00b8b8', border: '1px solid rgba(0,244,244,.12)' }}>Apple Search Ads</span>
+                </div>
+                <a href="/calculator" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none', padding: '16px 36px', fontSize: '1rem' }}
+                   onClick={() => trackEvent('cta_click', 'calculator_teaser', { destination: 'calculator' })}>
+                  Open ROI Calculator
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 9h10M10 5l4 4-4 4" /></svg>
+                </a>
+              </div>
+              <div style={{ background: '#fff', borderRadius: '16px', padding: '28px', boxShadow: '0 8px 32px rgba(0,0,0,.06)', border: '1px solid var(--border)' }}>
+                <div style={{ fontSize: '.82rem', fontWeight: 700, color: 'var(--text)', marginBottom: '4px', fontFamily: 'var(--font-h)' }}>Sample Channel Mix</div>
+                <div style={{ fontSize: '.72rem', color: 'var(--text-muted)', marginBottom: '16px' }}>Gaming app, $50K/mo, ROAS-focused</div>
+                <div style={{ display: 'flex', height: '12px', borderRadius: '6px', overflow: 'hidden', marginBottom: '16px' }}>
+                  <div style={{ width: '32%', background: 'var(--green)' }} />
+                  <div style={{ width: '34%', background: 'var(--purple)' }} />
+                  <div style={{ width: '10%', background: '#555' }} />
+                  <div style={{ width: '24%', background: 'var(--cyan)' }} />
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><div style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--green)', flexShrink: 0 }} /><span style={{ fontSize: '.78rem', color: 'var(--text-muted)' }}>DSP 32%</span></div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><div style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--purple)', flexShrink: 0 }} /><span style={{ fontSize: '.78rem', color: 'var(--text-muted)' }}>Rewarded 34%</span></div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#555', flexShrink: 0 }} /><span style={{ fontSize: '.78rem', color: 'var(--text-muted)' }}>OEM 10%</span></div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><div style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--cyan)', flexShrink: 0 }} /><span style={{ fontSize: '.78rem', color: 'var(--text-muted)' }}>ASA 24%</span></div>
+                </div>
+                <div style={{ marginTop: '16px', padding: '12px', background: 'var(--bg-alt)', borderRadius: '10px', display: 'flex', justifyContent: 'space-between' }}>
+                  <div style={{ textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--green)' }}>$2.84</div><div style={{ fontSize: '.68rem', color: 'var(--text-faint)' }}>Blended CAC</div></div>
+                  <div style={{ textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--green)' }}>5.2x</div><div style={{ fontSize: '.68rem', color: 'var(--text-faint)' }}>Est. ROAS</div></div>
+                  <div style={{ textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--green)' }}>17.6K</div><div style={{ fontSize: '.68rem', color: 'var(--text-faint)' }}>Est. Installs</div></div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
+
+        {/* Chapter 4 FAQ */}
+        <FAQ items={ASA_FAQ} chapterColor="var(--ch4)" />
 
         {/* TESTIMONIALS */}
         <section className="sec sec-l" style={{ padding: '56px 0' }}>
