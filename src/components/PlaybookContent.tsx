@@ -12,7 +12,6 @@ import {
   MarketShareChart,
   OEMFormatChart,
   ASABubbleChart,
-  TapNationChart,
 } from './charts';
 import FAQ, { DSP_FAQ, REWARDED_FAQ, OEM_FAQ, ASA_FAQ } from './FAQ';
 import TrendingContent from './TrendingContent';
@@ -1062,6 +1061,9 @@ export default function PlaybookContent({
             <h2>OEM User Acquisition: Reaching 3B+ Android Users Before the App Store</h2>
             <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>On-Device Discovery</p>
             <div className="ch-desc">The most sophisticated growth teams have moved &ldquo;upstream.&rdquo; By partnering with manufacturers like Samsung, Xiaomi, and Oppo, brands gain unprecedented system-level access to users that traditional ad networks simply cannot replicate.</div>
+            <div className="rv" style={{ marginTop: '32px', textAlign: 'center' }}>
+              <img src="/images/oem-entry-screens.png" alt="OEM entry screens showing app discovery on Samsung and Xiaomi devices" style={{ maxWidth: '520px', width: '100%', borderRadius: '12px' }} />
+            </div>
           </div>
         </section>
 
@@ -1101,6 +1103,24 @@ export default function PlaybookContent({
                 <tr><td><strong>Smart Push</strong></td><td>Medium-High</td><td><span className="delta pos">&#9650; Good</span></td><td>Re-engagement messaging</td></tr>
               </tbody>
             </table>
+            <div className="rv" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginTop: '24px' }}>
+              <div style={{ textAlign: 'center' }}>
+                <img src="/images/oem-format-pai.png" alt="PAI (Play-Auto-Install) format" style={{ width: '100%', borderRadius: '10px', border: '1px solid var(--border)' }} />
+                <p style={{ fontSize: '.75rem', fontWeight: 600, color: 'var(--text-muted)', marginTop: '8px' }}>PAI (Play-Auto-Install)</p>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <img src="/images/oem-format-icon.png" alt="Icon Placement format" style={{ width: '100%', borderRadius: '10px', border: '1px solid var(--border)' }} />
+                <p style={{ fontSize: '.75rem', fontWeight: 600, color: 'var(--text-muted)', marginTop: '8px' }}>Icon Placement</p>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <img src="/images/oem-format-splash.png" alt="Native Splash format" style={{ width: '100%', borderRadius: '10px', border: '1px solid var(--border)' }} />
+                <p style={{ fontSize: '.75rem', fontWeight: 600, color: 'var(--text-muted)', marginTop: '8px' }}>Native Splash</p>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <img src="/images/oem-format-push.png" alt="Smart Push format" style={{ width: '100%', borderRadius: '10px', border: '1px solid var(--border)' }} />
+                <p style={{ fontSize: '.75rem', fontWeight: 600, color: 'var(--text-muted)', marginTop: '8px' }}>Smart Push</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -1138,29 +1158,18 @@ export default function PlaybookContent({
             <span className="insight-badge">Cost Advantage</span>
             <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.4rem', fontWeight: 700, marginBottom: '16px', color: 'var(--text)' }}>OEM Advertising Costs: Lower CPM, Higher ROAS Than Social Platforms</h3>
             <div className="grid-3">
-              <div className="stat-callout rv" style={{ flexDirection: 'column', textAlign: 'center', borderLeft: 'none', borderTop: '3px solid var(--green)' }}><div className="big-num" style={{ color: 'var(--green)', fontSize: '1.6rem' }}>Lower CPM</div><div className="stat-body"><p style={{ fontSize: '.82rem' }}>OEM provides lower entry costs vs traditional digital.</p></div></div>
-              <div className="stat-callout rv" style={{ flexDirection: 'column', textAlign: 'center', borderLeft: 'none', borderTop: '3px solid var(--green)' }}><div className="big-num" style={{ color: 'var(--green)', fontSize: '1.6rem' }}>Less Waste</div><div className="stat-body"><p style={{ fontSize: '.82rem' }}>Precise targeting ensures no wasted impressions.</p></div></div>
-              <div className="stat-callout rv" style={{ flexDirection: 'column', textAlign: 'center', borderLeft: 'none', borderTop: '3px solid var(--green)' }}><div className="big-num" style={{ color: 'var(--green)', fontSize: '1.6rem' }}>Uncluttered</div><div className="stat-body"><p style={{ fontSize: '.82rem' }}>Brands stand out in a clean system environment.</p></div></div>
+              <div className="stat-callout rv" style={{ flexDirection: 'column', borderLeft: 'none', borderTop: '3px solid var(--green)' }}><div className="big-num" style={{ color: 'var(--green)', fontSize: '1.6rem', marginBottom: '8px' }}>Lower CPM/CPC</div><div className="stat-body"><p style={{ fontSize: '.82rem', lineHeight: 1.7 }}>OEM advertising often provides lower entry costs compared to traditional digital channels, allowing for broader reach with less ad spend.</p></div></div>
+              <div className="stat-callout rv" style={{ flexDirection: 'column', borderLeft: 'none', borderTop: '3px solid var(--green)' }}><div className="big-num" style={{ color: 'var(--green)', fontSize: '1.6rem', marginBottom: '8px' }}>Reduced Waste</div><div className="stat-body"><p style={{ fontSize: '.82rem', lineHeight: 1.7 }}>Precise targeting ensures that impressions aren&apos;t wasted on disinterested audiences. You aren&apos;t just buying reach; you are buying <strong>contextual relevance</strong>.</p></div></div>
+              <div className="stat-callout rv" style={{ flexDirection: 'column', borderLeft: 'none', borderTop: '3px solid var(--green)' }}><div className="big-num" style={{ color: 'var(--green)', fontSize: '1.6rem', marginBottom: '8px' }}>Uncluttered</div><div className="stat-body"><p style={{ fontSize: '.82rem', lineHeight: 1.7 }}>By moving away from the &ldquo;noise&rdquo; of crowded ad auctions, brands can stand out in an uncluttered system environment, building a lasting connection with the user at multiple stages of their journey.</p></div></div>
             </div>
           </div>
         </section>
 
-        {/* TapNation Case Study — Light Mode */}
+        {/* TapNation Case Study — Full Image */}
         <section className="sec sec-w">
           <div className="wrap">
-            <div className="chart-card-new rv" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', alignItems: 'center' }}>
-              <div>
-                <span className="insight-badge" style={{ marginBottom: '8px', display: 'inline-block', background: 'rgba(175,156,255,.08)', color: 'var(--purple)', borderColor: 'rgba(175,156,255,.2)' }}>Case Study</span>
-                <h4 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--purple)', marginBottom: '4px', fontFamily: 'var(--font-h)' }}>TapNation</h4>
-                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '8px', color: 'var(--text)' }}>How TapNation Achieved ROAS+ via AppSamurai&apos;s OEM Campaign</h4>
-                <p style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '16px' }}>TapNation leveraged AppSamurai&apos;s OEM channel to reach users at the device level, achieving strong ROAS targets through pre-install strategies and on-device discovery.</p>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
-                  <div style={{ background: 'var(--purple-l)', borderRadius: '10px', padding: '14px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--purple)' }}>45%</div><div style={{ fontSize: '.72rem', color: 'var(--text-muted)' }}>OEM Discovery</div></div>
-                  <div style={{ background: 'var(--purple-l)', borderRadius: '10px', padding: '14px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--purple)' }}>35%</div><div style={{ fontSize: '.72rem', color: 'var(--text-muted)' }}>Programmatic</div></div>
-                  <div style={{ background: 'var(--green-l)', borderRadius: '10px', padding: '14px', textAlign: 'center' }}><div style={{ fontFamily: 'var(--font-h)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--green)' }}>ROAS+</div><div style={{ fontSize: '.72rem', color: 'var(--text-muted)' }}>Target Achieved</div></div>
-                </div>
-              </div>
-              <div><TapNationChart /></div>
+            <div className="rv" style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)' }}>
+              <img src="/images/tapnation-case-study.png" alt="TapNation Case Study — Achieved ROAS+ with OEM Strategies: 1.7 Million loyal new users acquired, 116% ROAS" style={{ width: '100%', display: 'block' }} />
             </div>
           </div>
         </section>

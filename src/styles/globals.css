@@ -420,6 +420,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   [style*="grid-template-columns:repeat(5"]{grid-template-columns:repeat(3,1fr)!important}
   .about-stats{flex-direction:column;gap:16px}
   .logo-item{padding:10px 20px;font-size:12px}
+  [style*="grid-template-columns: repeat(4"]{grid-template-columns:repeat(2,1fr)!important}
   .gate{padding:28px 0!important}
   .gate h2{font-size:1.2rem!important}
   .footer-grid{grid-template-columns:1fr 1fr!important;gap:24px}
