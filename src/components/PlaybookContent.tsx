@@ -972,21 +972,9 @@ export default function PlaybookContent({
         <section className="sec sec-l" style={{ padding: '24px 0' }}>
           <div className="wrap rv">
             <a href="https://appsamurai.com/roas/" target="_blank" rel="noopener noreferrer"
-               style={{ display: 'block', background: 'linear-gradient(135deg, #f0fdf6, #e8f5ee)', borderRadius: 16, padding: '24px 32px', textDecoration: 'none', border: '1px solid rgba(38,190,129,.15)', transition: 'box-shadow 0.3s' }}
+               style={{ display: 'block', borderRadius: 16, overflow: 'hidden', textDecoration: 'none', transition: 'box-shadow 0.3s' }}
                onClick={() => trackEvent('cta_click', 'roas_banner', { destination: 'roas' })}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
-                <div>
-                  <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#222', fontFamily: 'var(--font-h)', marginBottom: 4 }}>
-                    What&apos;s Your Rewarded UA Potential?
-                  </div>
-                  <div style={{ color: '#666', fontSize: '0.9rem' }}>
-                    Try our ROAS Forecaster &mdash; estimate returns before you invest.
-                  </div>
-                </div>
-                <div style={{ background: 'var(--green)', color: '#fff', padding: '12px 28px', borderRadius: 29, fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap' }}>
-                  Try ROAS Forecaster &rarr;
-                </div>
-              </div>
+              <img src="/images/roas-forecaster-cta.png" alt="What's Your Rewarded UA Potential? Try our ROAS Forecaster — estimate returns before you invest." style={{ width: '100%', display: 'block', borderRadius: 16 }} />
             </a>
           </div>
         </section>
@@ -1124,8 +1112,10 @@ export default function PlaybookContent({
                 ['/images/oem-format-splash.png', 'Native Splash'],
                 ['/images/oem-format-push.png', 'Smart Push'],
               ] as [string, string][]).map(([src, label]) => (
-                <div key={label} style={{ textAlign: 'center', background: '#f5f7f9', borderRadius: '12px', padding: '16px 12px', border: '1px solid var(--border)' }}>
-                  <img src={src} alt={`${label} format`} style={{ width: '100%', maxHeight: '280px', objectFit: 'contain', borderRadius: '8px' }} />
+                <div key={label} style={{ textAlign: 'center', background: '#f5f7f9', borderRadius: '12px', padding: '16px 12px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '220px' }}>
+                    <img src={src} alt={`${label} format`} style={{ maxWidth: '100%', maxHeight: '220px', objectFit: 'contain', borderRadius: '8px' }} />
+                  </div>
                   <p style={{ fontSize: '.78rem', fontWeight: 600, color: 'var(--text)', marginTop: '10px' }}>{label}</p>
                 </div>
               ))}
