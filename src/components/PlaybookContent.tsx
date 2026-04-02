@@ -1113,8 +1113,8 @@ export default function PlaybookContent({
                 ['/images/oem-format-push.png', 'Smart Push'],
               ] as [string, string][]).map(([src, label]) => (
                 <div key={label} style={{ textAlign: 'center', background: '#f5f7f9', borderRadius: '12px', padding: '16px 12px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '220px' }}>
-                    <img src={src} alt={`${label} format`} style={{ maxWidth: '100%', maxHeight: '220px', objectFit: 'contain', borderRadius: '8px' }} />
+                  <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '280px' }}>
+                    <img src={src} alt={`${label} format`} style={{ maxWidth: '100%', maxHeight: '280px', objectFit: 'contain', borderRadius: '8px' }} />
                   </div>
                   <p style={{ fontSize: '.78rem', fontWeight: 600, color: 'var(--text)', marginTop: '10px' }}>{label}</p>
                 </div>
@@ -1167,9 +1167,9 @@ export default function PlaybookContent({
         {/* TapNation Case Study — Full Image */}
         <section className="sec sec-w">
           <div className="wrap">
-            <div className="rv" style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)' }}>
-              <img src="/images/tapnation-case-study.png" alt="TapNation Case Study — Achieved ROAS+ with OEM Strategies: 1.7 Million loyal new users acquired, 116% ROAS" style={{ width: '100%', display: 'block' }} />
-            </div>
+            <a href="https://appsamurai.com/contact-us/" target="_blank" rel="noopener noreferrer" style={{ display: 'block', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)' }} onClick={() => trackEvent('cta_click', 'tapnation_case_study', { destination: 'contact' })}>
+              <img src="/images/tapnation-case-study.png" alt="TapNation Case Study — Achieved ROAS+ with OEM Strategies: 1.7 Million loyal new users acquired, 116% ROAS" style={{ width: '100%', display: 'block', cursor: 'pointer' }} />
+            </a>
           </div>
         </section>
 
@@ -1356,7 +1356,7 @@ export default function PlaybookContent({
             <div className="rv">
               <div className="about-tag">About AppSamurai</div>
               <h2>The Growth Platform Built for Mobile</h2>
-              <p>AppSamurai is a global mobile growth platform empowering apps to scale through AI-powered programmatic advertising, rewarded user acquisition, OEM on-device discovery, and Apple Search Ads management.</p>
+              <p>AppSamurai is a global mobile growth platform empowering apps to scale through AI-powered programmatic advertising, rewarded user acquisition, and OEM on-device discovery.</p>
               <p>Our integrated ecosystem — including the AppsPrize rewards platform — enables growth teams to acquire high-value users, optimize retention, and maximize lifetime value across every stage of the funnel.</p>
               <div className="about-stats">
                 <div><strong>10,000+</strong><span>Campaigns Managed</span></div>
@@ -1366,13 +1366,11 @@ export default function PlaybookContent({
               <a href="https://appsamurai.com/contact" className="btn-primary" style={{ marginTop: '16px' }} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('cta_click', 'about', { destination: 'contact' })}>Get in Touch &rarr;</a>
             </div>
             <div className="rv-r">
-              <div className="pillar-grid">
-                <div className="pillar"><div className="pillar-icon">&#128640;</div><h4>DSP</h4><p>AI-Powered Programmatic</p></div>
-                <div className="pillar"><div className="pillar-icon">&#127918;</div><h4>Rewarded</h4><p>Playtime &amp; Offerwalls</p></div>
-                <div className="pillar"><div className="pillar-icon">&#128241;</div><h4>OEM</h4><p>On-Device Discovery</p></div>
-                <div className="pillar"><div className="pillar-icon">&#128269;</div><h4>ASA</h4><p>Search Ads &amp; ASO</p></div>
-                <div className="pillar"><div className="pillar-icon">&#127942;</div><h4>AppsPrize</h4><p>Publisher Monetization</p></div>
-                <div className="pillar"><div className="pillar-icon">&#128200;</div><h4>Analytics</h4><p>Attribution &amp; LTV</p></div>
+              <div className="pillar-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                <a href="https://appsamurai.com/dsp/" target="_blank" rel="noopener noreferrer" className="pillar" style={{ textDecoration: 'none', color: 'inherit' }}><div className="pillar-icon">&#128640;</div><h4>DSP</h4><p>AI-Powered Programmatic</p></a>
+                <a href="https://appsamurai.com/gaming/" target="_blank" rel="noopener noreferrer" className="pillar" style={{ textDecoration: 'none', color: 'inherit' }}><div className="pillar-icon">&#129689;</div><h4>Rewarded</h4><p>Playtime &amp; Offerwalls</p></a>
+                <a href="https://appsamurai.com/oem/" target="_blank" rel="noopener noreferrer" className="pillar" style={{ textDecoration: 'none', color: 'inherit' }}><div className="pillar-icon">&#128241;</div><h4>OEM</h4><p>On-Device Discovery</p></a>
+                <a href="https://appsamurai.com/appsprize-monetization/" target="_blank" rel="noopener noreferrer" className="pillar" style={{ textDecoration: 'none', color: 'inherit' }}><div className="pillar-icon">&#127942;</div><h4>AppsPrize</h4><p>Publisher Monetization</p></a>
               </div>
             </div>
           </div></div>

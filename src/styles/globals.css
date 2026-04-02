@@ -235,6 +235,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 
 /* === SECTION TRANSITIONS === */
 .sec-l+.sec-w,.sec-w+.sec-l{position:relative}
+.sec-w+.sec-w,.sec-l+.sec-l{margin-top:calc(var(--sec-pad) * -0.5)}
 .ch-head+.sec{padding-top:calc(var(--sec-pad) * .7)}
 
 /* === EMAIL GATE === */
