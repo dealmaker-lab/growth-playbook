@@ -621,6 +621,26 @@ export default function PlaybookContent({
         </div>
       </section>
 
+      {/* Overview Charts — General data, side-by-side after Ch1 intro */}
+      <section className="sec sec-w">
+        <div className="wrap"><div className="story rv">
+          <div className="story-chart rv-l">
+            <div className="chart-h" style={{ fontSize: '.95rem' }}>Annual Trends by Product Model</div>
+            <div className="tabs-center"><div className="tabs" id="trendTabs">
+              {['revenue', 'downloads', 'sessions'].map((t) => (
+                <button key={t} className={`tab-btn${trendTab === t ? ' active' : ''}`} onClick={() => setTrendTab(t)}>{t.charAt(0).toUpperCase() + t.slice(1)}</button>
+              ))}
+            </div></div>
+            <div className="chart-wrap" style={{ height: '280px' }}><TrendsChart tab={trendTab} /></div>
+          </div>
+          <div className="story-chart rv-r">
+            <div className="chart-h" style={{ fontSize: '.95rem' }}>Download Channels Share by Genre</div>
+            <div className="chart-sub">Share of downloads by product model</div>
+            <div className="chart-wrap" style={{ height: '300px' }}><GenreChart /></div>
+          </div>
+        </div></div>
+      </section>
+
       {/* Seasonal Insight Callout */}
       <section className="sec sec-w">
         <div className="wrap rv">
@@ -847,20 +867,6 @@ export default function PlaybookContent({
       {/* Chapter 1 FAQ */}
       <FAQ items={DSP_FAQ} chapterColor="var(--ch1)" />
 
-      {/* LTV Comparison Teaser (pre-gate) */}
-      <section className={`sec sec-l${!gateUnlocked ? ' gate-tease' : ''}`}>
-        <div className="wrap">
-          <div className="chart-card-new rv">
-            <h4>LTV Comparison by Acquisition Model</h4>
-            <div className="chart-subtitle">Rewarded Playtime delivers 2-3x higher LTV than traditional models</div>
-            <div className="chart-wrap"><LTVChart /></div>
-            <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-              <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> Rewarded Playtime users generate $14.80 D90 LTV — nearly 3x higher than incentivized installs ($3.10). The reward mechanic drives genuine engagement, not just downloads.
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* EMAIL GATE */}
       <section
         className={`gate${gateLiftingDone ? ' gate-lifting' : ''}`}
@@ -919,12 +925,15 @@ export default function PlaybookContent({
         {/* CHAPTER 2 */}
         <hr className="divider purple" />
         <section className="ch-head ch-purple" id="ch2">
-          <div className="wrap rv ch-enter-scale" style={{ position: 'relative' }}>
-            <span className="ch-bg-num">02</span>
-            <div className="ch-num" style={{ color: 'var(--ch2)' }}>2.0</div>
-            <h2>Rewarded Playtime: The Value-Exchange Model Driving 3x Higher LTV</h2>
-            <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.7)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Mastering the Value-Exchange Economy</p>
-            <div className="ch-desc">In 2026, the mobile growth landscape has shifted from passive ad consumption to a Value-Exchange Economy. Rewarded Playtime is at the center of sustainable growth strategies, transforming how developers acquire, engage, and monetize their audiences.</div>
+          <div className="wrap rv ch-enter-scale" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr auto', gap: '32px', alignItems: 'center' }}>
+            <div>
+              <span className="ch-bg-num">02</span>
+              <div className="ch-num" style={{ color: 'var(--ch2)' }}>2.0</div>
+              <h2>Rewarded Playtime: The Value-Exchange Model Driving 3x Higher LTV</h2>
+              <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.7)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Mastering the Value-Exchange Economy</p>
+              <div className="ch-desc">In 2026, the mobile growth landscape has shifted from passive ad consumption to a Value-Exchange Economy. Rewarded Playtime is at the center of sustainable growth strategies, transforming how developers acquire, engage, and monetize their audiences.</div>
+            </div>
+            <img src="/images/rewarded-entry-screens.png" alt="Rewarded Playtime interface showing user rewards and engagement" style={{ maxWidth: '400px', borderRadius: '16px', display: 'block' }} />
           </div>
         </section>
 
@@ -944,6 +953,20 @@ export default function PlaybookContent({
               <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch2)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><circle cx="8" cy="8" r="4"/><circle cx="16" cy="8" r="4"/><circle cx="12" cy="16" r="4"/></svg></div><div><h4>Systematic Segment Optimization</h4><p>By analyzing mobile interests, demographics, and geographic data, growth teams can optimize each segment individually for maximum ROI.</p></div></div>
             </div>
           </div></div>
+        </section>
+
+        {/* LTV Comparison — after Section 2.1 */}
+        <section className="sec sec-l">
+          <div className="wrap">
+            <div className="chart-card-new rv">
+              <h4>LTV Comparison by Acquisition Model</h4>
+              <div className="chart-subtitle">Rewarded Playtime delivers 2-3x higher LTV than traditional models</div>
+              <div className="chart-wrap"><LTVChart /></div>
+              <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> Rewarded Playtime users generate $14.80 D90 LTV — nearly 3x higher than incentivized installs ($3.10). The reward mechanic drives genuine engagement, not just downloads.
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="sec sec-l" style={{ padding: '24px 0' }}>
@@ -982,15 +1005,10 @@ export default function PlaybookContent({
           </div>
         </section>
 
-        {/* Genre + Retention Charts */}
+        {/* Retention Chart — after Section 2.2 */}
         <section className="sec sec-w">
-          <div className="wrap"><div className="story rv">
-            <div className="story-chart rv-l">
-              <div className="chart-h" style={{ fontSize: '.95rem' }}>Download Channels Share by Genre</div>
-              <div className="chart-sub">Share of downloads by product model</div>
-              <div className="chart-wrap" style={{ height: '300px' }}><GenreChart /></div>
-            </div>
-            <div className="story-chart rv-r">
+          <div className="wrap">
+            <div className="chart-card-new rv">
               <div className="chart-h" style={{ fontSize: '.95rem' }}>Mobile Game Retention Trends</div>
               <div className="tabs-center"><div className="tabs" id="retTabs">
                 {['d7', 'd30', 'd1', 'd365'].map((t) => (
@@ -999,29 +1017,20 @@ export default function PlaybookContent({
               </div></div>
               <div className="chart-wrap" style={{ height: '260px' }}><RetentionChart tab={retTab} /></div>
             </div>
-          </div></div>
+          </div>
         </section>
 
-        {/* 2.3 + Trends Chart */}
+        {/* 2.3 Scaling Paradox */}
         <section className="sec sec-l">
-          <div className="wrap"><div className="story rv">
-            <div className="story-text rv-l">
-              <span className="tag" style={{ color: 'var(--ch2)', borderColor: 'var(--ch2)' }}>Section 2.3</span>
-              <h3>Solving the Scaling Paradox: Smart Bidding</h3>
-              <p>Achieving high conversion rates while maintaining strict CPI constraints requires moving from acquiring volume toward acquiring value.</p>
-              <div className="info-card" style={{ margin: '8px 0', borderLeft: '3px solid var(--ch2)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="var(--purple)" stroke="none"/></svg></div><div><h4>Targeting Precision</h4><p>Using precise age and gender targeting allows teams to bid accurately for each audience segment. This ensures you reach users more effectively and avoid the trap of acquiring low-quality users.</p></div></div>
-              <div className="info-card" style={{ margin: '8px 0', borderLeft: '3px solid var(--ch2)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><path d="M12 2a10 10 0 1 0 10 10"/><path d="M22 5l-4 2 2 4"/><circle cx="12" cy="12" r="2"/></svg></div><div><h4>The Revenue Flywheel</h4><p>Initial tests with Playtime often reveal high retention rates. This stability allows growth teams to optimize segments individually and capitalize on the strengths of diverse audience groups, leading to a much more sustainable performance.</p></div></div>
+          <div className="wrap rv">
+            <span className="tag" style={{ color: 'var(--ch2)', borderColor: 'var(--ch2)' }}>Section 2.3</span>
+            <h3 style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1.3rem,2.5vw,1.8rem)', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>Solving the Scaling Paradox: Smart Bidding</h3>
+            <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.75, marginBottom: '24px', maxWidth: '720px' }}>Achieving high conversion rates while maintaining strict CPI constraints requires moving from acquiring volume toward acquiring value.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch2)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="var(--purple)" stroke="none"/></svg></div><div><h4>Targeting Precision</h4><p>Using precise age and gender targeting allows teams to bid accurately for each audience segment. This ensures you reach users more effectively and avoid the trap of acquiring low-quality users.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch2)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><path d="M12 2a10 10 0 1 0 10 10"/><path d="M22 5l-4 2 2 4"/><circle cx="12" cy="12" r="2"/></svg></div><div><h4>The Revenue Flywheel</h4><p>Initial tests with Playtime often reveal high retention rates. This stability allows growth teams to optimize segments individually and capitalize on the strengths of diverse audience groups, leading to a much more sustainable performance.</p></div></div>
             </div>
-            <div className="story-chart rv-r">
-              <div className="chart-h" style={{ fontSize: '.95rem' }}>Annual Trends by Product Model</div>
-              <div className="tabs-center"><div className="tabs" id="trendTabs">
-                {['revenue', 'downloads', 'sessions'].map((t) => (
-                  <button key={t} className={`tab-btn${trendTab === t ? ' active' : ''}`} onClick={() => setTrendTab(t)}>{t.charAt(0).toUpperCase() + t.slice(1)}</button>
-                ))}
-              </div></div>
-              <div className="chart-wrap" style={{ height: '280px' }}><TrendsChart tab={trendTab} /></div>
-            </div>
-          </div></div>
+          </div>
         </section>
 
         {/* Mert Quote */}
@@ -1045,6 +1054,11 @@ export default function PlaybookContent({
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--ch2)', flexDirection: 'column' }}><div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div><h4>A &ldquo;Native&rdquo; Rewards Experience</h4><p>AppsPrize acts as a loyalty layer, rewarding users in the app&apos;s native currency for seamless exploration.</p></div>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--ch2)', flexDirection: 'column' }}><div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><circle cx="12" cy="12" r="5"/><path d="M12 7a5 5 0 0 1 0 10"/><path d="M9 5l-2-2M15 5l2-2M9 19l-2 2M15 19l2 2"/></svg></div><h4>Verified Human Engagement</h4><p>Built on playtime and level-based events, it inherently filters out low-quality traffic. Publishers provide a platform for verified user attachment.</p></div>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--ch2)', flexDirection: 'column' }}><div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div><h4>Visual &amp; Interactive Appeal</h4><p>A visually engaging way to discover new content, ensuring positive UX and greater attachment to both the advertised game and the host app.</p></div>
+            </div>
+            <div className="rv" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginTop: '24px' }}>
+              <img src="/images/appsprize-1.png" alt="AppsPrize rewards experience" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--border)' }} />
+              <img src="/images/appsprize-2.png" alt="AppsPrize engagement interface" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--border)' }} />
+              <img src="/images/appsprize-3.png" alt="AppsPrize monetization dashboard" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--border)' }} />
             </div>
           </div>
         </section>
@@ -1103,23 +1117,18 @@ export default function PlaybookContent({
                 <tr><td><strong>Smart Push</strong></td><td>Medium-High</td><td><span className="delta pos">&#9650; Good</span></td><td>Re-engagement messaging</td></tr>
               </tbody>
             </table>
-            <div className="rv" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginTop: '24px' }}>
-              <div style={{ textAlign: 'center' }}>
-                <img src="/images/oem-format-pai.png" alt="PAI (Play-Auto-Install) format" style={{ width: '100%', borderRadius: '10px', border: '1px solid var(--border)' }} />
-                <p style={{ fontSize: '.75rem', fontWeight: 600, color: 'var(--text-muted)', marginTop: '8px' }}>PAI (Play-Auto-Install)</p>
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                <img src="/images/oem-format-icon.png" alt="Icon Placement format" style={{ width: '100%', borderRadius: '10px', border: '1px solid var(--border)' }} />
-                <p style={{ fontSize: '.75rem', fontWeight: 600, color: 'var(--text-muted)', marginTop: '8px' }}>Icon Placement</p>
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                <img src="/images/oem-format-splash.png" alt="Native Splash format" style={{ width: '100%', borderRadius: '10px', border: '1px solid var(--border)' }} />
-                <p style={{ fontSize: '.75rem', fontWeight: 600, color: 'var(--text-muted)', marginTop: '8px' }}>Native Splash</p>
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                <img src="/images/oem-format-push.png" alt="Smart Push format" style={{ width: '100%', borderRadius: '10px', border: '1px solid var(--border)' }} />
-                <p style={{ fontSize: '.75rem', fontWeight: 600, color: 'var(--text-muted)', marginTop: '8px' }}>Smart Push</p>
-              </div>
+            <div className="rv" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginTop: '24px' }}>
+              {([
+                ['/images/oem-format-pai.png', 'PAI (Play-Auto-Install)'],
+                ['/images/oem-format-icon.png', 'Icon Placement'],
+                ['/images/oem-format-splash.png', 'Native Splash'],
+                ['/images/oem-format-push.png', 'Smart Push'],
+              ] as [string, string][]).map(([src, label]) => (
+                <div key={label} style={{ textAlign: 'center', background: '#f5f7f9', borderRadius: '12px', padding: '16px 12px', border: '1px solid var(--border)' }}>
+                  <img src={src} alt={`${label} format`} style={{ width: '100%', maxHeight: '280px', objectFit: 'contain', borderRadius: '8px' }} />
+                  <p style={{ fontSize: '.78rem', fontWeight: 600, color: 'var(--text)', marginTop: '10px' }}>{label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
