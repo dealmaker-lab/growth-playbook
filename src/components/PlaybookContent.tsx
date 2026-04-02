@@ -1055,15 +1055,15 @@ export default function PlaybookContent({
         {/* CHAPTER 3 */}
         <hr className="divider dark" />
         <section className="ch-head ch-dark" id="ch3">
-          <div className="wrap rv ch-enter-left" style={{ position: 'relative' }}>
-            <span className="ch-bg-num">03</span>
-            <div className="ch-num" style={{ color: 'var(--green)' }}>3.0</div>
-            <h2>OEM User Acquisition: Reaching 3B+ Android Users Before the App Store</h2>
-            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>On-Device Discovery</p>
-            <div className="ch-desc">The most sophisticated growth teams have moved &ldquo;upstream.&rdquo; By partnering with manufacturers like Samsung, Xiaomi, and Oppo, brands gain unprecedented system-level access to users that traditional ad networks simply cannot replicate.</div>
-            <div className="rv" style={{ marginTop: '32px', textAlign: 'center' }}>
-              <img src="/images/oem-entry-screens.png" alt="OEM entry screens showing app discovery on Samsung and Xiaomi devices" style={{ maxWidth: '520px', width: '100%', borderRadius: '12px' }} />
+          <div className="wrap rv ch-enter-left" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr auto', gap: '32px', alignItems: 'center' }}>
+            <div>
+              <span className="ch-bg-num">03</span>
+              <div className="ch-num" style={{ color: 'var(--green)' }}>3.0</div>
+              <h2>OEM User Acquisition: Reaching 3B+ Android Users Before the App Store</h2>
+              <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>On-Device Discovery</p>
+              <div className="ch-desc">The most sophisticated growth teams have moved &ldquo;upstream.&rdquo; By partnering with manufacturers like Samsung, Xiaomi, and Oppo, brands gain unprecedented system-level access to users that traditional ad networks simply cannot replicate.</div>
             </div>
+            <img src="/images/oem-entry-screens.png" alt="OEM entry screens showing app discovery on Samsung and Xiaomi devices" style={{ maxWidth: '400px', borderRadius: '16px', display: 'block' }} />
           </div>
         </section>
 
