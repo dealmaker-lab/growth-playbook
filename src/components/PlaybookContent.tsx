@@ -606,22 +606,7 @@ export default function PlaybookContent({
         </div>
       </section>
 
-      {/* CHAPTER 1 */}
-      <hr className="divider green" />
-      <section className="ch-head ch-green" id="ch1">
-        <div className="wrap rv ch-enter-right" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr auto', gap: '32px', alignItems: 'center' }}>
-          <div>
-            <span className="ch-bg-num">01</span>
-            <div className="ch-num" style={{ color: 'var(--ch1)' }}>1.0</div>
-            <h2>How to Scale Mobile UA with Programmatic DSP in 2026</h2>
-            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The Programmatic Engine — Navigating the Open Internet</p>
-            <div className="ch-desc">The 2026 Thesis: As &ldquo;Walled Gardens&rdquo; reach inventory saturation and rising costs, the most significant growth opportunities have shifted to the Open Internet. Users spend over 60% of their mobile time in independent apps. We scale by tapping into this massive inventory, reaching users during &ldquo;lean-back&rdquo; moments.</div>
-          </div>
-          <img src="/dsp-hero.png" alt="AppSamurai DSP Platform" style={{ maxWidth: '400px', borderRadius: '16px', display: 'block' }} />
-        </div>
-      </section>
-
-      {/* Overview Charts — General data, side-by-side after Ch1 intro */}
+      {/* Overview Charts — General data, side-by-side before chapters */}
       <section className="sec sec-w">
         <div className="wrap"><div className="story rv">
           <div className="story-chart rv-l">
@@ -639,6 +624,21 @@ export default function PlaybookContent({
             <div className="chart-wrap" style={{ height: '300px' }}><GenreChart /></div>
           </div>
         </div></div>
+      </section>
+
+      {/* CHAPTER 1 */}
+      <hr className="divider green" />
+      <section className="ch-head ch-green" id="ch1">
+        <div className="wrap rv ch-enter-right" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr auto', gap: '32px', alignItems: 'center' }}>
+          <div>
+            <span className="ch-bg-num">01</span>
+            <div className="ch-num" style={{ color: 'var(--ch1)' }}>1.0</div>
+            <h2>How to Scale Mobile UA with Programmatic DSP in 2026</h2>
+            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The Programmatic Engine — Navigating the Open Internet</p>
+            <div className="ch-desc">The 2026 Thesis: As &ldquo;Walled Gardens&rdquo; reach inventory saturation and rising costs, the most significant growth opportunities have shifted to the Open Internet. Users spend over 60% of their mobile time in independent apps. We scale by tapping into this massive inventory, reaching users during &ldquo;lean-back&rdquo; moments.</div>
+          </div>
+          <img src="/dsp-hero.png" alt="AppSamurai DSP Platform" style={{ maxWidth: '400px', borderRadius: '16px', display: 'block' }} />
+        </div>
       </section>
 
       {/* Seasonal Insight Callout */}
