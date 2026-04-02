@@ -67,7 +67,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
 
 /* Mobile Menu */
-.mobile-menu{display:none;position:fixed;top:92px;left:0;right:0;bottom:0;background:#fff;z-index:499;overflow-y:auto;padding:24px;transform:translateY(-10px);opacity:0;pointer-events:none;transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:#fff;z-index:499;overflow-y:auto;padding:24px;transform:translateY(-10px);opacity:0;pointer-events:none;transition:all .3s}
 .mobile-menu.open{transform:translateY(0);opacity:1;pointer-events:auto}
 .mobile-menu-section{margin-bottom:20px}
 .mobile-menu-label{display:block;font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:var(--font-h)}
@@ -94,7 +94,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .hero-wrap{background:url('/hero-bg.png') center center/cover no-repeat;position:relative;overflow:hidden}
 .hero-wrap::before,.hero-wrap::after{z-index:0}
 .hero-wrap>*{position:relative;z-index:2}
-.hero{max-width:var(--max-w);margin:0 auto;padding:130px 40px 88px;text-align:center;position:relative;z-index:1}
+.hero{max-width:var(--max-w);margin:0 auto;padding:100px 40px 88px;text-align:center;position:relative;z-index:1}
 .hero .rv{position:relative;z-index:2;background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(245,247,249,.92) 0%,rgba(245,247,249,.7) 60%,transparent 100%);padding:40px 20px;border-radius:24px}
 .hero-badge{display:inline-block;background:rgba(38,190,129,.08);color:var(--green);font-size:11px;font-weight:700;font-family:var(--font-h);padding:7px 20px;border-radius:100px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:28px;border:1px solid rgba(38,190,129,.15)}
 .hero h1{font-family:var(--font-h);font-size:clamp(2.4rem,5.5vw,4rem);font-weight:700;color:#222;line-height:1.08;margin-bottom:20px;letter-spacing:-.03em}

@@ -239,10 +239,8 @@ export default function PlaybookContent({
     function updateNav() {
       const y = window.scrollY;
       const nav = document.getElementById('topNav');
-      const ribbon = document.querySelector('.nav-ribbon') as HTMLElement;
       const hiding = y > lastY.current && y > 200;
       if (nav) nav.classList.toggle('hide', hiding);
-      if (ribbon) ribbon.style.transform = hiding ? 'translateY(-100%)' : 'translateY(0)';
       lastY.current = y;
     }
 
@@ -393,13 +391,7 @@ export default function PlaybookContent({
       </div>
 
       {/* TOP NAV */}
-      {/* Top Ribbon */}
-      <div className="nav-ribbon">
-        <a href="https://appsamurai.com/roas/" target="_blank" rel="noopener noreferrer">
-          Discover your Rewarded UA potential — <strong>try our ROAS forecaster!</strong>
-        </a>
-      </div>
-      <nav className="top-nav" id="topNav">
+      <nav className="top-nav" id="topNav" style={{ top: 0 }}>
         <a href="https://appsamurai.com" className="nav-logo" target="_blank" rel="noopener noreferrer">
           <img src="/appsamurai-logo.png" alt="AppSamurai" style={{ height: '28px', width: 'auto' }} />
         </a>
