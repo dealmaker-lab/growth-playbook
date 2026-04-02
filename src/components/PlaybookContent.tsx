@@ -1027,7 +1027,7 @@ export default function PlaybookContent({
         {/* Mert Quote */}
         <section className="quote-block" style={{ background: 'var(--purple-l)' }}>
           <div className="wrap"><div className="quote-inner rv">
-            <div className="quote-avatar" style={{ background: 'var(--purple)' }}>MS</div>
+            <img className="quote-avatar" src="/images/mert-simsek.png" alt="Mert Simsek" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} />
             <div>
               <p className="quote-text">IAPs have become even more important for hypercasual game publishers, offering a more reliable revenue stream compared to the volatile nature of ad revenue. Through Rewarded UA we can reach a wider audience and attract players who are more likely to make in-app purchases while providing them with a richer gaming experience.</p>
               <p className="quote-attr">Mert Simsek, Co-founder &amp; CMO at APPS</p>
@@ -1180,12 +1180,15 @@ export default function PlaybookContent({
         {/* CHAPTER 4 */}
         <hr className="divider cyan" />
         <section className="ch-head ch-cyan" id="ch4">
-          <div className="wrap rv ch-enter-bottom" style={{ position: 'relative' }}>
-            <span className="ch-bg-num">04</span>
-            <div className="ch-num" style={{ color: 'var(--ch4)' }}>4.0</div>
-            <h2>Apple Search Ads + ASO: The Demand Capture Flywheel for Mobile Growth</h2>
-            <p style={{ fontSize: '.85rem', color: 'rgba(0,244,244,.6)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>ASA &amp; ASO Synergy</p>
-            <div className="ch-desc">In 2026, the App Store is a high-intent search engine where every query is a signal of immediate need. The real &ldquo;growth hack&rdquo; lies in the seamless synergy between paid search (ASA) and organic optimization (ASO).</div>
+          <div className="wrap rv ch-enter-bottom" style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr auto', gap: '32px', alignItems: 'center' }}>
+            <div>
+              <span className="ch-bg-num">04</span>
+              <div className="ch-num" style={{ color: 'var(--ch4)' }}>4.0</div>
+              <h2>Apple Search Ads + ASO: The Demand Capture Flywheel for Mobile Growth</h2>
+              <p style={{ fontSize: '.85rem', color: 'rgba(0,244,244,.6)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>ASA &amp; ASO Synergy</p>
+              <div className="ch-desc">In 2026, the App Store is a high-intent search engine where every query is a signal of immediate need. The real &ldquo;growth hack&rdquo; lies in the seamless synergy between paid search (ASA) and organic optimization (ASO).</div>
+            </div>
+            <img src="/images/asa-entry-screens.png" alt="Apple Search Ads interface showing keyword optimization and app rankings" style={{ maxWidth: '400px', borderRadius: '16px', display: 'block' }} />
           </div>
         </section>
 
@@ -1307,7 +1310,7 @@ export default function PlaybookContent({
             <div className="testimonial-grid rv">
               <div className="testimonial-card">
                 <div className="testi-quote">&ldquo;AppSamurai has been a vital partner for Magiclab Studio&apos;s games via their rewarded UA campaigns. Their ability to deliver high-quality users at scale has been instrumental in our growth strategy.&rdquo;</div>
-                <div className="testi-author"><div className="testi-avatar" style={{ background: 'var(--green)' }}>ME</div><div><strong>Mert Ersoz</strong><br /><span>Head of Growth, MagicLab</span></div></div>
+                <div className="testi-author"><img className="testi-avatar" src="/images/mert-ersoz.png" alt="Mert Ersoz" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} /><div><strong>Mert Ersoz</strong><br /><span>Head of Growth, MagicLab</span></div></div>
               </div>
               <div className="testimonial-card">
                 <div className="testi-quote">&ldquo;AppSamurai&apos;s strategic programmatic advertising expertise helped SHAHID boost user acquisition and achieve our subscription targets in a highly competitive streaming market.&rdquo;</div>
@@ -1315,7 +1318,7 @@ export default function PlaybookContent({
               </div>
               <div className="testimonial-card">
                 <div className="testi-quote">&ldquo;Partnering with AppSamurai has been a game-changer for us. Their growth strategies helped us exceed CPA and ROAS goals while maintaining user quality across all channels.&rdquo;</div>
-                <div className="testi-author"><div className="testi-avatar" style={{ background: 'var(--purple)' }}>AC</div><div><strong>Aleyna Cerrah</strong><br /><span>UA Manager, APPS</span></div></div>
+                <div className="testi-author"><img className="testi-avatar" src="/images/aleyna-cerrah.png" alt="Aleyna Cerrah" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} /><div><strong>Aleyna Cerrah</strong><br /><span>UA Manager, APPS</span></div></div>
               </div>
             </div>
             {/* Success metrics strip */}
