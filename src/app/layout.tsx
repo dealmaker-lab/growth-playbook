@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: 'AppSamurai 2026 Mobile Growth Strategy Guide | DSP, Rewarded, OEM & ASA',
   icons: { icon: '/favicon.ico' },
   description:
-    'The definitive 2026 strategy guide for mobile user acquisition: Programmatic DSP, Rewarded Playtime, OEM Discovery, and Apple Search Ads. Data-backed frameworks, ROI calculator, and actionable playbooks for growth teams.',
+    'The definitive 2026 strategy guide for mobile user acquisition: Programmatic DSP, Rewarded Playtime, OEM Discovery, and Apple Search Ads. Data-backed frameworks, ROI calculator, and practical playbooks for growth teams.',
   alternates: {
     canonical: '/',
   },

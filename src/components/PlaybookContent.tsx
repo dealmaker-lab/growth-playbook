@@ -486,7 +486,7 @@ export default function PlaybookContent({
               </p>
               <p className="hero-sub">
                 The definitive strategy guide for Rewarded Playtime, Programmatic DSP,
-                OEM Discovery, and Apple Search Ads — built for growth teams who
+                OEM Discovery, and Apple Search Ads. Built for growth teams who
                 need to scale smarter in 2026.
               </p>
               <div className="hero-cta">
@@ -608,7 +608,7 @@ export default function PlaybookContent({
           <h2 className="rv">The Complete 2026 Mobile Growth Strategy Guide</h2>
           <div className="toc-grid">
             <a href="#ch1" className="toc-card rv"><div className="toc-num">01</div><h3>The Programmatic Engine</h3><p>Scaling beyond walled gardens with AI, transparency, creative intelligence, and bid-level precision.</p></a>
-            <a href="#ch2" className="toc-card rv"><div className="toc-num">02</div><h3>Rewarded Models</h3><p>Mastering the Value-Exchange Economy through Rewarded Playtime and Offerwalls.</p></a>
+            <a href="#ch2" className="toc-card rv"><div className="toc-num">02</div><h3>Rewarded Models</h3><p>Mastering the value-exchange model through Rewarded Playtime and Offerwalls.</p></a>
             <a href="#ch3" className="toc-card rv"><div className="toc-num">03</div><h3>OEM &amp; On-Device Discovery</h3><p>Reaching users at the source before they even open an App Store.</p></a>
             <a href="#ch4" className="toc-card rv"><div className="toc-num">04</div><h3>Apple Search Ads &amp; ASO</h3><p>Mastering intent and managing cannibalization with a unified engine.</p></a>
           </div>
@@ -656,7 +656,7 @@ export default function PlaybookContent({
             <div className="ch-num" style={{ color: 'var(--ch1)' }}>1.0</div>
             <h2>How to Scale Mobile UA with Programmatic DSP in 2026</h2>
             <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The Programmatic Engine — Navigating the Open Internet</p>
-            <div className="ch-desc">The 2026 Thesis: As &ldquo;Walled Gardens&rdquo; reach inventory saturation and rising costs, the most significant growth opportunities have shifted to the Open Internet. Users spend over 60% of their mobile time in independent apps. We scale by tapping into this massive inventory, reaching users during &ldquo;lean-back&rdquo; moments.</div>
+            <div className="ch-desc">The 2026 Thesis: As &ldquo;Walled Gardens&rdquo; reach inventory saturation and rising costs, the biggest growth opportunities have shifted to the Open Internet. Users spend over 60% of their mobile time in independent apps. We scale by tapping into this massive inventory, reaching users during &ldquo;lean-back&rdquo; moments.</div>
           </div>
           <img src="/dsp-hero.png" alt="AppSamurai DSP Platform" style={{ maxWidth: '400px', borderRadius: '16px', display: 'block' }} />
         </div>
@@ -693,7 +693,7 @@ export default function PlaybookContent({
             <div className="story-text rv-l">
               <span className="tag" style={{ color: 'var(--ch1)', borderColor: 'var(--ch1)' }}>Section 1.1</span>
               <h3>Programmatic Bidding Strategy: From CPM to Predictive ROAS</h3>
-              <p>In 2026, the vanity metric of &ldquo;cheap impressions&rdquo; (CPM) has been officially retired. For sophisticated growth teams, the goal is no longer just winning the bid, but utilizing pre-bid intelligence to predict a post-install event before a single cent is spent.</p>
+              <p>In 2026, the vanity metric of &ldquo;cheap impressions&rdquo; (CPM) has been officially retired. For sophisticated growth teams, the goal has shifted from winning the bid to using pre-bid intelligence to predict a post-install event before a single cent is spent.</p>
               <div className="stat-callout" style={{ borderLeftColor: 'var(--ch1)' }}>
                 <div className="big-num" style={{ color: 'var(--ch1)' }} data-count="60" data-suffix="%+">0%+</div>
                 <div className="stat-body"><h4>Mobile Time in Independent Apps</h4><p>Massive inventory beyond walled gardens</p></div>
@@ -713,7 +713,7 @@ export default function PlaybookContent({
         <div className="wrap">
           <div className="info-card rv"><div className="ic-icon"><img className="ic-img" src="/icons/predictive roas modeling.png" alt="Predictive ROAS" /></div><div><h4>Predictive ROAS Modeling</h4><p>The industry has moved toward real-time machine learning that enables deep-funnel, CPA-based optimization. By identifying users with a high propensity for specific actions&mdash;such as reaching a gameplay milestone or starting a subscription trial&mdash;brands are achieving a more predictable and stable path to profitability.</p></div></div>
           <div className="info-card rv"><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/brindging the intent gap.png" alt="Intent Gap" /></div><div><h4>Bridging the &ldquo;Intent Gap&rdquo;</h4><p>Traditional social platforms often capture &ldquo;passive scrolling,&rdquo; leading to high ad fatigue. In contrast, programmatic inventory captures &ldquo;active engagement&rdquo; moments. Shifting spend to these high-receptivity lulls (e.g., between game levels or during utility tasks) ensures your brand reaches users when their cognitive load is primed for discovery, not just distraction.</p></div></div>
-          <div className="info-card rv"><div className="ic-icon"><img className="ic-img" src="/icons/scalibility paradox.png" alt="Scalability" /></div><div><h4>The Scalability Paradox (Precision Control)</h4><p>To scale without losing efficiency, granular control is non-negotiable. Automated Whitelisting ensures your presence is consolidated on top-performing platforms that align with your core audience. Simultaneously, Automated Blacklisting acts as a dynamic shield, filtering out low-intent inventory in real-time so that as your budget grows, your waste doesn&apos;t.</p></div></div>
+          <div className="info-card rv"><div className="ic-icon"><img className="ic-img" src="/icons/scalibility paradox.png" alt="Scalability" /></div><div><h4>The Scalability Tradeoff (Precision Control)</h4><p>To scale without losing efficiency, granular control is non-negotiable. Automated Whitelisting ensures your presence is consolidated on top-performing platforms that align with your core audience. Simultaneously, Automated Blacklisting acts as a dynamic shield, filtering out low-intent inventory in real-time so that as your budget grows, your waste doesn&apos;t.</p></div></div>
           <div className="info-card rv"><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/transparency_mandate.png" alt="Transparency" /></div><div><h4>The Transparency Mandate</h4><p>You cannot scale what you cannot see. Success in the 2026 open internet requires total visibility into bid floors, session depth, and loss notifications. This level of bid-level transparency allows growth teams to uncover high-value &ldquo;pockets&rdquo; of inventory that others overlook, shifting the strategy from chasing volume to securing quality.</p></div></div>
         </div>
       </section>
@@ -724,7 +724,7 @@ export default function PlaybookContent({
           <div className="story rv">
             <div className="story-text rv-l">
               <span className="tag" style={{ color: 'var(--ch1)', borderColor: 'var(--ch1)' }}>Section 1.2</span>
-              <h3>Mobile Ad Creative Best Practices 2026: Psychology-Driven Performance</h3>
+              <h3>Mobile Ad Creative Playbook 2026: Psychology-Driven Performance</h3>
               <p>Creatives have become the new targeting. With granular ID-based targeting fading, the visual asset itself must do the heavy lifting of finding the right audience.</p>
               <div className="stat-callout" style={{ borderLeftColor: 'var(--yellow)' }}>
                 <div className="big-num" style={{ color: 'var(--yellow)' }} data-count="30" data-suffix="%">0%</div>
@@ -737,7 +737,7 @@ export default function PlaybookContent({
             </div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px', marginTop: '20px' }}>
-            <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}><div className="ic-icon" style={{ marginBottom: '8px' }}><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><h4>Contextual Resonance over Broad Reach</h4><p>Visibility is only valuable when it is contextually relevant. For high-volume platforms (such as those in the VOD and streaming space), tailoring creative themes to match local seasonal events or utilizing dayparting (aligning themes with peak viewing times) has become a primary lever for driving down subscription costs.</p></div>
+            <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}><div className="ic-icon" style={{ marginBottom: '8px' }}><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><h4>Context-Aware Delivery over Broad Reach</h4><p>Visibility is only valuable when it is contextually relevant. For high-volume platforms (such as those in the VOD and streaming space), tailoring creative themes to match local seasonal events or utilizing dayparting (aligning themes with peak viewing times) has become a primary lever for driving down subscription costs.</p></div>
             <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}><div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h4>Cultural Authenticity as a Performance Benchmark</h4><p>In 2026, localization has evolved far beyond simple translation. To scale effectively in global markets, ads must feel &ldquo;native&rdquo; to the local culture. Utilizing regional creators, local slang, and culturally relevant scenarios is now a strict performance requirement; in emerging markets, this has been shown to lower CPAs by up to 30%.</p></div>
             <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}><div className="ic-icon" style={{ marginBottom: '8px' }}><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div><h4>Creative as Market Research</h4><p>Creative data is now a primary insights engine. By analyzing which iterations drive long-term LTV rather than just clicks, brands are feeding these findings back into their broader product development.</p></div>
           </div>
@@ -748,17 +748,17 @@ export default function PlaybookContent({
       <section className="sec sec-l">
         <div className="wrap rv">
           <span className="insight-badge">Creative Intelligence</span>
-          <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, marginBottom: '20px', color: 'var(--text)' }}>Platform-Specific Creative Best Practices</h3>
+          <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, marginBottom: '20px', color: 'var(--text)' }}>What Works on Each Platform</h3>
 
           {/* iOS — image left, text right */}
           <div className="creative-card">
             <div style={{ textAlign: 'center' }}>
-              <img src="/ios-android-age-1.png" alt="iOS Creative Best Practices — sound-off design, close-up shots, gameplay focus" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
+              <img src="/ios-android-age-1.png" alt="iOS Creative Playbook — sound-off design, close-up shots, gameplay focus" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
                 <span style={{ fontSize: '24px' }}>&#127822;</span>
-                <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--text)' }}>iOS Creative Best Practices</h4>
+                <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--text)' }}>iOS Creative Playbook</h4>
               </div>
               <p style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.75 }}>
                 iOS users respond well to a sound-off design (+24%), that open with close-up shots (+16%) of gameplay (+45%), introduce free-offer text early (+30%), and feature a large centered logo (+29%) at the end paired with the CTA text &apos;Play Now!&apos; (+14%).
@@ -770,12 +770,12 @@ export default function PlaybookContent({
           {/* Android — image left, text right */}
           <div className="creative-card">
             <div style={{ textAlign: 'center' }}>
-              <img src="/ios-android-age-2.png" alt="Android Creative Best Practices — split-screen gameplay, multiple scenes, falling coins" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
+              <img src="/ios-android-age-2.png" alt="Android Creative Playbook — split-screen gameplay, multiple scenes, falling coins" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
                 <span style={{ fontSize: '24px' }}>&#129302;</span>
-                <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--text)' }}>Android Creative Best Practices</h4>
+                <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--text)' }}>Android Creative Playbook</h4>
               </div>
               <p style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.75 }}>
                 Android users respond well to videos that use sound effects (+12%), split-screen (+51%) scenes showcasing gameplay (+13%), and multiple scenes (+42%), with an end card that omits a CTA (+31%) but features falling coins (+11%).
@@ -805,8 +805,8 @@ export default function PlaybookContent({
             <p>With the full adoption of <strong>SKAN 5.0</strong> and the <strong>Android Privacy Sandbox</strong>, 2026 is the year of &ldquo;Signal Loss.&rdquo; The most successful growth teams have stopped chasing deterministic tracking and started embracing <strong>Incrementality</strong>.</p>
           </div>
           <div className="rv-r" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch1)' }}><div className="ic-icon"><img className="ic-img" src="/icons/Beyond the Last Click.png" alt="Beyond Last Click" /></div><div><h4>Beyond the Last Click</h4><p>To prove &ldquo;Net-New&rdquo; growth, brands must utilize probabilistic modeling and lift testing. This ensures that programmatic spend isn&apos;t merely poaching organic installs but driving genuine, incremental scale.</p></div></div>
-            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch1)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/Contextual Resonance.png" alt="Contextual Resonance" /></div><div><h4>Contextual Resonance</h4><p>High-performing creatives are now context-aware. Tailoring themes to match local seasonal events or &ldquo;dayparting&rdquo; (aligning ads with peak viewing or usage hours) has become a key lever in driving down the cost per subscription.</p></div></div>
+            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch1)' }}><div className="ic-icon"><img className="ic-img" src="/icons/Beyond the Last Click.png" alt="Beyond Last Click" /></div><div><h4>Beyond the Last Click</h4><p>To prove incremental growth, brands use probabilistic modeling and lift testing. This ensures that programmatic spend isn&apos;t merely poaching organic installs but driving incremental scale.</p></div></div>
+            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch1)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/Contextual Resonance.png" alt="Contextual Targeting" /></div><div><h4>Contextual Targeting</h4><p>High-performing creatives are now context-aware. Tailoring themes to match local seasonal events or &ldquo;dayparting&rdquo; (aligning ads with peak viewing or usage hours) has become a key lever in driving down the cost per subscription.</p></div></div>
           </div>
         </div></div>
       </section>
@@ -865,14 +865,14 @@ export default function PlaybookContent({
                 <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--green)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontFamily: 'var(--font-h)', fontSize: '.85rem', flexShrink: 0 }}>1</div>
                 <h4 style={{ margin: 0 }}>Strategic Win-Backs</h4>
               </div>
-              <p>Not all dormant users are the same. The industry has moved toward Intelligent Segmentation based on inactivity duration and historical value. Users are segmented by churn risk&mdash;a user inactive 10+ days without purchases receives awareness messaging, while a high-value user inactive 7 days gets a personalized reward. The key is identifying the exact &ldquo;churn window&rdquo; for surgical intervention.</p>
+              <p>Not all dormant users are the same. The industry has moved toward Intelligent Segmentation based on inactivity duration and historical value. Users are segmented by churn risk: a user inactive 10+ days without purchases receives awareness messaging, while a high-value user inactive 7 days gets a personalized reward. The key is identifying the exact &ldquo;churn window&rdquo; for surgical intervention.</p>
             </div>
             <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
                 <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--green)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontFamily: 'var(--font-h)', fontSize: '.85rem', flexShrink: 0 }}>2</div>
                 <h4 style={{ margin: 0 }}>Optimizing Engagement</h4>
               </div>
-              <p>Retargeting moves active users deeper into the funnel through Strategic Timing and Frictionless Re-entry. Optimal Window Targeting (dayparting) pinpoints when users are most receptive. Direct Deep Linking bypasses the App Store, landing users exactly where they need to be&mdash;a product page, new feature, or pending game level.</p>
+              <p>Retargeting moves active users deeper into the funnel through Strategic Timing and Frictionless Re-entry. Optimal Window Targeting (dayparting) pinpoints when users are most receptive. Direct Deep Linking bypasses the App Store, landing users exactly where they need to be, whether that&apos;s a product page, new feature, or pending game level.</p>
             </div>
             <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch1)', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
@@ -905,7 +905,7 @@ export default function PlaybookContent({
             <>
               <div className="gate-icon">&#128274;</div>
               <h2>Unlock the Full 2026 Strategy Guide</h2>
-              <p>You&apos;ve seen Chapter 1. Get instant access to all 4 chapters — including Rewarded Models, OEM Discovery, ASA strategies, and advanced growth tactics.</p>
+              <p>The rest covers Rewarded Playtime (Chapter 2), OEM preloads on Samsung, Xiaomi, and Huawei (Chapter 3), and Apple Search Ads + ASO strategy (Chapter 4), plus the interactive ROI calculator.</p>
               <div className="gate-form" id="gateForm" ref={gateFormRef}>
                 <input
                   className="gate-input"
@@ -951,8 +951,8 @@ export default function PlaybookContent({
               <span className="ch-bg-num">02</span>
               <div className="ch-num" style={{ color: 'var(--ch2)' }}>2.0</div>
               <h2>Rewarded Playtime: The Value-Exchange Model Driving 3x Higher LTV</h2>
-              <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.7)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Mastering the Value-Exchange Economy</p>
-              <div className="ch-desc">In 2026, the mobile growth landscape has shifted from passive ad consumption to a Value-Exchange Economy. Rewarded Playtime is at the center of sustainable growth strategies, transforming how developers acquire, engage, and monetize their audiences.</div>
+              <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.7)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Mastering the value-exchange model</p>
+              <div className="ch-desc">In 2026, the mobile growth landscape has shifted from passive ad consumption to a value-exchange model. Rewarded Playtime is at the center of sustainable growth strategies, transforming how developers acquire, engage, and monetize their audiences.</div>
             </div>
             <img src="/images/rewarded-entry-screens.png" alt="Rewarded Playtime interface showing user rewards and engagement" style={{ maxWidth: '400px', borderRadius: '16px', display: 'block' }} />
           </div>
@@ -984,7 +984,7 @@ export default function PlaybookContent({
               <div className="chart-subtitle">Rewarded Playtime delivers 2-3x higher LTV than traditional models</div>
               <div className="chart-wrap"><LTVChart /></div>
               <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> Rewarded Playtime users generate $14.80 D90 LTV — nearly 3x higher than incentivized installs ($3.10). The reward mechanic drives genuine engagement, not just downloads.
+                <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> Rewarded Playtime users generate $14.80 D90 LTV, nearly 3x higher than incentivized installs ($3.10). The reward mechanic drives genuine engagement, not just downloads.
               </div>
             </div>
           </div>
@@ -1055,7 +1055,7 @@ export default function PlaybookContent({
         <section className="sec sec-l">
           <div className="wrap rv">
             <span className="tag" style={{ color: 'var(--ch2)', borderColor: 'var(--ch2)' }}>Section 2.3</span>
-            <h3 style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1.3rem,2.5vw,1.8rem)', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>Solving the Scaling Paradox: Smart Bidding</h3>
+            <h3 style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1.3rem,2.5vw,1.8rem)', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>Solving the Scaling Tradeoff: Smart Bidding</h3>
             <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.75, marginBottom: '24px', maxWidth: '720px' }}>Achieving high conversion rates while maintaining strict CPI constraints requires moving from acquiring volume toward acquiring value.</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch2)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="var(--purple)" stroke="none"/></svg></div><div><h4>Targeting Precision</h4><p>Using precise age and gender targeting allows teams to bid accurately for each audience segment. This ensures you reach users more effectively and avoid the trap of acquiring low-quality users.</p></div></div>
@@ -1082,7 +1082,7 @@ export default function PlaybookContent({
             <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.3rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>Publisher Monetization: The AppsPrize Ecosystem</h3>
             <p style={{ color: '#666', fontSize: '.88rem', marginBottom: '16px', maxWidth: '640px' }}>For publishers, maximizing yield in 2026 requires a monetization strategy that feels like a feature, not a disruption. This is the core philosophy behind <span style={{ color: 'var(--ch2)', fontWeight: 700 }}>AppsPrize.</span></p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
-              <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--ch2)', flexDirection: 'column' }}><div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div><h4>A &ldquo;Native&rdquo; Rewards Experience</h4><p>AppsPrize acts as a loyalty layer, rewarding users in the app&apos;s native currency for seamless exploration.</p></div>
+              <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--ch2)', flexDirection: 'column' }}><div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div><h4>A &ldquo;Native&rdquo; Rewards Experience</h4><p>AppsPrize acts as a loyalty layer, rewarding users in the app&apos;s native currency as they explore.</p></div>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--ch2)', flexDirection: 'column' }}><div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><circle cx="12" cy="12" r="5"/><path d="M12 7a5 5 0 0 1 0 10"/><path d="M9 5l-2-2M15 5l2-2M9 19l-2 2M15 19l2 2"/></svg></div><h4>Verified Human Engagement</h4><p>Built on playtime and level-based events, it inherently filters out low-quality traffic. Publishers provide a platform for verified user attachment.</p></div>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--ch2)', flexDirection: 'column' }}><div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div><h4>Visual &amp; Interactive Appeal</h4><p>A visually engaging way to discover new content, ensuring positive UX and greater attachment to both the advertised game and the host app.</p></div>
             </div>
@@ -1106,7 +1106,7 @@ export default function PlaybookContent({
               <div className="ch-num" style={{ color: 'var(--green)' }}>3.0</div>
               <h2>OEM User Acquisition: Reaching 3B+ Android Users Before the App Store</h2>
               <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>On-Device Discovery</p>
-              <div className="ch-desc">The most sophisticated growth teams have moved &ldquo;upstream.&rdquo; By partnering with manufacturers like Samsung, Xiaomi, and Oppo, brands gain unprecedented system-level access to users that traditional ad networks simply cannot replicate.</div>
+              <div className="ch-desc">Growth teams that ship fastest have moved &ldquo;upstream.&rdquo; By partnering with manufacturers like Samsung, Xiaomi, and Oppo, brands gain direct system-level access to users that traditional ad networks simply cannot replicate.</div>
             </div>
             <img src="/images/oem-entry-screens.png" alt="OEM entry screens showing app discovery on Samsung and Xiaomi devices" style={{ maxWidth: '400px', borderRadius: '16px', display: 'block' }} />
           </div>
@@ -1117,7 +1117,7 @@ export default function PlaybookContent({
             <div className="story-text rv-l">
               <span className="tag" style={{ color: 'var(--ch3)', borderColor: 'var(--ch3)' }}>Section 3.1</span>
               <h3>Why OEM Ads Outperform Traditional Mobile Advertising</h3>
-              <p>OEM ads appear at natural touchpoints — the home screen, lock screen, and within native system apps — instead of interrupting a user&apos;s session.</p>
+              <p>OEM ads appear at natural touchpoints: the home screen, lock screen, and within native system apps. They don&apos;t interrupt a user&apos;s session.</p>
               <ul className="blist">
                 <li><strong>The Integrated Journey:</strong> OEM ads are woven into the OS fabric, not interrupting sessions.</li>
                 <li><strong>The Android Powerhouse:</strong> 70-72% global market share, exceeding 85% in India and Brazil.</li>
@@ -1185,7 +1185,7 @@ export default function PlaybookContent({
           <div className="wrap rv">
             <span className="tag" style={{ color: 'var(--ch3)', borderColor: 'var(--ch3)' }}>Section 3.3</span>
             <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.3rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>OEM Ad Targeting: Moving Beyond Demographics</h3>
-            <p style={{ color: '#666', fontSize: '.88rem', marginBottom: '16px', maxWidth: '640px' }}>The true power of OEM lies in the depth of data available at the hardware level. We&apos;ve moved beyond simple age and gender filters to a more holistic understanding of user intent.</p>
+            <p style={{ color: '#666', fontSize: '.88rem', marginBottom: '16px', maxWidth: '640px' }}>The true power of OEM lies in the depth of data available at the hardware level. We&apos;ve moved beyond simple age and gender filters to a fuller picture of user intent based on behavior and purchase signals.</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--green)', flexDirection: 'column' }}><div className="ic-icon" style={{ marginBottom: '8px' }}><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div><h4>Behavioral &amp; App Category</h4><p>Reach users based on their actual app usage patterns. Surface your game to users who frequently engage with similar genres.</p></div>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--green)', flexDirection: 'column' }}><div className="ic-icon" style={{ marginBottom: '8px' }}><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><h4>Geographic &amp; Device Precision</h4><p>Tailor campaigns to specific device models. Promote flagship titles on premium hardware, utility apps on the broader mid-range market.</p></div>
@@ -1228,7 +1228,7 @@ export default function PlaybookContent({
               <div className="ch-num" style={{ color: 'var(--ch4)' }}>4.0</div>
               <h2>Apple Search Ads + ASO: The Demand Capture Flywheel for Mobile Growth</h2>
               <p style={{ fontSize: '.85rem', color: 'rgba(0,244,244,.6)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>ASA &amp; ASO Synergy</p>
-              <div className="ch-desc">In 2026, the App Store is a high-intent search engine where every query is a signal of immediate need. The real &ldquo;growth hack&rdquo; lies in the seamless synergy between paid search (ASA) and organic optimization (ASO).</div>
+              <div className="ch-desc">In 2026, the App Store is a high-intent search engine where every query is a signal of immediate need. The real &ldquo;growth hack&rdquo; lies in the feedback loop between paid search (ASA) and organic optimization (ASO).</div>
             </div>
             <img src="/images/asa-entry-screens.png" alt="Apple Search Ads interface showing keyword optimization and app rankings" style={{ maxWidth: '400px', borderRadius: '16px', display: 'block' }} />
           </div>
@@ -1303,7 +1303,7 @@ export default function PlaybookContent({
               <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch4)', flexDirection: 'column' }}>
                 <span className="tag" style={{ color: 'var(--ch4)', borderColor: 'var(--ch4)', marginBottom: '4px' }}>4.4</span>
                 <h4 style={{ fontSize: '1rem', marginBottom: '8px' }}>Custom Product Pages: Matching Intent</h4>
-                <ul className="blist" style={{ margin: 0 }}><li><strong>Intent-Based Visuals:</strong> Users searching competitive keywords land on pages highlighting your competitive edge. Utility searches see efficiency-focused visuals.</li><li><strong>Seamless Continuity:</strong> This alignment significantly increases conversion rates, as Apple&apos;s algorithm rewards relevance over raw spend with lower CPAs.</li></ul>
+                <ul className="blist" style={{ margin: 0 }}><li><strong>Intent-Based Visuals:</strong> Users searching competitive keywords land on pages highlighting your competitive edge. Utility searches see efficiency-focused visuals.</li><li><strong>Ad-to-Page Continuity:</strong> This alignment significantly increases conversion rates, as Apple&apos;s algorithm rewards relevance over raw spend with lower CPAs.</li></ul>
               </div>
             </div>
           </div>
@@ -1391,7 +1391,7 @@ export default function PlaybookContent({
                 <div className="testi-author"><img className="testi-avatar" src="/ali-shahid.png" alt="Ali Aktas" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} /><div><strong>Ali Aktas</strong><br /><span>Head of Performance, Shahid</span></div></div>
               </div>
               <div className="testimonial-card">
-                <div className="testi-quote">&ldquo;Partnering with AppSamurai has been a game-changer for us. Their growth strategies helped us exceed CPA and ROAS goals while maintaining user quality across all channels.&rdquo;</div>
+                <div className="testi-quote">&ldquo;AppSamurai helped us exceed our CPA and ROAS targets while maintaining user quality across every channel. The bid-level transparency made it possible to cut waste we couldn&apos;t see before.&rdquo;</div>
                 <div className="testi-author"><img className="testi-avatar" src="/images/aleyna-cerrah.png" alt="Aleyna Cerrah" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} /><div><strong>Aleyna Cerrah</strong><br /><span>UA Manager, APPS</span></div></div>
               </div>
             </div>
