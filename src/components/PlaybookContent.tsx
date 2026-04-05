@@ -1038,13 +1038,15 @@ export default function PlaybookContent({
         <section className="sec sec-w">
           <div className="wrap">
             <div className="chart-card-new rv">
-              <div className="chart-h" style={{ fontSize: '.95rem' }}>Mobile Game Retention Trends</div>
+              <div className="chart-h" style={{ fontSize: '.95rem' }}>Mobile Game Retention Trends by Product Model</div>
+              <div className="chart-subtitle" style={{ fontSize: '.75rem', marginBottom: '12px' }}>Top 25 Games by 2025 IAP Revenue per Product Model (by Downloads for Hypercasual)</div>
               <div className="tabs-center"><div className="tabs" id="retTabs">
                 {['d7', 'd30', 'd1', 'd365'].map((t) => (
-                  <button key={t} className={`tab-btn${retTab === t ? ' active' : ''}`} onClick={() => setRetTab(t)}>{t === 'd7' ? 'D7' : t === 'd30' ? 'D30' : t === 'd1' ? 'D1' : 'D365'}</button>
+                  <button key={t} className={`tab-btn${retTab === t ? ' active' : ''}`} onClick={() => setRetTab(t)}>{t === 'd7' ? 'D7 Retention' : t === 'd30' ? 'D30 Retention' : t === 'd1' ? 'D1 Retention' : 'D365 Retention'}</button>
                 ))}
               </div></div>
-              <div className="chart-wrap" style={{ height: '260px' }}><RetentionChart tab={retTab} /></div>
+              <div className="chart-wrap" style={{ height: '280px' }}><RetentionChart tab={retTab} /></div>
+              <div style={{ textAlign: 'center', fontSize: '.7rem', color: '#999', marginTop: '8px' }}>Source: Sensor Tower, State of Gaming 2026</div>
             </div>
           </div>
         </section>
