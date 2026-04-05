@@ -248,25 +248,17 @@ export default function PlaybookContent({
       updateProgress();
       updateNav();
 
-      // Lead bar
+      // Lead bar — only show when content is locked
       const bar = document.getElementById('leadBar');
       const gate = document.getElementById('emailGate');
-      if (bar && gate) {
-        if (!gateUnlocked) {
+      if (bar) {
+        if (gateUnlocked) {
+          bar.classList.remove('show');
+        } else if (gate) {
           const gateTop = gate.getBoundingClientRect().top;
           bar.classList.toggle(
             'show',
             window.scrollY > window.innerHeight && gateTop > 0
-          );
-        } else {
-          const footer = document.querySelector('.footer');
-          const footerTop = footer
-            ? footer.getBoundingClientRect().top
-            : 99999;
-          bar.classList.toggle(
-            'show',
-            window.scrollY > window.innerHeight &&
-              footerTop > window.innerHeight
           );
         }
       }
@@ -630,7 +622,7 @@ export default function PlaybookContent({
           <div className="toc-label rv" style={{ marginBottom: '6px' }}>About This Data</div>
           <h3 className="rv" style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1.3rem,2.5vw,1.8rem)', fontWeight: 700, textAlign: 'center', color: '#222', marginBottom: '32px' }}>Methodology &amp; Sources</h3>
           <div className="method-grid rv">
-            <div className="method-card"><div className="method-icon">&#128202;</div><p>Market data sourced from <strong>Sensor Tower</strong>, <strong>Data.ai</strong>, and <strong>Statista</strong> covering iOS App Store and Google Play downloads and revenue estimates through December 2025.</p></div>
+            <div className="method-card"><div className="method-icon">&#128202;</div><p>Market data sourced from <strong>Sensor Tower</strong> and <strong>Statista</strong> covering iOS App Store and Google Play downloads and revenue estimates through December 2025.</p></div>
             <div className="method-card"><div className="method-icon">&#127919;</div><p>Campaign performance data aggregated from <strong>10,000+ campaigns</strong> managed through AppSamurai&apos;s DSP, OEM, and Rewarded Playtime platforms across 2024-2025.</p></div>
             <div className="method-card"><div className="method-icon">&#128300;</div><p>Creative analysis powered by <strong>Adjust</strong> examining 500,000+ ad creatives across iOS and Android to identify top-performing elements and trends.</p></div>
             <div className="method-card"><div className="method-icon">&#128241;</div><p>In-app revenue figures are gross — inclusive of app store commissions. Download estimates are per-user, counting one download per Apple or Google account.</p></div>
@@ -654,26 +646,6 @@ export default function PlaybookContent({
             <div className="story-chart"><div className="chart-wrap"><DoughnutChart /></div></div>
           </div>
         </div>
-      </section>
-
-      {/* Overview Charts — General data, side-by-side before chapters */}
-      <section className="sec sec-w">
-        <div className="wrap"><div className="story rv">
-          <div className="story-chart rv-l">
-            <div className="chart-h" style={{ fontSize: '.95rem' }}>Annual Trends by Product Model</div>
-            <div className="tabs-center"><div className="tabs" id="trendTabs">
-              {['revenue', 'downloads', 'sessions'].map((t) => (
-                <button key={t} className={`tab-btn${trendTab === t ? ' active' : ''}`} onClick={() => setTrendTab(t)}>{t.charAt(0).toUpperCase() + t.slice(1)}</button>
-              ))}
-            </div></div>
-            <div className="chart-wrap" style={{ height: '280px' }}><TrendsChart tab={trendTab} /></div>
-          </div>
-          <div className="story-chart rv-r">
-            <div className="chart-h" style={{ fontSize: '.95rem' }}>Download Channels Share by Genre</div>
-            <div className="chart-sub">Share of downloads by product model</div>
-            <div className="chart-wrap" style={{ height: '300px' }}><GenreChart /></div>
-          </div>
-        </div></div>
       </section>
 
       {/* CHAPTER 1 */}
@@ -921,7 +893,7 @@ export default function PlaybookContent({
       <section
         className={`gate${gateLiftingDone ? ' gate-lifting' : ''}`}
         id="emailGate"
-        style={{ display: gateUnlocked && !initialUnlocked ? 'none' : undefined }}
+        style={{ display: gateUnlocked ? 'none' : undefined }}
         onAnimationEnd={(e) => { if (e.animationName === 'liftUp') { (e.currentTarget as HTMLElement).style.display = 'none'; } }}
       >
         <div className="gate-inner rv">
@@ -1017,6 +989,26 @@ export default function PlaybookContent({
               </div>
             </div>
           </div>
+        </section>
+
+        {/* Gaming-specific charts — Trends + Genre (moved from intro to Ch2) */}
+        <section className="sec sec-w">
+          <div className="wrap"><div className="story rv">
+            <div className="story-chart rv-l">
+              <div className="chart-h" style={{ fontSize: '.95rem' }}>Annual Trends for Mobile Games by Product Model</div>
+              <div className="tabs-center"><div className="tabs" id="trendTabs">
+                {['revenue', 'downloads', 'sessions'].map((t) => (
+                  <button key={t} className={`tab-btn${trendTab === t ? ' active' : ''}`} onClick={() => setTrendTab(t)}>{t.charAt(0).toUpperCase() + t.slice(1)}</button>
+                ))}
+              </div></div>
+              <div className="chart-wrap" style={{ height: '280px' }}><TrendsChart tab={trendTab} /></div>
+            </div>
+            <div className="story-chart rv-r">
+              <div className="chart-h" style={{ fontSize: '.95rem' }}>Download Channels Share by Genre</div>
+              <div className="chart-sub">Share of downloads by product model</div>
+              <div className="chart-wrap" style={{ height: '300px' }}><GenreChart /></div>
+            </div>
+          </div></div>
         </section>
 
         <section className="sec sec-l" style={{ padding: '24px 0' }}>
@@ -1445,7 +1437,6 @@ export default function PlaybookContent({
                 <div><strong>3B+</strong><span>Users Reached</span></div>
                 <div><strong>50+</strong><span>Countries</span></div>
               </div>
-              <a href="https://appsamurai.com/contact" className="btn-primary" style={{ marginTop: '16px' }} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('cta_click', 'about', { destination: 'contact' })}>Get in Touch &rarr;</a>
             </div>
             <div className="rv-r">
               <div className="pillar-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
