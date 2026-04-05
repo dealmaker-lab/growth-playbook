@@ -8,11 +8,11 @@ import {
   AdTypesChart,
   GenreChart,
   RetentionChart,
-  TrendsChart,
   MarketShareChart,
   OEMFormatChart,
   ASABubbleChart,
 } from './charts';
+import AnnualTrendsPanel from './charts/AnnualTrendsPanel';
 import FAQ, { DSP_FAQ, REWARDED_FAQ, OEM_FAQ, ASA_FAQ } from './FAQ';
 import TrendingContent from './TrendingContent';
 
@@ -29,7 +29,6 @@ export default function PlaybookContent({
   const [gateSuccess, setGateSuccess] = useState(false);
   const [gateLiftingDone, setGateLiftingDone] = useState(false);
   const [retTab, setRetTab] = useState('d7');
-  const [trendTab, setTrendTab] = useState('revenue');
   const lastY = useRef(0);
   const sessionId = useRef('');
   const maxScrollDepth = useRef(0);
@@ -991,24 +990,24 @@ export default function PlaybookContent({
           </div>
         </section>
 
-        {/* Gaming-specific charts — Trends + Genre (moved from intro to Ch2) */}
+        {/* Annual Trends — 3 metrics side-by-side with region filter */}
         <section className="sec sec-w">
-          <div className="wrap"><div className="story rv">
-            <div className="story-chart rv-l">
-              <div className="chart-h" style={{ fontSize: '.95rem' }}>Annual Trends for Mobile Games by Product Model</div>
-              <div className="tabs-center"><div className="tabs" id="trendTabs">
-                {['revenue', 'downloads', 'sessions'].map((t) => (
-                  <button key={t} className={`tab-btn${trendTab === t ? ' active' : ''}`} onClick={() => setTrendTab(t)}>{t.charAt(0).toUpperCase() + t.slice(1)}</button>
-                ))}
-              </div></div>
-              <div className="chart-wrap" style={{ height: '280px' }}><TrendsChart tab={trendTab} /></div>
+          <div className="wrap">
+            <div className="chart-card-new rv">
+              <AnnualTrendsPanel />
             </div>
-            <div className="story-chart rv-r">
-              <div className="chart-h" style={{ fontSize: '.95rem' }}>Download Channels Share by Genre</div>
-              <div className="chart-sub">Share of downloads by product model</div>
+          </div>
+        </section>
+
+        {/* Download Channels by Genre */}
+        <section className="sec sec-l">
+          <div className="wrap">
+            <div className="chart-card-new rv">
+              <h4>Download Channels Share by Genre</h4>
+              <div className="chart-subtitle">Share of downloads by product model</div>
               <div className="chart-wrap" style={{ height: '300px' }}><GenreChart /></div>
             </div>
-          </div></div>
+          </div>
         </section>
 
         <section className="sec sec-l" style={{ padding: '24px 0' }}>
