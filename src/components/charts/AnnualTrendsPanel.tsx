@@ -25,7 +25,7 @@ const DATA: Record<Region, {
   /* Revenue = IAP Revenue, Downloads = total downloads, Hours = Total Hours Spent */
   Worldwide: {
     revenue: { '2024': [28, 42, 5, 4], '2025': [29, 42, 5, 4] },
-    downloads: { '2024': [17, 2, 8, 21.6], '2025': [15, 2, 6, 21] },
+    downloads: { '2024': [17, 3, 8, 21.6], '2025': [15, 2.5, 7, 21] },
     hours: { '2024': [120, 150, 55, 100], '2025': [125, 155, 60, 95] },
   },
   'United States': {
