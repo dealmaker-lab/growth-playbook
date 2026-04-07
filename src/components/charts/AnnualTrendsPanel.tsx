@@ -123,7 +123,9 @@ function MetricChart({ metric, region }: { metric: string; region: Region }) {
         .legend(false)
         .label({
           text: (d: { value: number }) => {
-            if (d.value < 0.5) return '';
+            // Dynamic threshold: hide label only if segment is <5% of total bar
+            const total = data.filter((r: { year: string }) => r.year === '2024').reduce((s: number, r: { value: number }) => s + r.value, 0);
+            if (d.value < total * 0.05) return '';
             return formatVal(d.value, metric, region);
           },
           position: 'inside',
