@@ -1,4 +1,4 @@
-const BASE_URL = 'https://growth-playbook-six.vercel.app';
+const BASE_URL = 'https://playbook.appsamurai.com';
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export function GET() {
