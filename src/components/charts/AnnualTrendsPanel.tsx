@@ -27,7 +27,8 @@ const DATA = {
   },
 };
 
-function formatVal(value: number, metric: string): string {
+/* Short label for inside the bar */
+function formatLabel(value: number, metric: string): string {
   if (value === 0) return '';
   if (metric === 'revenue') {
     if (value >= 1) return '$' + value.toFixed(1) + 'B';
@@ -35,6 +36,15 @@ function formatVal(value: number, metric: string): string {
   }
   if (value >= 1) return value.toFixed(1) + 'B';
   return Math.round(value * 1000) + 'M';
+}
+
+/* Exact value for tooltip hover — shows full number with commas */
+function formatTooltip(value: number, metric: string): string {
+  if (value === 0) return '0';
+  const raw = Math.round(value * 1_000_000_000);
+  const formatted = raw.toLocaleString('en-US');
+  if (metric === 'revenue') return '$' + formatted;
+  return formatted;
 }
 
 function buildData(metric: string) {
@@ -72,7 +82,7 @@ function MetricChart({ metric }: { metric: string }) {
           range: colors,
         })
         .axis('y', {
-          labelFormatter: (v: number) => formatVal(v, metric),
+          labelFormatter: (v: number) => formatLabel(v, metric),
           labelFontSize: 9,
           labelFill: '#888',
           gridStroke: '#f0f0f0',
@@ -89,7 +99,7 @@ function MetricChart({ metric }: { metric: string }) {
           text: (d: { value: number }) => {
             const total = data.filter((r) => r.year === '2024').reduce((s, r) => s + r.value, 0);
             if (d.value < total * 0.03) return '';
-            return formatVal(d.value, metric);
+            return formatLabel(d.value, metric);
           },
           position: 'inside',
           fill: '#fff',
@@ -98,7 +108,7 @@ function MetricChart({ metric }: { metric: string }) {
         })
         .tooltip((d: { genre: string; value: number }) => ({
           name: d.genre,
-          value: formatVal(d.value, metric),
+          value: formatTooltip(d.value, metric),
         }))
         .style('radiusTopLeft', 2)
         .style('radiusTopRight', 2)
