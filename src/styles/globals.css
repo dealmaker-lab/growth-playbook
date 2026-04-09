@@ -515,6 +515,43 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .gate-tease{position:relative}
 .gate-tease::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,transparent,var(--bg-alt));pointer-events:none;z-index:1}
 
+/* === EBOOK ACCENT VARS === */
+:root{
+  --ebook-gp:var(--green);
+  --ebook-rp:var(--purple);
+  --ebook-hc:var(--pink);
+}
+
+/* === HUB LANDING PAGE === */
+.hub-hero{padding:120px 0 56px;text-align:center;background:linear-gradient(180deg,#fff 0%,var(--bg-alt) 100%)}
+.hub-hero-title{font-family:var(--font-h);font-size:clamp(2rem,5vw,3.2rem);font-weight:800;color:var(--text);line-height:1.1;margin-bottom:16px;letter-spacing:-.03em}
+.hub-hero-title em{font-style:normal;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hub-hero-sub{font-size:clamp(.95rem,1.5vw,1.15rem);color:var(--text-muted);max-width:600px;margin:0 auto;line-height:1.7;font-weight:400}
+.hub-grid-section{padding:32px 0 64px;background:var(--bg-alt)}
+.hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.hub-grid{grid-template-columns:1fr}}
+
+.hub-card{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:box-shadow .3s var(--ease),transform .3s var(--ease)}
+.hub-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px)}
+.hub-card-accent{height:4px;background:var(--card-accent)}
+.hub-card-body{padding:28px 24px 24px}
+.hub-card-subtitle{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint)}
+.hub-card-title{font-family:var(--font-h);font-size:1.25rem;font-weight:700;color:var(--text);margin:6px 0 12px;line-height:1.25}
+.hub-card-desc{font-size:.85rem;color:var(--text-muted);line-height:1.7;margin-bottom:16px}
+.hub-card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.hub-tag{padding:4px 10px;border-radius:20px;font-size:.7rem;font-weight:600;background:var(--bg-alt);color:var(--text-muted);border:1px solid var(--border)}
+.hub-card-meta{display:flex;align-items:center;gap:8px;font-size:.75rem;color:var(--text-faint);margin-bottom:16px}
+.hub-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--text-faint)}
+.hub-card-cta{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-h);font-size:.85rem;font-weight:600;color:var(--card-accent)}
+.hub-card:hover .hub-card-cta{gap:10px}
+
+.hub-calc-cta{padding:48px 0}
+.hub-calc-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;background:linear-gradient(135deg,#f0fdf6 0%,#e8f5ee 50%,#f0f4ff 100%);border:1px solid rgba(38,190,129,.15);border-radius:var(--r-lg);padding:36px 40px}
+.hub-calc-inner h3{font-family:var(--font-h);font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.hub-calc-inner p{font-size:.9rem;color:var(--text-muted);line-height:1.6;max-width:480px}
+.hub-calc-inner .btn-primary{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;text-decoration:none}
+@media(max-width:768px){.hub-calc-inner{flex-direction:column;text-align:center;padding:28px 24px}.hub-calc-inner p{max-width:none}}
+
 /* === PRINT STYLES === */
 @media print{
   .top-nav,.nav-ribbon,.side-nav,.progress-bar,.lead-bar,.gate,.gate-tease::after,.mobile-menu{display:none!important}

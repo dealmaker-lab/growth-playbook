@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import {
   DoughnutChart,
   ProgrammaticChart,
@@ -15,6 +15,38 @@ import {
 import AnnualTrendsPanel from './charts/AnnualTrendsPanel';
 import FAQ, { DSP_FAQ, REWARDED_FAQ, OEM_FAQ, ASA_FAQ } from './FAQ';
 import TrendingContent from './TrendingContent';
+import RelatedEbooks from './shared/RelatedEbooks';
+import TopNav from './shared/TopNav';
+import Footer from './shared/Footer';
+import SideNav from './shared/SideNav';
+import ProgressBar from './shared/ProgressBar';
+import EmailGate from './shared/EmailGate';
+import LeadBar from './shared/LeadBar';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useAnimatedCounters } from '../hooks/useAnimatedCounters';
+import { useSideNav } from '../hooks/useSideNav';
+import { useAnalytics } from '../hooks/useAnalytics';
+import { useProgressBar } from '../hooks/useProgressBar';
+
+const ANALYTICS_SECTIONS = ['hero', 'toc', 'ch1', 'ch2', 'ch3', 'ch4', 'emailGate', 'about', 'calculatorTeaser'];
+
+const SIDE_NAV_SECTIONS = [
+  { id: 'hero', color: '#26BE81' },
+  { id: 'toc', color: '#26BE81' },
+  { id: 'ch1', color: '#26BE81' },
+  { id: 'ch2', color: '#af9cff' },
+  { id: 'ch3', color: '#555' },
+  { id: 'ch4', color: '#00f4f4' },
+];
+
+const SIDE_NAV_ITEMS = [
+  { id: 'hero', label: 'Home', defaultColor: 'var(--green)' },
+  { id: 'toc', label: 'Contents' },
+  { id: 'ch1', label: 'DSP Engine' },
+  { id: 'ch2', label: 'Rewarded' },
+  { id: 'ch3', label: 'OEM' },
+  { id: 'ch4', label: 'ASA & ASO' },
+];
 
 interface PlaybookContentProps {
   initialUnlocked: boolean;
@@ -24,248 +56,13 @@ export default function PlaybookContent({
   initialUnlocked,
 }: PlaybookContentProps) {
   const [gateUnlocked, setGateUnlocked] = useState(initialUnlocked);
-  const [gateLoading, setGateLoading] = useState(false);
-  const [gateError, setGateError] = useState<string | false>(false);
-  const [gateSuccess, setGateSuccess] = useState(false);
-  const [gateLiftingDone, setGateLiftingDone] = useState(false);
   const [retTab, setRetTab] = useState('d7');
-  const lastY = useRef(0);
-  const sessionId = useRef('');
-  const maxScrollDepth = useRef(0);
 
-  const emailRef = useRef<HTMLInputElement>(null);
-  const gateFormRef = useRef<HTMLDivElement>(null);
-
-  /* ── Analytics ── */
-  const trackEvent = useCallback((event_type: string, section?: string, metadata?: Record<string, unknown>) => {
-    fetch('/api/analytics', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ session_id: sessionId.current, event_type, section, metadata }),
-    }).catch(() => {}); // fire and forget
-  }, []);
-
-  /* ── Analytics: page_view + scroll_depth on beforeunload ── */
-  useEffect(() => {
-    sessionId.current = crypto.randomUUID();
-    trackEvent('page_view');
-
-    function handleScroll() {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = Math.max(0, Math.min(100, Math.round((scrollTop / docHeight) * 100)));
-      if (pct > maxScrollDepth.current) maxScrollDepth.current = pct;
-    }
-
-    function handleBeforeUnload() {
-      trackEvent('scroll_depth', undefined, { max_percent: maxScrollDepth.current });
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [trackEvent]);
-
-  /* ── Analytics: section_view via IntersectionObserver ── */
-  useEffect(() => {
-    const sectionIds = ['hero', 'toc', 'ch1', 'ch2', 'ch3', 'ch4', 'emailGate', 'about'];
-    const seen = new Set<string>();
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !seen.has(entry.target.id)) {
-          seen.add(entry.target.id);
-          const label = entry.target.id === 'emailGate' ? 'gate' : entry.target.id;
-          trackEvent('section_view', label);
-        }
-      });
-    }, { threshold: 0.1 });
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) obs.observe(el);
-    });
-    // Also observe calculator section if it exists
-    const calcEl = document.getElementById('calculatorTeaser');
-    if (calcEl) obs.observe(calcEl);
-    return () => obs.disconnect();
-  }, [trackEvent]);
-
-  /* ── TapNation now uses AntV G2 component ── */
-
-  /* ── Scroll Reveal with Stagger ── */
-  const initReveal = useCallback(() => {
-    const prefersRM = window.matchMedia(
-      '(prefers-reduced-motion:reduce)'
-    ).matches;
-    const els = document.querySelectorAll('.rv,.rv-l,.rv-r,.ch-enter-right,.ch-enter-scale,.ch-enter-left,.ch-enter-bottom');
-    if (prefersRM) {
-      els.forEach((e) => e.classList.add('vis'));
-      return;
-    }
-
-    // Apply stagger classes to sibling .rv elements within each section
-    document.querySelectorAll('.sec, .ch-head, .bento, .toc').forEach((section) => {
-      const rvChildren = section.querySelectorAll(':scope > .wrap > .rv, :scope > .wrap > div > .rv');
-      rvChildren.forEach((el, i) => {
-        if (i > 0 && i <= 3) {
-          el.classList.add(`rv-stagger-${i}`);
-        }
-      });
-    });
-
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('vis');
-            obs.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.06, rootMargin: '0px 0px -40px 0px' }
-    );
-    els.forEach((e) => {
-      if (!e.classList.contains('vis')) obs.observe(e);
-    });
-  }, []);
-
-  /* ── Animated Counters ── */
-  const initCounters = useCallback(() => {
-    const prefersRM = window.matchMedia(
-      '(prefers-reduced-motion:reduce)'
-    ).matches;
-    const counters = document.querySelectorAll('[data-count]');
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target as HTMLElement & { _counted?: boolean };
-          if (el._counted) return;
-          el._counted = true;
-          const target = +el.dataset.count!;
-          const prefix = el.dataset.prefix || '';
-          const suffix = el.dataset.suffix || '';
-          const decimal = el.dataset.decimal ? +el.dataset.decimal : 0;
-          const duration = 1400;
-          const start = performance.now();
-          function tick(now: number) {
-            const elapsed = now - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const val = eased * target;
-            const display = decimal > 0 ? (val / Math.pow(10, decimal)).toFixed(1) : String(Math.round(val));
-            el.textContent = prefix + display + suffix;
-            if (progress < 1) requestAnimationFrame(tick);
-          }
-          if (prefersRM) {
-            const finalDisplay = decimal > 0 ? (target / Math.pow(10, decimal)).toFixed(1) : String(target);
-            el.textContent = prefix + finalDisplay + suffix;
-          } else {
-            requestAnimationFrame(tick);
-          }
-          obs.unobserve(el);
-        });
-      },
-      { threshold: 0.4 }
-    );
-    counters.forEach((c) => obs.observe(c));
-  }, []);
-
-  /* ── Side Nav ── */
-  const initSideNav = useCallback(() => {
-    const ids = ['hero', 'toc', 'ch1', 'ch2', 'ch3', 'ch4'];
-    const colors: Record<string, string> = {
-      hero: '#26BE81',
-      toc: '#26BE81',
-      ch1: '#26BE81',
-      ch2: '#af9cff',
-      ch3: '#555',
-      ch4: '#00f4f4',
-    };
-    const links = document.querySelectorAll('.side-nav a');
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            links.forEach((l) => {
-              l.classList.remove('active');
-              const dot = l.querySelector('.dot') as HTMLElement;
-              if (dot) {
-                dot.style.background = 'var(--border)';
-                dot.style.boxShadow = 'none';
-              }
-            });
-            const a = document.querySelector(
-              `.side-nav a[data-s="${entry.target.id}"]`
-            );
-            if (a) {
-              a.classList.add('active');
-              const c = colors[entry.target.id] || '#26BE81';
-              const dot = a.querySelector('.dot') as HTMLElement;
-              if (dot) {
-                dot.style.background = c;
-                dot.style.boxShadow = `0 0 0 3px ${c}33`;
-              }
-            }
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '-80px 0px -40% 0px' }
-    );
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) obs.observe(el);
-    });
-  }, []);
-
-  /* ── Progress + Nav ── */
-  useEffect(() => {
-    function updateProgress() {
-      const scrollTop = window.scrollY;
-      const docHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const progress = Math.max(
-        0,
-        Math.min(100, (scrollTop / docHeight) * 100)
-      );
-      const bar = document.querySelector('.progress-bar') as HTMLElement;
-      if (bar)
-        bar.style.setProperty('--read-progress', progress + '%');
-    }
-
-    function updateNav() {
-      const y = window.scrollY;
-      const nav = document.getElementById('topNav');
-      const hiding = y > lastY.current && y > 200;
-      if (nav) nav.classList.toggle('hide', hiding);
-      lastY.current = y;
-    }
-
-    function onScroll() {
-      updateProgress();
-      updateNav();
-
-      // Lead bar — only show when content is locked
-      const bar = document.getElementById('leadBar');
-      const gate = document.getElementById('emailGate');
-      if (bar) {
-        if (gateUnlocked) {
-          bar.classList.remove('show');
-        } else if (gate) {
-          const gateTop = gate.getBoundingClientRect().top;
-          bar.classList.toggle(
-            'show',
-            window.scrollY > window.innerHeight && gateTop > 0
-          );
-        }
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [gateUnlocked]);
+  const initReveal = useScrollReveal();
+  const initCounters = useAnimatedCounters();
+  const initSideNav = useSideNav(SIDE_NAV_SECTIONS);
+  const { trackEvent } = useAnalytics(ANALYTICS_SECTIONS);
+  useProgressBar(gateUnlocked);
 
   /* ── Main init ── */
   useEffect(() => {
@@ -303,175 +100,22 @@ export default function PlaybookContent({
     [initReveal, initCounters]
   );
 
-  /* ── Email gate submit ── */
-  const handleGateSubmit = useCallback(async () => {
-    const email = emailRef.current?.value.trim() || '';
-    setGateError(false);
-
-    if (gateFormRef.current) {
-      gateFormRef.current.classList.remove('shake', 'invalid');
-    }
-
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      if (emailRef.current) emailRef.current.style.borderColor = '#F87171';
-      if (gateFormRef.current) {
-        gateFormRef.current.classList.add('invalid');
-        void gateFormRef.current.offsetWidth;
-        gateFormRef.current.classList.add('shake');
-      }
-      setGateError('Please enter a valid work email address');
-      return;
-    }
-
-    setGateLoading(true);
-    if (emailRef.current) emailRef.current.style.borderColor = 'var(--green)';
-
-    try {
-      // Read UTM params from URL
-      const params = new URLSearchParams(window.location.search);
-
-      const res = await fetch('/api/unlock', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email,
-          utm_source: params.get('utm_source') || undefined,
-          utm_medium: params.get('utm_medium') || undefined,
-          utm_campaign: params.get('utm_campaign') || undefined,
-          referrer: document.referrer || undefined,
-        }),
-      });
-
-      if (res.ok) {
-        setGateSuccess(true);
-        trackEvent('gate_unlock', 'gate', { email_domain: email.split('@')[1] });
-        // Show success animation for 1.5s, then lift the gate curtain
-        setTimeout(() => {
-          setGateLiftingDone(true);
-          unlockGatedContent(true);
-        }, 1500);
-      } else {
-        const data = await res.json().catch(() => null);
-        if (res.status === 429) {
-          setGateError('Too many attempts. Please try again later.');
-        } else if (data?.error) {
-          setGateError(data.error);
-        } else {
-          setGateError('Something went wrong. Please try again.');
-        }
-        setGateLoading(false);
-      }
-    } catch {
-      setGateError('Something went wrong. Please try again.');
-      setGateLoading(false);
-    }
-  }, [unlockGatedContent, trackEvent]);
-
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const ebookLinks = useMemo(() => [
+    { href: '/growth-playbook', label: 'Mobile Growth Playbook' },
+    { href: '/rewarded-playtime', label: 'Rewarded Playtime Handbook' },
+    { href: '/hybrid-casual', label: 'Hybrid-Casual Games' },
+    { href: '/calculator', label: 'ROI Calculator' },
+  ], []);
+
   return (
     <>
-      {/* PROGRESS BAR */}
-      <div className="progress-bar">
-        <div className="progress-seg s1"></div>
-        <div className="progress-seg s2"></div>
-        <div className="progress-seg s3"></div>
-        <div className="progress-seg s4"></div>
-      </div>
-
-      {/* TOP NAV */}
-      <nav className="top-nav" id="topNav" style={{ top: 0 }}>
-        <a href="https://appsamurai.com" className="nav-logo" target="_blank" rel="noopener noreferrer">
-          <img src="/appsamurai-logo.png" alt="AppSamurai" style={{ height: '28px', width: 'auto' }} />
-        </a>
-        <div className="nav-right">
-          <div className="nav-dropdown">
-            <button className="nav-link nav-link--dropdown">Solutions <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 4l3 3 3-3"/></svg></button>
-            <div className="nav-dropdown-menu">
-              <a href="https://appsamurai.com/gaming/" target="_blank" rel="noopener noreferrer">AppSamurai For Games</a>
-              <a href="https://appsamurai.com/dsp/" target="_blank" rel="noopener noreferrer">DSP (UA &amp; Retargeting)</a>
-              <a href="https://appsamurai.com/oem/" target="_blank" rel="noopener noreferrer">OEM (App Discovery)</a>
-              <a href="https://appsamurai.com/appsprize-monetization/" target="_blank" rel="noopener noreferrer">Rewarded Playtime</a>
-            </div>
-          </div>
-          <div className="nav-dropdown">
-            <button className="nav-link nav-link--dropdown">Resources <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 4l3 3 3-3"/></svg></button>
-            <div className="nav-dropdown-menu">
-              <a href="https://appsamurai.com/blog/" target="_blank" rel="noopener noreferrer">Blog</a>
-              <a href="https://appsamurai.com/success-stories/" target="_blank" rel="noopener noreferrer">Success Stories</a>
-              <a href="https://appsamurai.com/all-about-apps-podcast/" target="_blank" rel="noopener noreferrer">Podcast</a>
-              <a href="https://appsamurai.com/ebooks/" target="_blank" rel="noopener noreferrer">eBooks</a>
-              <a href="https://appsamurai.com/glossary/" target="_blank" rel="noopener noreferrer">Glossary</a>
-              <a href="https://help.appsamurai.com" target="_blank" rel="noopener noreferrer">Help Center</a>
-            </div>
-          </div>
-          <div className="nav-dropdown">
-            <button className="nav-link nav-link--dropdown">Company <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 4l3 3 3-3"/></svg></button>
-            <div className="nav-dropdown-menu">
-              <a href="https://appsamurai.com/about-us/" target="_blank" rel="noopener noreferrer">About Us</a>
-              <a href="https://appsamurai.com/about-us/#culture" target="_blank" rel="noopener noreferrer">Culture</a>
-              <a href="https://appsamurai.com/about-us/#careers" target="_blank" rel="noopener noreferrer">Careers</a>
-            </div>
-          </div>
-          <a href="https://dashboard.appsamurai.com/login" className="nav-link" target="_blank" rel="noopener noreferrer">Login</a>
-          <a href="https://appsamurai.com/contact-us/" className="btn-primary nav-cta" target="_blank" rel="noopener noreferrer">Talk to us</a>
-        </div>
-        <button className="nav-hamburger" aria-label="Menu" onClick={() => { const m = document.getElementById('mobileMenu'); if (m) m.classList.toggle('open'); }}>
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#222" strokeWidth="2" strokeLinecap="round"><path d="M3 6h16M3 11h16M3 16h16"/></svg>
-        </button>
-      </nav>
-      {/* Mobile Menu */}
-      <div className="mobile-menu" id="mobileMenu">
-        <div className="mobile-menu-inner">
-          <div className="mobile-menu-section"><span className="mobile-menu-label">Solutions</span>
-            <a href="https://appsamurai.com/gaming/">AppSamurai For Games</a>
-            <a href="https://appsamurai.com/dsp/">DSP (UA &amp; Retargeting)</a>
-            <a href="https://appsamurai.com/oem/">OEM (App Discovery)</a>
-            <a href="https://appsamurai.com/appsprize-monetization/">Rewarded Playtime</a>
-          </div>
-          <div className="mobile-menu-section"><span className="mobile-menu-label">Resources</span>
-            <a href="https://appsamurai.com/blog/">Blog</a>
-            <a href="https://appsamurai.com/success-stories/">Success Stories</a>
-            <a href="https://appsamurai.com/ebooks/">eBooks</a>
-          </div>
-          <div className="mobile-menu-section"><span className="mobile-menu-label">Company</span>
-            <a href="https://appsamurai.com/about-us/">About Us</a>
-            <a href="https://appsamurai.com/about-us/#careers">Careers</a>
-          </div>
-          <a href="https://dashboard.appsamurai.com/login" className="mobile-menu-link">Login</a>
-          <a href="https://appsamurai.com/contact-us/" className="btn-primary" style={{ display: 'block', textAlign: 'center', marginTop: '12px', textDecoration: 'none' }}>Talk to us</a>
-        </div>
-      </div>
-
-      {/* SIDE NAV */}
-      <div className="side-nav" id="sideNav">
-        <a href="#hero" data-s="hero">
-          <span className="lbl">Home</span>
-          <span className="dot" style={{ background: 'var(--green)' }}></span>
-        </a>
-        <a href="#toc" data-s="toc">
-          <span className="lbl">Contents</span>
-          <span className="dot"></span>
-        </a>
-        <a href="#ch1" data-s="ch1">
-          <span className="lbl">DSP Engine</span>
-          <span className="dot"></span>
-        </a>
-        <a href="#ch2" data-s="ch2">
-          <span className="lbl">Rewarded</span>
-          <span className="dot"></span>
-        </a>
-        <a href="#ch3" data-s="ch3">
-          <span className="lbl">OEM</span>
-          <span className="dot"></span>
-        </a>
-        <a href="#ch4" data-s="ch4">
-          <span className="lbl">ASA &amp; ASO</span>
-          <span className="dot"></span>
-        </a>
-      </div>
+      <ProgressBar />
+      <TopNav ebookLinks={ebookLinks} />
+      <SideNav sections={SIDE_NAV_ITEMS} />
 
       {/* HERO */}
       <div className="hero-wrap">
@@ -889,56 +533,15 @@ export default function PlaybookContent({
       <FAQ items={DSP_FAQ} chapterColor="var(--ch1)" />
 
       {/* EMAIL GATE */}
-      <section
-        className={`gate${gateLiftingDone ? ' gate-lifting' : ''}`}
-        id="emailGate"
-        style={{ display: gateUnlocked ? 'none' : undefined }}
-        onAnimationEnd={(e) => { if (e.animationName === 'liftUp') { (e.currentTarget as HTMLElement).style.display = 'none'; } }}
-      >
-        <div className="gate-inner rv">
-          {gateSuccess ? (
-            <div className="gate-success">
-              <div className="checkmark">&#10003;</div>
-              <div className="success-msg">Welcome! Unlocking your content...</div>
-            </div>
-          ) : (
-            <>
-              <div className="gate-icon">&#128274;</div>
-              <h2>Unlock the Full 2026 Strategy Guide</h2>
-              <p>The rest covers Rewarded Playtime (Chapter 2), OEM preloads on Samsung, Xiaomi, and Huawei (Chapter 3), and Apple Search Ads + ASO strategy (Chapter 4), plus the interactive ROI calculator.</p>
-              <div className="gate-form" id="gateForm" ref={gateFormRef}>
-                <input
-                  className="gate-input"
-                  type="email"
-                  placeholder="Enter your work email"
-                  id="gateEmail"
-                  ref={emailRef}
-                  required
-                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleGateSubmit(); } }}
-                />
-                <button
-                  className={`gate-submit${gateLoading ? ' btn-loading' : ''}`}
-                  id="gateBtn"
-                  onClick={handleGateSubmit}
-                >
-                  {gateLoading ? (
-                    <>
-                      <svg className="spinner" viewBox="0 0 24 24" fill="none" style={{ width: 18, height: 18 }}>
-                        <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" strokeWidth="3" />
-                        <path d="M12 2a10 10 0 0 1 10 10" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
-                      </svg>
-                      Unlocking...
-                    </>
-                  ) : 'Get Access'}
-                </button>
-              </div>
-              {gateError && <div className="gate-error-msg" style={{ opacity: 1, fontSize: '.75rem', color: '#F87171', marginTop: '8px', textAlign: 'center' }}>{gateError}</div>}
-              <div className="social-proof" style={{ marginTop: '12px' }}>Join <strong>2,500+</strong> growth leaders who&apos;ve read this playbook</div>
-              <div className="gate-note">No spam. Instant access. Unsubscribe anytime.</div>
-            </>
-          )}
-        </div>
-      </section>
+      {!gateUnlocked && (
+        <EmailGate
+          title="Unlock the Full 2026 Strategy Guide"
+          description="The rest covers Rewarded Playtime (Chapter 2), OEM preloads on Samsung, Xiaomi, and Huawei (Chapter 3), and Apple Search Ads + ASO strategy (Chapter 4), plus the interactive ROI calculator."
+          socialProof='Join <strong>2,500+</strong> growth leaders who&apos;ve read this playbook'
+          onUnlock={unlockGatedContent}
+          trackEvent={trackEvent}
+        />
+      )}
 
       {/* GATED CONTENT — always in DOM for SEO; visual gate via CSS overflow + blur */}
       <div id="gatedContent" data-nosnippet className={`${gateUnlocked ? 'gated-locked unlocked' : 'gated-locked'}${gateUnlocked && !initialUnlocked ? ' gated-reveal' : ''}`}>
@@ -1467,59 +1070,15 @@ export default function PlaybookContent({
           </div>
         </section>
 
+        <RelatedEbooks currentSlug="growth-playbook" />
+
       </div>{/* END gatedContent */}
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="wrap">
-          <div className="footer-grid">
-            <div className="footer-brand">
-              <img src="/appsamurai-logo.png" alt="AppSamurai" style={{ height: '28px', width: 'auto', marginBottom: '12px' }} />
-              <p>The Growth Platform Built for Mobile</p>
-              <div className="footer-social">
-                <a href="https://www.linkedin.com/company/apsamurai" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="#666"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-                <a href="https://x.com/appsamurai" target="_blank" rel="noopener noreferrer" aria-label="X"><svg width="18" height="18" viewBox="0 0 24 24" fill="#666"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-                <a href="https://www.instagram.com/app.samurai" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="#666"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                <a href="https://www.youtube.com/@AppSamurai" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="#666"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-              </div>
-            </div>
-            <div className="footer-col">
-              <h4>Solutions</h4>
-              <a href="https://appsamurai.com/gaming/" target="_blank" rel="noopener noreferrer">AppSamurai for Games</a>
-              <a href="https://appsamurai.com/dsp/" target="_blank" rel="noopener noreferrer">AppSamurai DSP</a>
-              <a href="https://appsamurai.com/oem/" target="_blank" rel="noopener noreferrer">App Discovery (OEM)</a>
-              <a href="https://appsamurai.com/appsprize-monetization/" target="_blank" rel="noopener noreferrer">AppsPrize (Monetization)</a>
-            </div>
-            <div className="footer-col">
-              <h4>Resources</h4>
-              <a href="https://appsamurai.com/blog/" target="_blank" rel="noopener noreferrer">Blog</a>
-              <a href="https://appsamurai.com/ebooks/" target="_blank" rel="noopener noreferrer">eBooks</a>
-              <a href="https://appsamurai.com/success-stories/" target="_blank" rel="noopener noreferrer">Success Stories</a>
-              <a href="https://appsamurai.com/roas/" target="_blank" rel="noopener noreferrer">ROAS Forecaster</a>
-            </div>
-            <div className="footer-col">
-              <h4>Company</h4>
-              <a href="https://appsamurai.com/about-us/" target="_blank" rel="noopener noreferrer">About Us</a>
-              <a href="https://appsamurai.com/contact-us/" target="_blank" rel="noopener noreferrer">Contact Us</a>
-              <a href="https://appsamurai.com/about-us/#careers" target="_blank" rel="noopener noreferrer">Careers</a>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <div className="footer-legal">
-              <a href="https://dashboard.appsamurai.com/terms.html" target="_blank" rel="noopener noreferrer">Terms of Use</a>
-              <a href="https://appsamurai.com/information-security-policy/" target="_blank" rel="noopener noreferrer">Information Security</a>
-              <a href="https://appsamurai.com/cookie-policy/" target="_blank" rel="noopener noreferrer">Cookie Policy</a>
-            </div>
-            <p>&copy; 2025 All Rights Reserved AppSamurai</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
-      {/* LEAD BAR */}
-      <div className="lead-bar" id="leadBar">
-        <p>Get the full 2026 Mobile Growth Strategy Guide</p>
-        <button className="btn-primary" onClick={() => { trackEvent('cta_click', 'lead_bar', { destination: 'gate' }); scrollTo('emailGate'); }}>Unlock Full Report</button>
-      </div>
+      <LeadBar
+        onCtaClick={() => { trackEvent('cta_click', 'lead_bar', { destination: 'gate' }); scrollTo('emailGate'); }}
+      />
     </>
   );
 }

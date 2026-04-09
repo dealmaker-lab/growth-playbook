@@ -15,10 +15,13 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${BASE_URL}${basePath}`),
-  title: 'AppSamurai 2026 Mobile Growth Strategy Guide | DSP, Rewarded, OEM & ASA',
+  title: {
+    default: 'AppSamurai Content Hub | Mobile Growth Resources & Ebooks',
+    template: '%s | AppSamurai',
+  },
   icons: { icon: '/favicon.ico' },
   description:
-    'The definitive 2026 strategy guide for mobile user acquisition: Programmatic DSP, Rewarded Playtime, OEM Discovery, and Apple Search Ads. Data-backed frameworks, ROI calculator, and practical playbooks for growth teams.',
+    'Interactive ebooks and strategy guides for mobile user acquisition, rewarded playtime, hybrid-casual games, and programmatic advertising. By AppSamurai.',
   alternates: {
     canonical: '/',
   },
@@ -29,27 +32,24 @@ export const metadata: Metadata = {
     'max-snippet': -1,
   },
   openGraph: {
-    title: 'AppSamurai 2026 Mobile Growth Strategy Guide',
+    title: 'AppSamurai Content Hub | Mobile Growth Resources',
     description:
-      'The definitive strategy guide for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads — built for growth teams who need to scale smarter in 2026.',
-    type: 'article',
-    publishedTime: '2026-01-15T00:00:00Z',
-    modifiedTime: '2026-03-28T00:00:00Z',
-    authors: ['AppSamurai'],
+      'Interactive ebooks and strategy guides for mobile user acquisition, rewarded playtime, hybrid-casual games, and programmatic advertising.',
+    type: 'website',
     images: [
       {
         url: '/hero-bg.png',
         width: 1200,
         height: 630,
-        alt: 'AppSamurai 2026 Mobile Growth Strategy Guide — DSP, Rewarded, OEM, ASA',
+        alt: 'AppSamurai Content Hub — Mobile Growth Resources',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AppSamurai 2026 Mobile Growth Strategy Guide',
+    title: 'AppSamurai Content Hub',
     description:
-      'The definitive playbook for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads.',
+      'Interactive ebooks and strategy guides for mobile growth teams.',
     images: ['/hero-bg.png'],
   },
 };
@@ -57,25 +57,6 @@ export const metadata: Metadata = {
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
-    {
-      '@type': 'TechArticle',
-      headline: 'AppSamurai 2026 Mobile Growth Strategy Guide: DSP, Rewarded, OEM & ASA',
-      author: { '@type': 'Organization', name: 'AppSamurai', url: 'https://appsamurai.com' },
-      publisher: {
-        '@type': 'Organization',
-        name: 'AppSamurai',
-        url: 'https://appsamurai.com',
-        logo: { '@type': 'ImageObject', url: 'https://appsamurai.com/logo.png' },
-      },
-      datePublished: '2026-01-15',
-      dateModified: '2026-03-28',
-      description:
-        'The definitive 2026 strategy guide for mobile user acquisition covering Programmatic DSP, Rewarded Playtime, OEM Discovery, and Apple Search Ads with data-backed frameworks and an interactive ROI calculator.',
-      image: `${BASE_URL}${basePath}/hero-bg.png`,
-      mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}${basePath}/` },
-      articleSection: ['Programmatic DSP', 'Rewarded Playtime', 'OEM Discovery', 'Apple Search Ads'],
-      keywords: 'mobile user acquisition, programmatic DSP, rewarded playtime, OEM advertising, apple search ads, ASO, mobile growth strategy 2026',
-    },
     {
       '@type': 'Organization',
       name: 'AppSamurai',
@@ -88,11 +69,16 @@ const structuredData = {
       description: 'Global mobile growth platform empowering apps to scale through AI-powered programmatic advertising, rewarded user acquisition, OEM discovery, and Apple Search Ads management.',
     },
     {
+      '@type': 'WebSite',
+      name: 'AppSamurai Content Hub',
+      url: `${BASE_URL}${basePath}/`,
+      publisher: { '@type': 'Organization', name: 'AppSamurai', url: 'https://appsamurai.com' },
+    },
+    {
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'AppSamurai', item: 'https://appsamurai.com' },
-        { '@type': 'ListItem', position: 2, name: 'Growth Playbook', item: `${BASE_URL}${basePath}/` },
-        { '@type': 'ListItem', position: 3, name: 'ROI Calculator', item: `${BASE_URL}${basePath}/calculator` },
+        { '@type': 'ListItem', position: 2, name: 'Content Hub', item: `${BASE_URL}${basePath}/` },
       ],
     },
   ],
