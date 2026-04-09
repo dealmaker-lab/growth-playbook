@@ -6,6 +6,7 @@ interface EmailGateProps {
   title?: string;
   description?: string;
   socialProof?: string;
+  ebookSlug?: string;
   onUnlock: (scroll: boolean) => void;
   trackEvent: (event_type: string, section?: string, metadata?: Record<string, unknown>) => void;
 }
@@ -14,6 +15,7 @@ export default function EmailGate({
   title = 'Unlock the Full 2026 Strategy Guide',
   description = 'The rest covers Rewarded Playtime (Chapter 2), OEM preloads on Samsung, Xiaomi, and Huawei (Chapter 3), and Apple Search Ads + ASO strategy (Chapter 4), plus the interactive ROI calculator.',
   socialProof = 'Join <strong>2,500+</strong> growth leaders who\u2019ve read this playbook',
+  ebookSlug,
   onUnlock,
   trackEvent,
 }: EmailGateProps) {
@@ -54,6 +56,7 @@ export default function EmailGate({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
+          playbook_slug: ebookSlug || 'growth-playbook',
           utm_source: params.get('utm_source') || undefined,
           utm_medium: params.get('utm_medium') || undefined,
           utm_campaign: params.get('utm_campaign') || undefined,
@@ -83,7 +86,7 @@ export default function EmailGate({
       setError('Something went wrong. Please try again.');
       setLoading(false);
     }
-  }, [onUnlock, trackEvent]);
+  }, [ebookSlug, onUnlock, trackEvent]);
 
   return (
     <section

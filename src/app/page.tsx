@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import TopNav from '@/components/shared/TopNav';
 import Footer from '@/components/shared/Footer';
+import HashRedirect from '@/components/shared/HashRedirect';
 
 const EBOOK_LINKS = [
   { href: '/growth-playbook', label: 'Mobile Growth Playbook' },
@@ -39,7 +40,7 @@ const EBOOKS = [
     title: 'The Rise of Hybrid-Casual Games',
     subtitle: 'The Next Era in Mobile Gaming',
     description:
-      'Why hybrid-casual games emerged, how they combine casual accessibility with mid-core depth, and what marketing strategies drive growth in this fast-growing segment.',
+      'Why hybrid-casual games took off, how they mix casual accessibility with mid-core depth, and which marketing strategies are driving growth in this category.',
     chapters: 5,
     readTime: '20 min',
     accentVar: '--pink',
@@ -52,18 +53,19 @@ export default function HubPage() {
   return (
     <>
       <TopNav ebookLinks={EBOOK_LINKS} />
+      <HashRedirect />
 
       {/* HERO */}
       <section className="hub-hero">
         <div className="wrap">
           <span className="hero-badge">AppSamurai Content Hub</span>
           <h1 className="hub-hero-title">
-            Mobile Growth <em>Resources</em>
+            Mobile Growth <em>Playbooks</em>
           </h1>
           <p className="hub-hero-sub">
-            Interactive strategy guides, market research, and data-driven
-            frameworks built for mobile growth teams. Free to read, backed by
-            10,000+ campaigns.
+            Three strategy guides built from 10,000+ campaigns. Programmatic
+            DSP, rewarded playtime, OEM discovery, and hybrid-casual
+            monetization — the UA channels that are actually working in 2026.
           </p>
         </div>
       </section>

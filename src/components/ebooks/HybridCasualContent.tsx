@@ -42,8 +42,8 @@ const SIDE_NAV_ITEMS = [
 const HC_FAQ = [
   { question: 'What defines a hybrid-casual game?', answer: 'Hybrid-casual games combine a hyper-casual core game loop and simple mechanics with the features and monetization models of casual and mid-core games. They retain instant action and accessibility while adding deeper progression systems, narrative layers, and multiple monetization streams.' },
   { question: 'Why did hybrid-casual games emerge?', answer: 'Three factors converged: Apple\'s ATT framework increased user acquisition costs, ad-only monetization reached saturation, and players began churning from repetitive hyper-casual titles. Hybrid-casual games address all three by offering deeper engagement with diversified revenue streams.' },
-  { question: 'How do hybrid-casual games monetize differently?', answer: 'Unlike hyper-casual games that rely solely on ads, hybrid-casual games use a mix of in-app purchases, advertising, and subscription services. This diversified approach caters to different player preferences and creates more sustainable, higher-LTV revenue models.' },
-  { question: 'What marketing strategies work best for hybrid-casual games?', answer: 'Rewarded Playtime and Rewarded Engagement are two standout strategies. They incentivize players to engage with the game for longer periods, improving retention rates, player engagement, in-app purchases, and lifetime value.' },
+  { question: 'How do hybrid-casual games monetize differently?', answer: 'Unlike hyper-casual games that run on ads alone, hybrid-casual games mix in-app purchases, advertising, and subscriptions. This spread accommodates different player spending habits and produces higher-LTV revenue.' },
+  { question: 'What marketing strategies work best for hybrid-casual games?', answer: 'Rewarded Playtime and Rewarded Engagement stand out. Both reward players for spending time in-game, which lifts retention, engagement, IAP conversion, and lifetime value.' },
 ];
 
 interface HybridCasualContentProps {
@@ -103,7 +103,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
               The Next Era in Mobile Gaming
             </p>
             <p className="hero-sub" style={{ color: 'rgba(255,255,255,.6)' }}>
-              Why hybrid-casual games emerged, how they bridge casual accessibility with mid-core depth, and the marketing strategies that drive growth in this fast-growing segment.
+              Why hybrid-casual games took off, how they mix casual accessibility with mid-core depth, and which marketing strategies are driving growth in this category.
             </p>
             <div className="hero-cta">
               <button className="btn-primary" onClick={() => scrollTo('hc-toc')}>
@@ -165,7 +165,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
           <div className="ch-num" style={{ color: 'var(--pink)' }}>1.0</div>
           <h2>The Hybrid-Casual Revolution</h2>
           <p style={{ fontSize: '.85rem', color: 'rgba(244,141,255,.7)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>A New Era in Mobile Gaming</p>
-          <div className="ch-desc">The mobile gaming industry is shifting from hyper-casual games to hybrid-casual titles. By blending multiple genres, these games provide a fresh, engaging experience that appeals to casual and hardcore gamers alike.</div>
+          <div className="ch-desc">The mobile gaming industry is moving past hyper-casual. Hybrid-casual titles blend genres, combining the instant pick-up-and-play of casual games with the progression systems that keep mid-core players coming back.</div>
         </div>
       </section>
 
@@ -188,7 +188,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
           <div className="ch-num" style={{ color: 'var(--purple)' }}>2.0</div>
           <h2>What Are Hybrid-Casual Games?</h2>
           <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.7)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The Game Genre Spectrum</p>
-          <div className="ch-desc">Hybrid-casual games combine a hyper-casual core game loop with the features and monetization models of casual and mid-core games: instant action with deeper progression systems.</div>
+          <div className="ch-desc">Hybrid-casual games layer casual and mid-core features onto a hyper-casual core loop: instant action on the surface, deeper progression underneath.</div>
         </div>
       </section>
 
@@ -236,7 +236,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
             <h4 style={{ fontFamily: 'var(--font-h)', fontWeight: 700, color: 'var(--text)' }}>7 Meta Layers of Hybrid-Casual Games</h4>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '12px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '12px' }}>
             {[
               { n: '1', title: 'Storyline', desc: 'Narrative and mood', color: '#FCA5A5' },
               { n: '2', title: 'Collecting', desc: 'Complete collections', color: '#C4B5FD' },
@@ -262,6 +262,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
           title="Unlock the Full Hybrid-Casual Ebook"
           description="Continue reading for market analysis, revenue data, UA strategies, and expert insights on the hybrid-casual gaming revolution."
           socialProof='Join <strong>2,500+</strong> growth leaders who read our ebooks'
+          ebookSlug="hybrid-casual"
           onUnlock={unlockGatedContent}
           trackEvent={trackEvent}
         />
@@ -278,7 +279,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
             <div className="ch-num" style={{ color: 'var(--yellow)' }}>3.0</div>
             <h2>Why Did Hybrid-Casual Games Emerge?</h2>
             <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Recent Changes in the Industry</p>
-            <div className="ch-desc">Hybrid-casual games arose from three converging forces: Apple&apos;s App Tracking Transparency, the limits of ad-only monetization, and a saturated market with declining engagement and retention.</div>
+            <div className="ch-desc">Three forces pushed hybrid-casual into existence: Apple&apos;s App Tracking Transparency, the ceiling on ad-only monetization, and a saturated market where engagement and retention were falling.</div>
           </div>
         </section>
 
@@ -288,17 +289,17 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
                 <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                 <h4>ATT (App Tracking Transparency)</h4>
-                <p>Apple&apos;s iOS 14.5 made tracking opt-in, raising user acquisition costs and making it harder to deliver targeted ads. Developers needed new ways to keep players engaged and monetize effectively.</p>
+                <p>iOS 14.5 made tracking opt-in, driving up UA costs and cutting the precision of targeted ads. Developers needed new engagement and monetization strategies without cheap, large-scale targeting.</p>
               </div>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
                 <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div>
                 <h4>Ad Monetization Limits</h4>
-                <p>In a saturated market with ever-growing competition, ad-based monetization alone is no longer enough. Low engagement and retention levels heavily affect the ad-based revenue model.</p>
+                <p>In a saturated market, ad-based monetization alone falls short. When engagement and retention are low, fewer impressions per user means less ad revenue per install.</p>
               </div>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
                 <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
                 <h4>Low Engagement &amp; Retention</h4>
-                <p>Hyper-casual&apos;s repetitive features are causing low engagement. Players are losing the reason to return, affecting CPI, retention, LTV, and ROAS.</p>
+                <p>Hyper-casual&apos;s repetitive loops are burning out players. Without a reason to return, CPI climbs, retention drops, and LTV and ROAS shrink.</p>
               </div>
             </div>
           </div>
@@ -323,7 +324,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
             <div className="ch-num" style={{ color: 'var(--green)' }}>4.0</div>
             <h2>How Hybrid-Casual Enlivens the Market</h2>
             <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Retention, Engagement, Spending, and UA</p>
-            <div className="ch-desc">Hybrid-casual games retain the positive instant action of hyper-casual while offering deeper, more complex progression systems that result in improved retention, long-term motivation, and higher LTV.</div>
+            <div className="ch-desc">Hybrid-casual keeps the instant-action feel of hyper-casual but adds deeper progression. The result: better retention, longer player lifecycles, and higher LTV.</div>
           </div>
         </section>
 
@@ -348,10 +349,10 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
           <div className="wrap rv">
             <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '16px', color: 'var(--text)' }}>4 Benefits of Hybrid-Casual Games</h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--green)' }}><div className="ic-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div><div><h4>Longer Retention</h4><p>Deeper progression systems keep players engaged for extended periods. D1 retention above 35% signals a successful mobile game (GameAnalytics).</p></div></div>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--green)' }}><div className="ic-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><h4>Higher Engagement</h4><p>Complex gameplay mechanics require more skill and strategy, and meta layers provide various ways to keep players invested in the game.</p></div></div>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--green)' }}><div className="ic-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div><div><h4>Increased Consumer Spending</h4><p>IAPs, virtual goods, and subscription options encourage players to invest money, creating a diversified and more sustainable revenue model.</p></div></div>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--green)' }}><div className="ic-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div><h4>Improved User Acquisition</h4><p>Hybrid-casual games appeal to a broader range of players and can offer more attention-grabbing creatives for play stores and marketing.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--green)' }}><div className="ic-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div><div><h4>Longer Retention</h4><p>Deeper progression keeps players in-game longer. D1 retention above 35% signals a successful mobile game, per GameAnalytics benchmarks.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--green)' }}><div className="ic-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><h4>Higher Engagement</h4><p>More complex mechanics demand skill and strategy. Meta layers like collecting, customizing, and competing give players multiple reasons to stay invested.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--green)' }}><div className="ic-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div><div><h4>Increased Consumer Spending</h4><p>IAPs, virtual goods, and subscriptions open multiple revenue channels. Players who spend money stay longer, and the diversified model reduces reliance on ads alone.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--green)' }}><div className="ic-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div><h4>Improved User Acquisition</h4><p>Hybrid-casual games attract a wider player base and produce richer creative assets for app stores and paid campaigns.</p></div></div>
             </div>
           </div>
         </section>
@@ -364,7 +365,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
             <div className="ch-num" style={{ color: 'var(--cyan)' }}>5.0</div>
             <h2>Marketing for Hybrid-Casual Games</h2>
             <p style={{ fontSize: '.85rem', color: 'rgba(0,244,244,.6)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Out-of-the-box Strategies</p>
-            <div className="ch-desc">Even though hybrid-casual games face less over-saturation risk, mobile game owners should start looking for innovative marketing strategies to stand out among competitors and attract players.</div>
+            <div className="ch-desc">Hybrid-casual faces less saturation than hyper-casual, but standing out still requires sharp marketing. Two strategies are outperforming traditional UA channels.</div>
           </div>
         </section>
 
@@ -385,12 +386,12 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--cyan)', flexDirection: 'column' }}>
                 <div className="ic-icon" style={{ background: 'rgba(0,244,244,.1)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--cyan)' }}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
                 <h4>Rewarded Playtime</h4>
-                <p>Players earn coins/points per minute of gameplay, redeemable for in-app purchases, gift cards, or real money. The longer they play, the more motivated they become. This drives retention rates, player engagement, in-app purchases, and lifetime value.</p>
+                <p>Players earn coins or points per minute of gameplay, redeemable for in-app purchases, gift cards, or cash. The longer they play, the more they earn. That loop lifts retention, engagement, IAP conversion, and lifetime value.</p>
               </div>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--cyan)', flexDirection: 'column' }}>
                 <div className="ic-icon" style={{ background: 'rgba(0,244,244,.1)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--cyan)' }}><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div>
                 <h4>Rewarded Engagement</h4>
-                <p>Players complete various tasks and challenges within the game, earning rewards for successful completion. This conversion-based model increases ad revenue per user (ARPU) as players spend more time engaging and viewing more ads.</p>
+                <p>Players complete in-game tasks and challenges for rewards on completion. This conversion-based model lifts ARPU: more engaged time means more ad views and higher revenue per player.</p>
               </div>
             </div>
           </div>
@@ -406,7 +407,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
               Ready to Grow Your Hybrid-Casual Game?
             </h3>
             <p style={{ color: 'var(--text-muted)', maxWidth: '540px', margin: '0 auto 24px', lineHeight: 1.7 }}>
-              Our growth team has helped 500+ apps scale with rewarded UA and OEM discovery. Let&apos;s build your custom growth plan.
+              Our growth team has scaled 500+ apps through rewarded UA and OEM discovery. Tell us about your game, and we&apos;ll build a growth plan around it.
             </p>
             <a href="https://appsamurai.com/contact" target="_blank" rel="noopener noreferrer"
                className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none', fontSize: '1rem', padding: '16px 40px' }}

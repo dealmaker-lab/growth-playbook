@@ -6,7 +6,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 export const metadata: Metadata = {
   title: 'Rewarded Playtime Handbook | Engage, Retain, Monetize',
   description:
-    'How rewarded playtime is reshaping mobile gaming monetization. Covers market trends, campaign strategy, KPI measurement, and best practices for casual and mid-core games. By AppSamurai.',
+    'Rewarded playtime is reshaping how mobile games monetize. This handbook covers market trends, campaign setup, KPI benchmarks (ARPDAU, eCPM, retention), and offerwall best practices for casual and mid-core publishers. By AppSamurai.',
   alternates: {
     canonical: '/rewarded-playtime',
   },
@@ -53,7 +53,7 @@ const structuredData = {
   image: `${BASE_URL}${basePath}/hero-bg.png`,
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}${basePath}/rewarded-playtime` },
   articleSection: ['Rewarded Playtime', 'Mobile Gaming', 'Campaign Strategy', 'KPIs'],
-  keywords: 'rewarded playtime, mobile gaming monetization, casual games, in-app purchases, player retention, ARPDAU, eCPM',
+  keywords: 'rewarded playtime, offerwall ads, mobile game monetization, play to earn mobile games, rewarded ads mobile gaming, casual game user acquisition, in-app purchase optimization, player retention strategies, ARPDAU optimization, mobile game KPIs 2024',
 };
 
 export default function RewardedPlaytimeLayout({

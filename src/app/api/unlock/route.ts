@@ -104,6 +104,7 @@ export async function POST(request: NextRequest) {
     const referrer = body.referrer || request.headers.get('referer') || null;
     const user_agent =
       body.user_agent || request.headers.get('user-agent') || null;
+    const playbook_slug = body.playbook_slug || 'growth-playbook';
 
     // ── Insert into Supabase (ignore duplicate emails) ──
     const supabase = createClient(
@@ -114,6 +115,7 @@ export async function POST(request: NextRequest) {
       {
         email,
         source: 'gate',
+        playbook_slug,
         ip_address: ip,
         user_agent,
         referrer,
@@ -140,6 +142,7 @@ export async function POST(request: NextRequest) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
+          playbook_slug,
           utm_source,
           utm_medium,
           utm_campaign,

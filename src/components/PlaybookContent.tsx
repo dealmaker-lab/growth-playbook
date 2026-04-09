@@ -538,6 +538,7 @@ export default function PlaybookContent({
           title="Unlock the Full 2026 Strategy Guide"
           description="The rest covers Rewarded Playtime (Chapter 2), OEM preloads on Samsung, Xiaomi, and Huawei (Chapter 3), and Apple Search Ads + ASO strategy (Chapter 4), plus the interactive ROI calculator."
           socialProof='Join <strong>2,500+</strong> growth leaders who&apos;ve read this playbook'
+          ebookSlug="growth-playbook"
           onUnlock={unlockGatedContent}
           trackEvent={trackEvent}
         />

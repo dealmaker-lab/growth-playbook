@@ -44,8 +44,8 @@ const SIDE_NAV_ITEMS = [
 const RP_FAQ = [
   { question: 'What is Rewarded Playtime?', answer: 'Rewarded Playtime is a user acquisition and engagement model where players receive real-world monetary rewards (coupons, gift cards, or cash) for their time spent playing mobile games. Unlike traditional install-focused models, it incentivizes sustained engagement and deeper funnel events.' },
   { question: 'How does Rewarded Playtime differ from rewarded video ads?', answer: 'Rewarded video ads give users a small in-game bonus for watching a short ad. Rewarded Playtime goes further by rewarding actual gameplay time and milestone achievements with real-world value, driving higher retention and LTV.' },
-  { question: 'What metrics should I track for Rewarded Playtime campaigns?', answer: 'Focus on player engagement (DAU, session length), lifetime value (LTV), retention rates (D1, D7, D30), return on ad spend (ROAS), and event completion rates. These KPIs provide a complete picture of campaign effectiveness.' },
-  { question: 'Is Rewarded Playtime only for gaming apps?', answer: 'While it originated in gaming, the model works for any app category where sustained engagement matters: fintech, e-commerce, streaming, and utility apps all benefit from the rewarded engagement approach.' },
+  { question: 'What metrics should I track for Rewarded Playtime campaigns?', answer: 'Track player engagement (DAU, session length), lifetime value (LTV), retention rates (D1, D7, D30), return on ad spend (ROAS), and event completion rates. Together, these five metrics show whether a campaign is profitable and sustainable.' },
+  { question: 'Is Rewarded Playtime only for gaming apps?', answer: 'It started in gaming, but the model works wherever sustained engagement matters: fintech, e-commerce, streaming, and utility apps all run rewarded engagement campaigns today.' },
 ];
 
 interface RewardedPlaytimeContentProps {
@@ -105,7 +105,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
               Engage, Retain, Monetize in Mobile Gaming
             </p>
             <p className="hero-sub" style={{ color: 'rgba(255,255,255,.6)' }}>
-              The complete guide to rewarded playtime: how it works, market data, campaign strategy, and the KPIs that matter for casual, mid-core, and hybrid-casual games.
+              How rewarded playtime works, the market data behind it, campaign strategy for casual, mid-core, and hybrid-casual games, and the KPIs that separate winners from underperformers.
             </p>
             <div className="hero-cta">
               <button className="btn-primary" onClick={() => scrollTo('rp-toc')}>
@@ -168,7 +168,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           <div className="ch-num" style={{ color: 'var(--purple)' }}>1.0</div>
           <h2>The Rise of Casual and Mid-core Games</h2>
           <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.7)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Understanding the Mobile Gaming Landscape</p>
-          <div className="ch-desc">The global mobile gaming market is valued at around $159 billion and is projected to grow approximately 10% annually through 2027. Casual games now generate 38% of total mobile game revenue, growing 8% YoY to $28.6 billion.</div>
+          <div className="ch-desc">The global mobile gaming market hit $159 billion in 2023 and grows roughly 10% per year through 2027. Casual games now account for 38% of mobile game revenue ($28.6 billion), up 8% year over year.</div>
         </div>
       </section>
 
@@ -177,7 +177,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           <div className="story-text rv-l">
             <span className="tag" style={{ color: 'var(--purple)', borderColor: 'var(--purple)' }}>Section 1.1</span>
             <h3>Why Casual and Mid-core Games Dominate</h3>
-            <p>Casual games attract players with simplicity and accessibility. Titles like Royal Match and Monopoly GO! capture attention with engaging gameplay and colorful graphics. Mid-core games like Clash Royale add strategic depth and competitive elements for players seeking longer sessions.</p>
+            <p>Casual games win on simplicity. Royal Match and Monopoly GO! pull players in with quick sessions and polished visuals. Mid-core titles like Clash Royale go deeper: strategic mechanics, competitive ladders, and session lengths that push past 15 minutes.</p>
             <div className="stat-callout" style={{ borderLeftColor: 'var(--purple)' }}>
               <div className="big-num" style={{ color: 'var(--purple)' }}>$159B</div>
               <div className="stat-body"><h4>Global Mobile Gaming Market</h4><p>Projected ~10% annual growth through 2027 (Newzoo)</p></div>
@@ -199,7 +199,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           <div className="ch-num" style={{ color: 'var(--purple)' }}>2.0</div>
           <h2>Rewarded Playtime: How It Works</h2>
           <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.7)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The Play-to-Earn Model</p>
-          <div className="ch-desc">Rewarded playtime rewards users with real-world monetary rewards for their time and engagement in games. Players earn tangible benefits such as coupons, gift cards, or cash based on achieving milestones, completing levels, or accumulating playtime.</div>
+          <div className="ch-desc">Players earn real money for their time in-game: coupons, gift cards, or cash. Rewards trigger on milestones, level completions, or accumulated playtime, turning engagement into a direct value exchange.</div>
         </div>
       </section>
 
@@ -209,17 +209,17 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--purple)', flexDirection: 'column' }}>
               <div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
               <h4>Time-Based Rewards</h4>
-              <p>Players earn coins or points per minute of gameplay. The longer they play, the more they earn, creating a self-reinforcing engagement loop.</p>
+              <p>Players earn coins or points per minute of gameplay. More time in-game means more earned value, compounding session length.</p>
             </div>
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--purple)', flexDirection: 'column' }}>
               <div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
               <h4>Milestone Achievements</h4>
-              <p>Reaching specific in-game milestones triggers bonus rewards, encouraging players to progress deeper into the game experience.</p>
+              <p>Hitting in-game milestones triggers bonus payouts, pulling players further into the game's progression systems.</p>
             </div>
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--purple)', flexDirection: 'column' }}>
               <div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div>
               <h4>Real-World Redemption</h4>
-              <p>Earned points convert to tangible rewards: gift cards, cash, coupons. This tangible value drives word-of-mouth and differentiates from ad-based models.</p>
+              <p>Earned points convert to gift cards, cash, or coupons. Real monetary value drives word-of-mouth and sets rewarded playtime apart from ad-only models.</p>
             </div>
           </div>
         </div>
@@ -231,6 +231,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           title="Unlock the Full Rewarded Playtime Handbook"
           description="Continue reading for mobile gaming trends, campaign best practices, KPI measurement frameworks, and future predictions from industry leaders."
           socialProof='Join <strong>2,500+</strong> growth leaders who read our handbooks'
+          ebookSlug="rewarded-playtime"
           onUnlock={unlockGatedContent}
           trackEvent={trackEvent}
         />
@@ -247,7 +248,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="ch-num" style={{ color: 'var(--green)' }}>3.0</div>
             <h2>Mobile Gaming Trends and Rewarded Playtime</h2>
             <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The Rising Importance of In-App Purchases</p>
-            <div className="ch-desc">Mobile gaming monetization has shifted from purely ad-driven revenue to hybrid models combining advertising, IAPs, and subscription services. Rewarded Playtime sits at the intersection of this shift.</div>
+            <div className="ch-desc">Mobile gaming monetization has moved from ad-only revenue to hybrid models that mix advertising, IAPs, and subscriptions. Rewarded Playtime sits at that intersection.</div>
           </div>
         </section>
 
@@ -313,7 +314,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="ch-num" style={{ color: 'var(--yellow)' }}>4.0</div>
             <h2>Best Practices &amp; Campaign Strategy</h2>
             <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Designing Rewarded Playtime Experiences</p>
-            <div className="ch-desc">Effective Rewarded Playtime campaigns require clear goals, a deep understanding of the target audience, and continuous optimization across reward types, audience segments, and competitive positioning.</div>
+            <div className="ch-desc">A Rewarded Playtime campaign that performs needs three things: clear goals, a well-defined audience, and ongoing optimization of reward types, segments, and competitive positioning.</div>
           </div>
         </section>
 
@@ -323,17 +324,17 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
                 <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
                 <h4>Uninterrupted UX</h4>
-                <p>Players opt in voluntarily, ensuring rewards integrate naturally into gameplay without disruption. Maintaining an uninterrupted experience enhances satisfaction and session length.</p>
+                <p>Players opt in voluntarily, so rewards fit naturally into gameplay. No interruptions means longer sessions and higher satisfaction.</p>
               </div>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
                 <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div>
                 <h4>Tiered Reward System</h4>
-                <p>Reward players incrementally as they progress. Small rewards for early achievements, increasing to larger rewards for significant milestones. This creates a sense of progression and accomplishment.</p>
+                <p>Start with small rewards for early achievements and scale up at major milestones. Each tier pulls players toward the next, building visible momentum.</p>
               </div>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
                 <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="var(--yellow)" stroke="none"/></svg></div>
                 <h4>Reward Player Investment</h4>
-                <p>Align rewards with the level of player investment. Players who dedicate more time and effort should be rewarded accordingly, with milestone-based triggers for higher-tier rewards.</p>
+                <p>Match reward value to player effort. Players who invest more time and skill earn proportionally more, with milestone-based triggers unlocking higher-tier payouts.</p>
               </div>
             </div>
           </div>
@@ -370,7 +371,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="ch-num" style={{ color: 'var(--cyan)' }}>5.0</div>
             <h2>Measuring and Analyzing Performance</h2>
             <p style={{ fontSize: '.85rem', color: 'rgba(0,244,244,.6)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Key Performance Indicators (KPIs)</p>
-            <div className="ch-desc">Monitoring the right metrics is crucial for refining Rewarded Playtime strategies and enhancing outcomes. Growth teams need to continually track and act on campaign data.</div>
+            <div className="ch-desc">The right metrics tell you what's working and what's burning budget. Growth teams that track these KPIs can tune campaigns in near-real-time.</div>
           </div>
         </section>
 
@@ -402,17 +403,17 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="ch-num" style={{ color: 'var(--pink)' }}>6.0</div>
             <h2>Future Trends in Rewarded Playtime</h2>
             <p style={{ fontSize: '.85rem', color: 'rgba(244,141,255,.7)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Emerging Technologies and Innovations</p>
-            <div className="ch-desc">AI, machine learning, and predictive analytics are poised to reshape how Rewarded Playtime campaigns are personalized, delivered, and optimized.</div>
+            <div className="ch-desc">AI and predictive analytics are already changing how Rewarded Playtime campaigns target, personalize, and optimize in real time.</div>
           </div>
         </section>
 
         <section className="sec sec-w">
           <div className="wrap rv">
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div><h4>AI-Personalized Ads</h4><p>Predictive analytics will analyze player data to forecast preferences and behaviors, enabling highly targeted ad placements within Rewarded Playtime campaigns.</p></div></div>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div><div><h4>Predictive Analytics</h4><p>AI can identify disengagement signals before they become visible, proactively adjusting offerings or rewards to re-engage players before churn occurs.</p></div></div>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>Regulatory Landscape</h4><p>Staying compliant with evolving data privacy regulations is crucial. Rewarded Playtime&apos;s opt-in model has a built-in advantage, as players voluntarily initiate the process.</p></div></div>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="var(--pink)" stroke="none"/></svg></div><div><h4>Higher Reward Values</h4><p>As competition grows, reward values will increase. Higher reward values drive higher engagement rates and motivate more players to participate.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div><h4>AI-Personalized Ads</h4><p>Predictive models will analyze player data to forecast preferences and behavior, placing ads where they convert, not just where they're visible.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div><div><h4>Predictive Analytics</h4><p>AI can spot disengagement signals before they surface, flagging at-risk players and adjusting rewards to pull them back before they churn.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>Regulatory Landscape</h4><p>Data privacy regulations keep tightening. Rewarded Playtime&apos;s opt-in model has a built-in edge: players voluntarily participate, putting it on solid ground under GDPR and ATT.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="var(--pink)" stroke="none"/></svg></div><div><h4>Higher Reward Values</h4><p>As competition heats up, reward values will climb. Publishers who offer more tangible value per session will win the attention war.</p></div></div>
             </div>
           </div>
         </section>
@@ -427,7 +428,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
               Ready to Launch a Rewarded Playtime Campaign?
             </h3>
             <p style={{ color: 'var(--text-muted)', maxWidth: '540px', margin: '0 auto 24px', lineHeight: 1.7 }}>
-              Our growth team has helped 500+ apps scale with rewarded user acquisition. Let&apos;s build your custom campaign strategy.
+              Our growth team has scaled 500+ apps with rewarded UA. Tell us your game, and we&apos;ll design a campaign strategy around it.
             </p>
             <a href="https://appsamurai.com/contact" target="_blank" rel="noopener noreferrer"
                className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none', fontSize: '1rem', padding: '16px 40px' }}

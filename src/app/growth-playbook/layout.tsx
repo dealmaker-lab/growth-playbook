@@ -56,7 +56,7 @@ const structuredData = {
       image: `${BASE_URL}${basePath}/hero-bg.png`,
       mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}${basePath}/growth-playbook` },
       articleSection: ['Programmatic DSP', 'Rewarded Playtime', 'OEM Discovery', 'Apple Search Ads'],
-      keywords: 'mobile user acquisition, programmatic DSP, rewarded playtime, OEM advertising, apple search ads, ASO, mobile growth strategy 2026',
+      keywords: 'mobile user acquisition strategy, programmatic DSP advertising, rewarded playtime campaigns, OEM preload advertising Samsung Xiaomi, apple search ads optimization, ASO strategy 2026, mobile app growth playbook, UA channel diversification, mobile ROAS optimization, CAC reduction mobile apps',
     },
     {
       '@type': 'FAQPage',
