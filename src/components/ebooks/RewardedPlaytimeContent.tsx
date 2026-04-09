@@ -95,16 +95,16 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
 
       {/* HERO */}
       <div className="hero-wrap" style={{ background: 'linear-gradient(180deg, #1A1A2E 0%, #2d1b69 50%, #1A1A2E 100%)' }}>
-        <section className="hero" id="rp-hero" style={{ minHeight: '70vh' }}>
+        <section className="hero hero-dark" id="rp-hero" style={{ minHeight: '70vh' }}>
           <div className="rv" style={{ textAlign: 'center' }}>
             <span className="hero-badge" style={{ background: 'rgba(175,156,255,.15)', color: '#af9cff', border: '1px solid rgba(175,156,255,.3)' }}>AppSamurai Handbook</span>
             <h1 style={{ color: '#fff' }}>
               Rewarded <em style={{ fontStyle: 'normal', color: '#af9cff' }}>Playtime</em>
             </h1>
-            <p style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1rem,2vw,1.3rem)', fontWeight: 600, color: 'rgba(255,255,255,.8)', marginBottom: '16px', letterSpacing: '-.01em' }}>
+            <p style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1rem,2vw,1.3rem)', fontWeight: 600, marginBottom: '16px', letterSpacing: '-.01em' }}>
               Engage, Retain, Monetize in Mobile Gaming
             </p>
-            <p className="hero-sub" style={{ color: 'rgba(255,255,255,.6)' }}>
+            <p className="hero-sub">
               How rewarded playtime works, the market data behind it, campaign strategy for casual, mid-core, and hybrid-casual games, and the KPIs that separate winners from underperformers.
             </p>
             <div className="hero-cta">

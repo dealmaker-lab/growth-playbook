@@ -93,16 +93,16 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
 
       {/* HERO */}
       <div className="hero-wrap" style={{ background: 'linear-gradient(180deg, #2a0845 0%, #1A1A2E 100%)' }}>
-        <section className="hero" id="hc-hero" style={{ minHeight: '70vh' }}>
+        <section className="hero hero-dark" id="hc-hero" style={{ minHeight: '70vh' }}>
           <div className="rv" style={{ textAlign: 'center' }}>
             <span className="hero-badge" style={{ background: 'rgba(244,141,255,.15)', color: '#f48dff', border: '1px solid rgba(244,141,255,.3)' }}>AppSamurai for Games</span>
             <h1 style={{ color: '#fff' }}>
               The Rise of <em style={{ fontStyle: 'normal', color: '#f48dff' }}>Hybrid-Casual</em> Games
             </h1>
-            <p style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1rem,2vw,1.3rem)', fontWeight: 600, color: 'rgba(255,255,255,.8)', marginBottom: '16px', letterSpacing: '-.01em' }}>
+            <p style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1rem,2vw,1.3rem)', fontWeight: 600, marginBottom: '16px', letterSpacing: '-.01em' }}>
               The Next Era in Mobile Gaming
             </p>
-            <p className="hero-sub" style={{ color: 'rgba(255,255,255,.6)' }}>
+            <p className="hero-sub">
               Why hybrid-casual games took off, how they mix casual accessibility with mid-core depth, and which marketing strategies are driving growth in this category.
             </p>
             <div className="hero-cta">

@@ -111,6 +111,10 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .hero-wrap>*{position:relative;z-index:2}
 .hero{max-width:var(--max-w);margin:0 auto;padding:100px 40px 88px;text-align:center;position:relative;z-index:1}
 .hero .rv{position:relative;z-index:2;background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(245,247,249,.92) 0%,rgba(245,247,249,.7) 60%,transparent 100%);padding:40px 20px;border-radius:24px}
+.hero-dark .rv{background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(20,20,50,.55) 0%,rgba(20,20,50,.3) 60%,transparent 100%)}
+.hero-dark .hero-sub{color:rgba(255,255,255,.75)}
+.hero-dark h1{color:#fff}
+.hero-dark p{color:rgba(255,255,255,.9)}
 .hero-badge{display:inline-block;background:rgba(38,190,129,.08);color:var(--green);font-size:11px;font-weight:700;font-family:var(--font-h);padding:7px 20px;border-radius:100px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:28px;border:1px solid rgba(38,190,129,.15)}
 .hero h1{font-family:var(--font-h);font-size:clamp(2.4rem,5.5vw,3.5rem);font-weight:var(--fw-bold);color:var(--text);line-height:1.06;margin-bottom:20px;letter-spacing:-.04em}
 .hero h1 em{font-style:normal;color:var(--green)}
