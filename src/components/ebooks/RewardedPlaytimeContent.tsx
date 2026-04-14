@@ -230,7 +230,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
         <EmailGate
           title="Unlock the Full Rewarded Playtime Handbook"
           description="Continue reading for mobile gaming trends, campaign best practices, KPI measurement frameworks, and future predictions from industry leaders."
-          socialProof='Join <strong>2,500+</strong> growth leaders who read our handbooks'
+          socialProof={<>Join <strong>2,500+</strong> growth leaders who read our handbooks</>}
           ebookSlug="rewarded-playtime"
           onUnlock={unlockGatedContent}
           trackEvent={trackEvent}

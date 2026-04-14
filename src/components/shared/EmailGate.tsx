@@ -1,11 +1,16 @@
 'use client';
 
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, type ReactNode } from 'react';
 
 interface EmailGateProps {
   title?: string;
   description?: string;
-  socialProof?: string;
+  /**
+   * Optional social-proof line rendered below the submit button.
+   * Accepts a ReactNode so callers can compose `<>Join <strong>2,500+</strong> leaders</>`
+   * without exposing the component to an HTML-string injection surface.
+   */
+  socialProof?: ReactNode;
   ebookSlug?: string;
   onUnlock: (scroll: boolean) => void;
   trackEvent: (event_type: string, section?: string, metadata?: Record<string, unknown>) => void;
@@ -14,7 +19,9 @@ interface EmailGateProps {
 export default function EmailGate({
   title = 'Unlock the Full 2026 Strategy Guide',
   description = 'The rest covers Rewarded Playtime (Chapter 2), OEM preloads on Samsung, Xiaomi, and Huawei (Chapter 3), and Apple Search Ads + ASO strategy (Chapter 4), plus the interactive ROI calculator.',
-  socialProof = 'Join <strong>2,500+</strong> growth leaders who\u2019ve read this playbook',
+  socialProof = (
+    <>Join <strong>2,500+</strong> growth leaders who&rsquo;ve read this playbook</>
+  ),
   ebookSlug,
   onUnlock,
   trackEvent,
@@ -132,7 +139,7 @@ export default function EmailGate({
               </button>
             </div>
             {error && <div className="gate-error-msg" style={{ opacity: 1, fontSize: '.75rem', color: '#F87171', marginTop: '8px', textAlign: 'center' }}>{error}</div>}
-            <div className="social-proof" style={{ marginTop: '12px' }} dangerouslySetInnerHTML={{ __html: socialProof }} />
+            <div className="social-proof" style={{ marginTop: '12px' }}>{socialProof}</div>
             <div className="gate-note">No spam. Instant access. Unsubscribe anytime.</div>
           </>
         )}

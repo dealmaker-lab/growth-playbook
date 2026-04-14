@@ -261,7 +261,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
         <EmailGate
           title="Unlock the Full Hybrid-Casual Ebook"
           description="Continue reading for market analysis, revenue data, UA strategies, and expert insights on the hybrid-casual gaming revolution."
-          socialProof='Join <strong>2,500+</strong> growth leaders who read our ebooks'
+          socialProof={<>Join <strong>2,500+</strong> growth leaders who read our ebooks</>}
           ebookSlug="hybrid-casual"
           onUnlock={unlockGatedContent}
           trackEvent={trackEvent}
