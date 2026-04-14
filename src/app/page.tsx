@@ -23,6 +23,7 @@ const EBOOKS = [
     accentHex: '#26BE81',
     tags: ['DSP', 'Rewarded', 'OEM', 'ASA/ASO'],
     cover: '/covers/growth-playbook.png',
+    newUntil: '2026-07-13', // 90 days from 2026-04-14
   },
   {
     slug: 'rewarded-playtime',
@@ -64,9 +65,9 @@ export default function HubPage() {
             Mobile Growth <em>Playbooks</em>
           </h1>
           <p className="hub-hero-sub">
-            Three strategy guides built from 10,000+ campaigns. Programmatic
-            DSP, rewarded playtime, OEM discovery, and hybrid-casual
-            monetization — the UA channels that are actually working in 2026.
+            Three strategy guides for mobile growth teams. Programmatic DSP,
+            Rewarded Playtime, OEM Discovery, and Apple Search Ads —
+            frameworks and data from AppSamurai&rsquo;s work with 10,000+ apps.
           </p>
         </div>
       </section>
@@ -75,7 +76,12 @@ export default function HubPage() {
       <section className="hub-grid-section">
         <div className="wrap">
           <div className="hub-grid">
-            {EBOOKS.map((book) => (
+            {EBOOKS.map((book) => {
+              const isNew =
+                'newUntil' in book &&
+                typeof book.newUntil === 'string' &&
+                new Date() < new Date(book.newUntil);
+              return (
               <Link
                 key={book.slug}
                 href={`/${book.slug}`}
@@ -92,6 +98,7 @@ export default function HubPage() {
                     priority
                   />
                   <span className="hub-card-label">{book.label}</span>
+                  {isNew && <span className="hub-card-new">NEW</span>}
                 </div>
                 <div className="hub-card-body">
                   <p className="hub-card-desc">{book.description}</p>
@@ -113,7 +120,8 @@ export default function HubPage() {
                   </div>
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
