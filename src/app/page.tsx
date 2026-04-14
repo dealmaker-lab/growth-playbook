@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import TopNav from '@/components/shared/TopNav';
 import Footer from '@/components/shared/Footer';
@@ -14,38 +15,38 @@ const EBOOKS = [
   {
     slug: 'growth-playbook',
     title: 'Mobile Growth Strategy Guide',
-    subtitle: '2026 Edition',
+    label: 'GUIDE',
     description:
       'The definitive strategy guide for Programmatic DSP, Rewarded Playtime, OEM Discovery, and Apple Search Ads. Data-backed frameworks and an interactive ROI calculator for growth teams.',
     chapters: 4,
     readTime: '25 min',
-    accentVar: '--green',
     accentHex: '#26BE81',
     tags: ['DSP', 'Rewarded', 'OEM', 'ASA/ASO'],
+    cover: '/covers/growth-playbook.png',
   },
   {
     slug: 'rewarded-playtime',
     title: 'Rewarded Playtime Handbook',
-    subtitle: 'Engage, Retain, Monetize',
+    label: 'HANDBOOK',
     description:
       'How rewarded playtime is reshaping mobile gaming monetization. Covers market trends, campaign strategy, KPI measurement, and best practices for casual and mid-core games.',
     chapters: 6,
     readTime: '15 min',
-    accentVar: '--purple',
     accentHex: '#af9cff',
     tags: ['Gaming', 'IAPs', 'Retention', 'KPIs'],
+    cover: '/covers/rewarded-playtime.png',
   },
   {
     slug: 'hybrid-casual',
     title: 'The Rise of Hybrid-Casual Games',
-    subtitle: 'The Next Era in Mobile Gaming',
+    label: 'REPORT',
     description:
       'Why hybrid-casual games took off, how they mix casual accessibility with mid-core depth, and which marketing strategies are driving growth in this category.',
     chapters: 5,
     readTime: '20 min',
-    accentVar: '--pink',
     accentHex: '#f48dff',
     tags: ['Hybrid-Casual', 'UA', 'Monetization', 'Retention'],
+    cover: '/covers/hybrid-casual.png',
   },
 ];
 
@@ -81,25 +82,35 @@ export default function HubPage() {
                 className="hub-card"
                 style={{ '--card-accent': book.accentHex } as React.CSSProperties}
               >
-                <div className="hub-card-accent" />
+                <div className="hub-card-cover">
+                  <Image
+                    src={book.cover}
+                    alt={book.title}
+                    width={800}
+                    height={480}
+                    className="hub-card-img"
+                    priority
+                  />
+                  <span className="hub-card-label">{book.label}</span>
+                </div>
                 <div className="hub-card-body">
-                  <span className="hub-card-subtitle">{book.subtitle}</span>
-                  <h2 className="hub-card-title">{book.title}</h2>
                   <p className="hub-card-desc">{book.description}</p>
                   <div className="hub-card-tags">
                     {book.tags.map((tag) => (
                       <span key={tag} className="hub-tag">{tag}</span>
                     ))}
                   </div>
-                  <div className="hub-card-meta">
-                    <span>{book.chapters} chapters</span>
-                    <span className="hub-meta-dot" />
-                    <span>{book.readTime} read</span>
+                  <div className="hub-card-footer">
+                    <div className="hub-card-meta">
+                      <span>{book.chapters} chapters</span>
+                      <span className="hub-meta-dot" />
+                      <span>{book.readTime} read</span>
+                    </div>
+                    <span className="hub-card-cta">
+                      Read Now
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+                    </span>
                   </div>
-                  <span className="hub-card-cta">
-                    Read Now
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-                  </span>
                 </div>
               </Link>
             ))}
