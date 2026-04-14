@@ -1,7 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { rateLimit } from '@/lib/rate-limit';
+
+/**
+ * Admin dashboard auth endpoint.
+ *
+ * Protection: 10 attempts per hour per IP (independent scope).
+ * Blocks offline-dictionary brute force against ADMIN_PASSWORD.
+ */
 
 export async function POST(request: NextRequest) {
   try {
+    // ── Rate limit brute-force attempts ──
+    const forwarded = request.headers.get('x-forwarded-for');
+    const ip = forwarded?.split(',')[0]?.trim() || 'unknown';
+
+    const limit = rateLimit(ip, {
+      scope: 'admin-auth',
+      max: 10,
+      windowMs: 60 * 60 * 1000, // 1 hour
+    });
+    if (!limit.success) {
+      return NextResponse.json(
+        { success: false, error: 'Too many attempts. Try again later.' },
+        { status: 429, headers: { 'Retry-After': '3600' } }
+      );
+    }
+
     const body = await request.json();
     const password = body.password?.trim();
 
