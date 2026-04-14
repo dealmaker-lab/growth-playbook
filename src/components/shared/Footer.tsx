@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -23,7 +25,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Resources</h4>
             <a href="https://appsamurai.com/blog/" target="_blank" rel="noopener noreferrer">Blog</a>
-            <a href="/" rel="noopener noreferrer">eBooks</a>
+            <Link href="/">eBooks</Link>
             <a href="https://appsamurai.com/success-stories/" target="_blank" rel="noopener noreferrer">Success Stories</a>
             <a href="https://appsamurai.com/roas/" target="_blank" rel="noopener noreferrer">ROAS Forecaster</a>
           </div>

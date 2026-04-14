@@ -214,7 +214,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--purple)', flexDirection: 'column' }}>
               <div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
               <h4>Milestone Achievements</h4>
-              <p>Hitting in-game milestones triggers bonus payouts, pulling players further into the game's progression systems.</p>
+              <p>Hitting in-game milestones triggers bonus payouts, pulling players further into the game&apos;s progression systems.</p>
             </div>
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--purple)', flexDirection: 'column' }}>
               <div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div>
@@ -371,7 +371,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="ch-num" style={{ color: 'var(--cyan)' }}>5.0</div>
             <h2>Measuring and Analyzing Performance</h2>
             <p style={{ fontSize: '.85rem', color: 'rgba(0,244,244,.6)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Key Performance Indicators (KPIs)</p>
-            <div className="ch-desc">The right metrics tell you what's working and what's burning budget. Growth teams that track these KPIs can tune campaigns in near-real-time.</div>
+            <div className="ch-desc">The right metrics tell you what&apos;s working and what&apos;s burning budget. Growth teams that track these KPIs can tune campaigns in near-real-time.</div>
           </div>
         </section>
 
@@ -410,7 +410,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
         <section className="sec sec-w">
           <div className="wrap rv">
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div><h4>AI-Personalized Ads</h4><p>Predictive models will analyze player data to forecast preferences and behavior, placing ads where they convert, not just where they're visible.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div><h4>AI-Personalized Ads</h4><p>Predictive models will analyze player data to forecast preferences and behavior, placing ads where they convert, not just where they&apos;re visible.</p></div></div>
               <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div><div><h4>Predictive Analytics</h4><p>AI can spot disengagement signals before they surface, flagging at-risk players and adjusting rewards to pull them back before they churn.</p></div></div>
               <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>Regulatory Landscape</h4><p>Data privacy regulations keep tightening. Rewarded Playtime&apos;s opt-in model has a built-in edge: players voluntarily participate, putting it on solid ground under GDPR and ATT.</p></div></div>
               <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--pink)' }}><div className="ic-icon" style={{ background: 'var(--pink-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--pink)' }}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="var(--pink)" stroke="none"/></svg></div><div><h4>Higher Reward Values</h4><p>As competition heats up, reward values will climb. Publishers who offer more tangible value per session will win the attention war.</p></div></div>
