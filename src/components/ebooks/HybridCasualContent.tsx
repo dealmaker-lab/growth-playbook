@@ -7,6 +7,8 @@ import SideNav from '../shared/SideNav';
 import ProgressBar from '../shared/ProgressBar';
 import EmailGate from '../shared/EmailGate';
 import LeadBar from '../shared/LeadBar';
+import DownloadPDFButton from '../shared/DownloadPDFButton';
+import DownloadPDFFab from '../shared/DownloadPDFFab';
 import FAQ from '../FAQ';
 import RelatedEbooks from '../shared/RelatedEbooks';
 import HCRevenueChart from '../charts/hc/HCRevenueChart';
@@ -109,6 +111,13 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
               <button className="btn-primary" onClick={() => scrollTo('hc-toc')}>
                 Explore the Ebook <span>&darr;</span>
               </button>
+              <DownloadPDFButton
+                slug="hybrid-casual"
+                unlocked={gateUnlocked}
+                trackEvent={trackEvent}
+                section="hero"
+                onLocked={() => trackEvent('cta_click', 'hero', { destination: 'gate', intent: 'pdf' })}
+              />
             </div>
           </div>
         </section>
@@ -400,6 +409,26 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
         {/* FAQ */}
         <FAQ items={HC_FAQ} chapterColor="var(--pink)" />
 
+        {/* PDF DOWNLOAD */}
+        <section className="gate" style={{ padding: '36px 0' }} id="pdfDownload">
+          <div className="gate-inner rv">
+            <div className="gate-icon">&#128196;</div>
+            <h2>Download the Full Ebook as PDF</h2>
+            <p>Save the complete Hybrid-Casual Games ebook — every chart, case study, and strategy to take on the go.</p>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
+              <DownloadPDFButton
+                slug="hybrid-casual"
+                unlocked={gateUnlocked}
+                trackEvent={trackEvent}
+                section="pdf_section"
+                variant="primary"
+                label="Download PDF"
+              />
+            </div>
+            <div className="gate-note">Opens your device&rsquo;s print dialog — choose &ldquo;Save as PDF.&rdquo; Works on mobile &amp; desktop.</div>
+          </div>
+        </section>
+
         {/* FINAL CTA */}
         <section className="sec sec-w" style={{ textAlign: 'center', padding: '56px 0' }}>
           <div className="wrap">
@@ -428,6 +457,8 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
         buttonText="Unlock Full Ebook"
         onCtaClick={() => { trackEvent('cta_click', 'lead_bar', { destination: 'gate' }); scrollTo('emailGate'); }}
       />
+
+      <DownloadPDFFab slug="hybrid-casual" unlocked={gateUnlocked} trackEvent={trackEvent} />
     </>
   );
 }

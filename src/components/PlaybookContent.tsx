@@ -22,6 +22,8 @@ import SideNav from './shared/SideNav';
 import ProgressBar from './shared/ProgressBar';
 import EmailGate from './shared/EmailGate';
 import LeadBar from './shared/LeadBar';
+import DownloadPDFButton from './shared/DownloadPDFButton';
+import DownloadPDFFab from './shared/DownloadPDFFab';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useAnimatedCounters } from '../hooks/useAnimatedCounters';
 import { useSideNav } from '../hooks/useSideNav';
@@ -140,12 +142,13 @@ export default function PlaybookContent({
                 >
                   Explore the Guide <span>&darr;</span>
                 </button>
-                <button
-                  className="btn-outline"
-                  onClick={() => { trackEvent('cta_click', 'hero', { destination: 'pdf' }); scrollTo('emailGate'); }}
-                >
-                  Download PDF
-                </button>
+                <DownloadPDFButton
+                  slug="growth-playbook"
+                  unlocked={gateUnlocked}
+                  trackEvent={trackEvent}
+                  section="hero"
+                  onLocked={() => trackEvent('cta_click', 'hero', { destination: 'gate', intent: 'pdf' })}
+                />
               </div>
             </div>
           </section>
@@ -1018,14 +1021,23 @@ export default function PlaybookContent({
           </div>
         </section>
 
-        {/* PDF Gate */}
-        <section className="gate" style={{ padding: '36px 0' }}>
+        {/* PDF DOWNLOAD */}
+        <section className="gate" style={{ padding: '36px 0' }} id="pdfDownload">
           <div className="gate-inner rv">
             <div className="gate-icon">&#128196;</div>
             <h2>Download the Full Report as PDF</h2>
             <p>Save the complete 2026 Growth Strategy Guide — all 4 chapters, charts, case studies, and frameworks.</p>
-            <div className="gate-form"><input className="gate-input" type="email" placeholder="Enter your work email" /><button className="gate-submit">Download PDF</button></div>
-            <div className="gate-note">Instant download. No spam.</div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
+              <DownloadPDFButton
+                slug="growth-playbook"
+                unlocked={gateUnlocked}
+                trackEvent={trackEvent}
+                section="pdf_section"
+                variant="primary"
+                label="Download PDF"
+              />
+            </div>
+            <div className="gate-note">Opens your device&rsquo;s print dialog — choose &ldquo;Save as PDF.&rdquo; Works on mobile &amp; desktop.</div>
           </div>
         </section>
 
@@ -1080,6 +1092,8 @@ export default function PlaybookContent({
       <LeadBar
         onCtaClick={() => { trackEvent('cta_click', 'lead_bar', { destination: 'gate' }); scrollTo('emailGate'); }}
       />
+
+      <DownloadPDFFab slug="growth-playbook" unlocked={gateUnlocked} trackEvent={trackEvent} />
     </>
   );
 }

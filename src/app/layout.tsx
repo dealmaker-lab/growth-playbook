@@ -19,7 +19,17 @@ export const metadata: Metadata = {
     default: 'AppSamurai Content Hub | Mobile Growth Resources & Ebooks',
     template: '%s | AppSamurai',
   },
-  icons: { icon: '/favicon.ico' },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    shortcut: '/favicon.ico',
+  },
   description:
     'Interactive ebooks and strategy guides for mobile user acquisition, rewarded playtime, hybrid-casual games, and programmatic advertising. By AppSamurai.',
   alternates: {

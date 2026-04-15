@@ -7,6 +7,8 @@ import SideNav from '../shared/SideNav';
 import ProgressBar from '../shared/ProgressBar';
 import EmailGate from '../shared/EmailGate';
 import LeadBar from '../shared/LeadBar';
+import DownloadPDFButton from '../shared/DownloadPDFButton';
+import DownloadPDFFab from '../shared/DownloadPDFFab';
 import FAQ from '../FAQ';
 import RelatedEbooks from '../shared/RelatedEbooks';
 import RevenueByModelChart from '../charts/rp/RevenueByModelChart';
@@ -111,6 +113,13 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
               <button className="btn-primary" onClick={() => scrollTo('rp-toc')}>
                 Explore the Handbook <span>&darr;</span>
               </button>
+              <DownloadPDFButton
+                slug="rewarded-playtime"
+                unlocked={gateUnlocked}
+                trackEvent={trackEvent}
+                section="hero"
+                onLocked={() => trackEvent('cta_click', 'hero', { destination: 'gate', intent: 'pdf' })}
+              />
             </div>
           </div>
         </section>
@@ -421,6 +430,26 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
         {/* FAQ */}
         <FAQ items={RP_FAQ} chapterColor="var(--purple)" />
 
+        {/* PDF DOWNLOAD */}
+        <section className="gate" style={{ padding: '36px 0' }} id="pdfDownload">
+          <div className="gate-inner rv">
+            <div className="gate-icon">&#128196;</div>
+            <h2>Download the Full Handbook as PDF</h2>
+            <p>Save the complete Rewarded Playtime Handbook — all chapters, charts, KPIs, and campaign frameworks.</p>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
+              <DownloadPDFButton
+                slug="rewarded-playtime"
+                unlocked={gateUnlocked}
+                trackEvent={trackEvent}
+                section="pdf_section"
+                variant="primary"
+                label="Download PDF"
+              />
+            </div>
+            <div className="gate-note">Opens your device&rsquo;s print dialog — choose &ldquo;Save as PDF.&rdquo; Works on mobile &amp; desktop.</div>
+          </div>
+        </section>
+
         {/* FINAL CTA */}
         <section className="sec sec-w" style={{ textAlign: 'center', padding: '56px 0' }}>
           <div className="wrap">
@@ -449,6 +478,8 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
         buttonText="Unlock Full Handbook"
         onCtaClick={() => { trackEvent('cta_click', 'lead_bar', { destination: 'gate' }); scrollTo('emailGate'); }}
       />
+
+      <DownloadPDFFab slug="rewarded-playtime" unlocked={gateUnlocked} trackEvent={trackEvent} />
     </>
   );
 }
