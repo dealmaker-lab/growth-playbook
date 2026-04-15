@@ -22,8 +22,6 @@ import SideNav from './shared/SideNav';
 import ProgressBar from './shared/ProgressBar';
 import EmailGate from './shared/EmailGate';
 import LeadBar from './shared/LeadBar';
-import DownloadPDFButton from './shared/DownloadPDFButton';
-import DownloadPDFFab from './shared/DownloadPDFFab';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useAnimatedCounters } from '../hooks/useAnimatedCounters';
 import { useSideNav } from '../hooks/useSideNav';
@@ -142,13 +140,6 @@ export default function PlaybookContent({
                 >
                   Explore the Guide <span>&darr;</span>
                 </button>
-                <DownloadPDFButton
-                  slug="growth-playbook"
-                  unlocked={gateUnlocked}
-                  trackEvent={trackEvent}
-                  section="hero"
-                  onLocked={() => trackEvent('cta_click', 'hero', { destination: 'gate', intent: 'pdf' })}
-                />
               </div>
             </div>
           </section>
@@ -1021,26 +1012,6 @@ export default function PlaybookContent({
           </div>
         </section>
 
-        {/* PDF DOWNLOAD */}
-        <section className="gate" style={{ padding: '36px 0' }} id="pdfDownload">
-          <div className="gate-inner rv">
-            <div className="gate-icon">&#128196;</div>
-            <h2>Download the Full Report as PDF</h2>
-            <p>Save the complete 2026 Growth Strategy Guide — all 4 chapters, charts, case studies, and frameworks.</p>
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
-              <DownloadPDFButton
-                slug="growth-playbook"
-                unlocked={gateUnlocked}
-                trackEvent={trackEvent}
-                section="pdf_section"
-                variant="primary"
-                label="Download PDF"
-              />
-            </div>
-            <div className="gate-note">Opens your device&rsquo;s print dialog — choose &ldquo;Save as PDF.&rdquo; Works on mobile &amp; desktop.</div>
-          </div>
-        </section>
-
         {/* ABOUT */}
         <section className="about" id="about">
           <div className="wrap"><div className="about-grid">
@@ -1092,8 +1063,6 @@ export default function PlaybookContent({
       <LeadBar
         onCtaClick={() => { trackEvent('cta_click', 'lead_bar', { destination: 'gate' }); scrollTo('emailGate'); }}
       />
-
-      <DownloadPDFFab slug="growth-playbook" unlocked={gateUnlocked} trackEvent={trackEvent} />
     </>
   );
 }
