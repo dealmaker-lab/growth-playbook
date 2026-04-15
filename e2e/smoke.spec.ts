@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { PAGES, collectErrors, expectPageLoaded } from './helpers';
+import { PAGES, PLAYBOOK_PATHS, collectErrors, expectPageLoaded } from './helpers';
 
 /**
  * Validation Algorithms: Smoke Tests
@@ -52,3 +52,19 @@ test('Calculator back link works', async ({ page }) => {
   await page.click('.calc-back');
   await page.waitForURL('/', { timeout: 5000 });
 });
+
+for (const path of PLAYBOOK_PATHS) {
+  test(`${path} exposes Download PDF button in hero`, async ({ page }) => {
+    await page.goto(path, { waitUntil: 'domcontentloaded' });
+    const pdfBtn = page.locator('.hero-cta .download-pdf-btn');
+    await expect(pdfBtn).toBeVisible();
+    await expect(pdfBtn).toContainText('Download PDF');
+  });
+
+  test(`${path} ships AppSamurai favicon`, async ({ page }) => {
+    await page.goto(path, { waitUntil: 'domcontentloaded' });
+    // At least one of the AppSamurai brand icons should be registered
+    const icons = await page.locator('link[rel="apple-touch-icon"], link[rel="icon"][sizes="192x192"]').count();
+    expect(icons).toBeGreaterThanOrEqual(1);
+  });
+}

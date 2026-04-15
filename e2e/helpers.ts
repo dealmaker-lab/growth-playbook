@@ -9,8 +9,13 @@ import { Page, expect } from '@playwright/test';
 
 export const PAGES = [
   { path: '/', name: 'Playbook Home' },
+  { path: '/growth-playbook', name: 'Growth Playbook' },
+  { path: '/hybrid-casual', name: 'Hybrid-Casual Ebook' },
+  { path: '/rewarded-playtime', name: 'Rewarded Playtime Handbook' },
   { path: '/calculator', name: 'ROI Calculator' },
 ];
+
+export const PLAYBOOK_PATHS = ['/growth-playbook', '/hybrid-casual', '/rewarded-playtime'] as const;
 
 export const CATEGORIES = ['Gaming', 'E-commerce', 'FinTech', 'Health & Fitness', 'Utility'] as const;
 export const REGIONS = ['North America', 'LATAM', 'SEA', 'EMEA', 'MENA', 'APAC'] as const;
