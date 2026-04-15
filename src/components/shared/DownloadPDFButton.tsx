@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useState, type ReactNode } from 'react';
+import { triggerPrint } from '@/lib/preparePrint';
 
 interface DownloadPDFButtonProps {
   /** Playbook slug — emitted on analytics events and used in the cookie check. */
@@ -60,15 +61,14 @@ export default function DownloadPDFButton({
     trackEvent?.('pdf_download', section, { slug });
     setPreparing(true);
 
-    // Give the button a beat to reflect the state, then fire the print dialog.
-    // window.print() is synchronous and modal; we reset state on the next tick.
-    setTimeout(() => {
-      try {
-        window.print();
-      } finally {
-        setPreparing(false);
-      }
-    }, 120);
+    // triggerPrint forces every scroll-reveal + animated counter into its
+    // final state before opening the native print dialog, so the PDF matches
+    // the fully-scrolled article instead of a half-faded preview.
+    triggerPrint();
+    // Reset our button label shortly after — window.print is modal on some
+    // browsers but the afterprint event isn't guaranteed, so guard with a
+    // timeout as well.
+    setTimeout(() => setPreparing(false), 1500);
   }, [unlocked, trackEvent, section, slug, onLocked, gateAnchor]);
 
   const baseClass =

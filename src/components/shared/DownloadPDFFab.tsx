@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+import { triggerPrint } from '@/lib/preparePrint';
 
 interface DownloadPDFFabProps {
   slug: string;
@@ -36,7 +37,7 @@ export default function DownloadPDFFab({
       return;
     }
     trackEvent?.('pdf_download', 'pdf_fab', { slug });
-    setTimeout(() => window.print(), 120);
+    triggerPrint();
   }, [unlocked, trackEvent, slug, gateAnchor]);
 
   if (!visible) return null;
