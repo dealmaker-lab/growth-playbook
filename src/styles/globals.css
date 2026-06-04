@@ -31,7 +31,7 @@
 }
 /* === RESET === */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:clip}
 body{font-family:var(--font-b);color:var(--text);background:var(--bg);line-height:1.7;overflow-x:hidden;padding-top:60px;font-size:16px;font-weight:var(--fw-regular);letter-spacing:-0.01em;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .wrap{max-width:var(--max-w);margin:0 auto;padding:0 40px}
