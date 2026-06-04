@@ -30,12 +30,13 @@ const EBOOKS = [
     title: 'Rewarded Playtime Handbook',
     label: 'HANDBOOK',
     description:
-      'How rewarded playtime is reshaping mobile gaming monetization. Covers market trends, campaign strategy, KPI measurement, and best practices for casual and mid-core games.',
-    chapters: 6,
-    readTime: '15 min',
+      'How rewarded playtime is reshaping mobile gaming monetization. Covers the dual-value model, genre-by-genre dynamics, a regional landscape across the US, South Korea, Japan, Brazil, and Europe, plus campaign strategy and KPIs.',
+    chapters: 7,
+    readTime: '20 min',
     accentHex: '#af9cff',
-    tags: ['Gaming', 'IAPs', 'Retention', 'KPIs'],
+    tags: ['Gaming', 'IAPs', 'Regional', 'LTV'],
     cover: '/covers/rewarded-playtime.png',
+    newUntil: '2026-09-01', // 90 days from 2026-06-03 refresh
   },
   {
     slug: 'hybrid-casual',

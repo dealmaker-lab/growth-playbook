@@ -136,6 +136,9 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .bento-card.b-cyan{border-left-color:var(--ch4)}.bento-card.b-yellow{border-left-color:var(--ch5)}.bento-card.b-pink{border-left-color:var(--ch6)}
 .bento-val{font-family:var(--font-h);font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;color:var(--text);margin-bottom:4px}
 .bento-lbl{font-size:.82rem;color:var(--text-muted);margin-bottom:8px}
+.bento-card .delta{display:inline-block;font-family:var(--font-h);font-size:.72rem;font-weight:600;line-height:1.4;color:var(--text-faint)}
+.bento-card .delta.pos{color:var(--delta-pos)}
+.bento-card .delta.neg{color:var(--delta-neg)}
 @media(max-width:900px){.bento-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.bento-grid{grid-template-columns:1fr}}
 
@@ -562,4 +565,34 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .hub-calc-inner p{font-size:.9rem;color:var(--text-muted);line-height:1.6;max-width:480px}
 .hub-calc-inner .btn-primary{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;text-decoration:none}
 @media(max-width:768px){.hub-calc-inner{flex-direction:column;text-align:center;padding:28px 24px}.hub-calc-inner p{max-width:none}}
+
+/* === DUAL CHART (side-by-side, e.g. US IAP Revenue + Downloads) === */
+.dual-chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.dual-chart-title{font-family:var(--font-h);font-weight:700;font-size:.85rem;text-align:center;color:var(--text);margin-bottom:8px}
+@media(max-width:768px){.dual-chart-grid{grid-template-columns:1fr;gap:20px}}
+
+/* === "THE REWARDED PLAYTIME PLAY" — recurring branded insight callout === */
+.rp-play{position:relative;background:linear-gradient(135deg,rgba(38,190,129,.07),rgba(0,244,244,.045));border:1px solid rgba(38,190,129,.2);border-left:4px solid var(--green);border-radius:var(--r-lg);padding:22px 26px;margin:24px 0;transition:box-shadow .3s var(--ease),transform .3s var(--ease)}
+.rp-play:hover{box-shadow:var(--shadow-md);transform:translateX(3px)}
+.rp-play-label{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-h);font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green-h);margin-bottom:8px}
+.rp-play-label svg{width:15px;height:15px;flex-shrink:0}
+.rp-play p{font-size:.9rem;line-height:1.72;color:var(--text);margin:0}
+.rp-play p+p{margin-top:10px}
+
+/* === REGION HEADER (flag + name anchor in Regional Landscape) === */
+.region-head{display:flex;align-items:center;gap:12px;font-family:var(--font-h);font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:700;color:var(--text);letter-spacing:-.01em;margin-bottom:6px;scroll-margin-top:80px}
+.region-flag{font-size:1.6rem;line-height:1;flex-shrink:0}
+.region-sub{font-size:.85rem;color:var(--text-muted);font-weight:500;font-style:italic;margin-bottom:18px}
+
+/* === HOVERABLE INFOGRAPHIC TABLE (genre breakdown, regional matrix) === */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 4px;border-radius:var(--r-lg)}
+.infographic-table{width:100%;min-width:560px;border-collapse:separate;border-spacing:0;font-size:.84rem;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:#fff;box-shadow:var(--shadow-sm)}
+.infographic-table thead th{background:var(--bg-alt);font-family:var(--font-h);font-weight:700;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);text-align:left;padding:14px 18px;border-bottom:1px solid var(--border);white-space:nowrap}
+.infographic-table tbody td{padding:14px 18px;border-bottom:1px solid var(--border);color:var(--text-muted);line-height:1.55;vertical-align:top}
+.infographic-table tbody tr:last-child td{border-bottom:none}
+.infographic-table tbody tr{transition:background .2s var(--ease)}
+.infographic-table tbody tr:hover{background:var(--green-l)}
+.infographic-table tbody td:first-child{font-family:var(--font-h);font-weight:700;color:var(--text)}
+.infographic-table .num-pos{color:var(--delta-pos);font-weight:600;font-variant-numeric:tabular-nums}
+.infographic-table .num-neg{color:var(--delta-neg);font-weight:600;font-variant-numeric:tabular-nums}
 

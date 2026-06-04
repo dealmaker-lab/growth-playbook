@@ -4,19 +4,19 @@ const BASE_URL = 'https://playbook.appsamurai.com';
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export const metadata: Metadata = {
-  title: 'Rewarded Playtime Handbook | Engage, Retain, Monetize',
+  title: 'Rewarded Playtime Handbook 2025 | Global Mobile Gaming Monetization',
   description:
-    'Rewarded playtime is reshaping how mobile games monetize. This handbook covers market trends, campaign setup, KPI benchmarks (ARPDAU, eCPM, retention), and offerwall best practices for casual and mid-core publishers. By AppSamurai.',
+    'The definitive 2025 handbook on rewarded playtime: the dual-value model, genre-by-genre monetization, a regional landscape across the US, South Korea, Japan, Brazil & Europe, KPI benchmarks (ARPDAU, eCPM, retention), and offerwall campaign strategy. By AppSamurai.',
   alternates: {
     canonical: '/rewarded-playtime',
   },
   openGraph: {
-    title: 'Rewarded Playtime in Mobile Gaming | AppSamurai Handbook',
+    title: 'Rewarded Playtime Handbook 2025 | AppSamurai',
     description:
-      'The complete guide to rewarded playtime: market data, campaign strategy, KPIs, and best practices for mobile game publishers.',
+      'The complete guide to rewarded playtime: the dual-value model, genre dynamics, regional monetization data across five markets, campaign strategy, and KPIs for mobile game publishers.',
     type: 'article',
     publishedTime: '2024-06-01T00:00:00Z',
-    modifiedTime: '2026-04-09T00:00:00Z',
+    modifiedTime: '2026-06-03T00:00:00Z',
     authors: ['AppSamurai'],
     images: [
       {
@@ -47,13 +47,13 @@ const structuredData = {
     logo: { '@type': 'ImageObject', url: 'https://appsamurai.com/logo.png' },
   },
   datePublished: '2024-06-01',
-  dateModified: '2026-04-09',
+  dateModified: '2026-06-03',
   description:
-    'Complete handbook on rewarded playtime in mobile gaming covering market trends, campaign strategy, KPI measurement, and best practices.',
+    'Complete 2025 handbook on rewarded playtime in mobile gaming: the dual-value model, genre-specific monetization, regional landscape across the US, South Korea, Japan, Brazil and Europe, campaign strategy, and KPI measurement.',
   image: `${BASE_URL}${basePath}/hero-bg.png`,
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}${basePath}/rewarded-playtime` },
-  articleSection: ['Rewarded Playtime', 'Mobile Gaming', 'Campaign Strategy', 'KPIs'],
-  keywords: 'rewarded playtime, offerwall ads, mobile game monetization, play to earn mobile games, rewarded ads mobile gaming, casual game user acquisition, in-app purchase optimization, player retention strategies, ARPDAU optimization, mobile game KPIs 2024',
+  articleSection: ['Rewarded Playtime', 'Mobile Gaming', 'Regional Monetization', 'Campaign Strategy', 'KPIs'],
+  keywords: 'rewarded playtime, offerwall ads, mobile game monetization 2025, play to earn mobile games, rewarded ads mobile gaming, casual game user acquisition, hybrid-casual monetization, in-app purchase optimization, player retention strategies, ARPDAU optimization, mobile game KPIs, South Korea mobile gaming, Japan mobile gaming RPG, Brazil mobile ad monetization, Europe mobile IAP',
 };
 
 export default function RewardedPlaytimeLayout({
