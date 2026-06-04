@@ -253,7 +253,9 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .data-table thead{background:var(--bg-alt);font-weight:600}
 .data-table th{padding:14px 16px;text-align:left;color:var(--text);border-bottom:2px solid var(--border)}
 .data-table td{padding:14px 16px;border-bottom:1px solid var(--border);color:var(--text-muted)}
+.data-table tbody tr{transition:background .2s var(--ease)}
 .data-table tbody tr:hover{background:var(--green-l)}
+.data-table tbody td:first-child{font-weight:600;color:var(--text)}
 .rank-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:12px;font-family:var(--font-h)}
 
 /* === CASE STUDY === */
@@ -491,6 +493,15 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   [style*="grid-template-columns:1fr 1fr;gap:32px"]{grid-template-columns:1fr!important}
   [style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr!important}
   [style*="grid-template-columns: 1fr 1fr 1fr"]{grid-template-columns:1fr!important}
+  /* React serializes inline grids WITHOUT a space after the colon
+     (grid-template-columns:repeat(4,1fr)). The spaced selectors above miss
+     those, so add no-space + gap-agnostic variants — otherwise repeat(4) and
+     odd-gap 1fr 1fr grids never collapse on mobile. */
+  [style*="grid-template-columns:repeat(4"]{grid-template-columns:repeat(2,1fr)!important}
+  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:auto 1fr"]{grid-template-columns:1fr!important}
+  /* keep wide data tables scrollable from tablet down, not just <480 */
+  .data-table{display:block;overflow-x:auto}
 }
 @media(max-width:480px){
   .footer-grid{grid-template-columns:1fr!important}

@@ -119,12 +119,12 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
         <div className="wrap">
           <div className="bento-grid">
             <div className="bento-card b-pink rv">
-              <div className="bento-val" style={{ color: 'var(--pink)' }}>$1.4B</div>
+              <div className="bento-val" style={{ color: 'var(--pink)' }} data-count="14" data-decimal="1" data-prefix="$" data-suffix="B">$0.0B</div>
               <div className="bento-lbl">Hybrid-Casual Revenue 2022</div>
               <span className="delta pos">App Store + Google Play</span>
             </div>
             <div className="bento-card b-purple rv">
-              <div className="bento-val" style={{ color: 'var(--purple)' }}>5.1B</div>
+              <div className="bento-val" style={{ color: 'var(--purple)' }} data-count="51" data-decimal="1" data-suffix="B">0.0B</div>
               <div className="bento-lbl">Global Downloads 2022</div>
               <span className="delta pos">Source: Sensor Tower</span>
             </div>
@@ -165,14 +165,14 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
           <div className="ch-num" style={{ color: 'var(--pink)' }}>1.0</div>
           <h2>The Hybrid-Casual Revolution</h2>
           <p style={{ fontSize: '.85rem', color: 'rgba(244,141,255,.7)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>A New Era in Mobile Gaming</p>
-          <div className="ch-desc">The mobile gaming industry is moving past hyper-casual. Hybrid-casual titles blend genres, combining the instant pick-up-and-play of casual games with the progression systems that keep mid-core players coming back.</div>
+          <div className="ch-desc">Mobile gaming is moving past hyper-casual. Hybrid-casual titles blend genres, pairing the instant pick-up-and-play of casual games with the progression systems that keep mid-core players coming back.</div>
         </div>
       </section>
 
       {/* Osman Soysal Quote */}
       <section className="quote-block" style={{ background: 'var(--pink-l)' }}>
         <div className="wrap"><div className="quote-inner rv">
-          <img className="quote-avatar" src="/images/osman-soysal.png" alt="Osman Soysal" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} />
+          <div className="quote-avatar" style={{ width: 64, height: 64, background: 'var(--pink)' }} aria-hidden="true">OS</div>
           <div>
             <p className="quote-text">The gaming landscape has undergone significant transformations, leading to the waning profitability of hyper-casual games. The industry recognized the need for a fresh approach that could captivate players and sustain profitability. By catering to a broader audience, hybrid-casual games bridge the gap between casual players seeking more depth and hardcore gamers craving more accessible experiences.</p>
             <p className="quote-attr">Osman Soysal, Managing Director at AppSamurai</p>
@@ -299,7 +299,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
                 <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
                 <h4>Low Engagement &amp; Retention</h4>
-                <p>Hyper-casual&apos;s repetitive loops are burning out players. Without a reason to return, CPI climbs, retention drops, and LTV and ROAS shrink.</p>
+                <p>Hyper-casual&apos;s repetitive loops burn players out. Without a reason to return, CPI climbs, retention drops, and LTV and ROAS shrink.</p>
               </div>
             </div>
           </div>
@@ -308,7 +308,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
         {/* Utku Erdinc Quote */}
         <section className="quote-block" style={{ background: 'var(--purple-l)' }}>
           <div className="wrap"><div className="quote-inner rv">
-            <img className="quote-avatar" src="/images/utku-erdinc.png" alt="Utku Erdinc" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} />
+            <div className="quote-avatar" style={{ width: 64, height: 64, background: 'var(--purple)' }} aria-hidden="true">UE</div>
             <div>
               <p className="quote-text">The Hyper-Casual industry has been working on games that solely depend on game mechanics and focusing on the first 3 days of in-game monetization. In recent years, we at Rollic have shifted focus and started working to achieve $0.70 to $0.80 of LTVs, and it eventually surpassed the $1 benchmark. The mobile gaming industry should eventually start expecting D7+ user engagement to become absolutely critical.</p>
               <p className="quote-attr">Utku Erdinc, Vice President of Gaming at Rollic</p>
@@ -324,7 +324,7 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
             <div className="ch-num" style={{ color: 'var(--green)' }}>4.0</div>
             <h2>How Hybrid-Casual Enlivens the Market</h2>
             <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Retention, Engagement, Spending, and UA</p>
-            <div className="ch-desc">Hybrid-casual keeps the instant-action feel of hyper-casual but adds deeper progression. The result: better retention, longer player lifecycles, and higher LTV.</div>
+            <div className="ch-desc">Hybrid-casual keeps the instant-action feel of hyper-casual but adds deeper progression &mdash; yielding better retention, longer player lifecycles, and higher LTV.</div>
           </div>
         </section>
 
@@ -370,9 +370,9 @@ export default function HybridCasualContent({ initialUnlocked }: HybridCasualCon
         </section>
 
         {/* Ryan Chadwick Quote */}
-        <section className="quote-block sec-l">
+        <section className="quote-block" style={{ background: 'var(--cyan-l)' }}>
           <div className="wrap"><div className="quote-inner rv">
-            <img className="quote-avatar" src="/images/ryan-chadwick.png" alt="Ryan Chadwick" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }} />
+            <div className="quote-avatar" style={{ width: 64, height: 64, background: 'var(--cyan-d)' }} aria-hidden="true">RC</div>
             <div>
               <p className="quote-text">Rewarded playtime is a great user acquisition source for Tripledot Studios and other ad-monetized publishers. Time-based incentives increase the number of ads watched per user, resulting in a win-win situation for both parties: more fulfilling gameplay for users and more ads revenue for publishers.</p>
               <p className="quote-attr">Ryan Chadwick, Senior Marketing Analyst at Tripledot Studios</p>

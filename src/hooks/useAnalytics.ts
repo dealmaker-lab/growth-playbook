@@ -9,6 +9,7 @@ export function useAnalytics(sectionIds: string[]) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ session_id: sessionId.current, event_type, section, metadata }),
+      keepalive: true, // let the beforeunload scroll_depth beacon survive navigation
     }).catch(() => {}); // fire and forget
   }, []);
 
