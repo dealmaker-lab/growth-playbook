@@ -39,11 +39,12 @@ export function collectErrors(page: Page): string[] {
  * Assert page loaded without critical errors
  */
 export async function expectPageLoaded(page: Page, errors: string[]) {
-  // No "Application error" or 500 page
+  // No Next.js error / not-found page. (Avoid a bare '500' check — legit copy
+  // like "scaled 500+ apps" contains that substring.)
   const body = await page.textContent('body');
   expect(body).not.toContain('Application error');
-  expect(body).not.toContain('500');
   expect(body).not.toContain('Internal Server Error');
+  expect(body).not.toContain('This page could not be found');
 
   // Filter out non-critical errors (e.g., analytics failures)
   const critical = errors.filter(

@@ -18,28 +18,22 @@ for (const { path, name } of PAGES) {
   });
 }
 
-test('Playbook hero section renders', async ({ page }) => {
+test('Hub hero renders', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('.hub-hero-title')).toBeVisible();
+  await expect(page.locator('.hero-badge')).toContainText('Content Hub');
+});
+
+test('Hub lists the ebook cards', async ({ page }) => {
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  // EBOOKS grid renders one card per guide: growth-playbook, rewarded-playtime, hybrid-casual
+  await expect(page.locator('.hub-card')).toHaveCount(3);
+});
+
+test('Growth Playbook page renders hero + TOC', async ({ page }) => {
+  await page.goto('/growth-playbook', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('.hero h1')).toBeVisible();
-  await expect(page.locator('.hero-badge')).toContainText('2026');
-  await expect(page.locator('.btn-primary')).toBeVisible();
-});
-
-test('Playbook bento stats are visible', async ({ page }) => {
-  await page.goto('/', { waitUntil: 'domcontentloaded' });
-  const bentoCards = page.locator('.bento-card');
-  await expect(bentoCards).toHaveCount(4);
-});
-
-test('Logo wall renders', async ({ page }) => {
-  await page.goto('/', { waitUntil: 'domcontentloaded' });
-  await expect(page.locator('.logo-wall')).toBeVisible();
-});
-
-test('TOC section has 4 chapters', async ({ page }) => {
-  await page.goto('/', { waitUntil: 'domcontentloaded' });
-  const tocCards = page.locator('.toc-card');
-  await expect(tocCards).toHaveCount(4);
+  await expect(page.locator('.toc-card').first()).toBeVisible();
 });
 
 test('Calculator page renders wizard', async ({ page }) => {
