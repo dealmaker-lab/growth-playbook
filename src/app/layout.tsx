@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico?v=2',
   },
   description:
-    'Interactive ebooks and strategy guides for mobile user acquisition, rewarded playtime, hybrid-casual games, and programmatic advertising. By AppSamurai.',
+    'Interactive ebooks and strategy guides for mobile user acquisition, rewarded playtime, casual and hybrid casual game monetization, and programmatic advertising. By AppSamurai.',
   alternates: {
     canonical: '/',
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AppSamurai Content Hub | Mobile Growth Resources',
     description:
-      'Interactive ebooks and strategy guides for mobile user acquisition, rewarded playtime, hybrid-casual games, and programmatic advertising.',
+      'Interactive ebooks and strategy guides for mobile user acquisition, rewarded playtime, casual and hybrid casual game monetization, and programmatic advertising.',
     type: 'website',
     images: [
       {

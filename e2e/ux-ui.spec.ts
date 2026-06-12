@@ -9,7 +9,7 @@ import { collectErrors, expectPageLoaded } from './helpers';
  * check below is exercised on web AND mobile.
  */
 
-const ALL_PAGES = ['/', '/growth-playbook', '/rewarded-playtime', '/hybrid-casual', '/calculator'] as const;
+const ALL_PAGES = ['/', '/growth-playbook', '/rewarded-playtime', '/monetization-playbook', '/calculator'] as const;
 
 // ── No page may overflow its viewport horizontally (mobile + web) ──
 for (const path of ALL_PAGES) {
@@ -54,17 +54,28 @@ test.describe('Rewarded Playtime Handbook (2026 rewrite)', () => {
   });
 });
 
-// ── Hybrid-Casual: avatars must never render as broken images ──
-test.describe('Hybrid-Casual report', () => {
-  test('quote avatars are not broken-image references', async ({ page }) => {
-    await page.goto('/hybrid-casual', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(1000);
-    // the previously-404 person photos must NOT be referenced as <img>
+// ── Monetization Playbook (replaced the Hybrid-Casual report, 2026-06) ──
+test.describe('Monetization Playbook', () => {
+  test('renders 10 chapters, charts, tables, and gate', async ({ page }) => {
+    await page.goto('/monetization-playbook', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(2000);
+    await expect(page.locator('.toc-card')).toHaveCount(10);
+    // RevenueSplitChart + DTCAdoptionChart
+    expect(await page.locator('canvas').count()).toBeGreaterThanOrEqual(2);
+    // genre spectrum, ad formats, LiveOps calendar, retention design, key metrics
+    await expect(page.locator('.infographic-table')).toHaveCount(5);
+    await expect(page.locator('#emailGate')).toBeAttached();
+    // quote avatars are initials circles, never broken <img> refs
     for (const slug of ['osman-soysal', 'utku-erdinc', 'ryan-chadwick']) {
       expect(await page.locator(`img[src*="${slug}"]`).count()).toBe(0);
     }
-    // initials-circle avatars render instead
-    expect(await page.locator('.quote-avatar').count()).toBeGreaterThanOrEqual(3);
+    expect(await page.locator('.quote-avatar').count()).toBeGreaterThanOrEqual(2);
+  });
+
+  test('/hybrid-casual permanently redirects to /monetization-playbook', async ({ page }) => {
+    await page.goto('/hybrid-casual', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(1000);
+    expect(page.url()).toContain('/monetization-playbook');
   });
 
   test('any quote <img> avatars actually load (no 404s)', async ({ page }) => {

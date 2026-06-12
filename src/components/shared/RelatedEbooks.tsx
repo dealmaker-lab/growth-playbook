@@ -14,9 +14,9 @@ const ALL_EBOOKS = [
     accentHex: '#af9cff',
   },
   {
-    slug: 'hybrid-casual',
-    title: 'The Rise of Hybrid-Casual Games',
-    description: 'The next era in mobile gaming market growth.',
+    slug: 'monetization-playbook',
+    title: 'Monetization Playbook for Casual & Hybrid Casual Games',
+    description: 'Revenue strategy, LiveOps, ad models, IAP & DTC.',
     accentHex: '#f48dff',
   },
 ];

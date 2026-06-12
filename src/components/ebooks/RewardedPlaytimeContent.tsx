@@ -104,7 +104,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
   const ebookLinks = useMemo(() => [
     { href: '/growth-playbook', label: 'Mobile Growth Playbook' },
     { href: '/rewarded-playtime', label: 'Rewarded Playtime Handbook' },
-    { href: '/hybrid-casual', label: 'Hybrid-Casual Games' },
+    { href: '/monetization-playbook', label: 'Monetization Playbook' },
     { href: '/calculator', label: 'ROI Calculator' },
   ], []);
 
@@ -375,7 +375,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
       </section>
 
       {/* ───────────────────────── CH 3: GENRE LANDSCAPE ───────────────────────── */}
-      <hr className="divider" style={{ borderColor: 'var(--yellow)' }} />
+      <hr className="divider yellow" />
       <section className="ch-head" id="rp-ch3" style={{ borderTop: '4px solid var(--yellow)' }}>
         <div className="wrap rv ch-enter-left" style={{ position: 'relative' }}>
           <span className="ch-bg-num">03</span>
@@ -449,7 +449,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
       </section>
 
       {/* ───────────────────────── CH 4: REGIONAL LANDSCAPE ───────────────────────── */}
-      <hr className="divider" style={{ borderColor: 'var(--cyan)' }} />
+      <hr className="divider cyan" />
       <section className="ch-head" id="rp-ch4" style={{ borderTop: '4px solid var(--cyan)' }}>
         <div className="wrap rv ch-enter-bottom" style={{ position: 'relative' }}>
           <span className="ch-bg-num">04</span>
@@ -739,7 +739,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
         </section>
 
         {/* ───────────────────────── CH 6: BEST PRACTICES ───────────────────────── */}
-        <hr className="divider" style={{ borderColor: 'var(--yellow)' }} />
+        <hr className="divider yellow" />
         <section className="ch-head" id="rp-ch6" style={{ borderTop: '4px solid var(--yellow)' }}>
           <div className="wrap rv ch-enter-left" style={{ position: 'relative' }}>
             <span className="ch-bg-num">06</span>

@@ -7,7 +7,7 @@ import HashRedirect from '@/components/shared/HashRedirect';
 const EBOOK_LINKS = [
   { href: '/growth-playbook', label: 'Mobile Growth Playbook' },
   { href: '/rewarded-playtime', label: 'Rewarded Playtime Handbook' },
-  { href: '/hybrid-casual', label: 'Hybrid-Casual Games' },
+  { href: '/monetization-playbook', label: 'Monetization Playbook' },
   { href: '/calculator', label: 'ROI Calculator' },
 ];
 
@@ -39,16 +39,17 @@ const EBOOKS = [
     newUntil: '2026-09-01', // 90 days from 2026-06-03 refresh
   },
   {
-    slug: 'hybrid-casual',
-    title: 'The Rise of Hybrid-Casual Games',
-    label: 'REPORT',
+    slug: 'monetization-playbook',
+    title: 'Monetization Playbook for Casual & Hybrid Casual Games',
+    label: 'PLAYBOOK',
     description:
-      'Why hybrid-casual games took off, how they mix casual accessibility with mid-core depth, and which marketing strategies are driving growth in this category.',
-    chapters: 5,
-    readTime: '20 min',
+      'A 2025–2026 field guide to revenue strategy for casual and hybrid casual games: the full monetization stack, LiveOps, direct-to-consumer web stores, retention frameworks, and rewarded UA.',
+    chapters: 10,
+    readTime: '30 min',
     accentHex: '#f48dff',
-    tags: ['Hybrid-Casual', 'UA', 'Monetization', 'Retention'],
-    cover: '/covers/hybrid-casual.png',
+    tags: ['Monetization', 'LiveOps', 'IAP', 'DTC'],
+    cover: '/covers/monetization-playbook.png',
+    newUntil: '2026-09-11', // 90 days from 2026-06-13 launch
   },
 ];
 

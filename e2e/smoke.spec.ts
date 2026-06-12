@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { PAGES, collectErrors, expectPageLoaded } from './helpers';
 
-const PLAYBOOK_PATHS = ['/growth-playbook', '/hybrid-casual', '/rewarded-playtime'] as const;
+const PLAYBOOK_PATHS = ['/growth-playbook', '/monetization-playbook', '/rewarded-playtime'] as const;
 
 /**
  * Validation Algorithms: Smoke Tests
@@ -26,7 +26,7 @@ test('Hub hero renders', async ({ page }) => {
 
 test('Hub lists the ebook cards', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
-  // EBOOKS grid renders one card per guide: growth-playbook, rewarded-playtime, hybrid-casual
+  // EBOOKS grid renders one card per guide: growth-playbook, rewarded-playtime, monetization-playbook
   await expect(page.locator('.hub-card')).toHaveCount(3);
 });
 

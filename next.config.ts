@@ -40,6 +40,13 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        // The Rise of Hybrid-Casual Games was retired and replaced by the
+        // Monetization Playbook for Casual & Hybrid Casual Games (2026-06).
+        source: '/hybrid-casual',
+        destination: '/monetization-playbook',
+        permanent: true,
+      },
     ];
   },
   async headers() {

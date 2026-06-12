@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}${basePath}/hybrid-casual`,
+      url: `${BASE_URL}${basePath}/monetization-playbook`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,

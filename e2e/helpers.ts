@@ -10,7 +10,7 @@ import { Page, expect } from '@playwright/test';
 export const PAGES = [
   { path: '/', name: 'Playbook Home' },
   { path: '/growth-playbook', name: 'Growth Playbook' },
-  { path: '/hybrid-casual', name: 'Hybrid-Casual Ebook' },
+  { path: '/monetization-playbook', name: 'Monetization Playbook' },
   { path: '/rewarded-playtime', name: 'Rewarded Playtime Handbook' },
   { path: '/calculator', name: 'ROI Calculator' },
 ];

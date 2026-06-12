@@ -107,7 +107,7 @@ export default function PlaybookContent({
   const ebookLinks = useMemo(() => [
     { href: '/growth-playbook', label: 'Mobile Growth Playbook' },
     { href: '/rewarded-playtime', label: 'Rewarded Playtime Handbook' },
-    { href: '/hybrid-casual', label: 'Hybrid-Casual Games' },
+    { href: '/monetization-playbook', label: 'Monetization Playbook' },
     { href: '/calculator', label: 'ROI Calculator' },
   ], []);
 
