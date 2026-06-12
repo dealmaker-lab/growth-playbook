@@ -262,7 +262,7 @@ export default function PlaybookContent({
             <div className="method-card"><div className="method-icon">&#128202;</div><p>Market data sourced from <strong>Sensor Tower</strong> and <strong>Statista</strong> covering iOS App Store and Google Play downloads and revenue estimates through December 2025.</p></div>
             <div className="method-card"><div className="method-icon">&#127919;</div><p>Campaign performance data aggregated from <strong>10,000+ campaigns</strong> managed through AppSamurai&apos;s DSP, OEM, and Rewarded Playtime platforms across 2024-2025.</p></div>
             <div className="method-card"><div className="method-icon">&#128300;</div><p>Creative analysis powered by <strong>Adjust</strong> examining 500,000+ ad creatives across iOS and Android to identify top-performing elements and trends.</p></div>
-            <div className="method-card"><div className="method-icon">&#128241;</div><p>In-app revenue figures are gross — inclusive of app store commissions. Download estimates are per-user, counting one download per Apple or Google account.</p></div>
+            <div className="method-card"><div className="method-icon">&#128241;</div><p>In-app revenue figures are gross, inclusive of app store commissions. Download estimates are per-user, counting one download per Apple or Google account.</p></div>
           </div>
         </div>
       </section>
@@ -293,7 +293,7 @@ export default function PlaybookContent({
             <span className="ch-bg-num">01</span>
             <div className="ch-num" style={{ color: 'var(--ch1)' }}>1.0</div>
             <h2>How to Scale Mobile UA with Programmatic DSP in 2026</h2>
-            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The Programmatic Engine — Navigating the Open Internet</p>
+            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The Programmatic Engine: Navigating the Open Internet</p>
             <div className="ch-desc">The 2026 Thesis: As &ldquo;Walled Gardens&rdquo; reach inventory saturation and rising costs, the biggest growth opportunities have shifted to the Open Internet. Users spend over 60% of their mobile time in independent apps. We scale by tapping into this massive inventory, reaching users during &ldquo;lean-back&rdquo; moments.</div>
           </div>
           <img src="/dsp-hero.png" alt="AppSamurai DSP Platform" style={{ maxWidth: '400px', borderRadius: '16px', display: 'block' }} />
@@ -349,10 +349,10 @@ export default function PlaybookContent({
       {/* 1.1 Detail Cards */}
       <section className="sec sec-l">
         <div className="wrap">
-          <div className="info-card rv"><div className="ic-icon"><img className="ic-img" src="/icons/predictive roas modeling.png" alt="Predictive ROAS" /></div><div><h4>Predictive ROAS Modeling</h4><p>Real-time machine learning now enables deep-funnel, CPA-based optimization. By identifying users likely to complete specific actions&mdash;reaching a gameplay milestone or starting a subscription trial&mdash;brands achieve a more predictable path to profitability.</p></div></div>
+          <div className="info-card rv"><div className="ic-icon"><img className="ic-img" src="/icons/predictive roas modeling.png" alt="Predictive ROAS" /></div><div><h4>Predictive ROAS Modeling</h4><p>Real-time machine learning now enables deep-funnel, CPA-based optimization. By identifying users likely to complete specific actions (reaching a gameplay milestone or starting a subscription trial), brands achieve a more predictable path to profitability.</p></div></div>
           <div className="info-card rv"><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/brindging the intent gap.png" alt="Intent Gap" /></div><div><h4>Bridging the &ldquo;Intent Gap&rdquo;</h4><p>Traditional social platforms capture &ldquo;passive scrolling,&rdquo; leading to high ad fatigue. Programmatic inventory captures &ldquo;active engagement&rdquo; moments instead. Shifting spend to these high-receptivity lulls (e.g., between game levels or during utility tasks) reaches users when they are primed for discovery, not distraction.</p></div></div>
           <div className="info-card rv"><div className="ic-icon"><img className="ic-img" src="/icons/scalibility paradox.png" alt="Scalability" /></div><div><h4>The Scalability Tradeoff (Precision Control)</h4><p>Scaling without losing efficiency demands granular control. Automated Whitelisting consolidates your presence on top-performing platforms aligned with your core audience. Automated Blacklisting filters out low-intent inventory in real-time, so as your budget grows, your waste does not.</p></div></div>
-          <div className="info-card rv"><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/transparency_mandate.png" alt="Transparency" /></div><div><h4>The Transparency Mandate</h4><p>You cannot scale what you cannot see. The 2026 open internet requires total visibility into bid floors, session depth, and loss notifications. Bid-level transparency lets growth teams uncover high-value inventory pockets that others overlook&mdash;shifting strategy from chasing volume to securing quality.</p></div></div>
+          <div className="info-card rv"><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><img className="ic-img" src="/icons/transparency_mandate.png" alt="Transparency" /></div><div><h4>The Transparency Mandate</h4><p>You cannot scale what you cannot see. The 2026 open internet requires total visibility into bid floors, session depth, and loss notifications. Bid-level transparency lets growth teams uncover high-value inventory pockets that others overlook, shifting strategy from chasing volume to securing quality.</p></div></div>
         </div>
       </section>
 
@@ -370,7 +370,7 @@ export default function PlaybookContent({
               </div>
             </div>
             <div className="rv-r" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch1)' }}><div className="ic-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M22 5l-4 2 2 4"/><circle cx="12" cy="12" r="2"/></svg></div><div><h4>Psychological Hooks over Aesthetics</h4><p>High-performing assets in 2026 tap user psychology&mdash;pain points, FOMO, or the desire for efficiency. When a creative resonates with a psychological profile, the algorithm naturally finds similar audiences.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch1)' }}><div className="ic-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M22 5l-4 2 2 4"/><circle cx="12" cy="12" r="2"/></svg></div><div><h4>Psychological Hooks over Aesthetics</h4><p>High-performing assets in 2026 tap user psychology: pain points, FOMO, or the desire for efficiency. When a creative resonates with a psychological profile, the algorithm naturally finds similar audiences.</p></div></div>
               <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch1)' }}><div className="ic-icon" style={{ background: 'var(--purple-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><h4>The AI-Driven Speed Requirement</h4><p>Manual A/B testing is no longer viable at scale. The benchmark has shifted to AI-powered rotation that identifies winning visual hooks (like localized gameplay mechanics) in real-time.</p></div></div>
             </div>
           </div>
@@ -391,7 +391,7 @@ export default function PlaybookContent({
           {/* iOS — image left, text right */}
           <div className="creative-card">
             <div style={{ textAlign: 'center' }}>
-              <img src="/ios-android-age-1.png" alt="iOS Creative Playbook — sound-off design, close-up shots, gameplay focus" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
+              <img src="/ios-android-age-1.png" alt="iOS Creative Playbook: sound-off design, close-up shots, gameplay focus" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
@@ -408,7 +408,7 @@ export default function PlaybookContent({
           {/* Android — image left, text right */}
           <div className="creative-card">
             <div style={{ textAlign: 'center' }}>
-              <img src="/ios-android-age-2.png" alt="Android Creative Playbook — split-screen gameplay, multiple scenes, falling coins" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
+              <img src="/ios-android-age-2.png" alt="Android Creative Playbook: split-screen gameplay, multiple scenes, falling coins" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
@@ -425,7 +425,7 @@ export default function PlaybookContent({
           {/* Ad Type Impression Share — full width below */}
           <div className="chart-box" style={{ margin: 0, padding: '24px' }}>
             <div className="chart-h" style={{ fontSize: '.95rem', marginBottom: '4px' }}>Ad Type Impression Share, Worldwide</div>
-            <div className="chart-sub" style={{ fontSize: '.75rem', marginBottom: '12px' }}>Image, Playable, and Video ad format share — 2024 vs 2025</div>
+            <div className="chart-sub" style={{ fontSize: '.75rem', marginBottom: '12px' }}>Image, Playable, and Video ad format share, 2024 vs 2025</div>
             <div className="chart-wrap" style={{ height: '260px', maxWidth: '500px', margin: '0 auto' }}><AdTypesChart /></div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: '10px', fontSize: '.75rem', color: 'var(--text-muted)', textAlign: 'center' }}>
               <span>Video overtakes Image as dominant format. Playable ads double (+111%).</span>
@@ -468,7 +468,7 @@ export default function PlaybookContent({
       <section className="sec sec-w">
         <div className="wrap rv" style={{ textAlign: 'center' }}>
           <a href="https://appsamurai.com/contact-us/" target="_blank" rel="noopener noreferrer" style={{ display: 'block' }}>
-            <img src="/paycell-banner.png" alt="Paycell Case Study — 32% MAU increase, +120K users, 49% QR payment increase with AppSamurai DSP" loading="lazy" style={{ width: '100%', maxWidth: '900px', borderRadius: '16px', margin: '0 auto', display: 'block', cursor: 'pointer' }} />
+            <img src="/paycell-banner.png" alt="Paycell Case Study: 32% MAU increase, +120K users, 49% QR payment increase with AppSamurai DSP" loading="lazy" style={{ width: '100%', maxWidth: '900px', borderRadius: '16px', margin: '0 auto', display: 'block', cursor: 'pointer' }} />
           </a>
         </div>
       </section>
@@ -613,7 +613,7 @@ export default function PlaybookContent({
             <a href="https://appsamurai.com/roas/" target="_blank" rel="noopener noreferrer"
                style={{ display: 'block', borderRadius: 16, overflow: 'hidden', textDecoration: 'none', transition: 'box-shadow 0.3s' }}
                onClick={() => trackEvent('cta_click', 'roas_banner', { destination: 'roas' })}>
-              <img src="/images/roas-forecaster-cta.png" alt="What's Your Rewarded UA Potential? Try our ROAS Forecaster — estimate returns before you invest." style={{ width: '100%', display: 'block', borderRadius: 16 }} />
+              <img src="/images/roas-forecaster-cta.png" alt="What's Your Rewarded UA Potential? Try our ROAS Forecaster. Estimate returns before you invest." style={{ width: '100%', display: 'block', borderRadius: 16 }} />
             </a>
           </div>
         </section>
@@ -727,7 +727,7 @@ export default function PlaybookContent({
             </div>
             <div className="story-chart sticky rv-r">
               <div className="chart-h" style={{ fontSize: '.95rem' }}>iPhone vs Android Market Share</div>
-              <div className="chart-sub">2009 — 2024</div>
+              <div className="chart-sub">2009&ndash;2024</div>
               <div className="chart-wrap" style={{ height: '300px' }}><MarketShareChart /></div>
             </div>
           </div></div>
@@ -769,10 +769,10 @@ export default function PlaybookContent({
           <div className="wrap">
             <div className="chart-card-new rv">
               <h4>OEM Format Comparison</h4>
-              <div className="chart-subtitle">Scored across 5 dimensions (out of 10) — PAI leads in reach and brand safety</div>
+              <div className="chart-subtitle">Scored across 5 dimensions (out of 10). PAI leads in reach and brand safety</div>
               <div className="chart-wrap" style={{ height: '300px' }}><OEMFormatChart /></div>
               <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> PAI (Pre-loaded App Install) scores highest overall — it reaches users at first device setup with zero friction. Push notifications score highest on user intent but lowest on brand safety. Icon Placement offers the best cost efficiency.
+                <strong style={{ color: 'var(--text)' }}>ℹ️ Insight:</strong> PAI (Pre-loaded App Install) scores highest overall. It reaches users at first device setup with zero friction. Push notifications score highest on user intent but lowest on brand safety. Icon Placement offers the best cost efficiency.
               </div>
             </div>
           </div>
@@ -809,7 +809,7 @@ export default function PlaybookContent({
         <section className="sec sec-w">
           <div className="wrap">
             <a href="https://appsamurai.com/contact-us/" target="_blank" rel="noopener noreferrer" style={{ display: 'block', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)' }} onClick={() => trackEvent('cta_click', 'tapnation_case_study', { destination: 'contact' })}>
-              <img src="/images/tapnation-case-study.png" alt="TapNation Case Study — Achieved ROAS+ with OEM Strategies: 1.7 Million loyal new users acquired, 116% ROAS" style={{ width: '100%', display: 'block', cursor: 'pointer' }} />
+              <img src="/images/tapnation-case-study.png" alt="TapNation Case Study. Achieved ROAS+ with OEM Strategies: 1.7 Million loyal new users acquired, 116% ROAS" style={{ width: '100%', display: 'block', cursor: 'pointer' }} />
             </a>
           </div>
         </section>
@@ -839,8 +839,8 @@ export default function PlaybookContent({
             <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.3rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>Apple Search Ads Optimization: CPA Targeting Beyond Installs</h3>
             <p style={{ color: '#666', fontSize: '.88rem', marginBottom: '16px', maxWidth: '640px' }}>The most successful strategies are rooted in CPA and deep-funnel event optimization.</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '20px' }}>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch4)' }}><div className="ic-icon" style={{ background: 'rgba(0,244,244,.1)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--ch4)' }}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div><h4>Targeting Registrations, Not Just Installs</h4><p>We optimize campaigns to achieve a target CPA for registrations — ensuring the budget buys active users, not just downloads.</p></div></div>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch4)' }}><div className="ic-icon" style={{ background: 'rgba(0,244,244,.1)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--ch4)' }}><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div><div><h4>Event-Driven Bidding</h4><p>We prioritize keywords that yield high event conversion rates — tutorial completion, first purchase, profile setup — tying every dollar to long-term LTV.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch4)' }}><div className="ic-icon" style={{ background: 'rgba(0,244,244,.1)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--ch4)' }}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div><h4>Targeting Registrations, Not Just Installs</h4><p>We optimize campaigns to achieve a target CPA for registrations, ensuring the budget buys active users, not just downloads.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--ch4)' }}><div className="ic-icon" style={{ background: 'rgba(0,244,244,.1)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--ch4)' }}><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div><div><h4>Event-Driven Bidding</h4><p>We prioritize keywords that yield high event conversion rates (tutorial completion, first purchase, profile setup), tying every dollar to long-term LTV.</p></div></div>
             </div>
             <table className="data-table">
               <thead><tr><th>Keyword</th><th>Search Volume</th><th>Competition</th><th>Opportunity</th></tr></thead>
@@ -870,7 +870,7 @@ export default function PlaybookContent({
                 <div style={{ position: 'absolute', bottom: 28, left: 12, fontSize: '0.7rem', color: '#999', fontWeight: 600, opacity: 0.5 }}>Avoid ↙</div>
               </div>
               <div style={{ marginTop: 12, padding: '12px 16px', background: 'var(--bg-alt)', borderRadius: 8, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
-                <strong style={{ color: 'var(--text)' }}>How to read:</strong> Brand keywords (top-right) convert best — high volume with high conversion rates. Long-tail keywords are hidden gems — low competition but high conversion. Generic keywords burn budget — high volume but low conversion. Focus ASA spend on Brand defense and Long-tail capture.
+                <strong style={{ color: 'var(--text)' }}>How to read:</strong> Brand keywords (top-right) convert best: high volume with high conversion rates. Long-tail keywords are hidden gems: low competition but high conversion. Generic keywords burn budget: high volume but low conversion. Focus ASA spend on Brand defense and Long-tail capture.
               </div>
             </div>
           </div>
@@ -896,7 +896,7 @@ export default function PlaybookContent({
               <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch4)', flexDirection: 'column' }}>
                 <span className="tag" style={{ color: 'var(--ch4)', borderColor: 'var(--ch4)', marginBottom: '4px' }}>4.3</span>
                 <h4 style={{ fontSize: '1rem', marginBottom: '8px' }}>The ASA-ASO &ldquo;Halo Effect&rdquo;</h4>
-                <ul className="blist" style={{ margin: 0 }}><li><strong>Keyword Intelligence:</strong> ASA acts as the R&amp;D lab for ASO. Winning keywords are integrated into App Store metadata to boost organic rankings.</li><li><strong>Conversion Rate Synergy:</strong> Insights from ASA creative testing — which screenshots drive the highest TTR — iterate on the organic store listing.</li></ul>
+                <ul className="blist" style={{ margin: 0 }}><li><strong>Keyword Intelligence:</strong> ASA acts as the R&amp;D lab for ASO. Winning keywords are integrated into App Store metadata to boost organic rankings.</li><li><strong>Conversion Rate Synergy:</strong> Insights from ASA creative testing (which screenshots drive the highest TTR) iterate on the organic store listing.</li></ul>
               </div>
               <div className="info-card rv" style={{ margin: 0, borderTop: '3px solid var(--ch4)', flexDirection: 'column' }}>
                 <span className="tag" style={{ color: 'var(--ch4)', borderColor: 'var(--ch4)', marginBottom: '4px' }}>4.4</span>
@@ -916,7 +916,7 @@ export default function PlaybookContent({
               </div>
               <div>
                 <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.05rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>Cross-Channel UA Strategy: How DSP + OEM + ASA Amplify Each Other</h4>
-                <p style={{ color: 'var(--text-muted)', fontSize: '.88rem', lineHeight: 1.7 }}>High-impact DSP or OEM campaigns cause brand searches to surge. Increasing your ASA presence during these periods captures 100% of that manufactured demand at the most efficient price point. ASA does not exist in a vacuum&mdash;it is the net that catches the demand your other channels create.</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '.88rem', lineHeight: 1.7 }}>High-impact DSP or OEM campaigns cause brand searches to surge. Increasing your ASA presence during these periods captures 100% of that manufactured demand at the most efficient price point. ASA does not exist in a vacuum. It is the net that catches the demand your other channels create.</p>
               </div>
             </div>
           </div>
@@ -932,7 +932,7 @@ export default function PlaybookContent({
                   You&apos;ve Seen the Strategy.<br />Now Model It for Your App.
                 </h3>
                 <p style={{ color: 'var(--text-muted)', fontSize: '.92rem', lineHeight: 1.7, marginBottom: '20px', maxWidth: '440px' }}>
-                  Combine all 4 pillars — DSP, Rewarded, OEM, and ASA — into a personalized budget allocation with estimated CAC and ROAS projections.
+                  Combine all 4 pillars (DSP, Rewarded, OEM, and ASA) into a personalized budget allocation with estimated CAC and ROAS projections.
                 </p>
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '24px' }}>
                   <span style={{ padding: '6px 14px', borderRadius: '20px', fontSize: '.75rem', fontWeight: 600, background: 'rgba(38,190,129,.08)', color: 'var(--green)', border: '1px solid rgba(38,190,129,.15)' }}>Programmatic DSP</span>

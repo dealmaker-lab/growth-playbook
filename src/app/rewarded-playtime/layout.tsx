@@ -23,7 +23,7 @@ export const metadata: Metadata = {
         url: '/hero-bg.png',
         width: 1200,
         height: 630,
-        alt: 'Rewarded Playtime in Mobile Gaming — AppSamurai Handbook',
+        alt: 'Rewarded Playtime in Mobile Gaming: AppSamurai Handbook',
       },
     ],
   },

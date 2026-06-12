@@ -121,7 +121,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
               For Casual &amp; Hybrid Casual Games
             </p>
             <p className="hero-sub">
-              A 2025&ndash;2026 field guide to revenue strategy, LiveOps, ad models, IAP, and emerging channels &mdash; built for game developers, product managers, and monetization leads.
+              A 2025&ndash;2026 field guide to revenue strategy, LiveOps, ad models, IAP, and emerging channels. Built for game developers, product managers, and monetization leads.
             </p>
             <div className="hero-cta">
               <button className="btn-primary" onClick={() => scrollTo('mp-toc')}>
@@ -166,7 +166,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
           <span className="insight-badge">Introduction</span>
           <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.3rem', fontWeight: 700, marginBottom: '12px', color: 'var(--text)' }}>The Monetization Landscape Has Changed</h3>
           <p style={{ fontSize: '.95rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '780px', marginBottom: '14px' }}>
-            The mobile gaming industry has matured well past the heyday of hyper-casual &mdash; and the rules of monetization have matured with it. The pure ad-based models that once powered chart-topping hyper-casual titles can no longer sustain profitability on their own. A richer, more layered approach has taken their place: one that combines ads, in-app purchases, subscriptions, LiveOps, and, increasingly, direct-to-consumer channels.
+            The mobile gaming industry has matured well past the heyday of hyper-casual, and the rules of monetization have matured with it. The pure ad-based models that once powered chart-topping hyper-casual titles can no longer sustain profitability on their own. A richer, more layered approach has taken their place: one that combines ads, in-app purchases, subscriptions, LiveOps, and, increasingly, direct-to-consumer channels.
           </p>
           <p style={{ fontSize: '.95rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '780px', marginBottom: '14px' }}>
             Casual and hybrid casual games sit at the center of this shift. They are the genres best positioned to capture the full spectrum of modern monetization: accessible enough to acquire users at scale, engaging enough to convert them into spenders.
@@ -185,7 +185,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
           <div className="toc-grid">
             <a href="#mp-ch1" className="toc-card rv" style={{ borderLeftColor: 'var(--purple)' }}><div className="toc-num" style={{ color: 'var(--purple)' }}>01</div><h3>The Genre Landscape</h3><p>The genre spectrum, the hybrid casual formula, and the meta layers that set the genre apart.</p></a>
             <a href="#mp-ch2" className="toc-card rv" style={{ borderLeftColor: 'var(--yellow)' }}><div className="toc-num" style={{ color: 'var(--yellow)' }}>02</div><h3>Why Strategy Must Evolve</h3><p>What broke the hyper-casual model, and the hybrid casual opportunity by the numbers.</p></a>
-            <a href="#mp-ch3" className="toc-card rv" style={{ borderLeftColor: 'var(--green)' }}><div className="toc-num" style={{ color: 'var(--green)' }}>03</div><h3>The Monetization Stack</h3><p>IAA, IAP, subscriptions, and battle passes &mdash; the layered framework that wins.</p></a>
+            <a href="#mp-ch3" className="toc-card rv" style={{ borderLeftColor: 'var(--green)' }}><div className="toc-num" style={{ color: 'var(--green)' }}>03</div><h3>The Monetization Stack</h3><p>IAA, IAP, subscriptions, and battle passes: the layered framework that wins.</p></a>
             <a href="#mp-ch4" className="toc-card rv" style={{ borderLeftColor: 'var(--cyan)' }}><div className="toc-num" style={{ color: 'var(--cyan-d)' }}>04</div><h3>LiveOps</h3><p>The engine of long-term revenue: calendars, core-loop alignment, and AI personalization.</p></a>
             <a href="#mp-ch5" className="toc-card rv" style={{ borderLeftColor: 'var(--pink)' }}><div className="toc-num" style={{ color: 'var(--pink)' }}>05</div><h3>Direct-to-Consumer</h3><p>The emerging revenue frontier: web stores, platform-fee bypass, and adoption data.</p></a>
             <a href="#mp-ch6" className="toc-card rv" style={{ borderLeftColor: 'var(--purple)' }}><div className="toc-num" style={{ color: 'var(--purple)' }}>06</div><h3>Retention</h3><p>The foundation of all monetization: benchmarks, design elements, and KPIs.</p></a>
@@ -271,7 +271,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
           <div className="ch-num" style={{ color: 'var(--yellow)' }}>2.0</div>
           <h2>Why Monetization Strategy Must Evolve</h2>
           <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>What broke the hyper-casual model</p>
-          <div className="ch-desc">Hyper-casual built its dominance on massive download volume monetized purely through advertising. Three structural shifts eroded that model&rsquo;s profitability &mdash; and reshaped how every casual studio earns.</div>
+          <div className="ch-desc">Hyper-casual built its dominance on massive download volume monetized purely through advertising. Three structural shifts eroded that model&rsquo;s profitability and reshaped how every casual studio earns.</div>
         </div>
       </section>
 
@@ -281,7 +281,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
               <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg></div>
               <h4>Apple&apos;s App Tracking Transparency</h4>
-              <p>Introduced with iOS 14.5 in April 2021, ATT requires explicit user permission before tracking activity across apps and websites. Opt-in rates settled well below 50% in most markets &mdash; degrading ad-targeting precision, reducing eCPMs, and pushing up user acquisition costs for developers who rely on performance advertising.</p>
+              <p>Introduced with iOS 14.5 in April 2021, ATT requires explicit user permission before tracking activity across apps and websites. Opt-in rates settled well below 50% in most markets, degrading ad-targeting precision, reducing eCPMs, and pushing up user acquisition costs for developers who rely on performance advertising.</p>
             </div>
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
               <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" /></svg></div>
@@ -291,11 +291,11 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
               <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><path d="M3 3v18h18" /><path d="M7 8l4 6 4-4 5 8" /></svg></div>
               <h4>Ad Revenue Compression</h4>
-              <p>In 2024, publisher-side eCPMs dropped 20&ndash;30% while ad networks reported record profits &mdash; a structural shift in leverage that hurt studios relying on a single ad revenue stream. Hybrid monetization stopped being merely a growth strategy and became a survival strategy.</p>
+              <p>In 2024, publisher-side eCPMs dropped 20&ndash;30% while ad networks reported record profits, a structural shift in leverage that hurt studios relying on a single ad revenue stream. Hybrid monetization stopped being merely a growth strategy and became a survival strategy.</p>
             </div>
           </div>
           <PlayTip label="Key Insight">
-            <p>Ad monetization alone is no longer a viable foundation for casual game profitability. The studios winning in 2025&ndash;2026 treat advertising as one layer in a multi-stream model &mdash; not the whole stack.</p>
+            <p>Ad monetization alone is no longer a viable foundation for casual game profitability. The studios winning in 2025&ndash;2026 treat advertising as one layer in a multi-stream model, not the whole stack.</p>
           </PlayTip>
         </div>
       </section>
@@ -325,7 +325,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
             </div>
           </div>
           <p style={{ fontSize: '.92rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '780px' }}>
-            These numbers describe a genre that has cracked the hard problem of combining broad accessibility with deep monetization. IAP spend growing 37% in a single year &mdash; while the broader mobile market grew IAP at just 4% &mdash; confirms that hybrid casual isn&rsquo;t merely growing. It is outperforming every other genre on the revenue dimension that matters most.
+            These numbers describe a genre that has cracked the hard problem of combining broad accessibility with deep monetization. IAP spend growing 37% in a single year (while the broader mobile market grew IAP at just 4%) confirms that hybrid casual isn&rsquo;t merely growing. It is outperforming every other genre on the revenue dimension that matters most.
           </p>
         </div>
       </section>
@@ -362,10 +362,10 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
           <div className="wrap rv">
             <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '10px', color: 'var(--text)' }}>3.1 In-App Advertising (IAA)</h3>
             <p style={{ fontSize: '.92rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '780px', marginBottom: '16px' }}>
-              <strong style={{ color: 'var(--text)' }}>The role of ads in 2025&ndash;2026.</strong> Even with IAP on the rise, advertising remains the largest monetization channel for casual and hyper-casual games. Its real job: monetizing the 95%+ of players who will never make a purchase &mdash; a segment that would otherwise generate zero direct revenue.
+              <strong style={{ color: 'var(--text)' }}>The role of ads in 2025&ndash;2026.</strong> Even with IAP on the rise, advertising remains the largest monetization channel for casual and hyper-casual games. Its real job: monetizing the 95%+ of players who will never make a purchase, a segment that would otherwise generate zero direct revenue.
             </p>
             <PlayTip label="Benchmark">
-              <p>82% of players prefer free games with optional ads over paid games &mdash; yet 46.8% cite ads as their biggest frustration. Balance and placement are everything. (Business of Apps, 2025)</p>
+              <p>82% of players prefer free games with optional ads over paid games, yet 46.8% cite ads as their biggest frustration. Balance and placement are everything. (Business of Apps, 2025)</p>
             </PlayTip>
             <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1rem', fontWeight: 700, margin: '24px 0 8px', color: 'var(--text)' }}>Ad Formats and Where They Fit</h4>
             <div className="table-scroll">
@@ -396,7 +396,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
             </p>
             <div className="chart-card-new rv">
               <h4>Revenue Split Benchmark (2025&ndash;2026)</h4>
-              <div className="chart-subtitle">Ads vs. IAP share by genre &mdash; bars plot the midpoint of each published range; hybrid casual is drawn as an even split per its &ldquo;balanced blend&rdquo; description. Hover for the published figures (Source: Audiencelab, 2026)</div>
+              <div className="chart-subtitle">Ads vs. IAP share by genre: bars plot the midpoint of each published range; hybrid casual is drawn as an even split per its &ldquo;balanced blend&rdquo; description. Hover for the published figures (Source: Audiencelab, 2026)</div>
               <RevenueSplitChart />
               <p style={{ fontSize: '.8rem', color: 'var(--text-faint)', marginTop: '10px' }}>Published ranges: hyper-casual 85&ndash;95% ads / 5&ndash;15% IAP &middot; casual 40&ndash;60% ads / 40&ndash;60% IAP &middot; hybrid casual: balanced blend, weighted by meta depth &middot; mid-core 20&ndash;40% ads / 60&ndash;80% IAP.</p>
             </div>
@@ -442,13 +442,13 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
                 'At energy or life depletion',
                 'During boss or key-level encounters',
                 'Immediately after tutorial completion, while motivation is highest',
-                'During limited-time events — scarcity triggers urgency',
+                'During limited-time events (scarcity triggers urgency)',
               ].map((m) => (
                 <li key={m} style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '18px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--green)', fontWeight: 700 }}>&bull;</span>{m}</li>
               ))}
             </ul>
             <PlayTip label="Playbook Tip">
-              <p>Identify your game&rsquo;s highest-friction moments early in development &mdash; these are your primary IAP trigger points. Event-level analytics platforms can measure conversion lift per trigger for ongoing optimization. Teams using this approach report 15&ndash;25% ARPU lifts. (SolarEngine, 2026)</p>
+              <p>Identify your game&rsquo;s highest-friction moments early in development. These are your primary IAP trigger points. Event-level analytics platforms can measure conversion lift per trigger for ongoing optimization. Teams using this approach report 15&ndash;25% ARPU lifts. (SolarEngine, 2026)</p>
             </PlayTip>
             <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1rem', fontWeight: 700, margin: '24px 0 8px', color: 'var(--text)' }}>Pricing Strategy</h4>
             <p style={{ fontSize: '.92rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '780px', marginBottom: '12px' }}>
@@ -477,7 +477,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
                 <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: '12px' }}>Subscriptions are the fastest-growing IAP format in mobile gaming, and increasingly viable for casual and hybrid casual titles. They deliver predictable recurring revenue and encourage long-term engagement. What works in a subscription:</p>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {[
-                    'An ad-free experience — the most universally valued benefit',
+                    'An ad-free experience, the most universally valued benefit',
                     'Daily bonus currency or boosters for subscribers',
                     'Early access to new content, levels, or seasonal events',
                     'VIP status signals (badges, exclusive cosmetics)',
@@ -513,17 +513,17 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
             <div className="ch-num" style={{ color: 'var(--cyan-d)' }}>4.0</div>
             <h2>LiveOps: The Engine of Long-Term Revenue</h2>
             <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>From launch-and-forget to launch-and-operate</p>
-            <div className="ch-desc">Live Operations is the ongoing process of updating, optimizing, and expanding a game after launch &mdash; through real-time content, events, and personalized experiences, with no new app store submission required.</div>
+            <div className="ch-desc">Live Operations is the ongoing process of updating, optimizing, and expanding a game after launch, through real-time content, events, and personalized experiences, with no new app store submission required.</div>
           </div>
         </section>
 
         <section className="sec sec-w">
           <div className="wrap rv">
             <PlayTip label="Industry Benchmark">
-              <p>In 2024, 84% of all mobile IAP revenue came from games using LiveOps &mdash; and 95% of studios are now building or maintaining a live service title. (Adjust, 2025)</p>
+              <p>In 2024, 84% of all mobile IAP revenue came from games using LiveOps, and 95% of studios are now building or maintaining a live service title. (Adjust, 2025)</p>
             </PlayTip>
             <p style={{ fontSize: '.92rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '780px', margin: '20px 0' }}>
-              LiveOps turns a static game into a living product. It matters most in free-to-play ecosystems, where revenue depends on keeping existing players engaged rather than constantly acquiring new ones &mdash; a priority that has only intensified as UA costs have risen.
+              LiveOps turns a static game into a living product. It matters most in free-to-play ecosystems, where revenue depends on keeping existing players engaged rather than constantly acquiring new ones, a priority that has only intensified as UA costs have risen.
             </p>
             <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1rem', fontWeight: 700, margin: '0 0 12px', color: 'var(--text)' }}>4.2 LiveOps in 2025: What the Data Shows</h4>
             <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '780px', marginBottom: '12px' }}>From GameDesignBites&rsquo; analysis of the 2025 mobile landscape:</p>
@@ -556,7 +556,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
           <div className="wrap rv">
             <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1rem', fontWeight: 700, margin: '0 0 8px', color: 'var(--text)' }}>4.3 Building a LiveOps Calendar</h4>
             <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '780px', marginBottom: '12px' }}>
-              A LiveOps calendar has to balance event variety against pacing &mdash; a predictable or overloaded schedule breeds player fatigue. The recommended mix:
+              A LiveOps calendar has to balance event variety against pacing: a predictable or overloaded schedule breeds player fatigue. The recommended mix:
             </p>
             <div className="table-scroll">
               <table className="infographic-table">
@@ -581,7 +581,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
               {[
                 'Events should provide currency, boosters, or items that are useful in the main game',
                 'Event rewards should tie into the meta layer (furniture for a decorating game, characters for a narrative RPG)',
-                'Event mechanics should be recognizable extensions of the core mechanic — not arbitrary mini-games',
+                'Event mechanics should be recognizable extensions of the core mechanic, not arbitrary mini-games',
               ].map((s) => (
                 <li key={s} style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '18px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--cyan-d)', fontWeight: 700 }}>&bull;</span>{s}</li>
               ))}
@@ -637,7 +637,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
             </div>
             <div className="chart-card-new rv">
               <h4>Major Publishers Are Scaling DTC Aggressively</h4>
-              <div className="chart-subtitle">DTC share of revenue, 2025 &mdash; hover each bar for the detail</div>
+              <div className="chart-subtitle">DTC share of revenue, 2025. Hover each bar for the detail</div>
               <DTCAdoptionChart />
               <ul style={{ listStyle: 'none', padding: 0, margin: '12px 0 0', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {[
@@ -656,7 +656,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '12px', marginBottom: '20px' }}>
               {[
-                ['Web shop exclusive deals', 'Items and bundles not available in-app — drives web store discovery'],
+                ['Web shop exclusive deals', 'Items and bundles not available in-app. Drives web store discovery'],
                 ['App-to-web payment links', 'In-game prompts directing players to the web store for savings'],
                 ['Weekly web store rotations', 'Exclusive cosmetics and limited-time bundles'],
                 ['Free gift claims', 'Send players to the web store with a free reward to reduce friction'],
@@ -738,7 +738,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
                 ['Ad ARPU', 'effectiveness of your ad monetization per user'],
                 ['LTV (Lifetime Value) by cohort', 'overall business health'],
               ].map(([t, d]) => (
-                <li key={t} style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '18px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700 }}>&bull;</span><strong style={{ color: 'var(--text)' }}>{t}</strong> &mdash; {d}</li>
+                <li key={t} style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '18px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700 }}>&bull;</span><strong style={{ color: 'var(--text)' }}>{t}</strong>: {d}</li>
               ))}
             </ul>
           </div>
@@ -752,7 +752,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
             <div className="ch-num" style={{ color: 'var(--yellow)' }}>7.0</div>
             <h2>User Acquisition in a Hybrid Monetization World</h2>
             <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>From volume acquisition to quality acquisition</p>
-            <div className="ch-desc">ATT fundamentally rewired the economics of mobile game UA. With reduced IDFA availability and degraded targeting signals, CPI rose while conversion signals turned noisier. The industry&rsquo;s answer: shift investment from volume to quality &mdash; targeting players with higher predicted LTV rather than maximizing raw install counts.</div>
+            <div className="ch-desc">ATT fundamentally rewired the economics of mobile game UA. With reduced IDFA availability and degraded targeting signals, CPI rose while conversion signals turned noisier. The industry&rsquo;s answer: shift investment from volume to quality, targeting players with higher predicted LTV rather than maximizing raw install counts.</div>
           </div>
         </section>
 
@@ -763,13 +763,13 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
             </p>
             <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1rem', fontWeight: 700, margin: '0 0 8px', color: 'var(--text)' }}>7.2 Rewarded Playtime Campaigns</h4>
             <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '780px', marginBottom: '12px' }}>
-              Rewarded Playtime (also called play-to-earn) campaigns reward players with coins, points, or real-world value &mdash; gift cards, in-app currency &mdash; based on the time they spend in the game. The model is particularly effective for casual and hybrid casual titles because:
+              Rewarded Playtime (also called play-to-earn) campaigns reward players with coins, points, or real-world value (gift cards, in-app currency) based on the time they spend in the game. The model is particularly effective for casual and hybrid casual titles because:
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '20px' }}>
               {[
                 'It incentivizes longer sessions, which increases ad revenue and IAP probability',
                 'It improves retention metrics (D7, D30) as players return to accumulate rewards',
-                'It does not require developers to create new ad creatives — assets can be taken from the Play Store listing',
+                'It does not require developers to create new ad creatives: assets can be taken from the Play Store listing',
                 'It attracts a highly motivated player segment already inclined to engage deeply',
               ].map((s) => (
                 <div key={s} className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--yellow)' }}><div><p style={{ fontSize: '.85rem' }}>{s}</p></div></div>
@@ -793,15 +793,15 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
           <div className="wrap rv">
             <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1rem', fontWeight: 700, margin: '0 0 8px', color: 'var(--text)' }}>7.3 Rewarded Engagement Campaigns</h4>
             <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '780px', marginBottom: '12px' }}>
-              Rewarded Engagement campaigns reward players for completing specific in-game tasks and milestones &mdash; reaching a level, completing a challenge, unlocking a character. The advantages:
+              Rewarded Engagement campaigns reward players for completing specific in-game tasks and milestones: reaching a level, completing a challenge, unlocking a character. The advantages:
             </p>
             <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: '780px' }}>
               {[
-                'Fully player-initiated, with no forced interruptions — players engage on their own terms',
+                'Fully player-initiated, with no forced interruptions. Players engage on their own terms',
                 'A conversion-based structure that delivers ROAS-positive results',
                 'Significantly higher ARPU, as players spend more time interacting with ad content',
                 'Stronger player attachment through achievement reinforcement',
-                'Higher IAP conversion — engaged players are markedly more likely to purchase',
+                'Higher IAP conversion: engaged players are markedly more likely to purchase',
               ].map((s) => (
                 <li key={s} style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '18px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--yellow)', fontWeight: 700 }}>&bull;</span>{s}</li>
               ))}
@@ -816,7 +816,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
                 ['Narrative curiosity', '“What happens next?” story teasers'],
                 ['Meta-layer showcases', 'Decorating, building, and customization in action'],
                 ['Live-action & dramatic ads', 'Merge Mansion’s theatrical approach is the benchmark'],
-                ['Playable ads', 'Show the core mechanic instantly — players self-select based on genuine interest'],
+                ['Playable ads', 'Show the core mechanic instantly. Players self-select based on genuine interest'],
               ].map(([t, d]) => (
                 <div key={t} className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column', padding: '18px 16px' }}>
                   <h4 style={{ fontSize: '.85rem' }}>{t}</h4>
@@ -855,8 +855,8 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
                   <h4>8.2 Monetize the Majority Without Alienating the Minority</h4>
                   <p style={{ marginBottom: '8px' }}>Your stack serves two fundamentally different populations at once:</p>
                   <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <li style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '16px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--green)', fontWeight: 700 }}>&bull;</span><strong style={{ color: 'var(--text)' }}>The 95% who will never pay</strong> &mdash; monetize via ads, but respect their experience; ad frequency caps and rewarded formats are essential.</li>
-                    <li style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '16px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--green)', fontWeight: 700 }}>&bull;</span><strong style={{ color: 'var(--text)' }}>The 5% who pay</strong> &mdash; offer an IAP experience that feels rewarding and fair; remove ads for subscribers or heavy spenders.</li>
+                    <li style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '16px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--green)', fontWeight: 700 }}>&bull;</span><strong style={{ color: 'var(--text)' }}>The 95% who will never pay</strong>: monetize via ads, but respect their experience; ad frequency caps and rewarded formats are essential.</li>
+                    <li style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '16px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--green)', fontWeight: 700 }}>&bull;</span><strong style={{ color: 'var(--text)' }}>The 5% who pay</strong>: offer an IAP experience that feels rewarding and fair; remove ads for subscribers or heavy spenders.</li>
                   </ul>
                   <p>The most effective approach is progressive disclosure: new players see only rewarded video ads and gentle IAP prompts, with more monetization options introduced as engagement deepens, based on behavioral signals.</p>
                 </div>
@@ -871,7 +871,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
                       'Never gate mandatory progression behind hard paywalls in a casual game',
                       'Ensure IAP offers feel like genuine value, not desperation taxes',
                       'Cap ad frequency per session and per level',
-                      'Reward players for engaging with ads — never punish them for not watching',
+                      'Reward players for engaging with ads. Never punish them for not watching',
                       'Build systems where non-paying players feel respected and included',
                     ].map((s) => (
                       <li key={s} style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '16px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--green)', fontWeight: 700 }}>&bull;</span>{s}</li>
@@ -886,12 +886,12 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
                   <p style={{ marginBottom: '8px' }}>A single global strategy doesn&rsquo;t work. The key variables by market:</p>
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
                     {[
-                      ['IAP price points', '$2.99 in the US may be prohibitive in Southeast Asia — use regional pricing tiers'],
+                      ['IAP price points', '$2.99 in the US may be prohibitive in Southeast Asia; use regional pricing tiers'],
                       ['Ad sensitivity', 'some markets tolerate more ads than others; adjust frequency accordingly'],
                       ['Payment methods', 'local wallets, carrier billing, and alternative payment methods are critical in many markets'],
                       ['Event timing', 'seasonal events should align with local holidays and cultural moments'],
                     ].map(([t, d]) => (
-                      <li key={t} style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '16px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--green)', fontWeight: 700 }}>&bull;</span><strong style={{ color: 'var(--text)' }}>{t}</strong> &mdash; {d}</li>
+                      <li key={t} style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '16px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--green)', fontWeight: 700 }}>&bull;</span><strong style={{ color: 'var(--text)' }}>{t}</strong>: {d}</li>
                     ))}
                   </ul>
                 </div>
@@ -908,7 +908,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
             <div className="ch-num" style={{ color: 'var(--cyan-d)' }}>9.0</div>
             <h2>Key Metrics and Success Benchmarks</h2>
             <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>What to track from day one</p>
-            <div className="ch-desc">Track these metrics from day one &mdash; they are the signal system for your monetization health.</div>
+            <div className="ch-desc">Track these metrics from day one. They are the signal system for your monetization health.</div>
           </div>
         </section>
 
@@ -953,7 +953,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
               {[
                 ['Hybrid monetization is the standard, not the exception.', 'The most successful games combine ads, IAP, subscriptions, and battle passes. Each stream serves a different player segment. Relying on any single channel leaves significant revenue on the table.'],
                 ['Hybrid casual is the highest-growth genre in mobile gaming.', 'With 37% YoY IAP revenue growth in 2024 and sustained momentum in 2025, hybrid casual outperforms every other genre category on the revenue dimensions that matter most.'],
-                ['LiveOps is no longer optional.', '84% of mobile IAP revenue in 2024 came from games with active LiveOps. The shift from launch-and-forget to launch-and-operate is complete — your revenue model must include a content operations strategy.'],
+                ['LiveOps is no longer optional.', '84% of mobile IAP revenue in 2024 came from games with active LiveOps. The shift from launch-and-forget to launch-and-operate is complete: your revenue model must include a content operations strategy.'],
                 ['DTC is a genuine revenue opportunity, now.', 'Regulatory changes have opened the door. Early movers are seeing DTC account for 25–40% of total revenue. Even partial adoption dramatically improves margins by bypassing the 30% platform tax.'],
                 ['Retention is the precondition for monetization.', 'Downloads are declining. IAP is growing. The signal is unmistakable: the industry has shifted to maximizing LTV from existing players. Invest in retention mechanics before, during, and after launch.'],
                 ['Rewarded formats protect experience while driving revenue.', 'Rewarded video ads, rewarded playtime campaigns, and rewarded engagement campaigns consistently outperform interruptive formats on both revenue and retention metrics. Player-initiated monetization is the framework that scales.'],

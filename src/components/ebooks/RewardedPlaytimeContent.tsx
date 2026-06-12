@@ -46,11 +46,11 @@ const SIDE_NAV_ITEMS = [
 ];
 
 const RP_FAQ = [
-  { question: 'What is Rewarded Playtime?', answer: 'Rewarded Playtime is a user acquisition and engagement model where players earn real-world value — gift cards, coupons, or cash — for the time they spend playing, alongside premium in-game incentives. Instead of paying for installs, advertisers pay for sustained engagement and deep-funnel milestones, which produces higher retention and LTV.' },
-  { question: 'What is the difference between outbound UA and an inbound offerwall?', answer: 'Outbound UA means listing your game on a rewarded platform or offerwall to buy high-intent traffic — you pay only when acquired players cross milestones like finishing a tutorial or hitting Level 70. Inbound integration means hosting the offerwall inside your own game, so your existing players earn your premium currency by trying partner apps. One acquires users; the other monetizes the ones you already have.' },
+  { question: 'What is Rewarded Playtime?', answer: 'Rewarded Playtime is a user acquisition and engagement model where players earn real-world value (gift cards, coupons, or cash) for the time they spend playing, alongside premium in-game incentives. Instead of paying for installs, advertisers pay for sustained engagement and deep-funnel milestones, which produces higher retention and LTV.' },
+  { question: 'What is the difference between outbound UA and an inbound offerwall?', answer: 'Outbound UA means listing your game on a rewarded platform or offerwall to buy high-intent traffic. You pay only when acquired players cross milestones like finishing a tutorial or hitting Level 70. Inbound integration means hosting the offerwall inside your own game, so your existing players earn your premium currency by trying partner apps. One acquires users; the other monetizes the ones you already have.' },
   { question: 'How does Rewarded Playtime differ from rewarded video ads?', answer: 'A rewarded video gives a small in-game bonus for watching a short ad. Rewarded Playtime rewards actual gameplay time and milestone achievements with real-world value, which pulls players deeper into a game rather than briefly interrupting it.' },
   { question: 'What metrics should I track for Rewarded Playtime campaigns?', answer: 'Track player engagement (session length, DAU, WAU), lifetime value (LTV), retention (D1, D7, D30), return on ad spend (ROAS), and event completion rates. Together they show whether a campaign is profitable and sustainable.' },
-  { question: 'Is Rewarded Playtime only for gaming apps?', answer: 'It started in gaming, but the value-exchange model works wherever sustained engagement matters — fintech, e-commerce, streaming, and utility apps all run rewarded engagement campaigns today.' },
+  { question: 'Is Rewarded Playtime only for gaming apps?', answer: 'It started in gaming, but the value-exchange model works wherever sustained engagement matters: fintech, e-commerce, streaming, and utility apps all run rewarded engagement campaigns today.' },
 ];
 
 interface RewardedPlaytimeContentProps {
@@ -126,7 +126,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
               Engage, Retain, Monetize in Mobile Gaming
             </p>
             <p className="hero-sub">
-              How rewarded playtime works, the regional data behind it, genre-by-genre campaign strategy, and the KPIs that separate winners from underperformers — built for growth teams scaling casual, hybrid-casual, and mid-core games.
+              How rewarded playtime works, the regional data behind it, genre-by-genre campaign strategy, and the KPIs that separate winners from underperformers. Built for growth teams scaling casual, hybrid-casual, and mid-core games.
             </p>
             <div className="hero-cta">
               <button className="btn-primary" onClick={() => scrollTo('rp-toc')}>
@@ -173,7 +173,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           <div className="toc-grid">
             <a href="#rp-ch1" className="toc-card rv" style={{ borderLeftColor: 'var(--purple)' }}><div className="toc-num" style={{ color: 'var(--purple)' }}>01</div><h3>Introduction</h3><p>How rewarded playtime matured into a foundational pillar of mobile UA and retention.</p></a>
             <a href="#rp-ch2" className="toc-card rv" style={{ borderLeftColor: 'var(--green)' }}><div className="toc-num" style={{ color: 'var(--green)' }}>02</div><h3>How It Works</h3><p>The dual-value loop, the three reward pillars, and the player / advertiser / publisher angles.</p></a>
-            <a href="#rp-ch3" className="toc-card rv" style={{ borderLeftColor: 'var(--yellow)' }}><div className="toc-num" style={{ color: 'var(--yellow)' }}>03</div><h3>Genre-Specific Landscape</h3><p>How casual, hybrid-casual, and mid-core games monetize — and where rewarded playtime fits each.</p></a>
+            <a href="#rp-ch3" className="toc-card rv" style={{ borderLeftColor: 'var(--yellow)' }}><div className="toc-num" style={{ color: 'var(--yellow)' }}>03</div><h3>Genre-Specific Landscape</h3><p>How casual, hybrid-casual, and mid-core games monetize, and where rewarded playtime fits each.</p></a>
             <a href="#rp-ch4" className="toc-card rv" style={{ borderLeftColor: 'var(--cyan-d)' }}><div className="toc-num" style={{ color: 'var(--cyan-d)' }}>04</div><h3>Regional Landscape</h3><p>Monetization and reward behavior across the US, South Korea, Japan, Brazil, and Europe.</p></a>
             <a href="#rp-ch5" className="toc-card rv" style={{ borderLeftColor: 'var(--purple)' }}><div className="toc-num" style={{ color: 'var(--purple)' }}>05</div><h3>Trends &amp; IAPs</h3><p>The shift to player value, channel diversification, and the data behind rewarded playtime.</p></a>
             <a href="#rp-ch6" className="toc-card rv" style={{ borderLeftColor: 'var(--yellow)' }}><div className="toc-num" style={{ color: 'var(--yellow)' }}>06</div><h3>Best Practices &amp; Campaign Strategy</h3><p>Designing reward experiences, setting goals, segmenting audiences, and optimizing rewards.</p></a>
@@ -190,7 +190,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           <div className="ch-num" style={{ color: 'var(--purple)' }}>1.0</div>
           <h2>The Mobile Gaming Landscape &amp; Rewarded Playtime</h2>
           <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.8)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>From experimental tactic to foundational cornerstone</p>
-          <div className="ch-desc">Once treated as an experimental tactic, rewarded playtime has matured into a proven cornerstone of mobile user acquisition and retention. It runs on a simple psychological lever — positive reinforcement — that keeps players engaged in order to earn more.</div>
+          <div className="ch-desc">Once treated as an experimental tactic, rewarded playtime has matured into a proven cornerstone of mobile user acquisition and retention. It runs on a simple psychological lever (positive reinforcement) that keeps players engaged in order to earn more.</div>
         </div>
       </section>
 
@@ -271,17 +271,17 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--green)', flexDirection: 'column' }}>
               <div className="ic-icon" style={{ marginBottom: '8px' }}><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" /></svg></div>
               <h4>Time-Based Accumulation</h4>
-              <p>Players earn platform currency or reward points tied directly to the playtime they log inside an app — the longer they play, the more they bank.</p>
+              <p>Players earn platform currency or reward points tied directly to the playtime they log inside an app: the longer they play, the more they bank.</p>
             </div>
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--green)', flexDirection: 'column' }}>
               <div className="ic-icon" style={{ marginBottom: '8px' }}><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></div>
               <h4>Granular Milestone Achievements</h4>
-              <p>Hitting specific milestones or completing designated levels unlocks premium tiers — digital gift cards, cash-back perks, or exclusive in-game assets.</p>
+              <p>Hitting specific milestones or completing designated levels unlocks premium tiers: digital gift cards, cash-back perks, or exclusive in-game assets.</p>
             </div>
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--green)', flexDirection: 'column' }}>
               <div className="ic-icon" style={{ marginBottom: '8px' }}><svg viewBox="0 0 24 24"><path d="M3 3v18h18" /><path d="M7 16l4-6 4 4 5-8" /></svg></div>
               <h4>Deep-Funnel Actions</h4>
-              <p>High-value payouts trigger when players reach significant achievements or show consistent engagement over a longer period — the signals that correlate with real LTV.</p>
+              <p>High-value payouts trigger when players reach significant achievements or show consistent engagement over a longer period: the signals that correlate with real LTV.</p>
             </div>
           </div>
           <div className="stat-callout rv" style={{ marginTop: '20px', borderLeftColor: 'var(--green)' }}>
@@ -296,7 +296,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
         <div className="wrap rv">
           <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.3rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text)', textAlign: 'center' }}>The Three Angles of the Ecosystem</h3>
           <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '680px', margin: '0 auto 24px', textAlign: 'center' }}>
-            To grasp the scale of the model, view it through its three core participants — the player, the advertiser, and the publisher.
+            To grasp the scale of the model, view it through its three core participants: the player, the advertiser, and the publisher.
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '16px' }}>
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--green)', flexDirection: 'column', textAlign: 'center' }}>
@@ -324,7 +324,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           <span className="tag" style={{ color: 'var(--green)', borderColor: 'var(--green)', display: 'inline-block', fontSize: '10px', fontWeight: 700, fontFamily: 'var(--font-h)', padding: '4px 12px', borderRadius: '100px', letterSpacing: '.8px', textTransform: 'uppercase', marginBottom: '10px', border: '1px solid' }}>1 &middot; The Player</span>
           <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '10px', color: 'var(--text)' }}>Value for Engagement</h3>
           <p style={{ fontSize: '.92rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '760px' }}>
-            For the user, the value proposition is frictionless. Players opt in voluntarily and pick titles they genuinely want to play. They earn real-world payouts — gift cards or digital cash — and crucial in-game rewards like premium currency, rare items, or progression boosters. That dual structure satisfies two distinct needs at once: immediate gratification inside the game, and tangible financial value outside it.
+            For the user, the value proposition is frictionless. Players opt in voluntarily and pick titles they genuinely want to play. They earn real-world payouts (gift cards or digital cash) and crucial in-game rewards like premium currency, rare items, or progression boosters. That dual structure satisfies two distinct needs at once: immediate gratification inside the game, and tangible financial value outside it.
           </p>
         </div>
       </section>
@@ -343,14 +343,14 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
               <h4 style={{ marginBottom: '10px' }}>Outbound User Acquisition</h4>
               <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: '12px' }}><strong style={{ color: 'var(--text)' }}>Placing your game on publisher sites.</strong> You act as the advertiser buying high-value traffic, listing your title inside a rewarded platform, offerwall, or publisher app to attract fresh players.</p>
               <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: '8px' }}><strong style={{ color: 'var(--text)' }}>How it operates:</strong> users browsing a partner app see your game listed alongside specific rewards, then download and engage to earn them.</p>
-              <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.65 }}><strong style={{ color: 'var(--text)' }}>Strategic value:</strong> because payouts are tied to milestone completion, you pay only for users who cross key depth thresholds — finishing a tutorial, reaching Level 70 — for a reliable, optimized ROAS.</p>
+              <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.65 }}><strong style={{ color: 'var(--text)' }}>Strategic value:</strong> because payouts are tied to milestone completion, you pay only for users who cross key depth thresholds (finishing a tutorial, reaching Level 70) for a reliable, optimized ROAS.</p>
             </div>
             <div className="chart-card-new rv" style={{ margin: 0, borderTop: '3px solid var(--green)' }}>
               <div style={{ fontFamily: 'var(--font-h)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--green)', marginBottom: '6px' }}>Alternative 2</div>
               <h4 style={{ marginBottom: '10px' }}>Inbound Economy Optimization</h4>
               <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: '12px' }}><strong style={{ color: 'var(--text)' }}>Integrating the offerwall into your own game.</strong> You act as the host, using rewarded architecture as a premium monetization and retention system inside your own ecosystem.</p>
               <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.65, marginBottom: '8px' }}><strong style={{ color: 'var(--text)' }}>How it operates:</strong> you embed a rewarded playtime offerwall in your UI; active players open the panel, browse partner apps or tasks, and opt to try them.</p>
-              <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.65 }}><strong style={{ color: 'var(--text)' }}>Strategic value:</strong> instead of disruptive video ads or a hard paywall, players earn your premium currency for free by spending time elsewhere — lifting goodwill, bridging non-payers to premium content, and adding a diversified ad-revenue stream without hurting retention.</p>
+              <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.65 }}><strong style={{ color: 'var(--text)' }}>Strategic value:</strong> instead of disruptive video ads or a hard paywall, players earn your premium currency for free by spending time elsewhere, lifting goodwill, bridging non-payers to premium content, and adding a diversified ad-revenue stream without hurting retention.</p>
             </div>
           </div>
         </div>
@@ -368,7 +368,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             </div>
             <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--cyan-d)' }}>
               <div className="ic-icon" style={{ background: 'var(--cyan-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--cyan-d)' }}><path d="M3 3v18h18" /><path d="M7 16l4-6 4 4 5-8" /></svg></div>
-              <div><h4>Elevated Lifetime Value</h4><p>Giving players a reliable alternative to opening their wallets — while keeping the game ad-undisrupted — raises satisfaction, lengthens sessions, and adds a dependable, diversified ad-revenue stream.</p></div>
+              <div><h4>Elevated Lifetime Value</h4><p>Giving players a reliable alternative to opening their wallets (while keeping the game ad-undisrupted) raises satisfaction, lengthens sessions, and adds a dependable, diversified ad-revenue stream.</p></div>
             </div>
           </div>
         </div>
@@ -382,7 +382,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           <div className="ch-num" style={{ color: 'var(--yellow)' }}>3.0</div>
           <h2>Genre-Specific Landscape &amp; Monetization Dynamics</h2>
           <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Where rewarded playtime fits each genre</p>
-          <div className="ch-desc">The market has moved well past one-size-fits-all monetization. Today&rsquo;s games run complex, genre-specific hybrid models — and knowing how each genre earns is essential to deploying rewarded playtime as an acquisition and retention tool.</div>
+          <div className="ch-desc">The market has moved well past one-size-fits-all monetization. Today&rsquo;s games run complex, genre-specific hybrid models, and knowing how each genre earns is essential to deploying rewarded playtime as an acquisition and retention tool.</div>
         </div>
       </section>
 
@@ -392,7 +392,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--green)', flexDirection: 'column' }}>
               <h4 style={{ fontSize: '1rem' }}>1. Casual Games</h4>
               <p style={{ fontSize: '.78rem', color: 'var(--green)', fontWeight: 600, marginBottom: '8px' }}>Royal Match &middot; Monopoly GO! &middot; Candy Crush Saga</p>
-              <p style={{ marginBottom: '8px' }}><strong style={{ color: 'var(--text)' }}>Monetization:</strong> driven mainly by IAPs — extra lives, boosters, event tokens — supplemented by calculated in-app advertising.</p>
+              <p style={{ marginBottom: '8px' }}><strong style={{ color: 'var(--text)' }}>Monetization:</strong> driven mainly by IAPs (extra lives, boosters, event tokens), supplemented by calculated in-app advertising.</p>
               <p><strong style={{ color: 'var(--text)' }}>The fit:</strong> casual players are motivated by progression, so milestone rewards keep them engaged through natural plateaus and nudge them toward becoming paid spenders.</p>
             </div>
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
@@ -404,7 +404,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--purple)', flexDirection: 'column' }}>
               <h4 style={{ fontSize: '1rem' }}>3. Mid-Core &amp; Hardcore Games</h4>
               <p style={{ fontSize: '.78rem', color: 'var(--purple-d)', fontWeight: 600, marginBottom: '8px' }}>Clash of Clans &middot; Genshin Impact &middot; PUBG Mobile</p>
-              <p style={{ marginBottom: '8px' }}><strong style={{ color: 'var(--text)' }}>Monetization:</strong> overwhelmingly high-value IAPs — gacha mechanics, character and item customization, cosmetic skins, and seasonal battle passes.</p>
+              <p style={{ marginBottom: '8px' }}><strong style={{ color: 'var(--text)' }}>Monetization:</strong> overwhelmingly high-value IAPs (gacha mechanics, character and item customization, cosmetic skins, and seasonal battle passes).</p>
               <p><strong style={{ color: 'var(--text)' }}>The fit:</strong> these games suffer steep early churn. Incentivizing players past the initial learning curve (reaching Level 10, finishing a tutorial) sharply scales their organic LTV and propensity to purchase.</p>
             </div>
           </div>
@@ -442,7 +442,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="big-num" style={{ color: 'var(--yellow)', fontSize: '1.4rem', minWidth: 'auto' }}>&rarr;</div>
             <div className="stat-body">
               <h4>The Shift from Ad-Volume to Player-Value</h4>
-              <p>As ad-signal loss and rising CPIs reshape the industry, developers have moved away from chasing raw install volume. Success now belongs to studios that diversify channels and build loyal user bases — and rewarded playtime is the bridge across every genre, delivering high-intent players who explore deep gameplay loops and maximize both ad equity and long-term IAP profitability.</p>
+              <p>As ad-signal loss and rising CPIs reshape the industry, developers have moved away from chasing raw install volume. Success now belongs to studios that diversify channels and build loyal user bases. Rewarded playtime is the bridge across every genre, delivering high-intent players who explore deep gameplay loops and maximize both ad equity and long-term IAP profitability.</p>
             </div>
           </div>
         </div>
@@ -456,7 +456,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           <div className="ch-num" style={{ color: 'var(--cyan-d)' }}>4.0</div>
           <h2>Regional Landscape: Global Monetization &amp; Reward Behaviors</h2>
           <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Five markets, five very different playbooks</p>
-          <div className="ch-desc">Global downloads slipped 7% year over year to 50 billion in 2025, even as total in-app purchase revenue held steady at $82 billion. With volume softening, publishers are designing region-specific loops to capture higher LTV — and user-initiated formats like rewarded playtime and paid access to accumulated rewards have become a foundational way to offset rising ROAS friction.</div>
+          <div className="ch-desc">Global downloads slipped 7% year over year to 50 billion in 2025, even as total in-app purchase revenue held steady at $82 billion. With volume softening, publishers are designing region-specific loops to capture higher LTV, and user-initiated formats like rewarded playtime and paid access to accumulated rewards have become a foundational way to offset rising ROAS friction.</div>
         </div>
       </section>
 
@@ -489,16 +489,16 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '16px', marginBottom: '24px' }}>
             <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--cyan-d)' }}><div><h4>The Revenue vs. Ad-Spend Mismatch</h4><p>Ad spend is crowded into Casual (Lifestyle &amp; Puzzle) at a 56.2% share, yet that category generates only 41.3% of IAP revenue. Action &amp; Strategy capture 34.8% of IAP revenue on a lighter 30.7% ad-spend share.</p></div></div>
-            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--cyan-d)' }}><div><h4>Genre Shifting</h4><p>In 2025, Strategy led North American growth, scaling IAP revenue by $1.12 billion, with a $604 million lift in Puzzle. Older mechanics contracted hard — Casino revenue fell $860 million.</p></div></div>
-            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--cyan-d)' }}><div><h4>Age &amp; Gender Profiles</h4><p>The casual and hyper-casual base skews older — nearly 60% of players are 35+. Gender splits sharply: Lifestyle (77% female), Puzzle (63%), and Tabletop (62%) against Shooters (72% male) and Strategy (73% male).</p></div></div>
+            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--cyan-d)' }}><div><h4>Genre Shifting</h4><p>In 2025, Strategy led North American growth, scaling IAP revenue by $1.12 billion, with a $604 million lift in Puzzle. Older mechanics contracted hard: Casino revenue fell $860 million.</p></div></div>
+            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--cyan-d)' }}><div><h4>Age &amp; Gender Profiles</h4><p>The casual and hyper-casual base skews older. Nearly 60% of players are 35+. Gender splits sharply: Lifestyle (77% female), Puzzle (63%), and Tabletop (62%) against Shooters (72% male) and Strategy (73% male).</p></div></div>
           </div>
           <div className="chart-card-new rv">
-            <h4>Annual Trends for Mobile Games by Product Model — United States</h4>
+            <h4>Annual Trends for Mobile Games by Product Model: United States</h4>
             <div className="chart-subtitle">IAP revenue and downloads, 2024 vs 2025 (Source: Sensor Tower)</div>
             <USAnnualTrendsChart />
           </div>
           <RpPlay>
-            <p>Because US casual ad delivery has consolidated into high-attention video (53.7%) and playable (13.3%) formats, creative fatigue sets in fast. An outbound rewarded playtime model captures the high-intent, mature female audience (35+) looking for clear progression hooks — without forcing intrusive interstitials on them.</p>
+            <p>Because US casual ad delivery has consolidated into high-attention video (53.7%) and playable (13.3%) formats, creative fatigue sets in fast. An outbound rewarded playtime model captures the high-intent, mature female audience (35+) looking for clear progression hooks, without forcing intrusive interstitials on them.</p>
           </RpPlay>
         </div>
       </section>
@@ -509,12 +509,12 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           <h3 className="region-head"><span className="region-flag">🇰🇷</span> South Korea</h3>
           <p className="region-sub">Deep player stickiness &amp; hardcore dominance</p>
           <p style={{ fontSize: '.92rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '780px', marginBottom: '20px' }}>
-            South Korea is one of the most lucrative, high-penetration mobile markets on earth — the fourth largest, with 24 million active mobile gamers.
+            South Korea is one of the most lucrative, high-penetration mobile markets on earth: the fourth largest, with 24 million active mobile gamers.
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '16px', marginBottom: '24px' }}>
-            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--purple)' }}><div><h4>The Playtime Multiplier</h4><p>Top-grossing Korean games average 119 minutes of daily playtime — an engagement rate 4 to 5 times higher than standard vertical averages.</p></div></div>
+            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--purple)' }}><div><h4>The Playtime Multiplier</h4><p>Top-grossing Korean games average 119 minutes of daily playtime, an engagement rate 4 to 5 times higher than standard vertical averages.</p></div></div>
             <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--purple)' }}><div><h4>RPG Sovereignty</h4><p>RPGs command 47% of total market revenue at $3.17 billion. Google Play captures 79% ($2.49 billion) of that, though iOS RPG revenue is on pace to expand over the next few years.</p></div></div>
-            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--purple)' }}><div><h4>Strategy &amp; Casual Openings</h4><p>Strategy generates $716.6 million, drawing an older male audience at 45 minutes a day. Casual leads raw popularity with 177 million downloads, driven by female players logging 45 minutes daily — double the global casual baseline.</p></div></div>
+            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--purple)' }}><div><h4>Strategy &amp; Casual Openings</h4><p>Strategy generates $716.6 million, drawing an older male audience at 45 minutes a day. Casual leads raw popularity with 177 million downloads, driven by female players logging 45 minutes daily, double the global casual baseline.</p></div></div>
           </div>
           <div className="chart-card-new rv">
             <h4>South Korean Mobile Revenue by Genre (2024)</h4>
@@ -523,10 +523,10 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           </div>
           <div className="info-card rv" style={{ borderLeft: '3px solid var(--yellow)', marginTop: '16px' }}>
             <div className="ic-icon" style={{ background: 'var(--yellow-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg></div>
-            <div><h4>Regulatory Layer &amp; Compliance</h4><p>Publishers must design around strict frameworks: local law mandates full disclosure of drop and draw probabilities across all card, gacha, and loot-box mechanics, and foreign game entities are legally required to designate an official local representative for compliance — or face stiff financial penalties.</p></div>
+            <div><h4>Regulatory Layer &amp; Compliance</h4><p>Publishers must design around strict frameworks: local law mandates full disclosure of drop and draw probabilities across all card, gacha, and loot-box mechanics, and foreign game entities are legally required to designate an official local representative for compliance, or face stiff financial penalties.</p></div>
           </div>
           <RpPlay>
-            <p>Because Korean players are driven by achievement and competition, F2P acquisition relies on demonstrating authentic, high-quality gameplay. An inbound rewarded playtime offerwall is the ideal way to monetize non-spending users — especially on Android, where casual ad monetization already accounts for 13.7% of total revenue ($18.8 million) and keeps expanding.</p>
+            <p>Because Korean players are driven by achievement and competition, F2P acquisition relies on demonstrating authentic, high-quality gameplay. An inbound rewarded playtime offerwall is the ideal way to monetize non-spending users, especially on Android, where casual ad monetization already accounts for 13.7% of total revenue ($18.8 million) and keeps expanding.</p>
           </RpPlay>
         </div>
       </section>
@@ -544,12 +544,12 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--cyan-d)' }}><div><h4>Live-Ops Breakouts</h4><p>Engagement rebounded on the back of massive domestic live-ops. Breakout titles like <em>SD Gundam G Generation ETERNAL</em> dominated domestic charts, generating exceptional revenue per day right at launch.</p></div></div>
           </div>
           <div className="chart-card-new rv">
-            <h4>Hybrid-Casual IAP vs IAA Revenue Share — Japan</h4>
+            <h4>Hybrid-Casual IAP vs IAA Revenue Share: Japan</h4>
             <div className="chart-subtitle">Top 1,000 games by downloads per genre (Source: Sensor Tower)</div>
             <JapanRevenueShareChart />
           </div>
           <RpPlay>
-            <p>Japanese users show low tolerance for disjointed, low-clarity ad creative. Outbound acquisition wins here when it uses deep performance milestones — reaching a complex meta-progression tier, for instance — that match the high-intensity preferences of the local player base.</p>
+            <p>Japanese users show low tolerance for disjointed, low-clarity ad creative. Outbound acquisition wins here when it uses deep performance milestones (reaching a complex meta-progression tier, for instance) that match the high-intensity preferences of the local player base.</p>
           </RpPlay>
         </div>
       </section>
@@ -567,12 +567,12 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--green)' }}><div><h4>Emerging Growth Vectors</h4><p>Strategy expanded its regional footprint with an $84 million revenue lift in 2025, alongside a steady $73 million increase across Puzzle sub-genres.</p></div></div>
           </div>
           <div className="chart-card-new rv">
-            <h4>Mobile Game Class Ad-Spend Share vs IAP Revenue Share — Brazil</h4>
+            <h4>Mobile Game Class Ad-Spend Share vs IAP Revenue Share: Brazil</h4>
             <div className="chart-subtitle">2025 (Source: Sensor Tower)</div>
             <BrazilAdVsIapChart />
           </div>
           <RpPlay>
-            <p>With direct cash-based IAP conversion sitting lower than in Tier-1 nations, inbound offerwall systems thrive across Latin America. Letting players download outbound advertiser titles to earn premium virtual currency in their core domestic game safely monetizes non-paying users&rsquo; time — without running into hard localized paywalls.</p>
+            <p>With direct cash-based IAP conversion sitting lower than in Tier-1 nations, inbound offerwall systems thrive across Latin America. Letting players download outbound advertiser titles to earn premium virtual currency in their core domestic game safely monetizes non-paying users&rsquo; time, without running into hard localized paywalls.</p>
           </RpPlay>
         </div>
       </section>
@@ -587,10 +587,10 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '8px' }}>
             <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--purple)' }}><div><h4>Geographic Variations</h4><p>In-app purchase health varies intensely by country. The United Kingdom strengthened its position markedly, France stayed entirely flat, and Germany ran into soft monetization headwinds.</p></div></div>
-            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--purple)' }}><div><h4>The European Genre Surge</h4><p>Europe posted the industry&rsquo;s biggest Puzzle gains, an outsized $706 million IAP lift — with <em>Royal Match</em> taking the top regional spot and <em>Gossip Harbor</em> the largest net uplift. Strategy also expanded by $629 million.</p></div></div>
+            <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--purple)' }}><div><h4>The European Genre Surge</h4><p>Europe posted the industry&rsquo;s biggest Puzzle gains, an outsized $706 million IAP lift, with <em>Royal Match</em> taking the top regional spot and <em>Gossip Harbor</em> the largest net uplift. Strategy also expanded by $629 million.</p></div></div>
           </div>
           <RpPlay>
-            <p>Because European casual portfolios face intense content fatigue, top publishers are testing sophisticated milestone-based events. Paid access to accumulated rewards — mini-passes without free tracks that build value through engagement — has delivered an average 18% release-revenue impact across European cohorts, aligning neatly with strict local data-privacy expectations.</p>
+            <p>Because European casual portfolios face intense content fatigue, top publishers are testing sophisticated milestone-based events. Paid access to accumulated rewards (mini-passes without free tracks that build value through engagement) has delivered an average 18% release-revenue impact across European cohorts, aligning neatly with strict local data-privacy expectations.</p>
           </RpPlay>
         </div>
       </section>
@@ -645,20 +645,20 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="ch-num" style={{ color: 'var(--purple)' }}>5.0</div>
             <h2>Mobile Gaming Trends &amp; Rewarded Playtime</h2>
             <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.8)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The rising importance of in-app purchases</p>
-            <div className="ch-desc">The market has officially shifted from chasing install volume to maximizing player value. With downloads softening, monetization now depends on capturing higher-value players who stay longer and spend more — which is why developers are prioritizing hybrid models that blend advertising, subscriptions, and IAPs without disrupting the experience.</div>
+            <div className="ch-desc">The market has officially shifted from chasing install volume to maximizing player value. With downloads softening, monetization now depends on capturing higher-value players who stay longer and spend more, which is why developers are prioritizing hybrid models that blend advertising, subscriptions, and IAPs without disrupting the experience.</div>
           </div>
         </section>
 
         <section className="sec sec-w">
           <div className="wrap rv">
             <p style={{ fontSize: '.92rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '780px', marginBottom: '20px' }}>
-              In-app purchases — from progression boosters to cosmetic items — remain the primary engine of revenue. Rewarded playtime feeds that engine directly by keeping players engaged long enough to form deep gameplay habits.
+              In-app purchases (from progression boosters to cosmetic items) remain the primary engine of revenue. Rewarded playtime feeds that engine directly by keeping players engaged long enough to form deep gameplay habits.
             </p>
             <div className="stat-callout rv" style={{ borderLeftColor: 'var(--purple)' }}>
               <div className="big-num" style={{ color: 'var(--purple)' }} data-count="5" data-suffix="x">0x</div>
               <div className="stat-body">
                 <h4>The 5&times; Conversion Rule</h4>
-                <p>Players who accumulate 600 minutes — 10 hours — of playtime during their first week are <strong style={{ color: 'var(--text)' }}>five times more likely</strong> to convert from free users into direct IAP spenders.</p>
+                <p>Players who accumulate 600 minutes (10 hours) of playtime during their first week are <strong style={{ color: 'var(--text)' }}>five times more likely</strong> to convert from free users into direct IAP spenders.</p>
               </div>
             </div>
           </div>
@@ -681,10 +681,10 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <span className="insight-badge">Diversification of Marketing Channels</span>
             <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.3rem', fontWeight: 700, marginBottom: '8px', color: 'var(--text)' }}>A crowded market needs a different channel</h3>
             <p style={{ fontSize: '.92rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '780px', marginBottom: '16px' }}>
-              With more than 84,000 active mobile game advertisers in the market — a 21.9% year-over-year surge — traditional methods have become crowded, expensive, and exposed to severe signal loss. Developers need alternative channels to attract and retain players efficiently.
+              With more than 84,000 active mobile game advertisers in the market (a 21.9% year-over-year surge), traditional methods have become crowded, expensive, and exposed to severe signal loss. Developers need alternative channels to attract and retain players efficiently.
             </p>
             <p style={{ fontSize: '.92rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '780px' }}>
-              Rewarded playtime offers a genuinely different approach. Rather than dropping users into random, disruptive placements between levels, it uses a game&rsquo;s own progression mechanics — backed by monetary rewards — to build a loyal base and create organic buzz. Players deliberately opt in from dedicated loyalty spaces with a clear intention to engage, which not only encourages high-intent players to start but securely scales their long-term retention and lifetime value.
+              Rewarded playtime offers a genuinely different approach. Rather than dropping users into random, disruptive placements between levels, it uses a game&rsquo;s own progression mechanics, backed by monetary rewards, to build a loyal base and create organic buzz. Players deliberately opt in from dedicated loyalty spaces with a clear intention to engage, which not only encourages high-intent players to start but securely scales their long-term retention and lifetime value.
             </p>
           </div>
         </section>
@@ -710,7 +710,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
                 <ul style={{ listStyle: 'none', padding: 0, margin: '12px 0 0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <li style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '18px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700 }}>&bull;</span>33% of spenders say they&rsquo;ll spend on an IAP deal too good to refuse, and 40% spend more when they receive personalized offers.</li>
                   <li style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '18px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700 }}>&bull;</span>79% of players take part in loyalty programs, and 51% spend more in-game in exchange for extra points or monetary rewards. <em>(Mistplay)</em></li>
-                  <li style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '18px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--green)', fontWeight: 700 }}>&bull;</span>In AppSamurai rewarded playtime campaigns, 76% of acquired players completed multiple in-game tasks — with a 24% uplift in D2 retention.</li>
+                  <li style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '18px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--green)', fontWeight: 700 }}>&bull;</span>In AppSamurai rewarded playtime campaigns, 76% of acquired players completed multiple in-game tasks, with a 24% uplift in D2 retention.</li>
                 </ul>
               </div>
               <div className="chart-card-new rv" style={{ margin: 0 }}>
@@ -761,12 +761,12 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
                 <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 3v18" /></svg></div>
                 <h4>Tiered Reward System</h4>
-                <p>Reward players incrementally — small gift cards or discounts for early levels, scaling to larger cash prizes and coupons at major milestones. Each tier creates a sense of progression that pulls players toward the next.</p>
+                <p>Reward players incrementally: small gift cards or discounts for early levels, scaling to larger cash prizes and coupons at major milestones. Each tier creates a sense of progression that pulls players toward the next.</p>
               </div>
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column' }}>
                 <div className="ic-icon" style={{ background: 'var(--yellow-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" fill="var(--yellow)" stroke="none" /></svg></div>
                 <h4>Reward Player Investment</h4>
-                <p>Match reward value to effort. Completing challenging levels, joining special events, or reaching specific milestones should trigger higher-tier payouts — so players feel their time and skill are genuinely recognized.</p>
+                <p>Match reward value to effort. Completing challenging levels, joining special events, or reaching specific milestones should trigger higher-tier payouts, so players feel their time and skill are genuinely recognized.</p>
               </div>
             </div>
           </div>
@@ -788,8 +788,8 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <h3 style={{ fontFamily: 'var(--font-h)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '16px', color: 'var(--text)' }}>Campaign Strategy Pillars</h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--yellow)' }}><div className="ic-icon" style={{ background: 'var(--yellow-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></div><div><h4>Campaign Goals &amp; Objectives</h4><p>Set specific, measurable goals up front. A retention campaign prioritizes rewards for daily logins and longer sessions; an IAP campaign offers incentives for purchases made during the campaign window.</p></div></div>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--yellow)' }}><div className="ic-icon" style={{ background: 'var(--yellow-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg></div><div><h4>Target Audience</h4><p>Combine demographics — age, location, spending habits — with behavioral signals like in-game preferences and progression. Newer players respond to small, frequent rewards; seasoned players prefer larger, milestone-based ones.</p></div></div>
-              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--yellow)' }}><div className="ic-icon" style={{ background: 'var(--yellow-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><path d="M12 2a10 10 0 1 0 10 10" /><path d="M22 5l-4 2 2 4" /><circle cx="12" cy="12" r="2" /></svg></div><div><h4>Reward Optimization</h4><p>A/B test reward types and values to find the balance that maximizes engagement and ROAS — digital gift cards versus cash-back, or small frequent rewards versus larger, less frequent ones.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--yellow)' }}><div className="ic-icon" style={{ background: 'var(--yellow-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg></div><div><h4>Target Audience</h4><p>Combine demographics (age, location, spending habits) with behavioral signals like in-game preferences and progression. Newer players respond to small, frequent rewards; seasoned players prefer larger, milestone-based ones.</p></div></div>
+              <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--yellow)' }}><div className="ic-icon" style={{ background: 'var(--yellow-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><path d="M12 2a10 10 0 1 0 10 10" /><path d="M22 5l-4 2 2 4" /><circle cx="12" cy="12" r="2" /></svg></div><div><h4>Reward Optimization</h4><p>A/B test reward types and values to find the balance that maximizes engagement and ROAS: digital gift cards versus cash-back, or small frequent rewards versus larger, less frequent ones.</p></div></div>
               <div className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--yellow)' }}><div className="ic-icon" style={{ background: 'var(--yellow-l)' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--yellow)' }}><path d="M3 3v18h18" /><path d="M7 16l4-6 4 4 5-8" /></svg></div><div><h4>Competitive Analysis</h4><p>Monitor competitor campaigns for reward strategies and player responses. If a rival offers high-value rewards behind a complex redemption flow, you can win by matching the value with a far simpler claim process.</p></div></div>
             </div>
           </div>
@@ -803,7 +803,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <div className="ch-num" style={{ color: 'var(--green)' }}>7.0</div>
             <h2>Measuring &amp; Analyzing Performance</h2>
             <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The five KPIs that matter</p>
-            <div className="ch-desc">Refining a rewarded playtime strategy means watching the right metrics continuously and acting on campaign data. Five KPIs reveal how players behave and whether a campaign is paying off — together they tell you what to optimize next.</div>
+            <div className="ch-desc">Refining a rewarded playtime strategy means watching the right metrics continuously and acting on campaign data. Five KPIs reveal how players behave and whether a campaign is paying off. Together they tell you what to optimize next.</div>
           </div>
         </section>
 

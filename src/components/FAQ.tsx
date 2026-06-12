@@ -105,7 +105,7 @@ export const DSP_FAQ = [
   },
   {
     question: 'How much does programmatic mobile advertising cost?',
-    answer: 'Programmatic CPMs vary by geography and vertical — typically $2-$8 for mid-tier inventory and $8-$20+ for premium placements. However, the real metric is cost per acquired user (CPI/CPA). With predictive bidding, programmatic campaigns often achieve 15-30% lower effective CPA than social platforms by targeting high-receptivity moments in independent apps.',
+    answer: 'Programmatic CPMs vary by geography and vertical, typically $2-$8 for mid-tier inventory and $8-$20+ for premium placements. However, the real metric is cost per acquired user (CPI/CPA). With predictive bidding, programmatic campaigns often achieve 15-30% lower effective CPA than social platforms by targeting high-receptivity moments in independent apps.',
   },
 ];
 
@@ -124,18 +124,18 @@ export const REWARDED_FAQ = [
   },
   {
     question: 'What LTV can you expect from Rewarded Playtime campaigns?',
-    answer: 'LTV varies by genre — hypercasual games typically see $5-$8 D90 LTV, casual/puzzle games $10-$15, and mid-core titles $15-$25+. The key differentiator is the 60-90 day reward window that extends engagement beyond the critical first-week churn period. Rewarded Playtime consistently delivers 2-3x the LTV of traditional incentivized installs across all genres.',
+    answer: 'LTV varies by genre: hypercasual games typically see $5-$8 D90 LTV, casual/puzzle games $10-$15, and mid-core titles $15-$25+. The key differentiator is the 60-90 day reward window that extends engagement beyond the critical first-week churn period. Rewarded Playtime consistently delivers 2-3x the LTV of traditional incentivized installs across all genres.',
   },
 ];
 
 export const OEM_FAQ = [
   {
     question: 'What is OEM user acquisition for mobile apps?',
-    answer: 'OEM (Original Equipment Manufacturer) user acquisition places your app directly on Android devices through partnerships with manufacturers like Samsung, Xiaomi, Oppo, and Vivo. Ads appear at system-level touchpoints — home screens, lock screens, setup wizards, and native app stores — reaching users before they even open the Google Play Store.',
+    answer: 'OEM (Original Equipment Manufacturer) user acquisition places your app directly on Android devices through partnerships with manufacturers like Samsung, Xiaomi, Oppo, and Vivo. Ads appear at system-level touchpoints (home screens, lock screens, setup wizards, and native app stores), reaching users before they even open the Google Play Store.',
   },
   {
     question: 'How do pre-loaded app installs (PAI) work?',
-    answer: 'Pre-loaded App Installs (PAI) bundle your app directly onto new devices at the factory level. When a user powers on their new phone, your app is already installed and ready to use. This format offers the highest reach and lowest friction of any UA channel — zero download required, zero app store competition, and the app appears alongside the device\'s core apps.',
+    answer: 'Pre-loaded App Installs (PAI) bundle your app directly onto new devices at the factory level. When a user powers on their new phone, your app is already installed and ready to use. This format offers the highest reach and lowest friction of any UA channel: zero download required, zero app store competition, and the app appears alongside the device\'s core apps.',
   },
   {
     question: 'Which Android OEM partners are available for advertising?',
@@ -154,7 +154,7 @@ export const ASA_FAQ = [
   },
   {
     question: 'What is a Custom Product Page on the App Store?',
-    answer: 'Custom Product Pages (CPPs) let you create up to 35 unique versions of your App Store listing, each with different screenshots, preview videos, and promotional text. When linked to specific ASA keyword groups, CPPs match search intent precisely — a user searching "puzzle games" sees puzzle-focused screenshots, while "multiplayer games" shows social gameplay. This relevance boost increases conversion rates by 20-40%.',
+    answer: 'Custom Product Pages (CPPs) let you create up to 35 unique versions of your App Store listing, each with different screenshots, preview videos, and promotional text. When linked to specific ASA keyword groups, CPPs match search intent precisely. A user searching "puzzle games" sees puzzle-focused screenshots, while "multiplayer games" shows social gameplay. This relevance boost increases conversion rates by 20-40%.',
   },
   {
     question: 'How do you defend brand keywords on the App Store?',
@@ -162,6 +162,6 @@ export const ASA_FAQ = [
   },
   {
     question: 'What is the ASA-ASO Halo Effect?',
-    answer: 'The Halo Effect is the phenomenon where running Apple Search Ads campaigns boosts your organic App Store rankings — even for keywords you\'re not bidding on. Increased paid visibility drives more installs, which Apple\'s algorithm interprets as growing popularity, lifting your organic position. Studies show a well-run ASA campaign can increase organic installs by 10-20% as a secondary benefit.',
+    answer: 'The Halo Effect is the phenomenon where running Apple Search Ads campaigns boosts your organic App Store rankings, even for keywords you\'re not bidding on. Increased paid visibility drives more installs, which Apple\'s algorithm interprets as growing popularity, lifting your organic position. Studies show a well-run ASA campaign can increase organic installs by 10-20% as a secondary benefit.',
   },
 ];

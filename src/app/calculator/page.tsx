@@ -499,7 +499,7 @@ export default function CalculatorPage() {
           <h1>Channel Mix &amp; ROI Calculator</h1>
           <p className="calc-hero-sub">
             Model your ideal channel allocation across Programmatic DSP, Rewarded Playtime,
-            OEM Discovery, and Apple Search Ads — with estimated CAC and ROAS benchmarks.
+            OEM Discovery, and Apple Search Ads, with estimated CAC and ROAS benchmarks.
           </p>
         </section>
 
@@ -863,7 +863,7 @@ export default function CalculatorPage() {
               </div>
               <div className="roas-indicator">
                 {results.roas >= 3 ? 'Excellent' : results.roas >= 2 ? 'Strong' : 'Moderate'}
-                {' '}&mdash;{' '}
+                {': '}
                 {results.roas >= 3
                   ? 'well above industry benchmarks'
                   : results.roas >= 2
@@ -967,7 +967,7 @@ export default function CalculatorPage() {
             {/* ── Budget Efficiency Curve ── */}
             <div className="result-card">
               <h3>Budget Efficiency Curve</h3>
-              <p className="chart-subtitle">ROAS at different budget levels — see where diminishing returns kick in</p>
+              <p className="chart-subtitle">ROAS at different budget levels. See where diminishing returns kick in</p>
               <div className="chart-container efficiency-container">
                 <Line
                   data={{
@@ -1040,7 +1040,7 @@ export default function CalculatorPage() {
             {results.paretoFrontier.length > 2 && (
               <div className="result-card">
                 <h3>Efficiency Frontier: CAC vs Installs</h3>
-                <p className="chart-subtitle">Non-dominated trade-offs — every point is optimal for its CAC level</p>
+                <p className="chart-subtitle">Non-dominated trade-offs: every point is optimal for its CAC level</p>
                 <div className="chart-container pareto-container">
                   <Scatter
                     data={{

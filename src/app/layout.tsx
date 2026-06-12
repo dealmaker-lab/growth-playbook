@@ -53,7 +53,7 @@ export const metadata: Metadata = {
         url: '/hero-bg.png',
         width: 1200,
         height: 630,
-        alt: 'AppSamurai Content Hub — Mobile Growth Resources',
+        alt: 'AppSamurai Content Hub: Mobile Growth Resources',
       },
     ],
   },

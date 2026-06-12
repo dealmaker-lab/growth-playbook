@@ -63,7 +63,7 @@ export default function KeywordInsights({ category }: KeywordInsightsProps) {
         </h4>
       </div>
       <p style={{ fontSize: '.82rem', color: '#666', marginBottom: '16px', lineHeight: 1.6 }}>
-        Real search volume data to inform your ASA keyword strategy. Focus budget on low-competition keywords first — they convert 2-3x better.
+        Real search volume data to inform your ASA keyword strategy. Focus budget on low-competition keywords first. They convert 2-3x better.
       </p>
 
       <div style={{ overflowX: 'auto' }}>
@@ -121,7 +121,7 @@ export default function KeywordInsights({ category }: KeywordInsightsProps) {
       </div>
 
       <div style={{ marginTop: '16px', padding: '12px 16px', background: '#fff', borderRadius: '8px', border: '1px solid #E8ECF1', fontSize: '.82rem', color: '#666', lineHeight: 1.6 }}>
-        <strong style={{ color: '#222' }}>&#128161; Tip:</strong> Focus your ASA budget on Low difficulty keywords first — they convert at 2-3x the rate of High competition terms. Feed winners into your ASO metadata for organic ranking.{' '}
+        <strong style={{ color: '#222' }}>&#128161; Tip:</strong> Focus your ASA budget on Low difficulty keywords first. They convert at 2-3x the rate of High competition terms. Feed winners into your ASO metadata for organic ranking.{' '}
         <Link href="/#ch4" style={{ color: 'var(--cyan)', fontWeight: 600, textDecoration: 'none' }}>
           Learn more in Chapter 4 &rarr;
         </Link>

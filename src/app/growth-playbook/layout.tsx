@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AppSamurai 2026 Mobile Growth Strategy Guide',
     description:
-      'The definitive strategy guide for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads — built for growth teams who need to scale smarter in 2026.',
+      'The definitive strategy guide for Rewarded Playtime, Programmatic DSP, OEM Discovery, and Apple Search Ads, built for growth teams who need to scale smarter in 2026.',
     type: 'article',
     publishedTime: '2026-01-15T00:00:00Z',
     modifiedTime: '2026-03-28T00:00:00Z',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
         url: '/hero-bg.png',
         width: 1200,
         height: 630,
-        alt: 'AppSamurai 2026 Mobile Growth Strategy Guide — DSP, Rewarded, OEM, ASA',
+        alt: 'AppSamurai 2026 Mobile Growth Strategy Guide: DSP, Rewarded, OEM, ASA',
       },
     ],
   },

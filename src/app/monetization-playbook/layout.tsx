@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Monetization Playbook for Casual & Hybrid Casual Games | AppSamurai',
     description:
-      'Revenue strategy, LiveOps, ad models, IAP, and emerging channels — the complete 2025–2026 monetization playbook for casual and hybrid casual game teams.',
+      'Revenue strategy, LiveOps, ad models, IAP, and emerging channels: the complete 2025–2026 monetization playbook for casual and hybrid casual game teams.',
     type: 'article',
     publishedTime: '2026-06-12T00:00:00Z',
     modifiedTime: '2026-06-12T00:00:00Z',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
         url: '/hero-bg.png',
         width: 1200,
         height: 630,
-        alt: 'Monetization Playbook for Casual & Hybrid Casual Games — AppSamurai',
+        alt: 'Monetization Playbook for Casual & Hybrid Casual Games by AppSamurai',
       },
     ],
   },

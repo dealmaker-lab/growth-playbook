@@ -68,7 +68,7 @@ export default function HubPage() {
           </h1>
           <p className="hub-hero-sub">
             Three strategy guides for mobile growth teams. Programmatic DSP,
-            Rewarded Playtime, OEM Discovery, and Apple Search Ads —
+            Rewarded Playtime, OEM Discovery, and Apple Search Ads, with
             frameworks and data from AppSamurai&rsquo;s work with 10,000+ apps.
           </p>
         </div>
