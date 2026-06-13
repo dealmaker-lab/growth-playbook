@@ -114,7 +114,7 @@ export function SectionChart({ sections }: { sections: SectionCount[] }) {
   }, []);
 
   const colors = [
-    '#26BE81',
+    '#2EC97E',
     '#af9cff',
     '#00c4c4',
     '#f4cb00',

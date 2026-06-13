@@ -126,15 +126,15 @@ const trendingStyles = `
   }
   .trending-badge {
     display: inline-block;
-    background: rgba(38,190,129,.08);
-    color: var(--green, #26BE81);
+    background: rgba(46,201,126,.08);
+    color: var(--green, #2EC97E);
     font-size: 11px;
     font-weight: 700;
     padding: 6px 16px;
     border-radius: 100px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    border: 1px solid rgba(38,190,129,.15);
+    border: 1px solid rgba(46,201,126,.15);
   }
   .trending-hint {
     font-size: .78rem;
@@ -159,13 +159,13 @@ const trendingStyles = `
     position: relative;
   }
   .trending-card:hover {
-    border-color: var(--green, #26BE81);
-    box-shadow: 0 4px 16px rgba(38,190,129,.08);
+    border-color: var(--green, #2EC97E);
+    box-shadow: 0 4px 16px rgba(46,201,126,.08);
     transform: translateY(-1px);
   }
   .trending-top {
-    border-color: rgba(38,190,129,.3);
-    background: rgba(38,190,129,.02);
+    border-color: rgba(46,201,126,.3);
+    background: rgba(46,201,126,.02);
   }
   .trending-rank {
     width: 32px;
@@ -178,7 +178,7 @@ const trendingStyles = `
     flex-shrink: 0;
   }
   .trending-top .trending-rank {
-    background: var(--green, #26BE81);
+    background: var(--green, #2EC97E);
   }
   .trending-top .trending-num {
     color: #fff;
@@ -206,15 +206,15 @@ const trendingStyles = `
   }
   .trending-bar-fill {
     height: 100%;
-    background: var(--green, #26BE81);
+    background: var(--green, #2EC97E);
     border-radius: 2px;
     transition: width .6s cubic-bezier(.22,1,.36,1);
   }
   .trending-fire {
     font-size: .68rem;
     font-weight: 700;
-    color: var(--green, #26BE81);
-    background: rgba(38,190,129,.08);
+    color: var(--green, #2EC97E);
+    background: rgba(46,201,126,.08);
     padding: 4px 10px;
     border-radius: 100px;
     text-transform: uppercase;

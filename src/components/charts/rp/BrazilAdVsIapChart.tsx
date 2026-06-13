@@ -19,7 +19,7 @@ const DATA = [
 
 const COLORS: Record<string, string> = {
   'Market Ad Spend Share': '#af9cff',
-  'Market IAP Revenue Share': '#26BE81',
+  'Market IAP Revenue Share': '#2EC97E',
 };
 
 export default function BrazilAdVsIapChart() {

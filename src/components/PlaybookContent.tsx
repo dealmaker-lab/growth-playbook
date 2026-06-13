@@ -31,9 +31,9 @@ import { useProgressBar } from '../hooks/useProgressBar';
 const ANALYTICS_SECTIONS = ['hero', 'toc', 'ch1', 'ch2', 'ch3', 'ch4', 'emailGate', 'about', 'calculatorTeaser'];
 
 const SIDE_NAV_SECTIONS = [
-  { id: 'hero', color: '#26BE81' },
-  { id: 'toc', color: '#26BE81' },
-  { id: 'ch1', color: '#26BE81' },
+  { id: 'hero', color: '#2EC97E' },
+  { id: 'toc', color: '#2EC97E' },
+  { id: 'ch1', color: '#2EC97E' },
   { id: 'ch2', color: '#af9cff' },
   { id: 'ch3', color: '#555' },
   { id: 'ch4', color: '#00f4f4' },
@@ -925,7 +925,7 @@ export default function PlaybookContent({
         {/* CALCULATOR CTA — "What's Next" after reading all 4 pillars */}
         <section className="sec sec-w rv" id="calculatorTeaser" style={{ padding: '56px 0' }}>
           <div className="wrap">
-            <div style={{ background: 'linear-gradient(135deg, #f0fdf6 0%, #e8f5ee 50%, #f0f4ff 100%)', border: '1px solid rgba(38,190,129,.15)', borderRadius: 'var(--r-lg)', padding: '48px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'center' }}>
+            <div style={{ background: 'linear-gradient(135deg, #f0fdf6 0%, #e8f5ee 50%, #f0f4ff 100%)', border: '1px solid rgba(46,201,126,.15)', borderRadius: 'var(--r-lg)', padding: '48px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'center' }}>
               <div>
                 <span className="insight-badge" style={{ marginBottom: '16px', display: 'inline-block' }}>Your Next Step</span>
                 <h3 style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1.4rem, 3vw, 1.8rem)', fontWeight: 800, marginBottom: '12px', color: 'var(--text)', lineHeight: 1.2 }}>
@@ -935,7 +935,7 @@ export default function PlaybookContent({
                   Combine all 4 pillars (DSP, Rewarded, OEM, and ASA) into a personalized budget allocation with estimated CAC and ROAS projections.
                 </p>
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '24px' }}>
-                  <span style={{ padding: '6px 14px', borderRadius: '20px', fontSize: '.75rem', fontWeight: 600, background: 'rgba(38,190,129,.08)', color: 'var(--green)', border: '1px solid rgba(38,190,129,.15)' }}>Programmatic DSP</span>
+                  <span style={{ padding: '6px 14px', borderRadius: '20px', fontSize: '.75rem', fontWeight: 600, background: 'rgba(46,201,126,.08)', color: 'var(--green)', border: '1px solid rgba(46,201,126,.15)' }}>Programmatic DSP</span>
                   <span style={{ padding: '6px 14px', borderRadius: '20px', fontSize: '.75rem', fontWeight: 600, background: 'rgba(175,156,255,.08)', color: 'var(--purple)', border: '1px solid rgba(175,156,255,.15)' }}>Rewarded Playtime</span>
                   <span style={{ padding: '6px 14px', borderRadius: '20px', fontSize: '.75rem', fontWeight: 600, background: 'rgba(85,85,85,.06)', color: '#555', border: '1px solid rgba(85,85,85,.12)' }}>OEM Discovery</span>
                   <span style={{ padding: '6px 14px', borderRadius: '20px', fontSize: '.75rem', fontWeight: 600, background: 'rgba(0,244,244,.06)', color: '#00b8b8', border: '1px solid rgba(0,244,244,.12)' }}>Apple Search Ads</span>

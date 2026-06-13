@@ -1,7 +1,7 @@
 'use client';
 import { useG2Chart } from '@/hooks/useG2Chart';
 
-const GRN = '#26BE81';
+const GRN = '#2EC97E';
 
 const data = [
   { year: '2022', value: 1.2, projected: false },
@@ -24,7 +24,7 @@ export default function ProgrammaticChart() {
         .encode('color', (d: { projected: boolean }) => (d.projected ? 'Projected' : 'Actual'))
         .scale('color', {
           domain: ['Actual', 'Projected'],
-          range: ['rgba(38,190,129,.4)', GRN],
+          range: ['rgba(46,201,126,.4)', GRN],
         })
         .axis('y', {
           labelFormatter: (v: number) => '$' + v + 'B',

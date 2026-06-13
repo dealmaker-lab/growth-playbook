@@ -23,7 +23,7 @@ const DATA = [
 
 const COLORS: Record<string, string> = {
   'Mid-Hardcore': '#8B7AE0',
-  'Casual': '#26BE81',
+  'Casual': '#2EC97E',
   'Hybrid-Casual': '#f4cb00',
   'Hyper-Casual': '#d4c5ff',
 };

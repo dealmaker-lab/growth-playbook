@@ -95,13 +95,13 @@ export default function KeywordInsights({ category }: KeywordInsightsProps) {
                       fontWeight: 600,
                       background:
                         kw.competition === 'LOW'
-                          ? 'rgba(38,190,129,.1)'
+                          ? 'rgba(46,201,126,.1)'
                           : kw.competition === 'HIGH'
                             ? 'rgba(248,113,113,.1)'
                             : 'rgba(244,203,0,.1)',
                       color:
                         kw.competition === 'LOW'
-                          ? '#26BE81'
+                          ? '#2EC97E'
                           : kw.competition === 'HIGH'
                             ? '#F87171'
                             : '#8B6914',

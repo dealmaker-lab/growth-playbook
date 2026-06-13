@@ -1,7 +1,7 @@
 'use client';
 import { useG2Chart } from '@/hooks/useG2Chart';
 
-const GRN = '#26BE81';
+const GRN = '#2EC97E';
 const DRK = '#2A2A3E';
 const PUR = '#af9cff';
 const GRY = '#B0B0B0';
@@ -43,7 +43,7 @@ export default function GenreChart() {
         .transform({ type: 'stackY' })
         .scale('color', {
           domain: ['Casual', 'Mid-core', 'Hybridcasual', 'Hypercasual', 'Other'],
-          range: [GRN, DRK, PUR, GRY, 'rgba(38,190,129,.5)'],
+          range: [GRN, DRK, PUR, GRY, 'rgba(46,201,126,.5)'],
         })
         .scale('y', { domain: [0, 100] })
         .axis('y', {

@@ -9,7 +9,7 @@ import { useG2Chart } from '@/hooks/useG2Chart';
 const DATA = [
   { genre: 'RPG', value: 3.17, label: '$3.17B (47%)', color: '#8B7AE0' },
   { genre: 'Strategy', value: 0.7166, label: '$716.6M', color: '#00c4c4' },
-  { genre: 'Casual', value: 0.2967, label: '$296.7M', color: '#26BE81' },
+  { genre: 'Casual', value: 0.2967, label: '$296.7M', color: '#2EC97E' },
 ];
 
 export default function KoreaRevenueByGenreChart() {

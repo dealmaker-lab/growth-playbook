@@ -20,7 +20,7 @@ const DATA = [
 
 const COLORS: Record<string, string> = {
   Ads: '#af9cff',
-  IAP: '#26BE81',
+  IAP: '#2EC97E',
 };
 
 export default function RevenueSplitChart() {

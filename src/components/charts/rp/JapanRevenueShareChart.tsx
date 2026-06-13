@@ -16,7 +16,7 @@ const DATA = [
 ];
 
 const COLORS: Record<string, string> = {
-  'In-App Purchase': '#26BE81',
+  'In-App Purchase': '#2EC97E',
   'In-App Advertising': '#af9cff',
 };
 

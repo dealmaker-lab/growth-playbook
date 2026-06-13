@@ -11,7 +11,7 @@ import { useG2Chart } from '@/hooks/useG2Chart';
 const MODELS = ['Casual', 'Mid-core', 'Hybridcasual', 'Hypercasual'] as const;
 
 const MODEL_COLORS: Record<string, string> = {
-  Casual: '#26BE81',
+  Casual: '#2EC97E',
   'Mid-core': '#b56bf2',
   Hybridcasual: '#6C8BF5',
   Hypercasual: '#F2876B',

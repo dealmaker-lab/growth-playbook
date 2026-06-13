@@ -17,7 +17,7 @@ export default function TapNationChart() {
         scale: {
           color: {
             domain: ['OEM Discovery', 'Programmatic', 'Organic Uplift'],
-            range: ['#af9cff', '#26BE81', '#B0B0B0'],
+            range: ['#af9cff', '#2EC97E', '#B0B0B0'],
           },
         },
         style: { stroke: '#fff', lineWidth: 2 },

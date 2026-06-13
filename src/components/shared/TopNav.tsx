@@ -14,7 +14,7 @@ export default function TopNav({ ebookLinks }: TopNavProps) {
     <>
       <nav className="top-nav" id="topNav" style={{ top: 0 }}>
         <a href="https://appsamurai.com" className="nav-logo" target="_blank" rel="noopener noreferrer">
-          <img src="/appsamurai-logo.png" alt="AppSamurai" style={{ height: '28px', width: 'auto' }} />
+          <img src="/appsamurai-logo.svg" alt="AppSamurai" style={{ height: '28px', width: 'auto' }} />
         </a>
         <div className="nav-right">
           {ebookLinks && ebookLinks.length > 0 && (

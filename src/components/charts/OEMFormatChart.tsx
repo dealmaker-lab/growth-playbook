@@ -1,7 +1,7 @@
 'use client';
 import { useG2Chart } from '@/hooks/useG2Chart';
 
-const GRN = '#26BE81';
+const GRN = '#2EC97E';
 const PUR = '#af9cff';
 const CYN = '#00f4f4';
 const YLW = '#F4CB00';

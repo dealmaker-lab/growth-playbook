@@ -29,7 +29,7 @@ export function useSideNav(sections: SideNavSection[]) {
             );
             if (a) {
               a.classList.add('active');
-              const c = colorMap[entry.target.id] || '#26BE81';
+              const c = colorMap[entry.target.id] || '#2EC97E';
               const dot = a.querySelector('.dot') as HTMLElement;
               if (dot) {
                 dot.style.background = c;

@@ -4,7 +4,7 @@ import { useG2Chart } from '@/hooks/useG2Chart';
 
 const DATA = [
   { type: 'In-App Advertising', value: 8.08, color: '#af9cff' },
-  { type: 'In-App Purchases', value: 8.84, color: '#26BE81' },
+  { type: 'In-App Purchases', value: 8.84, color: '#2EC97E' },
   { type: 'Paid Apps', value: 0.12, color: '#f48dff' },
 ];
 

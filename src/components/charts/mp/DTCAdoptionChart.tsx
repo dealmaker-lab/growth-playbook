@@ -10,7 +10,7 @@ import { useG2Chart } from '@/hooks/useG2Chart';
 const DATA = [
   { publisher: 'Dorian', value: 40, label: '40%+', detail: 'Grew from 10% to 40%+ in four months after launching web stores', color: '#f48dff' },
   { publisher: 'Stillfront Group', value: 39, label: '39%', detail: 'DTC reached 39% of net revenue in Q2 2025', color: '#af9cff' },
-  { publisher: 'Playtika', value: 25, label: '25%+', detail: '25%+ of revenue from web stores in 2025; targeting 40%', color: '#26BE81' },
+  { publisher: 'Playtika', value: 25, label: '25%+', detail: '25%+ of revenue from web stores in 2025; targeting 40%', color: '#2EC97E' },
   { publisher: 'MTG', value: 24, label: '24%', detail: 'DTC grew to 24% of total sales, up from 19% in 2024', color: '#00c4c4' },
 ];
 

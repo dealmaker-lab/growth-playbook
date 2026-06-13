@@ -115,7 +115,7 @@ const styles: Record<string, React.CSSProperties> = {
   btn: {
     width: '100%',
     padding: '12px',
-    background: '#26BE81',
+    background: '#2EC97E',
     color: '#fff',
     border: 'none',
     borderRadius: '10px',

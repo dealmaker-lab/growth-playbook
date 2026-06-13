@@ -25,12 +25,12 @@ const SIDE_NAV_SECTIONS = [
   { id: 'rp-hero', color: '#af9cff' },
   { id: 'rp-toc', color: '#af9cff' },
   { id: 'rp-ch1', color: '#af9cff' },
-  { id: 'rp-ch2', color: '#26BE81' },
+  { id: 'rp-ch2', color: '#2EC97E' },
   { id: 'rp-ch3', color: '#f4cb00' },
   { id: 'rp-ch4', color: '#00c4c4' },
   { id: 'rp-ch5', color: '#af9cff' },
   { id: 'rp-ch6', color: '#f4cb00' },
-  { id: 'rp-ch7', color: '#26BE81' },
+  { id: 'rp-ch7', color: '#2EC97E' },
 ];
 
 const SIDE_NAV_ITEMS = [

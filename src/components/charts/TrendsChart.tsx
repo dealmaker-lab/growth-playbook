@@ -2,7 +2,7 @@
 import { useRef, useEffect } from 'react';
 import { useG2Chart } from '@/hooks/useG2Chart';
 
-const GRN = '#26BE81';
+const GRN = '#2EC97E';
 const DRK = '#2A2A3E';
 const PUR = '#af9cff';
 const GRY = '#B0B0B0';

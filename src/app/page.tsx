@@ -20,7 +20,7 @@ const EBOOKS = [
       'The definitive strategy guide for Programmatic DSP, Rewarded Playtime, OEM Discovery, and Apple Search Ads. Data-backed frameworks and an interactive ROI calculator for growth teams.',
     chapters: 4,
     readTime: '25 min',
-    accentHex: '#26BE81',
+    accentHex: '#2EC97E',
     tags: ['DSP', 'Rewarded', 'OEM', 'ASA/ASO'],
     cover: '/covers/growth-playbook.png',
     newUntil: '2026-07-13', // 90 days from 2026-04-14

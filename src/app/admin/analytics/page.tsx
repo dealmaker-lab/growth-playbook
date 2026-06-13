@@ -167,7 +167,7 @@ export default async function AdminAnalyticsPage() {
 
       {/* Lead Stats Cards */}
       <section style={styles.cardRow}>
-        <StatCard label="Total Leads" value={stats.total} color="#26BE81" />
+        <StatCard label="Total Leads" value={stats.total} color="#2EC97E" />
         <StatCard label="This Week" value={stats.thisWeek} color="#af9cff" />
         <StatCard label="Today" value={stats.today} color="#00c4c4" />
       </section>
@@ -282,7 +282,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   backLink: {
     fontSize: '13px',
-    color: '#26BE81',
+    color: '#2EC97E',
     fontWeight: 600,
     textDecoration: 'none',
   },

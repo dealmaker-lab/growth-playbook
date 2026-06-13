@@ -5,7 +5,7 @@ const ALL_EBOOKS = [
     slug: 'growth-playbook',
     title: 'Mobile Growth Strategy Guide',
     description: 'DSP, Rewarded, OEM & ASA strategies for 2026.',
-    accentHex: '#26BE81',
+    accentHex: '#2EC97E',
   },
   {
     slug: 'rewarded-playtime',

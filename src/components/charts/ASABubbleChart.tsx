@@ -1,14 +1,14 @@
 'use client';
 import { useG2Chart } from '@/hooks/useG2Chart';
 
-const GRN = '#26BE81';
+const GRN = '#2EC97E';
 const PUR = '#af9cff';
 const CYN = '#00f4f4';
 const YLW = '#F4CB00';
 const GRY = '#B0B0B0';
 
 const data = [
-  { keyword: 'Brand', x: 85, y: 78, size: 18, fill: 'rgba(38,190,129,.6)', stroke: GRN },
+  { keyword: 'Brand', x: 85, y: 78, size: 18, fill: 'rgba(46,201,126,.6)', stroke: GRN },
   { keyword: 'Generic', x: 90, y: 25, size: 14, fill: 'rgba(175,156,255,.6)', stroke: PUR },
   {
     keyword: 'Competitor',
@@ -46,7 +46,7 @@ export default function ASABubbleChart() {
         .scale('color', {
           domain: ['Brand', 'Generic', 'Competitor', 'Long-tail', 'Discovery'],
           range: [
-            'rgba(38,190,129,.6)',
+            'rgba(46,201,126,.6)',
             'rgba(175,156,255,.6)',
             'rgba(0,244,244,.5)',
             'rgba(244,203,0,.5)',

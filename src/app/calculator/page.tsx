@@ -71,11 +71,11 @@ const DEFAULT_LTV: Record<Category, number> = {
 /* ── Palette ───────────────────────────────────────────────────────── */
 
 const COLORS = {
-  green: '#26BE81',
+  green: '#2EC97E',
   purple: '#af9cff',
   cyan: '#00c4c4',
   dark: '#1A1A2E',
-  greenHover: '#1DA367',
+  greenHover: '#23AD65',
   bgAlt: '#F5F7F9',
   border: '#E8ECF1',
   text: '#222222',
@@ -977,12 +977,12 @@ export default function CalculatorPage() {
                         label: 'Estimated ROAS',
                         data: results.efficiencyCurve.map((p) => p.roas),
                         borderColor: COLORS.green,
-                        backgroundColor: 'rgba(38,190,129,0.08)',
+                        backgroundColor: 'rgba(46,201,126,0.08)',
                         borderWidth: 2.5,
                         fill: true,
                         tension: 0.4,
                         pointBackgroundColor: results.efficiencyCurve.map((p) =>
-                          p.budget === budget ? COLORS.green : 'rgba(38,190,129,0.4)'
+                          p.budget === budget ? COLORS.green : 'rgba(46,201,126,0.4)'
                         ),
                         pointRadius: results.efficiencyCurve.map((p) =>
                           p.budget === budget ? 6 : 3
@@ -1220,7 +1220,7 @@ const styles = `
   }
   .calc-badge {
     display: inline-block;
-    background: rgba(38,190,129,.08);
+    background: rgba(46,201,126,.08);
     color: var(--green);
     font-size: 11px;
     font-weight: 700;
@@ -1229,7 +1229,7 @@ const styles = `
     letter-spacing: 1.2px;
     text-transform: uppercase;
     margin-bottom: 20px;
-    border: 1px solid rgba(38,190,129,.15);
+    border: 1px solid rgba(46,201,126,.15);
   }
   .calc-hero h1 {
     font-size: clamp(1.8rem, 4vw, 2.6rem);
@@ -1294,7 +1294,7 @@ const styles = `
   .step-dot.active {
     border-color: var(--green);
     color: var(--green);
-    box-shadow: 0 0 0 4px rgba(38,190,129,.1);
+    box-shadow: 0 0 0 4px rgba(46,201,126,.1);
   }
   .step-dot.done {
     border-color: var(--green);
@@ -1406,7 +1406,7 @@ const styles = `
     color: var(--green);
   }
   .chip.selected {
-    background: rgba(38,190,129,.08);
+    background: rgba(46,201,126,.08);
     border-color: var(--green);
     color: var(--green);
     font-weight: 600;
@@ -1513,12 +1513,12 @@ const styles = `
   }
   .goal-card:hover {
     border-color: var(--green);
-    background: rgba(38,190,129,.03);
+    background: rgba(46,201,126,.03);
   }
   .goal-card.selected {
     border-color: var(--green);
-    background: rgba(38,190,129,.06);
-    box-shadow: 0 0 0 3px rgba(38,190,129,.1);
+    background: rgba(46,201,126,.06);
+    box-shadow: 0 0 0 3px rgba(46,201,126,.1);
   }
   .goal-icon {
     font-size: 24px;
@@ -1555,7 +1555,7 @@ const styles = `
   .btn-next:hover, .btn-calculate:hover {
     background: var(--green-h);
     transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(38,190,129,.2);
+    box-shadow: 0 8px 24px rgba(46,201,126,.2);
   }
   .btn-next:disabled {
     opacity: .4;
@@ -1674,7 +1674,7 @@ const styles = `
     margin-bottom: 6px;
   }
   .roas-great { color: var(--green); }
-  .roas-good { color: #26BE81; }
+  .roas-good { color: #2EC97E; }
   .roas-ok { color: #f4cb00; }
   .roas-indicator {
     font-size: .88rem;
@@ -1807,7 +1807,7 @@ const styles = `
   .btn-cta:hover {
     background: var(--green-h);
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(38,190,129,.2);
+    box-shadow: 0 12px 32px rgba(46,201,126,.2);
   }
 
   /* Recalculate */
