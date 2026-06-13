@@ -182,9 +182,13 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 /* Chapter header with illustration: text left, art right (collapses on mobile via the .ch-head .wrap rule below) */
 .ch-head-art{display:grid;grid-template-columns:1fr minmax(0,380px);gap:40px;align-items:center}
 .ch-head-art .ch-bg-num{display:none}
-.ch-head-img{width:100%;max-width:380px;height:auto;justify-self:end;filter:drop-shadow(0 18px 36px rgba(50,50,93,.16));transition:transform .35s var(--ease),filter .35s var(--ease)}
-.ch-head-img:hover{transform:scale(1.05);filter:drop-shadow(0 28px 54px rgba(50,50,93,.26))}
-@media(prefers-reduced-motion:reduce){.ch-head-img{transition:none}.ch-head-img:hover{transform:none}}
+.ch-head-img{width:100%;max-width:380px;height:auto;justify-self:end;filter:drop-shadow(0 18px 36px rgba(50,50,93,.16))}
+/* Lift+zoom+shadow hover on EVERY chapter-header illustration — covers Rewarded's
+   .ch-head-img and the Growth guide's inline-styled mockups (both are direct
+   <img> in .ch-head .wrap), plus any figure tagged .illus-hover. */
+.ch-head .wrap img,.illus-hover{transition:transform .35s var(--ease),filter .35s var(--ease)}
+.ch-head .wrap img:hover,.illus-hover:hover{transform:scale(1.05);filter:drop-shadow(0 26px 52px rgba(50,50,93,.24))}
+@media(prefers-reduced-motion:reduce){.ch-head .wrap img,.illus-hover{transition:none}.ch-head .wrap img:hover,.illus-hover:hover{transform:none}}
 @media(max-width:768px){.ch-head .wrap{grid-template-columns:1fr!important}.ch-head .wrap img{max-width:240px!important;margin:16px auto 0}}
 
 /* === SECTIONS === */
