@@ -185,12 +185,15 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
       {/* ───────────────────────── CH 1: INTRODUCTION ───────────────────────── */}
       <hr className="divider purple" />
       <section className="ch-head ch-purple" id="rp-ch1">
-        <div className="wrap rv ch-enter-right" style={{ position: 'relative' }}>
+        <div className="wrap rv ch-enter-right ch-head-art" style={{ position: 'relative' }}>
           <span className="ch-bg-num">01</span>
-          <div className="ch-num" style={{ color: 'var(--purple)' }}>1.0</div>
-          <h2>The Mobile Gaming Landscape &amp; Rewarded Playtime</h2>
-          <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.8)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>From experimental tactic to foundational cornerstone</p>
-          <div className="ch-desc">Once treated as an experimental tactic, rewarded playtime has matured into a proven cornerstone of mobile user acquisition and retention. It runs on a simple psychological lever (positive reinforcement) that keeps players engaged in order to earn more.</div>
+          <div className="ch-head-copy">
+            <div className="ch-num" style={{ color: 'var(--purple)' }}>1.0</div>
+            <h2>The Mobile Gaming Landscape &amp; Rewarded Playtime</h2>
+            <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.8)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>From experimental tactic to foundational cornerstone</p>
+            <div className="ch-desc">Once treated as an experimental tactic, rewarded playtime has matured into a proven cornerstone of mobile user acquisition and retention. It runs on a simple psychological lever (positive reinforcement) that keeps players engaged in order to earn more.</div>
+          </div>
+          <img className="ch-head-img" src="/images/rp/ch1.webp" alt="Rewarded playtime in a merge-style mobile game with floating coin rewards" loading="lazy" width="880" height="880" />
         </div>
       </section>
 
@@ -253,12 +256,15 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
       {/* ───────────────────────── CH 2: HOW IT WORKS ───────────────────────── */}
       <hr className="divider green" />
       <section className="ch-head ch-green" id="rp-ch2">
-        <div className="wrap rv ch-enter-scale" style={{ position: 'relative' }}>
+        <div className="wrap rv ch-enter-scale ch-head-art" style={{ position: 'relative' }}>
           <span className="ch-bg-num">02</span>
-          <div className="ch-num" style={{ color: 'var(--green)' }}>2.0</div>
-          <h2>Rewarded Playtime: How It Works</h2>
-          <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The dual-value loop</p>
-          <div className="ch-desc">Rewarded playtime runs on a transparent value exchange: players receive a dual-value loop of real-world monetary rewards <em>and</em> premium in-game incentives, both scaled to the time and engagement they choose to give a game.</div>
+          <div className="ch-head-copy">
+            <div className="ch-num" style={{ color: 'var(--green)' }}>2.0</div>
+            <h2>Rewarded Playtime: How It Works</h2>
+            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The dual-value loop</p>
+            <div className="ch-desc">Rewarded playtime runs on a transparent value exchange: players receive a dual-value loop of real-world monetary rewards <em>and</em> premium in-game incentives, both scaled to the time and engagement they choose to give a game.</div>
+          </div>
+          <img className="ch-head-img" src="/images/rp/ch2.webp" alt="The AppsPrize rewarded playtime offerwall showing daily quests and cashback rewards" loading="lazy" width="880" height="880" />
         </div>
       </section>
 
@@ -377,12 +383,15 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
       {/* ───────────────────────── CH 3: GENRE LANDSCAPE ───────────────────────── */}
       <hr className="divider yellow" />
       <section className="ch-head" id="rp-ch3" style={{ borderTop: '4px solid var(--yellow)' }}>
-        <div className="wrap rv ch-enter-left" style={{ position: 'relative' }}>
+        <div className="wrap rv ch-enter-left ch-head-art" style={{ position: 'relative' }}>
           <span className="ch-bg-num">03</span>
-          <div className="ch-num" style={{ color: 'var(--yellow)' }}>3.0</div>
-          <h2>Genre-Specific Landscape &amp; Monetization Dynamics</h2>
-          <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Where rewarded playtime fits each genre</p>
-          <div className="ch-desc">The market has moved well past one-size-fits-all monetization. Today&rsquo;s games run complex, genre-specific hybrid models, and knowing how each genre earns is essential to deploying rewarded playtime as an acquisition and retention tool.</div>
+          <div className="ch-head-copy">
+            <div className="ch-num" style={{ color: 'var(--yellow)' }}>3.0</div>
+            <h2>Genre-Specific Landscape &amp; Monetization Dynamics</h2>
+            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Where rewarded playtime fits each genre</p>
+            <div className="ch-desc">The market has moved well past one-size-fits-all monetization. Today&rsquo;s games run complex, genre-specific hybrid models, and knowing how each genre earns is essential to deploying rewarded playtime as an acquisition and retention tool.</div>
+          </div>
+          <img className="ch-head-img" src="/images/rp/ch3.webp" alt="Popular casual, hybrid-casual, and mid-core mobile game icons" loading="lazy" width="880" height="880" />
         </div>
       </section>
 
@@ -451,12 +460,15 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
       {/* ───────────────────────── CH 4: REGIONAL LANDSCAPE ───────────────────────── */}
       <hr className="divider cyan" />
       <section className="ch-head" id="rp-ch4" style={{ borderTop: '4px solid var(--cyan)' }}>
-        <div className="wrap rv ch-enter-bottom" style={{ position: 'relative' }}>
+        <div className="wrap rv ch-enter-bottom ch-head-art" style={{ position: 'relative' }}>
           <span className="ch-bg-num">04</span>
-          <div className="ch-num" style={{ color: 'var(--cyan-d)' }}>4.0</div>
-          <h2>Regional Landscape: Global Monetization &amp; Reward Behaviors</h2>
-          <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Five markets, five very different playbooks</p>
-          <div className="ch-desc">Global downloads slipped 7% year over year to 50 billion in 2025, even as total in-app purchase revenue held steady at $82 billion. With volume softening, publishers are designing region-specific loops to capture higher LTV, and user-initiated formats like rewarded playtime and paid access to accumulated rewards have become a foundational way to offset rising ROAS friction.</div>
+          <div className="ch-head-copy">
+            <div className="ch-num" style={{ color: 'var(--cyan-d)' }}>4.0</div>
+            <h2>Regional Landscape: Global Monetization &amp; Reward Behaviors</h2>
+            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Five markets, five very different playbooks</p>
+            <div className="ch-desc">Global downloads slipped 7% year over year to 50 billion in 2025, even as total in-app purchase revenue held steady at $82 billion. With volume softening, publishers are designing region-specific loops to capture higher LTV, and user-initiated formats like rewarded playtime and paid access to accumulated rewards have become a foundational way to offset rising ROAS friction.</div>
+          </div>
+          <img className="ch-head-img" src="/images/rp/ch4.webp" alt="Global mobile game monetization and reward behavior across regions" loading="lazy" width="880" height="880" />
         </div>
       </section>
 
@@ -640,12 +652,15 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
         {/* ───────────────────────── CH 5: TRENDS & IAPs ───────────────────────── */}
         <hr className="divider purple" />
         <section className="ch-head ch-purple" id="rp-ch5">
-          <div className="wrap rv ch-enter-right" style={{ position: 'relative' }}>
+          <div className="wrap rv ch-enter-right ch-head-art" style={{ position: 'relative' }}>
             <span className="ch-bg-num">05</span>
-            <div className="ch-num" style={{ color: 'var(--purple)' }}>5.0</div>
-            <h2>Mobile Gaming Trends &amp; Rewarded Playtime</h2>
-            <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.8)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The rising importance of in-app purchases</p>
-            <div className="ch-desc">The market has officially shifted from chasing install volume to maximizing player value. With downloads softening, monetization now depends on capturing higher-value players who stay longer and spend more, which is why developers are prioritizing hybrid models that blend advertising, subscriptions, and IAPs without disrupting the experience.</div>
+            <div className="ch-head-copy">
+              <div className="ch-num" style={{ color: 'var(--purple)' }}>5.0</div>
+              <h2>Mobile Gaming Trends &amp; Rewarded Playtime</h2>
+              <p style={{ fontSize: '.85rem', color: 'rgba(175,156,255,.8)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The rising importance of in-app purchases</p>
+              <div className="ch-desc">The market has officially shifted from chasing install volume to maximizing player value. With downloads softening, monetization now depends on capturing higher-value players who stay longer and spend more, which is why developers are prioritizing hybrid models that blend advertising, subscriptions, and IAPs without disrupting the experience.</div>
+            </div>
+            <img className="ch-head-img" src="/images/rp/ch5.webp" alt="Mobile game analytics dashboard showing revenue and engagement trends" loading="lazy" width="657" height="880" />
           </div>
         </section>
 
@@ -741,12 +756,15 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
         {/* ───────────────────────── CH 6: BEST PRACTICES ───────────────────────── */}
         <hr className="divider yellow" />
         <section className="ch-head" id="rp-ch6" style={{ borderTop: '4px solid var(--yellow)' }}>
-          <div className="wrap rv ch-enter-left" style={{ position: 'relative' }}>
+          <div className="wrap rv ch-enter-left ch-head-art" style={{ position: 'relative' }}>
             <span className="ch-bg-num">06</span>
-            <div className="ch-num" style={{ color: 'var(--yellow)' }}>6.0</div>
-            <h2>Best Practices &amp; Campaign Strategy</h2>
-            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Designing rewarded playtime experiences</p>
-            <div className="ch-desc">A rewarded playtime campaign that performs needs three things: a reward experience designed around the player, clear goals, and continuous optimization of reward types, segments, and competitive positioning.</div>
+            <div className="ch-head-copy">
+              <div className="ch-num" style={{ color: 'var(--yellow)' }}>6.0</div>
+              <h2>Best Practices &amp; Campaign Strategy</h2>
+              <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Designing rewarded playtime experiences</p>
+              <div className="ch-desc">A rewarded playtime campaign that performs needs three things: a reward experience designed around the player, clear goals, and continuous optimization of reward types, segments, and competitive positioning.</div>
+            </div>
+            <img className="ch-head-img" src="/images/rp/ch6.webp" alt="AppsPrize onboarding screen: start earning every minute you play" loading="lazy" width="880" height="880" />
           </div>
         </section>
 
@@ -798,12 +816,15 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
         {/* ───────────────────────── CH 7: KPIs ───────────────────────── */}
         <hr className="divider green" />
         <section className="ch-head ch-green" id="rp-ch7">
-          <div className="wrap rv ch-enter-right" style={{ position: 'relative' }}>
+          <div className="wrap rv ch-enter-right ch-head-art" style={{ position: 'relative' }}>
             <span className="ch-bg-num">07</span>
-            <div className="ch-num" style={{ color: 'var(--green)' }}>7.0</div>
-            <h2>Measuring &amp; Analyzing Performance</h2>
-            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The five KPIs that matter</p>
-            <div className="ch-desc">Refining a rewarded playtime strategy means watching the right metrics continuously and acting on campaign data. Five KPIs reveal how players behave and whether a campaign is paying off. Together they tell you what to optimize next.</div>
+            <div className="ch-head-copy">
+              <div className="ch-num" style={{ color: 'var(--green)' }}>7.0</div>
+              <h2>Measuring &amp; Analyzing Performance</h2>
+              <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>The five KPIs that matter</p>
+              <div className="ch-desc">Refining a rewarded playtime strategy means watching the right metrics continuously and acting on campaign data. Five KPIs reveal how players behave and whether a campaign is paying off. Together they tell you what to optimize next.</div>
+            </div>
+            <img className="ch-head-img" src="/images/rp/ch7.webp" alt="Rewarded playtime performance metrics: eCPM, CTR, retention, and ARPDAU" loading="lazy" width="880" height="880" />
           </div>
         </section>
 

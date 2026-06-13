@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     authors: ['AppSamurai'],
     images: [
       {
-        url: '/hero-bg.png',
+        url: '/rewarded-playtime-og.png',
         width: 1200,
-        height: 630,
+        height: 600,
         alt: 'Rewarded Playtime in Mobile Gaming: AppSamurai Handbook',
       },
     ],
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Rewarded Playtime Handbook | AppSamurai',
     description: 'The complete guide to rewarded playtime for mobile game publishers.',
-    images: ['/hero-bg.png'],
+    images: ['/rewarded-playtime-og.png'],
   },
 };
 
@@ -50,7 +50,7 @@ const structuredData = {
   dateModified: '2026-06-03',
   description:
     'Complete 2025 handbook on rewarded playtime in mobile gaming: the dual-value model, genre-specific monetization, regional landscape across the US, South Korea, Japan, Brazil and Europe, campaign strategy, and KPI measurement.',
-  image: `${BASE_URL}${basePath}/hero-bg.png`,
+  image: `${BASE_URL}${basePath}/rewarded-playtime-og.png`,
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}${basePath}/rewarded-playtime` },
   articleSection: ['Rewarded Playtime', 'Mobile Gaming', 'Regional Monetization', 'Campaign Strategy', 'KPIs'],
   keywords: 'rewarded playtime, offerwall ads, mobile game monetization 2025, play to earn mobile games, rewarded ads mobile gaming, casual game user acquisition, hybrid-casual monetization, in-app purchase optimization, player retention strategies, ARPDAU optimization, mobile game KPIs, South Korea mobile gaming, Japan mobile gaming RPG, Brazil mobile ad monetization, Europe mobile IAP',
