@@ -391,7 +391,7 @@ export default function PlaybookContent({
           {/* iOS — image left, text right */}
           <div className="creative-card">
             <div style={{ textAlign: 'center' }}>
-              <img src="/ios-android-age-1.png" alt="iOS Creative Playbook: sound-off design, close-up shots, gameplay focus" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
+              <img className="illus-hover" src="/ios-android-age-1.png" alt="iOS Creative Playbook: sound-off design, close-up shots, gameplay focus" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
@@ -408,7 +408,7 @@ export default function PlaybookContent({
           {/* Android — image left, text right */}
           <div className="creative-card">
             <div style={{ textAlign: 'center' }}>
-              <img src="/ios-android-age-2.png" alt="Android Creative Playbook: split-screen gameplay, multiple scenes, falling coins" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
+              <img className="illus-hover" src="/ios-android-age-2.png" alt="Android Creative Playbook: split-screen gameplay, multiple scenes, falling coins" loading="lazy" style={{ maxWidth: '100%', maxHeight: '340px', borderRadius: '12px', objectFit: 'contain' }} />
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
@@ -468,7 +468,7 @@ export default function PlaybookContent({
       <section className="sec sec-w">
         <div className="wrap rv" style={{ textAlign: 'center' }}>
           <a href="https://appsamurai.com/contact-us/" target="_blank" rel="noopener noreferrer" style={{ display: 'block' }}>
-            <img src="/paycell-banner.png" alt="Paycell Case Study: 32% MAU increase, +120K users, 49% QR payment increase with AppSamurai DSP" loading="lazy" style={{ width: '100%', maxWidth: '900px', borderRadius: '16px', margin: '0 auto', display: 'block', cursor: 'pointer' }} />
+            <img className="illus-hover" src="/paycell-banner.png" alt="Paycell Case Study: 32% MAU increase, +120K users, 49% QR payment increase with AppSamurai DSP" loading="lazy" style={{ width: '100%', maxWidth: '900px', borderRadius: '16px', margin: '0 auto', display: 'block', cursor: 'pointer' }} />
           </a>
         </div>
       </section>
@@ -613,7 +613,7 @@ export default function PlaybookContent({
             <a href="https://appsamurai.com/roas/" target="_blank" rel="noopener noreferrer"
                style={{ display: 'block', borderRadius: 16, overflow: 'hidden', textDecoration: 'none', transition: 'box-shadow 0.3s' }}
                onClick={() => trackEvent('cta_click', 'roas_banner', { destination: 'roas' })}>
-              <img src="/images/roas-forecaster-cta.png" alt="What's Your Rewarded UA Potential? Try our ROAS Forecaster. Estimate returns before you invest." style={{ width: '100%', display: 'block', borderRadius: 16 }} />
+              <img className="illus-hover" src="/images/roas-forecaster-cta.png" alt="What's Your Rewarded UA Potential? Try our ROAS Forecaster. Estimate returns before you invest." style={{ width: '100%', display: 'block', borderRadius: 16 }} />
             </a>
           </div>
         </section>
@@ -685,9 +685,9 @@ export default function PlaybookContent({
               <div className="info-card" style={{ margin: 0, borderTop: '3px solid var(--ch2)', flexDirection: 'column' }}><div className="ic-icon" style={{ background: 'var(--purple-l)', marginBottom: '8px' }}><svg viewBox="0 0 24 24" style={{ stroke: 'var(--purple)' }}><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="10" cy="14" r="2"/><circle cx="14" cy="14" r="2"/><circle cx="12" cy="10" r="2"/></svg></div><h4>Visual &amp; Interactive Appeal</h4><p>A visually engaging way to discover new content, ensuring positive UX and greater attachment to both the advertised game and the host app.</p></div>
             </div>
             <div className="rv" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginTop: '24px' }}>
-              <img src="/images/appsprize-1.png" alt="AppsPrize rewards experience" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--border)' }} />
-              <img src="/images/appsprize-2.png" alt="AppsPrize engagement interface" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--border)' }} />
-              <img src="/images/appsprize-3.png" alt="AppsPrize monetization dashboard" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--border)' }} />
+              <img className="illus-hover" src="/images/appsprize-1.png" alt="AppsPrize rewards experience" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--border)' }} />
+              <img className="illus-hover" src="/images/appsprize-2.png" alt="AppsPrize engagement interface" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--border)' }} />
+              <img className="illus-hover" src="/images/appsprize-3.png" alt="AppsPrize monetization dashboard" style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--border)' }} />
             </div>
           </div>
         </section>
@@ -809,7 +809,7 @@ export default function PlaybookContent({
         <section className="sec sec-w">
           <div className="wrap">
             <a href="https://appsamurai.com/contact-us/" target="_blank" rel="noopener noreferrer" style={{ display: 'block', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)' }} onClick={() => trackEvent('cta_click', 'tapnation_case_study', { destination: 'contact' })}>
-              <img src="/images/tapnation-case-study.png" alt="TapNation Case Study. Achieved ROAS+ with OEM Strategies: 1.7 Million loyal new users acquired, 116% ROAS" style={{ width: '100%', display: 'block', cursor: 'pointer' }} />
+              <img className="illus-hover" src="/images/tapnation-case-study.png" alt="TapNation Case Study. Achieved ROAS+ with OEM Strategies: 1.7 Million loyal new users acquired, 116% ROAS" style={{ width: '100%', display: 'block', cursor: 'pointer' }} />
             </a>
           </div>
         </section>
