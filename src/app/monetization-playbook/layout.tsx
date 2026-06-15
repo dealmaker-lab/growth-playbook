@@ -49,11 +49,11 @@ const structuredData = {
   datePublished: '2026-06-12',
   dateModified: '2026-06-12',
   description:
-    'A 2025–2026 field guide to revenue strategy for casual and hybrid casual mobile games: the monetization stack (IAA, IAP, subscriptions, battle passes), LiveOps, direct-to-consumer web stores, retention frameworks, rewarded user acquisition, and success benchmarks.',
+    'A 2025–2026 field guide to revenue strategy for casual and hybrid casual mobile games: the monetization stack (IAA, IAP, subscriptions, battle passes), LiveOps, direct-to-consumer web stores, retention frameworks, the offerwall as a monetization layer, and success benchmarks.',
   image: `${BASE_URL}${basePath}/hero-bg.png`,
   mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}${basePath}/monetization-playbook` },
-  articleSection: ['Monetization', 'LiveOps', 'In-App Purchases', 'Direct-to-Consumer', 'Retention', 'User Acquisition'],
-  keywords: 'mobile game monetization playbook, hybrid casual monetization, casual game revenue strategy, in-app purchase optimization, LiveOps calendar, battle pass design, mobile game subscriptions, direct to consumer web store games, DTC mobile gaming, rewarded playtime campaigns, rewarded engagement, mobile game retention benchmarks, ARPDAU LTV ROAS benchmarks, hybrid monetization 2025 2026',
+  articleSection: ['Monetization', 'LiveOps', 'In-App Purchases', 'Direct-to-Consumer', 'Retention', 'Offerwall'],
+  keywords: 'mobile game monetization playbook, hybrid casual monetization, casual game revenue strategy, in-app purchase optimization, LiveOps calendar, battle pass design, mobile game subscriptions, direct to consumer web store games, DTC mobile gaming, offerwall monetization, offerwall for mobile games, rewarded playtime offerwall, premium currency monetization, non-payer monetization, mobile game retention benchmarks, ARPDAU LTV ROAS benchmarks, hybrid monetization 2025 2026',
 };
 
 export default function MonetizationPlaybookLayout({

@@ -42,7 +42,7 @@ const SIDE_NAV_ITEMS = [
   { id: 'mp-ch4', label: 'LiveOps' },
   { id: 'mp-ch5', label: 'DTC' },
   { id: 'mp-ch6', label: 'Retention' },
-  { id: 'mp-ch7', label: 'UA' },
+  { id: 'mp-ch7', label: 'Offerwall' },
   { id: 'mp-ch8', label: 'Principles' },
   { id: 'mp-ch9', label: 'Metrics' },
   { id: 'mp-ch10', label: 'Takeaways' },
@@ -189,7 +189,7 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
             <a href="#mp-ch4" className="toc-card rv" style={{ borderLeftColor: 'var(--cyan)' }}><div className="toc-num" style={{ color: 'var(--cyan-d)' }}>04</div><h3>LiveOps</h3><p>The engine of long-term revenue: calendars, core-loop alignment, and AI personalization.</p></a>
             <a href="#mp-ch5" className="toc-card rv" style={{ borderLeftColor: 'var(--pink)' }}><div className="toc-num" style={{ color: 'var(--pink)' }}>05</div><h3>Direct-to-Consumer</h3><p>The emerging revenue frontier: web stores, platform-fee bypass, and adoption data.</p></a>
             <a href="#mp-ch6" className="toc-card rv" style={{ borderLeftColor: 'var(--purple)' }}><div className="toc-num" style={{ color: 'var(--purple)' }}>06</div><h3>Retention</h3><p>The foundation of all monetization: benchmarks, design elements, and KPIs.</p></a>
-            <a href="#mp-ch7" className="toc-card rv" style={{ borderLeftColor: 'var(--yellow)' }}><div className="toc-num" style={{ color: 'var(--yellow)' }}>07</div><h3>User Acquisition</h3><p>Post-ATT UA, rewarded playtime and engagement campaigns, and creative strategy.</p></a>
+            <a href="#mp-ch7" className="toc-card rv" style={{ borderLeftColor: 'var(--yellow)' }}><div className="toc-num" style={{ color: 'var(--yellow)' }}>07</div><h3>The Offerwall</h3><p>The offerwall as a monetization layer: inbound economy optimization, the three-way value exchange, and benefits for casual and hybrid casual games.</p></a>
             <a href="#mp-ch8" className="toc-card rv" style={{ borderLeftColor: 'var(--green)' }}><div className="toc-num" style={{ color: 'var(--green)' }}>08</div><h3>Design Principles</h3><p>Day-one monetization design, the 95/5 rule, experience balance, and localization.</p></a>
             <a href="#mp-ch9" className="toc-card rv" style={{ borderLeftColor: 'var(--cyan)' }}><div className="toc-num" style={{ color: 'var(--cyan-d)' }}>09</div><h3>Metrics &amp; Benchmarks</h3><p>The signal system for monetization health, with target ranges per metric.</p></a>
             <a href="#mp-ch10" className="toc-card rv" style={{ borderLeftColor: 'var(--pink)' }}><div className="toc-num" style={{ color: 'var(--pink)' }}>10</div><h3>Key Takeaways</h3><p>Seven foundational principles for monetizing casual and hybrid casual games.</p></a>
@@ -750,31 +750,57 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
           <div className="wrap rv ch-enter-right" style={{ position: 'relative' }}>
             <span className="ch-bg-num">07</span>
             <div className="ch-num" style={{ color: 'var(--yellow)' }}>7.0</div>
-            <h2>User Acquisition in a Hybrid Monetization World</h2>
-            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>From volume acquisition to quality acquisition</p>
-            <div className="ch-desc">ATT fundamentally rewired the economics of mobile game UA. With reduced IDFA availability and degraded targeting signals, CPI rose while conversion signals turned noisier. The industry&rsquo;s answer: shift investment from volume to quality, targeting players with higher predicted LTV rather than maximizing raw install counts.</div>
+            <h2>The Offerwall as a Monetization Layer</h2>
+            <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '4px', fontStyle: 'italic' }}>Turning the non-paying majority into a revenue stream</p>
+            <div className="ch-desc">One of the most underutilized monetization tools in casual and hybrid casual games is the embedded offerwall: a rewarded architecture that turns your game into a host for partner tasks and apps, generating premium currency for players and a diversified ad-revenue stream for you.</div>
           </div>
         </section>
 
         <section className="sec sec-w">
           <div className="wrap rv">
-            <p style={{ fontSize: '.92rem', color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: '780px', marginBottom: '24px' }}>
-              Hybrid casual games benefit from this environment on two fronts: they generate richer creative assets than hyper-casual titles, and their longer retention curves allow more time for retargeting, push-notification re-engagement, and upsell campaigns.
+            <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1rem', fontWeight: 700, margin: '0 0 12px', color: 'var(--text)' }}>7.1 Inbound Economy Optimization</h4>
+
+            <h5 style={{ fontFamily: 'var(--font-h)', fontSize: '.95rem', fontWeight: 700, margin: '18px 0 6px', color: 'var(--text)' }}>How It Works</h5>
+            <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '820px', marginBottom: '12px' }}>
+              You integrate a rewarded playtime offerwall directly into your game&rsquo;s UI, typically accessible from a dedicated panel in the main hub or currency store. Active players open the panel, browse a curated list of partner apps or tasks (try this app for 10 minutes, reach level 5 in another game, complete a survey), and opt in on their own terms. When they complete a task, they receive your in-game premium currency as a reward.
             </p>
-            <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1rem', fontWeight: 700, margin: '0 0 8px', color: 'var(--text)' }}>7.2 Rewarded Playtime Campaigns</h4>
-            <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '780px', marginBottom: '12px' }}>
-              Rewarded Playtime (also called play-to-earn) campaigns reward players with coins, points, or real-world value (gift cards, in-app currency) based on the time they spend in the game. The model is particularly effective for casual and hybrid casual titles because:
+
+            <h5 style={{ fontFamily: 'var(--font-h)', fontSize: '.95rem', fontWeight: 700, margin: '20px 0 6px', color: 'var(--text)' }}>Why This Is a Monetization Strategy, Not Just an Ad Format</h5>
+            <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '820px', marginBottom: '12px' }}>
+              The offerwall operates differently from standard ad units. Rather than interrupting gameplay, it creates a voluntary, player-initiated economy where non-paying players can earn premium content through engagement. This achieves something few other monetization tools can: it converts the non-paying majority into active contributors to your revenue without charging them a cent.
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '20px' }}>
-              {[
-                'It incentivizes longer sessions, which increases ad revenue and IAP probability',
-                'It improves retention metrics (D7, D30) as players return to accumulate rewards',
-                'It does not require developers to create new ad creatives: assets can be taken from the Play Store listing',
-                'It attracts a highly motivated player segment already inclined to engage deeply',
-              ].map((s) => (
-                <div key={s} className="info-card" style={{ margin: 0, borderLeft: '3px solid var(--yellow)' }}><div><p style={{ fontSize: '.85rem' }}>{s}</p></div></div>
-              ))}
+
+            <h5 style={{ fontFamily: 'var(--font-h)', fontSize: '.95rem', fontWeight: 700, margin: '20px 0 6px', color: 'var(--text)' }}>Strategic Value at a Glance</h5>
+            <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '820px', marginBottom: '12px' }}>
+              Instead of disruptive video ads or a hard paywall, players earn your premium currency for free by completing partner tasks. It bridges non-payers to premium content and adds a diversified ad-revenue stream without hurting retention.
+            </p>
+
+            <h5 style={{ fontFamily: 'var(--font-h)', fontSize: '.95rem', fontWeight: 700, margin: '20px 0 8px', color: 'var(--text)' }}>The Three-Way Value Exchange</h5>
+            <div className="table-scroll">
+              <table className="infographic-table">
+                <thead>
+                  <tr><th>Stakeholder</th><th>What They Give</th><th>What They Get</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Your Player</td><td>Time spent in a partner app or task</td><td>Free premium currency, with no purchase required</td></tr>
+                  <tr><td>You (the Developer)</td><td>Panel real estate in your UI</td><td>Ad revenue per completed task, improved retention, and non-payer monetization</td></tr>
+                  <tr><td>Offerwall Partner</td><td>Revenue share per completed task</td><td>Engaged, motivated users who self-selected into the offer</td></tr>
+                </tbody>
+              </table>
             </div>
+
+            <h5 style={{ fontFamily: 'var(--font-h)', fontSize: '.95rem', fontWeight: 700, margin: '24px 0 8px', color: 'var(--text)' }}>Monetization Benefits for Casual &amp; Hybrid Casual Games</h5>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 4px', display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: '860px' }}>
+              {[
+                ['Bridges non-payers to premium content', 'Players who would never make a direct purchase can now access premium tiers, boosters, or battle pass rewards through earned currency.'],
+                ['Diversifies ad revenue without disruption', 'Offerwall revenue is additive to your existing ad stack; it does not replace rewarded video but complements it.'],
+                ['Improves D7 and D30 retention', 'Players with an active currency-earning goal return more frequently to collect and spend their rewards.'],
+                ['Reduces paywall friction', 'A player who has earned 400 gems via the offerwall is far more likely to top up with a small IAP to reach a threshold than a player who has never engaged with premium currency.'],
+                ['No new creative assets required', 'Your Play Store listing, screenshots, and gameplay clips are enough for partners to list your game on their offerwalls in return.'],
+              ].map(([t, d]) => (
+                <li key={t} style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '18px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--yellow)', fontWeight: 700 }}>&bull;</span><strong style={{ color: 'var(--text)' }}>{t}:</strong> {d}</li>
+              ))}
+            </ul>
           </div>
         </section>
 
@@ -787,44 +813,6 @@ export default function MonetizationPlaybookContent({ initialUnlocked }: Monetiz
               <p className="quote-attr">Ryan Chadwick, Senior Marketing Analyst at Tripledot Studios</p>
             </div>
           </div></div>
-        </section>
-
-        <section className="sec sec-w">
-          <div className="wrap rv">
-            <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1rem', fontWeight: 700, margin: '0 0 8px', color: 'var(--text)' }}>7.3 Rewarded Engagement Campaigns</h4>
-            <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '780px', marginBottom: '12px' }}>
-              Rewarded Engagement campaigns reward players for completing specific in-game tasks and milestones: reaching a level, completing a challenge, unlocking a character. The advantages:
-            </p>
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: '780px' }}>
-              {[
-                'Fully player-initiated, with no forced interruptions. Players engage on their own terms',
-                'A conversion-based structure that delivers ROAS-positive results',
-                'Significantly higher ARPU, as players spend more time interacting with ad content',
-                'Stronger player attachment through achievement reinforcement',
-                'Higher IAP conversion: engaged players are markedly more likely to purchase',
-              ].map((s) => (
-                <li key={s} style={{ fontSize: '.88rem', color: 'var(--text-muted)', lineHeight: 1.6, paddingLeft: '18px', position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--yellow)', fontWeight: 700 }}>&bull;</span>{s}</li>
-              ))}
-            </ul>
-            <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1rem', fontWeight: 700, margin: '0 0 8px', color: 'var(--text)' }}>7.4 Creative Strategy for Hybrid Casual UA</h4>
-            <p style={{ fontSize: '.9rem', color: 'var(--text-muted)', lineHeight: 1.7, maxWidth: '780px', marginBottom: '12px' }}>
-              Hybrid casual games hold a structural advantage in creative production: their meta layers provide the narrative and visual richness that compelling ad creatives are made of.
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '12px' }}>
-              {[
-                ['Puzzle / challenge mechanics', '“Can you solve this?” hooks with immediate interactivity'],
-                ['Narrative curiosity', '“What happens next?” story teasers'],
-                ['Meta-layer showcases', 'Decorating, building, and customization in action'],
-                ['Live-action & dramatic ads', 'Merge Mansion’s theatrical approach is the benchmark'],
-                ['Playable ads', 'Show the core mechanic instantly. Players self-select based on genuine interest'],
-              ].map(([t, d]) => (
-                <div key={t} className="info-card" style={{ margin: 0, borderTop: '3px solid var(--yellow)', flexDirection: 'column', padding: '18px 16px' }}>
-                  <h4 style={{ fontSize: '.85rem' }}>{t}</h4>
-                  <p style={{ fontSize: '.78rem' }}>{d}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </section>
 
         {/* ───────────── CH 8: DESIGN PRINCIPLES ───────────── */}
