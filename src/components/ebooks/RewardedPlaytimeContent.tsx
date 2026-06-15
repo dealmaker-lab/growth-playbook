@@ -115,14 +115,14 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
       <SideNav sections={SIDE_NAV_ITEMS} />
 
       {/* HERO */}
-      <div className="hero-wrap" style={{ background: 'linear-gradient(180deg, #1A1A2E 0%, #2d1b69 50%, #1A1A2E 100%)' }}>
-        <section className="hero hero-dark" id="rp-hero" style={{ minHeight: '70vh' }}>
-          <div className="rv" style={{ textAlign: 'center' }}>
-            <span className="hero-badge" style={{ background: 'rgba(175,156,255,.15)', color: '#af9cff', border: '1px solid rgba(175,156,255,.3)' }}>AppSamurai Handbook</span>
-            <h1 style={{ color: '#fff' }}>
-              Rewarded <em style={{ fontStyle: 'normal', color: '#af9cff' }}>Playtime</em>
+      <div className="hero-wrap" style={{ background: '#F5F7F9 url(/rp-hero-bg.png) center center / cover no-repeat' }}>
+        <section className="hero" id="rp-hero">
+          <div className="rv" style={{ textAlign: 'center', background: 'radial-gradient(ellipse 60% 72% at 50% 50%, rgba(245,247,249,.97) 0%, rgba(245,247,249,.9) 48%, rgba(245,247,249,.5) 74%, transparent 100%)' }}>
+            <span className="hero-badge" style={{ background: 'rgba(124,92,255,.1)', color: '#7c5cff', border: '1px solid rgba(124,92,255,.28)' }}>AppSamurai Handbook</span>
+            <h1>
+              Rewarded <em style={{ fontStyle: 'normal', color: '#7c5cff' }}>Playtime</em>
             </h1>
-            <p style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1rem,2vw,1.3rem)', fontWeight: 600, marginBottom: '16px', letterSpacing: '-.01em' }}>
+            <p style={{ fontFamily: 'var(--font-h)', fontSize: 'clamp(1rem,2vw,1.3rem)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px', letterSpacing: '-.01em' }}>
               Engage, Retain, Monetize in Mobile Gaming
             </p>
             <p className="hero-sub">
