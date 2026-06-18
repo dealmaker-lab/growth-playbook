@@ -160,28 +160,32 @@ export default function MonetizationPlaybookContent({
       <div
         className="hero-wrap"
         style={{
-          background: "linear-gradient(180deg, #2a0845 0%, #1A1A2E 100%)",
+          background:
+            "#F5F7F9 url(/mon-hero-bg.png) center center / cover no-repeat",
         }}
       >
-        <section
-          className="hero hero-dark"
-          id="mp-hero"
-          style={{ minHeight: "70vh" }}
-        >
-          <div className="rv" style={{ textAlign: "center" }}>
+        <section className="hero" id="mp-hero" style={{ minHeight: "70vh" }}>
+          <div
+            className="rv"
+            style={{
+              textAlign: "center",
+              background:
+                "radial-gradient(ellipse 62% 80% at 50% 50%, rgba(245,247,249,.97) 0%, rgba(245,247,249,.9) 50%, rgba(245,247,249,.5) 76%, transparent 100%)",
+            }}
+          >
             <span
               className="hero-badge"
               style={{
-                background: "rgba(244,141,255,.15)",
-                color: "#f48dff",
-                border: "1px solid rgba(244,141,255,.3)",
+                background: "rgba(212,76,224,.1)",
+                color: "#d44ce0",
+                border: "1px solid rgba(212,76,224,.28)",
               }}
             >
               AppSamurai for Games
             </span>
-            <h1 style={{ color: "#fff" }}>
+            <h1>
               Monetization{" "}
-              <em style={{ fontStyle: "normal", color: "#f48dff" }}>
+              <em style={{ fontStyle: "normal", color: "#d44ce0" }}>
                 Playbook
               </em>
             </h1>
