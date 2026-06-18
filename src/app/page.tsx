@@ -48,7 +48,7 @@ const EBOOKS = [
     readTime: '30 min',
     accentHex: '#f48dff',
     tags: ['Monetization', 'LiveOps', 'IAP', 'DTC'],
-    cover: '/covers/monetization-playbook.png',
+    cover: '/images/mon/cover.png',
     newUntil: '2026-09-11', // 90 days from 2026-06-13 launch
   },
 ];
