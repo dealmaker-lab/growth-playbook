@@ -859,7 +859,7 @@ export default function RewardedPlaytimeContent({ initialUnlocked }: RewardedPla
             <p style={{ color: 'var(--text-muted)', maxWidth: '540px', margin: '0 auto 24px', lineHeight: 1.7 }}>
               Our growth team has scaled 500+ apps with rewarded UA across every major region. Tell us about your game, and we&rsquo;ll design a campaign strategy around it.
             </p>
-            <a href="https://appsamurai.com/contact" target="_blank" rel="noopener noreferrer"
+            <a href="https://appsamurai.com/contact-us/" target="_blank" rel="noopener noreferrer"
                className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none', fontSize: '1rem', padding: '16px 40px' }}
                onClick={() => trackEvent('cta_click', 'rp_final_cta', { destination: 'contact' })}>
               Talk to Our Growth Team &rarr;

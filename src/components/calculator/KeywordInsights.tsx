@@ -1,131 +1,162 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-interface KeywordRow {
+/**
+ * What App Store search actually looks like in the chosen category.
+ *
+ * This replaces a table headed "Top App Store Keywords" that was in fact
+ * showing GOOGLE web-search volumes. The honest data turned out not to support
+ * a keyword table at all: App Store demand is a handful of enormous generic
+ * terms ("games", "free games") plus a long list of app names, with no rich
+ * non-brand long tail. There is also no API anywhere that returns App Store
+ * volume for a curated keyword list, so the old shape could not be salvaged.
+ *
+ * So the widget shows what the data does support, which is the more useful
+ * point for an ASA plan anyway: the split between generic discovery demand and
+ * branded demand, with real numbers on both sides.
+ *
+ * Every number here, the share included, comes from the API. Nothing about the
+ * split is asserted in copy, because it varies by category and a hard-coded
+ * claim would eventually be false for one of them.
+ */
+
+interface Row {
   keyword: string;
   volume: number;
-  cpc: number;
-  competition: string;
-  opportunity: string;
-  updated_at: string;
+}
+interface Payload {
+  brand: Row[];
+  generic: Row[];
+  brandCount: number;
+  genericCount: number;
+  brandShare: number;
+  total: number;
+  updatedAt: string | null;
 }
 
-interface KeywordInsightsProps {
-  category: string;
-}
-
-export default function KeywordInsights({ category }: KeywordInsightsProps) {
-  const [keywords, setKeywords] = useState<KeywordRow[]>([]);
-  const [loading, setLoading] = useState(true);
-  const abortRef = useRef<AbortController | null>(null);
+export default function KeywordInsights({ category }: { category: string }) {
+  const [data, setData] = useState<{ category: string; payload: Payload | null } | null>(null);
 
   useEffect(() => {
-    // Abort any in-flight request when category changes
-    abortRef.current?.abort();
-    const controller = new AbortController();
-    abortRef.current = controller;
-
-    fetch(`/api/keywords?category=${encodeURIComponent(category)}&_t=${Date.now()}`, {
-      signal: controller.signal,
-    })
+    const ac = new AbortController();
+    fetch(`/api/appstore-keywords?category=${encodeURIComponent(category)}`, { signal: ac.signal })
       .then((r) => r.json())
-      .then((data) => {
-        if (!controller.signal.aborted) {
-          setKeywords(data.keywords || []);
-          setLoading(false);
-        }
-      })
-      .catch(() => {
-        if (!controller.signal.aborted) setLoading(false);
+      .then((payload: Payload) => setData({ category, payload }))
+      .catch((err) => {
+        if (err?.name !== 'AbortError') setData({ category, payload: null });
       });
-
-    return () => controller.abort();
+    return () => ac.abort();
   }, [category]);
 
-  if (loading) {
-    return (
-      <div style={{ marginTop: '32px', padding: '24px', background: '#F5F7F9', borderRadius: '16px', border: '1px solid #E8ECF1' }}>
-        <div style={{ height: '200px', background: 'linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite', borderRadius: '8px' }} />
-      </div>
-    );
+  // Loading is derived from whether the data we hold matches the category we
+  // were asked for, so a category switch can never show the previous one's rows.
+  if (!data || data.category !== category) {
+    return <div className="kwi-skeleton" aria-hidden="true" />;
   }
 
-  if (keywords.length === 0) return null;
+  const p = data.payload;
+  if (!p || !p.total) return null;
+
+  const genericShare = 100 - p.brandShare;
+  const updated = p.updatedAt
+    ? new Date(p.updatedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+    : null;
 
   return (
-    <div style={{ marginTop: '32px', padding: '28px', background: '#F5F7F9', borderRadius: '16px', border: '1px solid #E8ECF1' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-        <span style={{ fontSize: '20px' }}>&#128273;</span>
-        <h4 style={{ fontFamily: 'var(--font-h)', fontSize: '1.1rem', fontWeight: 700, color: '#222', margin: 0 }}>
-          Top App Store Keywords for {category}
-        </h4>
-      </div>
-      <p style={{ fontSize: '.82rem', color: '#666', marginBottom: '16px', lineHeight: 1.6 }}>
-        Real search volume data to inform your ASA keyword strategy. Focus budget on low-competition keywords first. They convert 2-3x better.
+    <section className="kwi" aria-labelledby="kwi-title">
+      <h4 id="kwi-title" className="kwi-title">
+        What App Store search looks like in {category}
+      </h4>
+      <p className="kwi-sub">
+        Real App Store search volume for the terms this category&rsquo;s leading apps compete for,
+        split by whether the searcher already had an app in mind.
       </p>
 
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '.85rem' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid #E8ECF1' }}>
-              <th style={{ textAlign: 'left', padding: '10px 12px', fontWeight: 600, color: '#222' }}>Keyword</th>
-              <th style={{ textAlign: 'right', padding: '10px 12px', fontWeight: 600, color: '#222' }}>Volume/mo</th>
-              <th style={{ textAlign: 'center', padding: '10px 12px', fontWeight: 600, color: '#222' }}>Difficulty</th>
-              <th style={{ textAlign: 'left', padding: '10px 12px', fontWeight: 600, color: '#222' }}>Opportunity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {keywords.slice(0, 10).map((kw) => (
-              <tr key={kw.keyword} style={{ borderBottom: '1px solid #E8ECF1' }}>
-                <td style={{ padding: '10px 12px', color: '#222', fontWeight: 500 }}>
-                  &ldquo;{kw.keyword}&rdquo;
-                </td>
-                <td style={{ textAlign: 'right', padding: '10px 12px', color: '#666', fontVariantNumeric: 'tabular-nums' }}>
-                  {kw.volume.toLocaleString()}
-                </td>
-                <td style={{ textAlign: 'center', padding: '10px 12px' }}>
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '2px 10px',
-                      borderRadius: '100px',
-                      fontSize: '.72rem',
-                      fontWeight: 600,
-                      background:
-                        kw.competition === 'LOW'
-                          ? 'rgba(46,201,126,.1)'
-                          : kw.competition === 'HIGH'
-                            ? 'rgba(248,113,113,.1)'
-                            : 'rgba(244,203,0,.1)',
-                      color:
-                        kw.competition === 'LOW'
-                          ? '#2EC97E'
-                          : kw.competition === 'HIGH'
-                            ? '#F87171'
-                            : '#8B6914',
-                    }}
-                  >
-                    {kw.competition}
-                  </span>
-                </td>
-                <td style={{ padding: '10px 12px', color: '#666', fontSize: '.82rem' }}>
-                  {kw.opportunity || 'Discovery'}
-                  {kw.opportunity === 'Hidden Gem' && ' \u2728'}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* Headline stat first. The two-column brand/generic layout the earlier
+          draft used implied a parity the data does not have: measured July 2026
+          FinTech and Utility come back 100% branded with ZERO generic terms, and
+          E-commerce with one. An empty column reads as a broken widget, so the
+          share leads and the generic list appears only when there is something
+          honest to put in it. */}
+      <div className="kwi-stat">
+        <div className="kwi-stat-num">{p.brandShare}%</div>
+        <p className="kwi-stat-label">
+          of App Store search volume here is someone typing an app&rsquo;s name
+        </p>
+        <div
+          className="kwi-bar"
+          role="img"
+          aria-label={`Branded searches ${p.brandShare} percent, generic discovery ${genericShare} percent`}
+        >
+          <span className="kwi-bar-brand" style={{ width: `${p.brandShare}%` }} />
+          <span className="kwi-bar-generic" style={{ width: `${genericShare}%` }} />
+        </div>
+        <div className="kwi-legend">
+          <span>
+            <i className="kwi-dot kwi-dot-brand" aria-hidden="true" />
+            {p.brandCount} branded
+          </span>
+          <span>
+            <i className="kwi-dot kwi-dot-generic" aria-hidden="true" />
+            {p.genericCount} generic
+          </span>
+          <span className="kwi-legend-total">{p.total} terms tracked</span>
+        </div>
       </div>
 
-      <div style={{ marginTop: '16px', padding: '12px 16px', background: '#fff', borderRadius: '8px', border: '1px solid #E8ECF1', fontSize: '.82rem', color: '#666', lineHeight: 1.6 }}>
-        <strong style={{ color: '#222' }}>&#128161; Tip:</strong> Focus your ASA budget on Low difficulty keywords first. They convert at 2-3x the rate of High competition terms. Feed winners into your ASO metadata for organic ranking.{' '}
-        <Link href="/#ch4" style={{ color: 'var(--cyan)', fontWeight: 600, textDecoration: 'none' }}>
-          Learn more in Chapter 4 &rarr;
-        </Link>
+      <div className={`kwi-cols${p.generic.length ? '' : ' kwi-cols-one'}`}>
+        <div className="kwi-col">
+          <h5>Most-searched branded terms</h5>
+          <ul>
+            {p.brand.map((r) => (
+              <li key={r.keyword}>
+                <span className="kwi-kw">{r.keyword}</span>
+                <span className="kwi-vol">{r.volume.toLocaleString()}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {p.generic.length > 0 && (
+          <div className="kwi-col">
+            <h5>Generic discovery terms</h5>
+            <ul>
+              {p.generic.map((r) => (
+                <li key={r.keyword}>
+                  <span className="kwi-kw">{r.keyword}</span>
+                  <span className="kwi-vol">{r.volume.toLocaleString()}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
-    </div>
+
+      <p className="kwi-tip">
+        <strong>What this means for ASA.</strong>{' '}
+        {p.brandShare >= 50 ? (
+          <>
+            People arrive at the App Store already knowing the app they want, so an Apple Search Ads
+            plan starts by defending your own brand terms, where a rival can otherwise intercept
+            demand you paid to create, and then conquesting theirs. Generic discovery terms are the
+            far smaller pool and every app in the category bids them, which makes them the most
+            contested inventory on the store.
+          </>
+        ) : (
+          <>
+            {genericShare}% of the search volume here is generic discovery, which is unusual for the
+            App Store and means people in this category browse rather than arrive with an app in
+            mind. Head terms are worth bidding, but they are few and heavily contested, so pair them
+            with brand defence before spending up on discovery.
+          </>
+        )}
+      </p>
+
+      <p className="kwi-source">
+        Based on the top {p.total}{' '}App Store search terms that this category&rsquo;s leading apps rank
+        for, US storefront. Volume via DataForSEO; each term is classed as branded or generic from
+        the App Store&rsquo;s own results for it{updated ? `. Updated ${updated}` : ''}.
+      </p>
+    </section>
   );
 }

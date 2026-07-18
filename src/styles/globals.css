@@ -617,3 +617,64 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .infographic-table .num-pos{color:var(--delta-pos);font-weight:600;font-variant-numeric:tabular-nums}
 .infographic-table .num-neg{color:var(--delta-neg);font-weight:600;font-variant-numeric:tabular-nums}
 
+
+/* ── App Store search-demand panel (calculator step 3) ───────────────────────
+   Replaces the old inline-styled keyword table. Class-based rather than inline
+   because the two-column layout must collapse on a phone, which inline styles
+   cannot express. Colours come from the tokens above so the panel follows the
+   repo's palette rather than pinning its own hexes. */
+.kwi{margin-top:32px;padding:28px;background:var(--bg-alt);border:1px solid var(--border);border-radius:16px}
+.kwi-title{font-family:var(--font-h);font-size:1.1rem;font-weight:700;color:var(--text);margin:0 0 8px}
+.kwi-sub{font-size:.86rem;color:var(--text-muted);line-height:1.6;margin:0 0 20px;max-width:64ch}
+
+.kwi-bar{display:flex;height:10px;border-radius:100px;overflow:hidden;background:var(--border)}
+.kwi-bar-generic{background:var(--green)}
+.kwi-bar-brand{background:var(--purple-d)}
+.kwi-legend{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:10px;font-size:.82rem;color:var(--text-muted)}
+.kwi-legend span{display:flex;align-items:center;gap:6px}
+.kwi-legend strong{color:var(--text);font-weight:700}
+.kwi-legend em{font-style:normal;color:var(--text-faint);font-size:.78rem}
+.kwi-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.kwi-dot-generic{background:var(--green)}
+.kwi-dot-brand{background:var(--purple-d)}
+
+/* Two columns on desktop, stacked on a phone. minmax(0,1fr) not 1fr: a long
+   unbroken keyword would otherwise blow the track out and overflow the card. */
+.kwi-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}
+.kwi-col{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:16px}
+.kwi-col h5{font-family:var(--font-h);font-size:.74rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.8px;color:var(--text-faint);margin:0 0 10px}
+.kwi-col ul{list-style:none;margin:0;padding:0}
+.kwi-col li{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding:7px 0;border-bottom:1px solid var(--border);font-size:.86rem}
+.kwi-col li:last-child{border-bottom:none}
+.kwi-kw{color:var(--text);min-width:0;overflow-wrap:anywhere}
+.kwi-vol{color:var(--text-muted);font-variant-numeric:tabular-nums;flex-shrink:0}
+
+.kwi-tip{margin-top:20px;padding:14px 16px;background:var(--card-bg);border:1px solid var(--border);
+  border-radius:10px;font-size:.84rem;color:var(--text-muted);line-height:1.65}
+.kwi-tip strong{color:var(--text)}
+.kwi-source{margin-top:12px;font-size:.74rem;color:var(--text-faint);line-height:1.5}
+
+.kwi-skeleton{margin-top:32px;height:300px;border-radius:16px;
+  background:linear-gradient(90deg,var(--bg-alt) 25%,var(--border) 50%,var(--bg-alt) 75%);
+  background-size:200% 100%;animation:kwi-shimmer 1.5s infinite}
+@keyframes kwi-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.kwi-skeleton{animation:none}}
+
+@media(max-width:640px){
+  .kwi{padding:20px}
+  .kwi-cols{grid-template-columns:1fr}
+  .kwi-legend{gap:6px 16px}
+}
+
+/* Headline stat. Leads the panel because in three of five categories the
+   branded share is 92-100%, which is the finding; a balanced two-column table
+   would have buried it (and rendered an empty column). */
+.kwi-stat{margin-bottom:22px}
+.kwi-stat-num{font-family:var(--font-h);font-size:clamp(2.4rem,7vw,3.2rem);font-weight:800;
+  line-height:1;color:var(--purple-d);letter-spacing:-.03em}
+.kwi-stat-label{font-size:.9rem;color:var(--text);margin:6px 0 14px;max-width:44ch;line-height:1.5}
+.kwi-legend-total{color:var(--text-faint);margin-left:auto}
+/* One column when a category has no generic terms at all (FinTech, Utility). */
+.kwi-cols-one{grid-template-columns:minmax(0,1fr)}

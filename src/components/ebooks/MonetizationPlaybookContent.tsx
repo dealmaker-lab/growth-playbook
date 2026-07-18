@@ -3501,7 +3501,7 @@ export default function MonetizationPlaybookContent({
               us about your game, and we&rsquo;ll build the plan around it.
             </p>
             <a
-              href="https://appsamurai.com/contact"
+              href="https://appsamurai.com/contact-us/"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"

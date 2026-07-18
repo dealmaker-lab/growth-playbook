@@ -2,10 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
-// Kept, commented, alongside its render site below: the widget is hidden until
-// its data source is corrected, not deleted. See the block comment at the
-// render site for why.
-// import KeywordInsights from '@/components/calculator/KeywordInsights';
+import KeywordInsights from '@/components/calculator/KeywordInsights';
 import {
   Chart as ChartJS,
   ArcElement,
@@ -1108,7 +1105,7 @@ export default function CalculatorPage() {
             <div className="cta-card">
               <p>Want to validate these numbers with real campaign data?</p>
               <a
-                href="https://appsamurai.com/contact"
+                href="https://appsamurai.com/contact-us/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-cta"
@@ -1118,24 +1115,12 @@ export default function CalculatorPage() {
               </a>
             </div>
 
-            {/* Keyword Intelligence — HIDDEN 2026-07-18, do not re-enable as-is.
-                The widget is headed "Top App Store Keywords" and tells the reader
-                to build an Apple Search Ads keyword list from it, but the numbers
-                behind it are GOOGLE WEB SEARCH volumes: src/lib/dataforseo.ts
-                calls keywords_data/google_ads/search_volume and
-                dataforseo_labs/google/keyword_suggestions, US/en. "mobile game
-                201,000/mo" is Google searches, not App Store searches, and ASA
-                does not use absolute volumes at all (Apple exposes a 5-99
-                popularity index). Shown to mobile-UA buyers this is simply a
-                false claim, so it stays hidden until it is either relabelled as
-                Google demand or repointed at real App Store data.
-                Related bug to fix at the same time: both mappers read
-                `competition_level` with a `?? 'LOW'` fallback, but the google_ads
-                endpoint returns `competition`/`competition_index`, so every one
-                of the 123 cached rows silently became LOW.
-                The component and /api/keywords are intentionally left in place
-                for that rework. */}
-            {/* <KeywordInsights category={category} /> */}
+            {/* App Store search demand. Rebuilt 2026-07-18: this used to be a
+                "Top App Store Keywords" table fed by GOOGLE volumes. It now
+                reads appstore_keyword_cache (DataForSEO Labs, se_type apple)
+                and shows the generic-vs-branded split, which is what the real
+                data actually supports. Self-hides if the cache is empty. */}
+            <KeywordInsights category={category} />
 
             {/* Recalculate */}
             <div className="recalc-row">

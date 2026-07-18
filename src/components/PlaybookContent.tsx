@@ -1046,7 +1046,7 @@ export default function PlaybookContent({
             <p style={{ color: 'var(--text-muted)', maxWidth: '540px', margin: '0 auto 24px', lineHeight: 1.7 }}>
               Our growth team has helped 500+ apps scale with the exact strategies in this playbook. Let&apos;s build your custom growth plan.
             </p>
-            <a href="https://appsamurai.com/contact" target="_blank" rel="noopener noreferrer"
+            <a href="https://appsamurai.com/contact-us/" target="_blank" rel="noopener noreferrer"
                className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none', fontSize: '1rem', padding: '16px 40px' }}
                onClick={() => trackEvent('cta_click', 'final_cta', { destination: 'contact' })}>
               Talk to Our Growth Team &rarr;
