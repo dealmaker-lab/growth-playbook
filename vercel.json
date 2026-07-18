@@ -6,23 +6,63 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "origin-when-cross-origin" },
-        { "key": "X-DNS-Prefetch-Control", "value": "on" }
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "origin-when-cross-origin"
+        },
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "on"
+        }
       ]
     },
     {
       "source": "/sitemap.xml",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400"
+        }
       ]
     },
     {
       "source": "/robots.txt",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400"
+        }
       ]
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/admin/refresh-appstore?category=Gaming",
+      "schedule": "0 3 1 * *"
+    },
+    {
+      "path": "/api/admin/refresh-appstore?category=E-commerce",
+      "schedule": "0 4 1 * *"
+    },
+    {
+      "path": "/api/admin/refresh-appstore?category=FinTech",
+      "schedule": "0 5 1 * *"
+    },
+    {
+      "path": "/api/admin/refresh-appstore?category=Health %26 Fitness",
+      "schedule": "0 6 1 * *"
+    },
+    {
+      "path": "/api/admin/refresh-appstore?category=Utility",
+      "schedule": "0 7 1 * *"
     }
   ]
 }

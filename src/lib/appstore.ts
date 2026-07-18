@@ -221,7 +221,20 @@ const CATEGORY_GENRES: Record<Category, Set<string>> = {
   'E-commerce': new Set(['Shopping']),
   FinTech: new Set(['Finance']),
   'Health & Fitness': new Set(['Health & Fitness', 'Medical']),
-  Utility: new Set(['Utilities', 'Productivity', 'Photo & Video', 'Weather', 'Business', 'Graphics & Design']),
+  // Photo & Video and Business are deliberately EXCLUDED. Including them let
+  // Instagram and Snapchat through as "Utility" demand, which is wrong; the
+  // cost is that Picsart-driven and Acrobat-driven terms are filtered out too.
+  Utility: new Set(['Utilities', 'Productivity', 'Weather']),
+};
+
+/**
+ * Per-category tuning. Utility needs minApps:1 because its seeds span several
+ * genres and almost never co-rank, which is why the two-app rule left it with
+ * only 12 terms against 50 elsewhere. Relevance there is carried by the genre
+ * gate instead, and the result is 50 clean terms with no cross-category drift.
+ */
+const TUNING: Partial<Record<Category, { minApps?: number; screen?: number }>> = {
+  Utility: { minApps: 1, screen: 150 },
 };
 
 /** Cheap rejects, applied before spending an Apple call on the term. */
@@ -238,8 +251,13 @@ function isJunk(term: string): boolean {
   // query: "vid a", "me a", "i m" all arrived this way. Genuine multi-word
   // searches do not contain bare letters.
   if (w.length > 1 && w.some((x) => x.length === 1)) return true;
+  // A dangling preposition is the same tell: "microsoft for", "microsoft of"
+  // are index fragments, not things anyone typed.
+  if (w.length > 1 && DANGLING.has(w[w.length - 1])) return true;
   return false;
 }
+
+const DANGLING = new Set(['for', 'of', 'the', 'and', 'to', 'in', 'on', 'with', 'a', 'at', 'by']);
 
 /**
  * Is this a brand (navigational) query, given what the store returns for it?
@@ -377,9 +395,15 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
  */
 export async function buildCategory(
   category: Category,
-  opts: { perApp?: number; top?: number; minApps?: number; screen?: number } = {},
+  opts: { perApp?: number; top?: number; minApps?: number; screen?: number; genres?: Set<string> } = {},
 ): Promise<CategoryKeyword[]> {
-  const { perApp = 300, top = 50, minApps = 2, screen = 140 } = opts;
+  const tuned = TUNING[category] ?? {};
+  const {
+    perApp = 300,
+    top = 50,
+    minApps = tuned.minApps ?? 2,
+    screen = tuned.screen ?? 140,
+  } = opts;
 
   const volume = new Map<string, number>();
   const rankedBy = new Map<string, number>();
@@ -399,7 +423,7 @@ export async function buildCategory(
     .sort((a, b) => b[1] - a[1])
     .slice(0, screen);
 
-  const genres = CATEGORY_GENRES[category];
+  const genres = opts.genres ?? CATEGORY_GENRES[category];
   const out: CategoryKeyword[] = [];
 
   for (const [keyword, vol] of pool) {
